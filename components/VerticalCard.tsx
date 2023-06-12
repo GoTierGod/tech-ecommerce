@@ -11,7 +11,7 @@ interface VerticalCardProps {
 const formatPrice = (value: string) => Number(value).toFixed(2)
 
 const getDiscount = (price: string, offer: string) =>
-    (Number(price) / Number(offer)) * 100 - 100
+    Math.round((Number(price) / Number(offer)) * 100 - 100)
 
 // VERTICAL CARD FOR PRODUCT DETAILS
 const VerticalCard = ({ product }: VerticalCardProps) => {
