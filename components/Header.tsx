@@ -1,5 +1,6 @@
-import Link from 'next/link'
 import style from '../styles/header.module.css'
+
+import Link from 'next/link'
 import Image from 'next/image'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {

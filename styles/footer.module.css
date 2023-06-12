@@ -1,0 +1,96 @@
+/* ------------------------- Footer -------------------------  */
+.footer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    background: var(--main);
+    color: var(--white);
+
+    box-shadow: -1px -1px 2px var(--dark);
+}
+
+.footer > div {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 3rem;
+
+    padding: 3rem 1rem;
+
+    width: 100%;
+    max-width: 1200px;
+
+    text-align: center;
+}
+
+/* ------------------------- ICONS -------------------------  */
+.footer svg {
+    height: 1.5rem;
+}
+
+/* ------------------------- SOCIAL LINKS -------------------------  */
+.socials {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+}
+
+.links {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+}
+
+.links a {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+}
+
+/* ------------------------- USEFUL INFORMATION -------------------------  */
+.usefulInfo {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 3rem;
+}
+
+.usefulInfo > div {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+
+    text-align: center;
+}
+
+.usefulInfo p {
+    max-width: 300px;
+}
+
+/* ------------------------- MEDIA QUERIES -------------------------  */
+@media screen and (min-width: 768px) {
+    .footer > div {
+        padding: 6rem 3rem;
+    }
+
+    .links {
+        flex-direction: row;
+        gap: 3rem;
+    }
+}
+
+@media screen and (min-width: 1024px) {
+    .usefulInfo {
+        flex-direction: row;
+    }
+}
