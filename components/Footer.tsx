@@ -12,6 +12,7 @@ import {
     faBoxOpen
 } from '@fortawesome/free-solid-svg-icons'
 
+// WEBSITE FOOTER
 const Footer = () => {
     return (
         <footer className={style.footer}>

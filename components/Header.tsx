@@ -30,6 +30,7 @@ const titleCase = (str: string) =>
         .split(' ')
         .map(word => word[0].toUpperCase() + word.substring(1))
 
+// WEBSITE HEADER/NAVBAR
 const Header = () => {
     return (
         <header className={style.header}>
