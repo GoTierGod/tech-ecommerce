@@ -1,11 +1,17 @@
 /* ------------------------- HEADER -------------------------  */
 .header {
+    position: fixed;
+
     display: flex;
     justify-content: center;
     align-items: center;
 
+    width: 100%;
+
     background: var(--main);
     color: var(--white);
+
+    box-shadow: 1px 1px 2px var(--dark);
 }
 
 /* ------------------------- HEADER CONTENT CONTAINER -------------------------  */
