@@ -22,14 +22,14 @@
     justify-content: center;
     align-items: center;
 
-    padding: 1rem;
+    padding: 0.5rem 0;
 
     height: 100%;
     width: 100%;
 }
 
 .image img {
-    max-width: 125px;
+    max-width: 100px;
     height: auto;
 
     object-fit: contain;
@@ -45,9 +45,10 @@
 /* ------------------------- OFFER -------------------------  */
 .offer {
     display: flex;
+    flex-direction: column;
     justify-content: space-between;
-    align-items: center;
-    gap: 1rem;
+    align-items: flex-start;
+    gap: 0.25rem;
 }
 
 .offer div {
@@ -136,4 +137,22 @@
     font-weight: 400;
 
     overflow: hidden;
+}
+
+/* ------------------------- MEDIA QUERIES -------------------------  */
+@media screen and (min-width: 375px) {
+    .image img {
+        max-width: 125px;
+    }
+
+    .offer {
+        flex-direction: row;
+        gap: 0.5rem;
+    }
+}
+
+@media screen and (min-width: 425px) {
+    .image {
+        padding: 1rem 0.5rem;
+    }
 }

@@ -11,8 +11,10 @@ export default async function Home() {
 
     return (
         <main className={styles.main}>
-            <h1>Hello World</h1>
-            <ProductRows title='Laptops' products={products} url='/' />
+            <div>
+                <h1>Hello World</h1>
+                <ProductRows title='Laptops' products={products} url='/' />
+            </div>
         </main>
     )
 }
