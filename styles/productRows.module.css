@@ -1,0 +1,163 @@
+/* ------------------------- SECTION -------------------------  */
+.section {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+/* ------------------------- HEADER -------------------------  */
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    padding: 1rem;
+
+    background: var(--main);
+    color: var(--white);
+
+    border-radius: 4px;
+}
+
+/* ------------------------- TITLE -------------------------  */
+.header h4 {
+    font-size: 1.5rem;
+    font-weight: 500;
+}
+
+/* ------------------------- TOP LINK -------------------------  */
+.topLink {
+    display: none;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+
+    padding: 0.5rem 0.75rem;
+
+    background: var(--white);
+    color: var(--main);
+
+    border-radius: 4px;
+
+    transition: all 300ms;
+}
+
+.topLink span {
+    font-size: 1rem;
+
+    transition: all 300ms;
+}
+
+.topLink svg {
+    height: 1rem;
+
+    transition: all 300ms;
+}
+
+/* ------------------------- GRID -------------------------  */
+.grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.5rem;
+}
+
+.grid > a {
+    display: none;
+}
+
+.grid > a:nth-child(-n + 4) {
+    display: flex;
+}
+
+/* ------------------------- BOTTOM LINK -------------------------  */
+.bottomLink {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+
+    padding: 1rem;
+
+    background: var(--white);
+    color: var(--main);
+
+    border-radius: 4px;
+
+    transition: all 300ms;
+}
+
+.bottomLink span {
+    font-size: 1rem;
+
+    transition: all 300ms;
+}
+
+.bottomLink svg {
+    height: 1rem;
+
+    transition: all 300ms;
+}
+
+@media screen and (min-width: 600px) {
+    .grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    .grid > a:not(:nth-child(-n + 6)) {
+        display: none;
+    }
+
+    .grid > a:nth-child(-n + 6) {
+        display: flex;
+    }
+}
+
+@media screen and (min-width: 768px) {
+    .topLink {
+        display: flex;
+    }
+
+    .bottomLink {
+        display: none;
+    }
+
+    .grid {
+        grid-template-columns: repeat(4, 1fr);
+    }
+
+    .grid > a:not(:nth-child(-n + 4)) {
+        display: none;
+    }
+
+    .grid > a:nth-child(-n + 4) {
+        display: flex;
+    }
+}
+
+@media screen and (min-width: 1024px) {
+    .grid {
+        grid-template-columns: repeat(5, 1fr);
+    }
+
+    .grid > a:not(:nth-child(-n + 5)) {
+        display: none;
+    }
+
+    .grid > a:nth-child(-n + 5) {
+        display: flex;
+    }
+}
+
+@media screen and (min-width: 1200px) {
+    .grid {
+        grid-template-columns: repeat(6, 1fr);
+    }
+
+    .grid > a:not(:nth-child(-n + 6)) {
+        display: none;
+    }
+
+    .grid > a:nth-child(-n + 6) {
+        display: flex;
+    }
+}
