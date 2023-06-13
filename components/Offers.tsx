@@ -14,16 +14,6 @@ interface OffersProps {
 const Offers = ({ products }: OffersProps) => {
     return (
         <section className={style.section}>
-            <div className={style.header}>
-                <div>
-                    <span>Only for a few hours</span>
-                    <h4>Take Advantage Of This Offers</h4>
-                </div>
-                <Link href='/' className={style.link}>
-                    <span>More Offers</span>
-                    <FontAwesomeIcon icon={faRightLong} />
-                </Link>
-            </div>
             <div className={style.grid}>
                 {products.map(product => (
                     <Link
@@ -40,6 +30,16 @@ const Offers = ({ products }: OffersProps) => {
                         />
                     </Link>
                 ))}
+            </div>
+            <div className={style.header}>
+                <div>
+                    <span>Only for a few hours</span>
+                    <h4>Take Advantage Of This Offers</h4>
+                </div>
+                <Link href='/' className={style.link}>
+                    <span>More Offers</span>
+                    <FontAwesomeIcon icon={faRightLong} />
+                </Link>
             </div>
         </section>
     )

@@ -4,7 +4,11 @@
     flex-direction: column;
     gap: 0.5rem;
 
+    padding: 0.5rem;
+
     width: 100%;
+
+    background: var(--main);
 
     border-radius: 4px;
 }
@@ -16,15 +20,13 @@
     justify-content: space-between;
     gap: 0.5rem;
 
-    padding: 1rem;
+    padding: 0.5rem;
 
     height: 100%;
     width: 100%;
 
     background: var(--main);
     color: var(--white);
-
-    border-radius: 4px;
 }
 
 /* ------------------------- TITLE -------------------------  */
@@ -107,7 +109,7 @@
 @media screen and (min-width: 768px) {
     .section {
         display: grid;
-        grid-template-columns: 1fr 2fr;
+        grid-template-columns: 2fr 1fr;
     }
 
     .header {
@@ -122,7 +124,7 @@
 
 @media screen and (min-width: 1024px) {
     .section {
-        grid-template-columns: 3fr 5fr;
+        grid-template-columns: 5fr 3fr;
     }
 
     .header {
