@@ -24,7 +24,7 @@ export default async function Home() {
     )
 
     const gaming: CardProductDetails[] = await getData(
-        `https://ft-drf-api.vercel.app/api/products?category=laptops&limit=6`
+        `https://ft-drf-api.vercel.app/api/products?is_gamer=true&limit=6`
     )
 
     return (
