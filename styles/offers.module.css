@@ -124,14 +124,10 @@
 
 @media screen and (min-width: 1024px) {
     .section {
-        grid-template-columns: 5fr 3fr;
+        grid-template-columns: 6fr 5fr;
     }
 
     .header {
         gap: 2rem;
-    }
-
-    .product img {
-        padding: 2rem;
     }
 }
