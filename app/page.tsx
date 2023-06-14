@@ -1,4 +1,4 @@
-import styles from './page.module.css'
+import style from './page.module.css'
 
 import ProductRows from '@/components/ProductRows'
 import { CardProductDetails } from '@/types/products'
@@ -28,8 +28,8 @@ export default async function Home() {
     )
 
     return (
-        <main className={styles.main}>
-            <div>
+        <main>
+            <div className={style.home}>
                 <Offers products={offers} />
                 <ProductRows title='Laptops' products={laptops} url='/' />
                 <Highlighted products={[smartphone[0], headphones[0]]} />
