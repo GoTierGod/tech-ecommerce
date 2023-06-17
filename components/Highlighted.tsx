@@ -23,7 +23,10 @@ const Highlighted = ({ products }: HighlightedProps) => {
                             {product.details.category.title}
                         </Link>
                     </div>
-                    <div className={style.image}>
+                    <Link
+                        href={`/product/${product.details.id}`}
+                        className={style.image}
+                    >
                         <Image
                             src={product.image.url}
                             alt={product.image.description}
@@ -31,7 +34,7 @@ const Highlighted = ({ products }: HighlightedProps) => {
                             height={250}
                             quality='25'
                         />
-                    </div>
+                    </Link>
                 </article>
             ))}
         </section>
