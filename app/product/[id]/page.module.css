@@ -105,7 +105,7 @@
 .images {
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
     gap: 1rem;
 
@@ -138,6 +138,8 @@
 
     border: 2px solid var(--light-main);
     border-radius: 4px;
+
+    object-fit: contain;
 }
 
 /* ------------------------- MORE BRAND PRODUCTS -------------------------  */
@@ -504,8 +506,22 @@
         grid-template-columns: 2fr 1fr;
     }
 
+    .images {
+        flex-direction: row-reverse;
+        justify-content: center;
+
+        width: 100%;
+        height: fit-content;
+    }
+
     .images > img {
         height: 375px;
+    }
+
+    .images > div {
+        flex-direction: column;
+
+        overflow-x: visible;
     }
 }
 
