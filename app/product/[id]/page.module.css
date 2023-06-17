@@ -191,7 +191,7 @@
     align-items: center;
     gap: 1rem;
 
-    padding: 1.5rem;
+    padding: 1rem;
 
     background: var(--main);
     color: var(--white);
@@ -381,7 +381,7 @@
     border-radius: 4px;
 }
 
-/* ------------------------- DELIVERY -------------------------  */
+/* ------------------------- PAYMENT -------------------------  */
 .payment {
     display: flex;
     flex-direction: column;
