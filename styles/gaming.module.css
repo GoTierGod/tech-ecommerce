@@ -5,9 +5,6 @@
 
     padding: 0.5rem;
 
-    background: var(--main);
-    color: var(--white);
-
     border-radius: 4px;
 }
 
@@ -20,7 +17,12 @@
 
     padding: 1rem;
 
+    background: var(--main);
+    color: var(--white);
+
     text-align: center;
+
+    border-radius: 4px;
 }
 
 .header > div {

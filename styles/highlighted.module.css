@@ -18,9 +18,6 @@
 
     width: 100%;
 
-    background: var(--main);
-    color: var(--white);
-
     border-radius: 4px;
 }
 
@@ -36,9 +33,14 @@
     align-items: center;
     gap: 1rem;
 
+    width: 50%;
+
+    background: var(--main);
+    color: var(--white);
+
     text-align: center;
 
-    width: 50%;
+    border-radius: 4px;
 }
 
 .header h4 {
