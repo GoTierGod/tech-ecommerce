@@ -1,7 +1,5 @@
 import style from './page.module.css'
 
-import { notFound } from 'next/navigation'
-
 import { getData } from '@/helpers/getData'
 import { CardProductDetails, FullProductDetails } from '@/types/products'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -17,6 +15,7 @@ import Image from 'next/image'
 import VerticalCard from '@/components/VerticalCard'
 import ProductRows from '@/components/ProductRows'
 
+// GET STARS ACCORDING TO RATING
 const getStars = (reviews_ct: number, rating: number) => {
     const stars: Array<JSX.Element> = []
 
@@ -45,14 +44,17 @@ const getStars = (reviews_ct: number, rating: number) => {
     return stars
 }
 
+// INSTALLMENTS AND COST
 const getInstallments = (installments: number, offer: string) =>
     `${installments}x $${(
         Number(offer) / installments +
         Number(offer) / 100
     ).toFixed(2)}`
 
+// CALCULATE DELIVERY COST
 const getDeliveryCost = (price: string) =>
     Number(price) >= 50 ? 'for free' : `for $${(Number(price) / 10).toFixed(2)}`
+// CALCULATE DELIVERY DAY
 const deliveryDay: string = new Date(
     new Date().setDate(new Date().getDate() + 3)
 ).toLocaleString('en-US', { weekday: 'long' })
@@ -237,7 +239,9 @@ const product = async ({ params }: { params: { id: string } }) => {
                             <p>{product.details.description}</p>
                         </div>
                     </div>
+                    {/* ------------------------- FOR WIDE SCREENS -------------------------  */}
                     <div className={style.rightContent}>
+                        {/* ------------------------- WRAPPER FOR STICKY POSITION -------------------------  */}
                         <div className={style.stickyWrapper}>
                             {/* ------------------------- HEADER -------------------------  */}
                             <div className={style.header}>
