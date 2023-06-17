@@ -64,7 +64,7 @@ const product = async ({ params }: { params: { id: string } }) => {
         `https://ft-drf-api.vercel.app/api/products/${id}`
     )
     const brandProducts: CardProductDetails[] = await getData(
-        `https://ft-drf-api.vercel.app/api/products?brand=${product.details.brand.name}&limit=4`
+        `https://ft-drf-api.vercel.app/api/products?brand=${product.details.brand.name}&limit=5`
     )
     const relatedProducts: CardProductDetails[] = await getData(
         `https://ft-drf-api.vercel.app/api/products?brand=${product.details.brand.name}&limit=6`
