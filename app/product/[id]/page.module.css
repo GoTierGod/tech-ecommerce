@@ -121,7 +121,7 @@
 .images > img {
     position: sticky;
     height: 300px;
-    width: 100%;
+    width: 90%;
 
     object-fit: contain;
 }
