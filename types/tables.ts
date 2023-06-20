@@ -113,3 +113,15 @@ export interface Order {
     product: Product | number
     delivery_man: DeliveryMan | number
 }
+
+export interface CardItem {
+    id: number
+    product: number
+    customer: number
+}
+
+export interface FavItem {
+    id: number
+    product: number
+    customer: number
+}
