@@ -36,6 +36,13 @@
     font-weight: 500;
 }
 
+.gamingImg {
+    height: auto;
+    width: 75%;
+
+    object-fit: contain;
+}
+
 .link {
     display: flex;
     justify-content: center;
@@ -92,11 +99,5 @@
     .section {
         display: grid;
         grid-template-columns: 2fr 3fr;
-    }
-}
-
-@media screen and (min-width: 1024px) {
-    .header {
-        gap: 2.5rem;
     }
 }

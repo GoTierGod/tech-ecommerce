@@ -17,6 +17,15 @@ const Gaming = ({ products }: GamingProps) => {
                     <span>Desktops - Laptops - Graphic Cards and more..</span>
                     <h4>The Best Gaming Offers</h4>
                 </div>
+                <Image
+                    className={style.gamingImg}
+                    src={'/gaming.png'}
+                    alt='Gaming products'
+                    height={500}
+                    width={500}
+                    quality='100'
+                    priority
+                />
                 <Link href='/' className={style.link}>
                     <span>Gaming Offers</span>
                 </Link>
