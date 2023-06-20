@@ -477,7 +477,7 @@
         display: none;
     }
 
-    .brandProducts > div:nth-child(2) > a:nth-child(-n + 4) {
+    .brandProducts > div:nth-child(2) > a:nth-child(-n + 3) {
         display: flex;
     }
 }
