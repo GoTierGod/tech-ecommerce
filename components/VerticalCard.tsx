@@ -35,22 +35,16 @@ const VerticalCard = ({ product }: VerticalCardProps) => {
                         </span>
                     </div>
                     <span>
-                        -{' '}
+                        {' '}
                         {getDiscount(
                             product.details.price,
                             product.details.offer_price
                         )}
-                        %
+                        % OFF
                     </span>
                 </div>
                 <h4 className={style.name}>{product.details.name}</h4>
-                {Number(product.details.price) >= 50 ? (
-                    <span className={style.freeShipping}>Free Shipping</span>
-                ) : (
-                    <span className={style.normalShipping}>
-                        Normal Shipping
-                    </span>
-                )}
+                <span className={style.bestSeller}>Best Seller</span>
                 <p className={style.description}>
                     {product.details.description}
                 </p>

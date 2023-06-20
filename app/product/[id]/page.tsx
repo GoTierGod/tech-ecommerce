@@ -78,10 +78,7 @@ const product = async ({ params }: { params: { id: string } }) => {
         <div className={style.content}>
             {/* ------------------------- OFFER -------------------------  */}
             <div className={style.offer}>
-                <div>
-                    <span>$ {product.details.price}</span>
-                    <span>Best Seller</span>
-                </div>
+                <span>$ {product.details.price}</span>
                 <span>$ {product.details.offer_price}</span>
                 <span>
                     Available in{' '}
@@ -163,9 +160,9 @@ const product = async ({ params }: { params: { id: string } }) => {
                         <div className={style.header}>
                             <div>
                                 <h2>{product.details.name}</h2>
-                                {Number(product.details.price) > 50 && (
-                                    <span>Free Shipping</span>
-                                )}
+                                <span className={style.bestSeller}>
+                                    Best Seller
+                                </span>
                             </div>
                             <div>
                                 <span>
@@ -247,9 +244,9 @@ const product = async ({ params }: { params: { id: string } }) => {
                             <div className={style.header}>
                                 <div>
                                     <h2>{product.details.name}</h2>
-                                    {Number(product.details.price) > 50 && (
-                                        <span>Free Shipping</span>
-                                    )}
+                                    <span className={style.bestSeller}>
+                                        Best Seller
+                                    </span>
                                 </div>
                                 <div>
                                     <span>

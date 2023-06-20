@@ -98,9 +98,8 @@
     overflow: hidden;
 }
 
-/* ------------------------- SHIPPING -------------------------  */
-.freeShipping,
-.normalShipping {
+/* ------------------------- BEST SELLER -------------------------  */
+.bestSeller {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -109,19 +108,12 @@
 
     width: fit-content;
 
+    background: var(--best-seller);
     color: var(--white);
 
     font-size: 0.75rem;
 
     border-radius: 4px;
-}
-
-.freeShipping {
-    background: var(--free-shipping);
-}
-
-.normalShipping {
-    background: var(--normal-shipping);
 }
 
 /* ------------------------- DESCRIPTION -------------------------  */
