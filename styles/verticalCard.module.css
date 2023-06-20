@@ -30,6 +30,7 @@
 }
 
 .image img {
+    max-height: 150px;
     max-width: 100px;
     height: auto;
 
