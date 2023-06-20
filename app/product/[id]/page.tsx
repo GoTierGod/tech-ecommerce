@@ -59,7 +59,7 @@ const deliveryDay: string = new Date(
     new Date().setDate(new Date().getDate() + 3)
 ).toLocaleString('en-US', { weekday: 'long' })
 
-const product = async ({ params }: { params: { id: string } }) => {
+export default async function Product({ params }: { params: { id: string } }) {
     const { id } = params
 
     const product: FullProductDetails = await getData(
@@ -291,5 +291,3 @@ export const generateStaticParams = async () => {
 
 export const dynamicParams = false
 export const revalidate = 60
-
-export default product
