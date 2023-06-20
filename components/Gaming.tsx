@@ -19,7 +19,7 @@ const Gaming = ({ products }: GamingProps) => {
                 </div>
                 <Image
                     className={style.gamingImg}
-                    src={'/gaming.png'}
+                    src={'/gaming.webp'}
                     alt='Gaming products'
                     height={500}
                     width={500}
