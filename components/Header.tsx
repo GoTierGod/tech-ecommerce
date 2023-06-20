@@ -1,3 +1,5 @@
+'use client'
+
 import style from '../styles/header.module.css'
 
 import Link from 'next/link'
@@ -6,8 +8,11 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {
     faBars,
     faCircleUser,
-    faCartShopping
+    faCartShopping,
+    faSearch
 } from '@fortawesome/free-solid-svg-icons'
+import { useState } from 'react'
+import { useRouter } from 'next/navigation'
 
 const CategoryOptions = [
     {
@@ -32,6 +37,9 @@ const titleCase = (str: string) =>
 
 // WEBSITE HEADER/NAVBAR
 const Header = () => {
+    const [searchStr, setSearchStr] = useState('')
+    const router = useRouter()
+
     return (
         <header className={style.header}>
             <div>
@@ -50,7 +58,15 @@ const Header = () => {
                         name='search'
                         id='search'
                         placeholder='search products...'
+                        value={searchStr}
+                        onChange={e => setSearchStr(e.target.value)}
                     />
+                    <button
+                        aria-label='Search'
+                        onClick={() => router.push(`/search/${searchStr}`)}
+                    >
+                        <FontAwesomeIcon icon={faSearch} />
+                    </button>
                 </div>
                 <div className={style.dropdownBtn}>
                     <FontAwesomeIcon icon={faBars} height='1rem' />
