@@ -11,7 +11,7 @@ import {
     faCartShopping,
     faSearch
 } from '@fortawesome/free-solid-svg-icons'
-import { useState } from 'react'
+import { FormEvent, useState } from 'react'
 import { useRouter } from 'next/navigation'
 
 const CategoryOptions = [
@@ -40,6 +40,12 @@ const Header = () => {
     const [searchStr, setSearchStr] = useState('')
     const router = useRouter()
 
+    const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+        e.preventDefault()
+
+        router.push(`/search/${searchStr}`)
+    }
+
     return (
         <header className={style.header}>
             <div>
@@ -52,7 +58,10 @@ const Header = () => {
                         quality='100'
                     />
                 </Link>
-                <div className={style.searchBar}>
+                <form
+                    onSubmit={e => handleSubmit(e)}
+                    className={style.searchBar}
+                >
                     <input
                         type='search'
                         name='search'
@@ -61,13 +70,10 @@ const Header = () => {
                         value={searchStr}
                         onChange={e => setSearchStr(e.target.value)}
                     />
-                    <button
-                        aria-label='Search'
-                        onClick={() => router.push(`/search/${searchStr}`)}
-                    >
+                    <button type='submit' aria-label='Search'>
                         <FontAwesomeIcon icon={faSearch} />
                     </button>
-                </div>
+                </form>
                 <div className={style.dropdownBtn}>
                     <FontAwesomeIcon icon={faBars} height='1rem' />
                 </div>
