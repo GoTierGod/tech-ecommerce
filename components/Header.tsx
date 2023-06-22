@@ -42,8 +42,7 @@ const Header = () => {
 
     const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault()
-
-        router.push(`/search/${searchStr}`)
+        ;/.*[a-z].*/i.test(searchStr) && router.push(`/search/${searchStr}`)
     }
 
     return (

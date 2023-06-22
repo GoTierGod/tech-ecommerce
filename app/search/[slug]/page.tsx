@@ -9,7 +9,7 @@ import VerticalCard from '@/components/VerticalCard'
 
 export default async function Search({ params }: { params: { slug: string } }) {
     const { slug: search } = params
-    const cleanedSearch = search.replace(/(\%20)+/g, ',')
+    const cleanedSearch = search.replace(/(\s|\%20)+/g, ',')
 
     const products: CardProductDetails[] = await getData(
         `https://ft-drf-api.vercel.app/api/search/${cleanedSearch}`
@@ -27,7 +27,7 @@ export default async function Search({ params }: { params: { slug: string } }) {
                             <FontAwesomeIcon icon={faTasks} /> Filter
                         </button>
                     </div>
-                    <h2>{search}</h2>
+                    <h2>{search.replace(/(\s|\%20)+/g, ' ')}</h2>
                 </div>
                 <div className={style.results}>
                     <h3>1.476 Results</h3>
