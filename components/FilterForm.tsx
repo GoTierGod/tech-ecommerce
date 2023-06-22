@@ -8,14 +8,12 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCaretRight } from '@fortawesome/free-solid-svg-icons'
 
 interface FilterFormProps {
-    search: string
     categories: Category[]
     brands: Brand[]
+    handleSubmit: Function
 }
 
-const FilterForm = ({ search, categories, brands }: FilterFormProps) => {
-    const router = useRouter()
-
+const FilterForm = ({ categories, brands, handleSubmit }: FilterFormProps) => {
     const [minPrice, setMinPrice] = useState('')
     const [maxPrice, setMaxPrice] = useState('')
     const [gaming, setGaming] = useState('')
@@ -23,28 +21,23 @@ const FilterForm = ({ search, categories, brands }: FilterFormProps) => {
     const [brand, setBrand] = useState('')
     const [installments, setInstallments] = useState('')
 
-    const filter = () => {
+    const getQueryParams = () => {
         const filters = []
-        minPrice && filters.push(`min-price=${minPrice}`)
-        maxPrice && filters.push(`max-price=${maxPrice}`)
-        gaming && filters.push(`is_gamer=${gaming}`)
-        category && filters.push(`category=${category}`)
-        brand && filters.push(`brand=${brand}`)
-        installments && filters.push(`installments=${installments}`)
+        minPrice.length > 0 && filters.push(`min_price=${minPrice}`)
+        maxPrice.length > 0 && filters.push(`max_price=${maxPrice}`)
+        gaming.length > 0 && filters.push(`is_gamer=${gaming}`)
+        category.length > 0 && filters.push(`category=${category}`)
+        brand.length > 0 && filters.push(`brand=${brand}`)
+        installments.length > 0 && filters.push(`installments=${installments}`)
 
-        const queryParams = filters.length > 0 ? '?' + filters.join('&') : ''
-
-        router.push(`/search/${search + queryParams}`)
-    }
-
-    const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
-        e.preventDefault()
-
-        filter()
+        return filters.length > 0 ? '?' + filters.join('&') : ''
     }
 
     return (
-        <form onSubmit={e => handleSubmit(e)} className={style.form}>
+        <form
+            onSubmit={e => handleSubmit(e, getQueryParams())}
+            className={style.form}
+        >
             <div className={style.priceFilter}>
                 <h3>Price</h3>
                 <div>
