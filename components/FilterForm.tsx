@@ -2,7 +2,6 @@
 
 import { FormEvent, useState } from 'react'
 import style from '../styles/filterForm.module.css'
-import { useRouter } from 'next/navigation'
 import { Brand, Category } from '@/types/tables'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCaretRight } from '@fortawesome/free-solid-svg-icons'
@@ -10,10 +9,9 @@ import { faCaretRight } from '@fortawesome/free-solid-svg-icons'
 interface FilterFormProps {
     categories: Category[]
     brands: Brand[]
-    handleSubmit: Function
 }
 
-const FilterForm = ({ categories, brands, handleSubmit }: FilterFormProps) => {
+const FilterForm = ({ categories, brands }: FilterFormProps) => {
     const [minPrice, setMinPrice] = useState('')
     const [maxPrice, setMaxPrice] = useState('')
     const [gaming, setGaming] = useState('')
@@ -33,11 +31,10 @@ const FilterForm = ({ categories, brands, handleSubmit }: FilterFormProps) => {
         return filters.length > 0 ? '?' + filters.join('&') : ''
     }
 
+    const handleSubmit = (e: FormEvent<HTMLFormElement>) => e.preventDefault()
+
     return (
-        <form
-            onSubmit={e => handleSubmit(e, getQueryParams())}
-            className={style.form}
-        >
+        <form onSubmit={e => handleSubmit(e)} className={style.form}>
             <div className={style.priceFilter}>
                 <h3>Price</h3>
                 <div>

@@ -1,5 +1,3 @@
-'use client'
-
 import style from './page.module.css'
 
 import { getData } from '@/helpers/getData'
@@ -13,7 +11,6 @@ import { CardProductDetails } from '@/types/products'
 import VerticalCard from '@/components/VerticalCard'
 import FilterForm from '@/components/FilterForm'
 import { Brand, Category } from '@/types/tables'
-import { FormEvent } from 'react'
 
 export default async function Search({ params }: { params: { slug: string } }) {
     const { slug: search } = params
@@ -30,19 +27,6 @@ export default async function Search({ params }: { params: { slug: string } }) {
     const brands: Brand[] = await getData(
         `https://ft-drf-api.vercel.app/api/brands`
     )
-
-    const handleSubmit = async (
-        e: FormEvent<HTMLFormElement>,
-        queryParams: string
-    ) => {
-        e.preventDefault()
-
-        products = await getData(
-            `https://ft-drf-api.vercel.app/api/search/${
-                cleanedSearch + queryParams
-            }`
-        )
-    }
 
     return (
         <main>
@@ -74,7 +58,6 @@ export default async function Search({ params }: { params: { slug: string } }) {
                             <FilterForm
                                 categories={categories}
                                 brands={brands}
-                                handleSubmit={handleSubmit}
                             />
                         </div>
                     </div>
