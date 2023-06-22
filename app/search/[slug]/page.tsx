@@ -10,6 +10,7 @@ import {
 import { CardProductDetails } from '@/types/products'
 import VerticalCard from '@/components/VerticalCard'
 import FilterForm from '@/components/FilterForm'
+import { Brand, Category } from '@/types/tables'
 
 export default async function Search({ params }: { params: { slug: string } }) {
     const { slug: search } = params
@@ -17,6 +18,14 @@ export default async function Search({ params }: { params: { slug: string } }) {
 
     const products: CardProductDetails[] = await getData(
         `https://ft-drf-api.vercel.app/api/search/${cleanedSearch}`
+    )
+
+    const categories: Category[] = await getData(
+        `https://ft-drf-api.vercel.app/api/categories`
+    )
+
+    const brands: Brand[] = await getData(
+        `https://ft-drf-api.vercel.app/api/brands`
     )
 
     return (
@@ -46,7 +55,11 @@ export default async function Search({ params }: { params: { slug: string } }) {
                             <h2>
                                 Filters <FontAwesomeIcon icon={faTasks} />
                             </h2>
-                            <FilterForm />
+                            <FilterForm
+                                search={cleanedSearch}
+                                categories={categories}
+                                brands={brands}
+                            />
                         </div>
                     </div>
                 </div>

@@ -24,7 +24,7 @@
     height: 1rem;
 }
 
-.header button {
+.mobile button {
     display: flex;
     justify-content: center;
     align-items: center;
