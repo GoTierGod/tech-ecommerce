@@ -1,11 +1,15 @@
-import ProductRows from '@/components/ProductRows'
 import style from './page.module.css'
 
 import { getData } from '@/helpers/getData'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faSortAmountDesc, faTasks } from '@fortawesome/free-solid-svg-icons'
+import {
+    faSearch,
+    faSortAmountDesc,
+    faTasks
+} from '@fortawesome/free-solid-svg-icons'
 import { CardProductDetails } from '@/types/products'
 import VerticalCard from '@/components/VerticalCard'
+import FilterForm from '@/components/FilterForm'
 
 export default async function Search({ params }: { params: { slug: string } }) {
     const { slug: search } = params
@@ -19,18 +23,40 @@ export default async function Search({ params }: { params: { slug: string } }) {
         <main>
             <div className={style.wrapper}>
                 <div className={style.header}>
+                    <div className={style.mobile}>
+                        <div>
+                            <button>
+                                <FontAwesomeIcon icon={faSortAmountDesc} /> Sort
+                            </button>
+                            <button>
+                                <FontAwesomeIcon icon={faTasks} /> Filter
+                            </button>
+                        </div>
+                        <h2>{search.replace(/(\s|\%20)+/g, ' ')}</h2>
+                    </div>
+                    <div className={style.desktop}>
+                        <div>
+                            <h2>
+                                Searched Text{' '}
+                                <FontAwesomeIcon icon={faSearch} />
+                            </h2>
+                            <p>{search.replace(/(\s|\%20)+/g, ' ')}</p>
+                        </div>
+                        <div>
+                            <h2>
+                                Filters <FontAwesomeIcon icon={faTasks} />
+                            </h2>
+                            <FilterForm />
+                        </div>
+                    </div>
+                </div>
+                <div className={style.results}>
                     <div>
+                        <span>1.476 Results</span>
                         <button>
                             <FontAwesomeIcon icon={faSortAmountDesc} /> Sort
                         </button>
-                        <button>
-                            <FontAwesomeIcon icon={faTasks} /> Filter
-                        </button>
                     </div>
-                    <h2>{search.replace(/(\s|\%20)+/g, ' ')}</h2>
-                </div>
-                <div className={style.results}>
-                    <h3>1.476 Results</h3>
                     <div className={style.grid}>
                         {products.map(product => (
                             <VerticalCard

@@ -1,0 +1,11 @@
+/* ------------------------- FILTERS -------------------------  */
+.priceFilter {
+    display: flex;
+    flex-direction: column;
+
+    padding: 1rem;
+
+    background: var(--white);
+
+    border-radius: 4px;
+}
