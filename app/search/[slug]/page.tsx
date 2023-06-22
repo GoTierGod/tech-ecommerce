@@ -12,12 +12,40 @@ import VerticalCard from '@/components/VerticalCard'
 import FilterForm from '@/components/FilterForm'
 import { Brand, Category } from '@/types/tables'
 
-export default async function Search({ params }: { params: { slug: string } }) {
+export default async function Search({
+    params,
+    searchParams
+}: {
+    params: { slug: string }
+    searchParams?: { [key: string]: string | string[] | undefined }
+}) {
     const { slug: search } = params
+    const { minPrice } = searchParams ?? {}
+    const { maxPrice } = searchParams ?? {}
+    const { isGamer } = searchParams ?? {}
+    const { category } = searchParams ?? {}
+    const { brand } = searchParams ?? {}
+    const { installments } = searchParams ?? {}
+
+    const getQueryParams = () => {
+        const filters = []
+
+        minPrice && filters.push(`min_price=${minPrice}`)
+        maxPrice && filters.push(`max_price=${maxPrice}`)
+        isGamer && filters.push(`is_gamer=${isGamer}`)
+        category && filters.push(`category=${category}`)
+        brand && filters.push(`brand=${brand}`)
+        installments && filters.push(`installments=${installments}`)
+
+        return filters.length > 0 ? '?' + filters.join('&') : ''
+    }
+
     const cleanedSearch = search.replace(/(\s|\%20)+/g, ',')
 
     let products: CardProductDetails[] = await getData(
-        `https://ft-drf-api.vercel.app/api/search/${cleanedSearch}`
+        `https://ft-drf-api.vercel.app/api/search/${
+            cleanedSearch + getQueryParams()
+        }`
     )
 
     const categories: Category[] = await getData(
@@ -56,6 +84,7 @@ export default async function Search({ params }: { params: { slug: string } }) {
                                 Filters <FontAwesomeIcon icon={faTasks} />
                             </h2>
                             <FilterForm
+                                search={cleanedSearch}
                                 categories={categories}
                                 brands={brands}
                             />

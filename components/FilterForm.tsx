@@ -5,25 +5,30 @@ import style from '../styles/filterForm.module.css'
 import { Brand, Category } from '@/types/tables'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCaretRight } from '@fortawesome/free-solid-svg-icons'
+import { useRouter } from 'next/navigation'
 
 interface FilterFormProps {
+    search: string
     categories: Category[]
     brands: Brand[]
 }
 
-const FilterForm = ({ categories, brands }: FilterFormProps) => {
+const FilterForm = ({ search, categories, brands }: FilterFormProps) => {
+    const router = useRouter()
+
     const [minPrice, setMinPrice] = useState('')
     const [maxPrice, setMaxPrice] = useState('')
-    const [gaming, setGaming] = useState('')
+    const [isGamer, setGaming] = useState('')
     const [category, setCategory] = useState('')
     const [brand, setBrand] = useState('')
     const [installments, setInstallments] = useState('')
 
     const getQueryParams = () => {
         const filters = []
-        minPrice.length > 0 && filters.push(`min_price=${minPrice}`)
-        maxPrice.length > 0 && filters.push(`max_price=${maxPrice}`)
-        gaming.length > 0 && filters.push(`is_gamer=${gaming}`)
+
+        minPrice.length > 0 && filters.push(`minPrice=${minPrice}`)
+        maxPrice.length > 0 && filters.push(`maxPrice=${maxPrice}`)
+        isGamer.length > 0 && filters.push(`isGamer=${isGamer}`)
         category.length > 0 && filters.push(`category=${category}`)
         brand.length > 0 && filters.push(`brand=${brand}`)
         installments.length > 0 && filters.push(`installments=${installments}`)
@@ -31,7 +36,11 @@ const FilterForm = ({ categories, brands }: FilterFormProps) => {
         return filters.length > 0 ? '?' + filters.join('&') : ''
     }
 
-    const handleSubmit = (e: FormEvent<HTMLFormElement>) => e.preventDefault()
+    const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+        e.preventDefault()
+
+        router.push(`/search/${search + getQueryParams()}`)
+    }
 
     return (
         <form onSubmit={e => handleSubmit(e)} className={style.form}>
