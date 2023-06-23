@@ -3,7 +3,8 @@ import style from '../styles/verticalCard.module.css'
 
 import { CardProductDetails } from '@/types/products'
 import Link from 'next/link'
-import { formatPrice, getDiscount } from '@/helpers/getData'
+import { formatPrice } from '@/helpers/formatPrice'
+import { getDiscount } from '@/helpers/getDiscount'
 
 interface VerticalCardProps {
     product: CardProductDetails

@@ -5,7 +5,6 @@ import Link from 'next/link'
 import { CardProductDetails } from '@/types/products'
 import Image from 'next/image'
 import { getInstallments } from '@/helpers/getInstallments'
-import { getStars } from '@/helpers/getStars'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCartPlus, faHeart } from '@fortawesome/free-solid-svg-icons'
 
