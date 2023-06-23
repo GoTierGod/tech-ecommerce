@@ -3,15 +3,11 @@ import style from '../styles/verticalCard.module.css'
 
 import { CardProductDetails } from '@/types/products'
 import Link from 'next/link'
+import { formatPrice, getDiscount } from '@/helpers/getData'
 
 interface VerticalCardProps {
     product: CardProductDetails
 }
-
-const formatPrice = (value: string) => Number(value).toFixed(2)
-
-const getDiscount = (price: string, offer: string) =>
-    Math.round((Number(price) / Number(offer)) * 100 - 100)
 
 // VERTICAL CARD FOR PRODUCT DETAILS
 const VerticalCard = ({ product }: VerticalCardProps) => {

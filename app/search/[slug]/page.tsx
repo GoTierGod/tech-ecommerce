@@ -8,9 +8,9 @@ import {
     faTasks
 } from '@fortawesome/free-solid-svg-icons'
 import { CardProductDetails } from '@/types/products'
-import VerticalCard from '@/components/VerticalCard'
 import FilterForm from '@/components/FilterForm'
 import { Brand, Category } from '@/types/tables'
+import SearchCard from '@/components/SearchCard'
 
 export default async function Search({
     params,
@@ -100,7 +100,7 @@ export default async function Search({
                     </div>
                     <div className={style.grid}>
                         {products.map(product => (
-                            <VerticalCard
+                            <SearchCard
                                 key={product.details.id}
                                 product={product}
                             />

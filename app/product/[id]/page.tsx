@@ -7,57 +7,15 @@ import {
     faBox,
     faShieldAlt,
     faStar,
-    faStarHalf,
     faTruck
 } from '@fortawesome/free-solid-svg-icons'
 import Link from 'next/link'
 import Image from 'next/image'
 import VerticalCard from '@/components/VerticalCard'
 import ProductRows from '@/components/ProductRows'
-
-// GET STARS ACCORDING TO RATING
-const getStars = (reviews_ct: number, rating: number) => {
-    const stars: Array<JSX.Element> = []
-
-    if (!reviews_ct) {
-        for (let i = 0; i < 5; i++) {
-            stars.push(<FontAwesomeIcon key={i} icon={faStar} />)
-        }
-
-        return stars
-    }
-
-    const productRating = rating
-
-    const wholeStars = productRating - (productRating % 1)
-
-    for (let i = 0; i < wholeStars; i++) {
-        stars.push(<FontAwesomeIcon key={i} icon={faStar} />)
-    }
-
-    if (productRating - wholeStars >= 0.6) {
-        stars.push(<FontAwesomeIcon key={wholeStars + 1} icon={faStar} />)
-    } else if (productRating - wholeStars >= 0.1) {
-        stars.push(<FontAwesomeIcon key={wholeStars + 1} icon={faStarHalf} />)
-    }
-
-    return stars
-}
-
-// INSTALLMENTS AND COST
-const getInstallments = (installments: number, offer: string) =>
-    `${installments}x $${(
-        Number(offer) / installments +
-        Number(offer) / 100
-    ).toFixed(2)}`
-
-// CALCULATE DELIVERY COST
-const getDeliveryCost = (price: string) =>
-    Number(price) >= 50 ? 'for free' : `for $${(Number(price) / 10).toFixed(2)}`
-// CALCULATE DELIVERY DAY
-const deliveryDay: string = new Date(
-    new Date().setDate(new Date().getDate() + 3)
-).toLocaleString('en-US', { weekday: 'long' })
+import { getStars } from '@/helpers/getStars'
+import { getDeliveryDay } from '@/helpers/getDeliveryDay'
+import { getInstallments } from '@/helpers/getInstallments'
 
 export default async function Product({ params }: { params: { id: string } }) {
     const { id } = params
@@ -100,14 +58,13 @@ export default async function Product({ params }: { params: { id: string } }) {
             <div className={style.delivery}>
                 <h3>Delivery</h3>
                 <span>
-                    <FontAwesomeIcon icon={faTruck} /> It arrives for{' '}
-                    {getDeliveryCost(product.details.price)} this {deliveryDay}
+                    <FontAwesomeIcon icon={faTruck} /> It arrives for free this{' '}
+                    {getDeliveryDay()}
                 </span>
                 <span>
                     <FontAwesomeIcon icon={faBox} />
-                    Pick up your package for{' '}
-                    {getDeliveryCost(product.details.price)} starting from{' '}
-                    {deliveryDay}
+                    Pick up your package for free starting from{' '}
+                    {getDeliveryDay()}
                 </span>
             </div>
             {/* ------------------------- WARRANTY AND POINTS -------------------------  */}
