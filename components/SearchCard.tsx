@@ -7,45 +7,53 @@ import Image from 'next/image'
 import { getInstallments } from '@/helpers/getInstallments'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCartPlus, faHeart } from '@fortawesome/free-solid-svg-icons'
+import { getDiscount } from '@/helpers/getDiscount'
 
 const SearchCard = ({ product }: { product: CardProductDetails }) => {
     return (
-        <Link href={`/product/${product.details.id}`} className={style.card}>
-            <div className={style.image}>
-                <Image
-                    src={product.image.url}
-                    alt={product.image.description}
-                    width={250}
-                    height={250}
-                    quality='25'
-                />
+        <div className={style.wrapper}>
+            <Link
+                href={`/product/${product.details.id}`}
+                className={style.card}
+            >
+                <div className={style.image}>
+                    <Image
+                        src={product.image.url}
+                        alt={product.image.description}
+                        width={250}
+                        height={250}
+                        quality='25'
+                    />
+                </div>
+                <div className={style.details}>
+                    <div>
+                        <h4 className={style.name}>{product.details.name}</h4>
+                        <span className={style.bestSeller}>Best Seller</span>
+                    </div>
+                    <div className={style.offer}>
+                        <div>
+                            <span>$ {product.details.price}</span>
+                            <span>$ {product.details.offer_price}</span>
+                        </div>
+                        <span className={style.discount}>
+                            {getDiscount(
+                                product.details.price,
+                                product.details.offer_price
+                            )}
+                            % OFF
+                        </span>
+                    </div>
+                </div>
+            </Link>
+            <div className={style.options}>
+                <button>
+                    <FontAwesomeIcon icon={faHeart} />
+                </button>
+                <button>
+                    <FontAwesomeIcon icon={faCartPlus} />
+                </button>
             </div>
-            <div className={style.details}>
-                <div className={style.name}>
-                    <h4>{product.details.name}</h4>
-                    <span>Best Seller</span>
-                </div>
-                <div className={style.offer}>
-                    <span>{product.details.price}</span>
-                    <span>{product.details.offer_price}</span>
-                    <span>
-                        Available in{' '}
-                        {getInstallments(
-                            product.details.installments,
-                            product.details.offer_price
-                        )}
-                    </span>
-                </div>
-                <div className={style.options}>
-                    <button>
-                        <FontAwesomeIcon icon={faHeart} />
-                    </button>
-                    <button>
-                        <FontAwesomeIcon icon={faCartPlus} />
-                    </button>
-                </div>
-            </div>
-        </Link>
+        </div>
     )
 }
 
