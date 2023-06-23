@@ -104,10 +104,6 @@
     gap: 0.5rem;
 }
 
-.gamingFilter span:nth-child(1) {
-    background: var(--gray);
-}
-
 .gamingFilter span {
     padding: 0.5rem 0.75rem;
 

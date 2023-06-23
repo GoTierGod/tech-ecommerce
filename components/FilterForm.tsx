@@ -1,6 +1,6 @@
 'use client'
 
-import { FormEvent, useState } from 'react'
+import { FormEvent, useCallback, useEffect, useState } from 'react'
 import style from '../styles/filterForm.module.css'
 import { Brand, Category } from '@/types/tables'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -18,12 +18,12 @@ const FilterForm = ({ search, categories, brands }: FilterFormProps) => {
 
     const [minPrice, setMinPrice] = useState('')
     const [maxPrice, setMaxPrice] = useState('')
-    const [isGamer, setGaming] = useState('')
+    const [isGamer, setIsGamer] = useState('')
     const [category, setCategory] = useState('')
     const [brand, setBrand] = useState('')
     const [installments, setInstallments] = useState('')
 
-    const getQueryParams = () => {
+    const getQueryParams = useCallback(() => {
         const filters = []
 
         minPrice.length > 0 && filters.push(`minPrice=${minPrice}`)
@@ -34,13 +34,17 @@ const FilterForm = ({ search, categories, brands }: FilterFormProps) => {
         installments.length > 0 && filters.push(`installments=${installments}`)
 
         return filters.length > 0 ? '?' + filters.join('&') : ''
-    }
+    }, [minPrice, maxPrice, isGamer, category, brand, installments])
 
     const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault()
 
         router.push(`/search/${search + getQueryParams()}`)
     }
+
+    useEffect(() => {
+        router.push(`/search/${search + getQueryParams()}`)
+    }, [isGamer, category, brand, installments, getQueryParams, router, search])
 
     return (
         <form onSubmit={e => handleSubmit(e)} className={style.form}>
@@ -75,9 +79,35 @@ const FilterForm = ({ search, categories, brands }: FilterFormProps) => {
             <div className={style.gamingFilter}>
                 <h3>Gaming</h3>
                 <div>
-                    <span onClick={e => setGaming('')}>Any</span>
-                    <span onClick={e => setGaming('1')}>Yes</span>
-                    <span onClick={e => setGaming('0')}>No</span>
+                    <span
+                        style={{
+                            background:
+                                isGamer === '' ? 'var(--gray)' : 'var(--main)'
+                        }}
+                        onClick={e => {
+                            setIsGamer('')
+                        }}
+                    >
+                        Any
+                    </span>
+                    <span
+                        style={{
+                            background:
+                                isGamer === '1' ? 'var(--gray)' : 'var(--main)'
+                        }}
+                        onClick={e => setIsGamer('1')}
+                    >
+                        Yes
+                    </span>
+                    <span
+                        style={{
+                            background:
+                                isGamer === '0' ? 'var(--gray)' : 'var(--main)'
+                        }}
+                        onClick={e => setIsGamer('0')}
+                    >
+                        No
+                    </span>
                 </div>
             </div>
             <div className={style.categoryFilter}>
