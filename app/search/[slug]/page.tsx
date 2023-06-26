@@ -1,16 +1,8 @@
 import style from './page.module.css'
 
 import { getData } from '@/helpers/getData'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import {
-    faSearch,
-    faSortAmountDesc,
-    faTasks
-} from '@fortawesome/free-solid-svg-icons'
 import { CardProductDetails } from '@/types/products'
-import FilterForm from '@/components/FilterForm'
 import { Brand, Category } from '@/types/tables'
-import SearchCard from '@/components/SearchCard'
 import SearchAndResults from '@/components/SearchAndResults'
 
 export default async function Search({
