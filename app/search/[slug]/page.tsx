@@ -11,6 +11,7 @@ import { CardProductDetails } from '@/types/products'
 import FilterForm from '@/components/FilterForm'
 import { Brand, Category } from '@/types/tables'
 import SearchCard from '@/components/SearchCard'
+import SearchAndResults from '@/components/SearchAndResults'
 
 export default async function Search({
     params,
@@ -20,19 +21,15 @@ export default async function Search({
     searchParams?: { [key: string]: string | string[] | undefined }
 }) {
     const { slug: search } = params
-    const { minPrice } = searchParams ?? {}
-    const { maxPrice } = searchParams ?? {}
-    const { isGamer } = searchParams ?? {}
-    const { category } = searchParams ?? {}
-    const { brand } = searchParams ?? {}
-    const { installments } = searchParams ?? {}
+    const { min_price, max_price, is_gamer, category, brand, installments } =
+        searchParams ?? {}
 
     const getQueryParams = () => {
         const filters = []
 
-        minPrice && filters.push(`min_price=${minPrice}`)
-        maxPrice && filters.push(`max_price=${maxPrice}`)
-        isGamer && filters.push(`is_gamer=${isGamer}`)
+        min_price && filters.push(`min_price=${min_price}`)
+        max_price && filters.push(`max_price=${max_price}`)
+        is_gamer && filters.push(`is_gamer=${is_gamer}`)
         category && filters.push(`category=${category}`)
         brand && filters.push(`brand=${brand}`)
         installments && filters.push(`installments=${installments}`)
@@ -58,56 +55,12 @@ export default async function Search({
 
     return (
         <main>
-            <div className={style.wrapper}>
-                <div className={style.header}>
-                    <div className={style.mobile}>
-                        <div>
-                            <button>
-                                <FontAwesomeIcon icon={faSortAmountDesc} /> Sort
-                            </button>
-                            <button>
-                                <FontAwesomeIcon icon={faTasks} /> Filter
-                            </button>
-                        </div>
-                        <h2>{search.replace(/(\s|\%20)+/g, ' ')}</h2>
-                    </div>
-                    <div className={style.desktop}>
-                        <div>
-                            <h2>
-                                Searched Text{' '}
-                                <FontAwesomeIcon icon={faSearch} />
-                            </h2>
-                            <p>{search.replace(/(\s|\%20)+/g, ' ')}</p>
-                        </div>
-                        <div>
-                            <h2>
-                                Filters <FontAwesomeIcon icon={faTasks} />
-                            </h2>
-                            <FilterForm
-                                search={cleanedSearch}
-                                categories={categories}
-                                brands={brands}
-                            />
-                        </div>
-                    </div>
-                </div>
-                <div className={style.results}>
-                    <div>
-                        <span>1.476 Results</span>
-                        <button>
-                            <FontAwesomeIcon icon={faSortAmountDesc} /> Sort
-                        </button>
-                    </div>
-                    <div className={style.grid}>
-                        {products.map(product => (
-                            <SearchCard
-                                key={product.details.id}
-                                product={product}
-                            />
-                        ))}
-                    </div>
-                </div>
-            </div>
+            <SearchAndResults
+                search={cleanedSearch}
+                categories={categories}
+                brands={brands}
+                products={products}
+            />
         </main>
     )
 }

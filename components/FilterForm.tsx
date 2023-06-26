@@ -26,9 +26,9 @@ const FilterForm = ({ search, categories, brands }: FilterFormProps) => {
     const getQueryParams = useCallback(() => {
         const filters = []
 
-        minPrice.length > 0 && filters.push(`minPrice=${minPrice}`)
-        maxPrice.length > 0 && filters.push(`maxPrice=${maxPrice}`)
-        isGamer.length > 0 && filters.push(`isGamer=${isGamer}`)
+        minPrice.length > 0 && filters.push(`min_price=${minPrice}`)
+        maxPrice.length > 0 && filters.push(`max_price=${maxPrice}`)
+        isGamer.length > 0 && filters.push(`is_gamer=${isGamer}`)
         category.length > 0 && filters.push(`category=${category}`)
         brand.length > 0 && filters.push(`brand=${brand}`)
         installments.length > 0 && filters.push(`installments=${installments}`)
@@ -44,7 +44,9 @@ const FilterForm = ({ search, categories, brands }: FilterFormProps) => {
 
     useEffect(() => {
         router.push(`/search/${search + getQueryParams()}`)
-    }, [isGamer, category, brand, installments, getQueryParams, router, search])
+
+        // minPrice and maxPrice needs to be avoid
+    }, [isGamer, category, brand, installments])
 
     return (
         <form onSubmit={e => handleSubmit(e)} className={style.form}>
