@@ -52,6 +52,7 @@ export default async function Search({
                 categories={categories}
                 brands={brands}
                 products={products}
+                query={getQueryParams()}
             />
         </main>
     )
