@@ -12,7 +12,16 @@ import {
 import FilterForm from './FilterForm'
 import { CardProductDetails } from '@/types/products'
 import SearchCard from './SearchCard'
-import { MutableRefObject, useEffect, useMemo, useRef } from 'react'
+import {
+    MutableRefObject,
+    useCallback,
+    useEffect,
+    useMemo,
+    useRef,
+    useState
+} from 'react'
+import { useRouter } from 'next/navigation'
+import { AppRouterInstance } from 'next/dist/shared/lib/app-router-context'
 
 interface SearchProps {
     search: string
@@ -29,19 +38,27 @@ const SearchAndResults = ({
     products,
     query
 }: SearchProps) => {
-    const filterModalRef: MutableRefObject<null | HTMLDialogElement> =
+    const router = useRouter()
+
+    // Sorting value, could be "offer_price", "offer_price-" or ""
+    const [orderBy, setOrderBy] = useState('')
+
+    // Modals references
+    const filteringModalRef: MutableRefObject<null | HTMLDialogElement> =
         useRef(null)
     const sortingModalRef: MutableRefObject<null | HTMLDialogElement> =
         useRef(null)
 
-    const filterModal = (bool: boolean) => {
-        if (filterModalRef.current) {
+    // Open/close the filtering modal
+    const filteringModal = (bool: boolean) => {
+        if (filteringModalRef.current) {
             bool
-                ? filterModalRef.current.showModal()
-                : filterModalRef.current.close()
+                ? filteringModalRef.current.showModal()
+                : filteringModalRef.current.close()
         }
     }
 
+    // Open/close the sorting modal
     const sortingModal = (bool: boolean) => {
         if (sortingModalRef.current) {
             bool
@@ -50,10 +67,31 @@ const SearchAndResults = ({
         }
     }
 
+    // Constructur a query string that also supports sorting
+    const sortQuery = (queryParams: string, orBy: string) => {
+        if (orBy) {
+            const unsortedQuery = queryParams
+                .replace(/order_by=[^&]*/, '')
+                .replace('?', '')
+
+            return unsortedQuery.length > 0
+                ? '?' + unsortedQuery + `&order_by=${orBy}`
+                : `?order_by=${orBy}`
+        }
+
+        return queryParams.length > 0 ? '?' + queryParams.replace('?', '') : ''
+    }
+
     // Close the modal after making a request
     useEffect(() => {
-        filterModal(false)
+        filteringModal(false)
+        sortingModal(false)
     }, [query])
+
+    // Sort products when "orderBy" is set
+    useEffect(() => {
+        router.push(`/search/${search + sortQuery(query, orderBy)}`)
+    }, [orderBy])
 
     return (
         <div className={style.wrapper}>
@@ -63,7 +101,7 @@ const SearchAndResults = ({
                         <button onClick={() => sortingModal(true)}>
                             <FontAwesomeIcon icon={faSortAmountDesc} /> Sort
                         </button>
-                        <button onClick={() => filterModal(true)}>
+                        <button onClick={() => filteringModal(true)}>
                             <FontAwesomeIcon icon={faTasks} /> Filter
                         </button>
                     </div>
@@ -84,6 +122,8 @@ const SearchAndResults = ({
                             search={search}
                             categories={categories}
                             brands={brands}
+                            sortQuery={sortQuery}
+                            orderBy={orderBy}
                         />
                     </div>
                 </div>
@@ -104,19 +144,32 @@ const SearchAndResults = ({
                     ))}
                 </div>
             </div>
-            <dialog ref={filterModalRef} className={style.modal}>
+            <dialog ref={filteringModalRef} className={style.modal}>
                 <div>
                     <FilterForm
                         search={search}
                         categories={categories}
                         brands={brands}
+                        sortQuery={sortQuery}
+                        orderBy={orderBy}
                     />
-                    <button onClick={() => filterModal(false)}>Close</button>
+                    <button onClick={() => filteringModal(false)}>Close</button>
                 </div>
             </dialog>
             <dialog ref={sortingModalRef} className={style.modal}>
                 <div>
-                    <div>Sorting options...</div>
+                    <div className={style.orderBy}>
+                        <h2>Order By</h2>
+                        <div>
+                            <button onClick={() => setOrderBy('offer_price')}>
+                                Lower Price
+                            </button>
+                            <button onClick={() => setOrderBy('offer_price-')}>
+                                Higher Price
+                            </button>
+                            <button onClick={() => setOrderBy('')}>Any</button>
+                        </div>
+                    </div>
                     <button onClick={() => sortingModal(false)}>Close</button>
                 </div>
             </dialog>

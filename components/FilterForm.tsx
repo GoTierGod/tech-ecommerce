@@ -11,11 +11,20 @@ interface FilterFormProps {
     search: string
     categories: Category[]
     brands: Brand[]
+    sortQuery: Function
+    orderBy: string
 }
 
-const FilterForm = ({ search, categories, brands }: FilterFormProps) => {
+const FilterForm = ({
+    search,
+    categories,
+    brands,
+    sortQuery,
+    orderBy
+}: FilterFormProps) => {
     const router = useRouter()
 
+    // States for our controlled form
     const [minPrice, setMinPrice] = useState('')
     const [maxPrice, setMaxPrice] = useState('')
     const [isGamer, setIsGamer] = useState('')
@@ -23,6 +32,7 @@ const FilterForm = ({ search, categories, brands }: FilterFormProps) => {
     const [brand, setBrand] = useState('')
     const [installments, setInstallments] = useState('')
 
+    // Construct a query string with all valid filters
     const getQueryParams = useCallback(() => {
         const filters = []
 
@@ -33,19 +43,30 @@ const FilterForm = ({ search, categories, brands }: FilterFormProps) => {
         brand.length > 0 && filters.push(`brand=${brand}`)
         installments.length > 0 && filters.push(`installments=${installments}`)
 
-        return filters.length > 0 ? '?' + filters.join('&') : ''
-    }, [minPrice, maxPrice, isGamer, category, brand, installments])
+        return sortQuery(filters.join('&'), orderBy)
+    }, [
+        minPrice,
+        maxPrice,
+        isGamer,
+        category,
+        brand,
+        installments,
+        sortQuery,
+        orderBy
+    ])
 
+    // Filter results when the form is submitted
     const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault()
 
         router.push(`/search/${search + getQueryParams()}`)
     }
 
+    // Filter products if one of the dependecies changes
     useEffect(() => {
         router.push(`/search/${search + getQueryParams()}`)
 
-        // minPrice and maxPrice needs to be avoid
+        // minPrice and maxPrice needs to be omitted as dependencies
     }, [isGamer, category, brand, installments])
 
     return (
