@@ -28,19 +28,29 @@ const SearchCard = ({ product }: { product: CardProductDetails }) => {
                 <div className={style.details}>
                     <div>
                         <h4 className={style.name}>{product.details.name}</h4>
-                        <span className={style.bestSeller}>Best Seller</span>
+                        <span>Offered by {product.details.brand.name}</span>
                     </div>
-                    <div className={style.offer}>
-                        <div>
-                            <span>$ {product.details.price}</span>
-                            <span>$ {product.details.offer_price}</span>
-                        </div>
+                    <div className={style.badges}>
+                        <span className={style.bestSeller}>Best Seller</span>
                         <span className={style.discount}>
                             {getDiscount(
                                 product.details.price,
                                 product.details.offer_price
                             )}
                             % OFF
+                        </span>
+                    </div>
+                    <div className={style.offer}>
+                        <span>$ {product.details.price}</span>
+                        <span>$ {product.details.offer_price}</span>
+                        <span>
+                            Available in{' '}
+                            <span>
+                                {getInstallments(
+                                    product.details.installments,
+                                    product.details.offer_price
+                                )}
+                            </span>
                         </span>
                     </div>
                 </div>

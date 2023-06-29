@@ -35,8 +35,6 @@
     justify-content: center;
     align-items: center;
 
-    padding: 0.5rem 0;
-
     height: 100%;
     width: 100%;
 }
@@ -56,7 +54,7 @@
     gap: 1rem;
 }
 
-/* ------------------------- NAME AND BEST SELLER BADGE -------------------------  */
+/* ------------------------- NAME AND BRAND -------------------------  */
 .details > div:nth-child(1) {
     display: flex;
     flex-direction: column;
@@ -77,7 +75,17 @@
     overflow: hidden;
 }
 
-/* ------------------------- BEST SELLER -------------------------  */
+.details > div:nth-child(1) span {
+    font-size: 0.75rem;
+}
+
+/* ------------------------- BADGES -------------------------  */
+.badges {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
 .bestSeller {
     display: flex;
     justify-content: center;
@@ -95,37 +103,6 @@
     border-radius: 4px;
 }
 
-/* ------------------------- OFFER -------------------------  */
-.offer {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    align-items: flex-start;
-    gap: 0.25rem;
-}
-
-.offer div {
-    display: flex;
-    flex-direction: column;
-    gap: 0.25rem;
-}
-
-.offer div span:nth-child(1) {
-    font-size: 0.75rem;
-    text-decoration: line-through;
-}
-
-.offer div span:nth-child(2) {
-    font-size: 1.25rem;
-    font-weight: 500;
-}
-
-.offer > span {
-    font-size: 0.75rem;
-    font-weight: 500;
-}
-
-/* ------------------------- DISCOUNT -------------------------  */
 .discount {
     display: flex;
     justify-content: center;
@@ -133,12 +110,41 @@
 
     padding: 0.25rem 0.5rem;
 
+    width: fit-content;
+
     background: var(--main);
     color: var(--white);
 
     font-size: 0.75rem;
 
     border-radius: 4px;
+}
+
+/* ------------------------- OFFER -------------------------  */
+.offer {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 0.25rem;
+}
+
+.offer > span:nth-child(1) {
+    font-size: 0.75rem;
+    text-decoration: line-through;
+}
+
+.offer > span:nth-child(2) {
+    font-size: 1.25rem;
+    font-weight: 500;
+}
+
+.offer > span:nth-child(3) {
+    font-size: 0.75rem;
+}
+
+.offer > span span {
+    font-weight: 500;
 }
 
 /* ------------------------- OPTIONS -------------------------  */
@@ -155,8 +161,6 @@
 
     padding: 1rem;
 
-    aspect-ratio: 2/1;
-
     background: var(--white);
     color: var(--gray);
 
@@ -167,19 +171,20 @@
 }
 
 .options svg {
-    height: 1rem;
+    height: 1.25rem;
 }
 
 /* ------------------------- MEDIA QUERIES -------------------------  */
 @media screen and (min-width: 375px) {
     .image img {
+        max-height: 150px;
         max-width: 125px;
     }
 }
 
 @media screen and (min-width: 425px) {
     .image {
-        padding: 1rem 0.5rem;
+        padding: 0.5rem;
     }
 }
 
@@ -192,18 +197,56 @@
     .card {
         flex-direction: row;
         justify-content: flex-start;
+
         width: 100%;
     }
 
     .image {
-        padding: 0.5rem;
-
         width: fit-content;
-        height: fit-content;
+        height: 100%;
+    }
+
+    .image img {
+        max-height: 175px;
+        max-width: 150px;
     }
 
     .offer {
         flex-direction: column;
+    }
+
+    .name {
+        display: -webkit-box;
+        -webkit-line-clamp: 1;
+        line-clamp: 1;
+        -webkit-box-orient: vertical;
+
+        height: 1.2rem;
+
+        font-size: 1.25rem;
+        font-weight: 500;
+
+        overflow: hidden;
+    }
+
+    .details > div:nth-child(1) span {
+        font-size: 1rem;
+    }
+
+    .offer > span:nth-child(1) {
+        font-size: 1rem;
+        text-decoration: line-through;
+        font-weight: 400;
+    }
+
+    .offer > span:nth-child(2) {
+        font-size: 1.75rem;
+        font-weight: 300;
+    }
+
+    .offer > span:nth-child(3) {
+        font-size: 1rem;
+        font-weight: 400;
     }
 
     .options {
@@ -214,5 +257,11 @@
     .options button {
         width: 100%;
         height: 100%;
+
+        padding: 1rem 2.5rem;
+    }
+
+    .options svg {
+        height: 1.5rem;
     }
 }
