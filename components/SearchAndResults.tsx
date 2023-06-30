@@ -140,7 +140,7 @@ const SearchAndResults = ({
                         >
                             <option value=''>Any</option>
                             <option value='offer_price'>Lower Price</option>
-                            <option value='offer_price-'>Higher Price</option>
+                            <option value='-offer_price'>Higher Price</option>
                         </select>
                     </div>
                 </div>
@@ -173,7 +173,7 @@ const SearchAndResults = ({
                             <button onClick={() => setOrderBy('offer_price')}>
                                 Lower Price
                             </button>
-                            <button onClick={() => setOrderBy('offer_price-')}>
+                            <button onClick={() => setOrderBy('-offer_price')}>
                                 Higher Price
                             </button>
                             <button onClick={() => setOrderBy('')}>Any</button>

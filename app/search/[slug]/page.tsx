@@ -13,8 +13,15 @@ export default async function Search({
     searchParams?: { [key: string]: string | string[] | undefined }
 }) {
     const { slug: search } = params
-    const { min_price, max_price, is_gamer, category, brand, installments } =
-        searchParams ?? {}
+    const {
+        min_price,
+        max_price,
+        is_gamer,
+        category,
+        brand,
+        installments,
+        order_by
+    } = searchParams ?? {}
 
     const getQueryParams = () => {
         const filters = []
@@ -25,6 +32,7 @@ export default async function Search({
         category && filters.push(`category=${category}`)
         brand && filters.push(`brand=${brand}`)
         installments && filters.push(`installments=${installments}`)
+        order_by && filters.push(`order_by=${order_by}`)
 
         return filters.length > 0 ? '?' + filters.join('&') : ''
     }
