@@ -278,6 +278,36 @@
     border-radius: 4px;
 }
 
+/* ------------------------- ORDER BY FOR WIDE SCREENS -------------------------  */
+.desktopOrderBy {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 0.5rem;
+
+    width: 100%;
+
+    text-align: center;
+}
+
+.desktopOrderBy label {
+    font-size: 1.25rem;
+    font-weight: 500;
+}
+
+.desktopOrderBy select {
+    padding: 0.5rem 0.75rem;
+
+    background: var(--white);
+    color: var(--gray);
+
+    font-size: inherit;
+
+    border: none;
+    border-right: 0.75rem solid var(--white);
+    border-radius: 4px;
+}
+
 /* ------------------------- MEDIA QUERIES -------------------------  */
 @media screen and (min-width: 600px) {
     .grid {

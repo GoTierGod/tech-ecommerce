@@ -91,6 +91,7 @@ const SearchAndResults = ({
     // Sort products when "orderBy" is set
     useEffect(() => {
         router.push(`/search/${search + sortQuery(query, orderBy)}`)
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [orderBy])
 
     return (
@@ -130,10 +131,18 @@ const SearchAndResults = ({
             </div>
             <div className={style.results}>
                 <div>
-                    <span>1.476 Results</span>
-                    <button>
-                        <FontAwesomeIcon icon={faSortAmountDesc} /> Sort
-                    </button>
+                    <div className={style.desktopOrderBy}>
+                        <label htmlFor='order-by'>Order By</label>
+                        <select
+                            onChange={e => setOrderBy(e.target.value)}
+                            name='order-by'
+                            id='order-by'
+                        >
+                            <option value=''>Any</option>
+                            <option value='offer_price'>Lower Price</option>
+                            <option value='offer_price-'>Higher Price</option>
+                        </select>
+                    </div>
                 </div>
                 <div className={style.grid}>
                     {products.map(product => (

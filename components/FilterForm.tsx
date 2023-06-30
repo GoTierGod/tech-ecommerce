@@ -67,6 +67,7 @@ const FilterForm = ({
         router.push(`/search/${search + getQueryParams()}`)
 
         // minPrice and maxPrice needs to be omitted as dependencies
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [isGamer, category, brand, installments])
 
     return (
