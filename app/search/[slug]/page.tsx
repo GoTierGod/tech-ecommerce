@@ -12,7 +12,10 @@ export default async function Search({
     params: { slug: string }
     searchParams?: { [key: string]: string | string[] | undefined }
 }) {
+    // SEARCHED TEXT
     const { slug: search } = params
+
+    // SEARCH PARAMS
     const {
         min_price,
         max_price,
@@ -23,7 +26,8 @@ export default async function Search({
         order_by
     } = searchParams ?? {}
 
-    const getQueryParams = () => {
+    // CONSTRUCT THE QUERY STRING
+    const getQueryString = () => {
         const filters = []
 
         min_price && filters.push(`min_price=${min_price}`)
@@ -37,18 +41,22 @@ export default async function Search({
         return filters.length > 0 ? '?' + filters.join('&') : ''
     }
 
-    const cleanedSearch = search.replace(/(\s|\%20)+/g, ',')
+    // SEARCHED STRING IN A READABLE FORMAT
+    const readableSearch = search.replace(/(\s|\%20)+/g, ',')
 
+    // PRODUCTS
     let products: CardProductDetails[] = await getData(
         `https://ft-drf-api.vercel.app/api/search/${
-            cleanedSearch + getQueryParams()
+            readableSearch + getQueryString()
         }`
     )
 
+    // CATEGORIES
     const categories: Category[] = await getData(
         `https://ft-drf-api.vercel.app/api/categories`
     )
 
+    // BRANDS
     const brands: Brand[] = await getData(
         `https://ft-drf-api.vercel.app/api/brands`
     )
@@ -56,11 +64,12 @@ export default async function Search({
     return (
         <main>
             <SearchAndResults
-                search={cleanedSearch}
+                searchText={readableSearch}
                 categories={categories}
                 brands={brands}
                 products={products}
-                query={getQueryParams()}
+                queryObject={searchParams}
+                queryString={getQueryString()}
             />
         </main>
     )

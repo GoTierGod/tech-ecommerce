@@ -12,44 +12,41 @@ import {
 import FilterForm from './FilterForm'
 import { CardProductDetails } from '@/types/products'
 import SearchCard from './SearchCard'
-import {
-    MutableRefObject,
-    useCallback,
-    useEffect,
-    useMemo,
-    useRef,
-    useState
-} from 'react'
+import { MutableRefObject, useEffect, useMemo, useRef, useState } from 'react'
 import { useRouter } from 'next/navigation'
-import { AppRouterInstance } from 'next/dist/shared/lib/app-router-context'
 
 interface SearchProps {
-    search: string
+    searchText: string
     categories: Category[]
     brands: Brand[]
     products: CardProductDetails[]
-    query: string
+    queryObject?: { [key: string]: string | string[] | undefined }
+    queryString: string
 }
 
 const SearchAndResults = ({
-    search,
+    searchText,
     categories,
     brands,
     products,
-    query
+    queryObject,
+    queryString
 }: SearchProps) => {
     const router = useRouter()
 
-    // Sorting value, could be "offer_price", "offer_price-" or ""
-    const [orderBy, setOrderBy] = useState('')
+    // CURRENT ORDER_BY PARAMETER
+    const { order_by } = queryObject ?? {}
 
-    // Modals references
+    // ORDER BY
+    const [orderBy, setOrderBy] = useState((order_by as string) || '')
+
+    // MODAL REFERNECES
     const filteringModalRef: MutableRefObject<null | HTMLDialogElement> =
         useRef(null)
     const sortingModalRef: MutableRefObject<null | HTMLDialogElement> =
         useRef(null)
 
-    // Open/close the filtering modal
+    // OPEN/CLOSE FILTERING MODAL
     const filteringModal = (bool: boolean) => {
         if (filteringModalRef.current) {
             bool
@@ -58,7 +55,7 @@ const SearchAndResults = ({
         }
     }
 
-    // Open/close the sorting modal
+    // OPEN/CLOSE SORTING MODAL
     const sortingModal = (bool: boolean) => {
         if (sortingModalRef.current) {
             bool
@@ -67,30 +64,30 @@ const SearchAndResults = ({
         }
     }
 
-    // Constructur a query string that also supports sorting
-    const sortQuery = (queryParams: string, orBy: string) => {
-        if (orBy) {
-            const unsortedQuery = queryParams
+    // CONSTRUCT A QUERY STRING THAT ALSO SUPPORTS SORTING
+    const sortQuery = useMemo(() => {
+        if (orderBy) {
+            const unsortedQuery = queryString
                 .replace(/order_by=[^&]*/, '')
                 .replace('?', '')
 
             return unsortedQuery.length > 0
-                ? '?' + unsortedQuery + `&order_by=${orBy}`
-                : `?order_by=${orBy}`
+                ? '?' + unsortedQuery + `&order_by=${orderBy}`
+                : `?order_by=${orderBy}`
         }
 
-        return queryParams.length > 0 ? '?' + queryParams.replace('?', '') : ''
-    }
+        return queryString.length > 0 ? '?' + queryString.replace('?', '') : ''
+    }, [queryString, orderBy])
 
-    // Close the modal after making a request
+    // CLOSE MODALS AFTER MAKING A REQUEST
     useEffect(() => {
         filteringModal(false)
         sortingModal(false)
-    }, [query])
+    }, [queryString])
 
-    // Sort products when "orderBy" is set
+    // SORT PRODUCTS IF ORDER_BY PARAMETER IS DEFINED
     useEffect(() => {
-        router.push(`/search/${search + sortQuery(query, orderBy)}`)
+        router.push(`/search/${searchText + sortQuery}`)
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [orderBy])
 
@@ -106,25 +103,24 @@ const SearchAndResults = ({
                             <FontAwesomeIcon icon={faTasks} /> Filter
                         </button>
                     </div>
-                    <h2>{search.replace(/(\s|\%20)+/g, ' ')}</h2>
+                    <h2>{searchText.replace(/(\s|\%20)+/g, ' ')}</h2>
                 </div>
                 <div className={style.desktop}>
                     <div>
                         <h2>
                             Searched Text <FontAwesomeIcon icon={faSearch} />
                         </h2>
-                        <p>{search.replace(/(\s|\%20)+/g, ' ')}</p>
+                        <p>{searchText.replace(/(\s|\%20)+/g, ' ')}</p>
                     </div>
                     <div>
                         <h2>
                             Filters <FontAwesomeIcon icon={faTasks} />
                         </h2>
                         <FilterForm
-                            search={search}
+                            searchText={searchText}
                             categories={categories}
                             brands={brands}
-                            sortQuery={sortQuery}
-                            orderBy={orderBy}
+                            queryObject={queryObject}
                         />
                     </div>
                 </div>
@@ -137,6 +133,7 @@ const SearchAndResults = ({
                             onChange={e => setOrderBy(e.target.value)}
                             name='order-by'
                             id='order-by'
+                            value={orderBy}
                         >
                             <option value=''>Any</option>
                             <option value='offer_price'>Lower Price</option>
@@ -156,11 +153,10 @@ const SearchAndResults = ({
             <dialog ref={filteringModalRef} className={style.modal}>
                 <div>
                     <FilterForm
-                        search={search}
+                        searchText={searchText}
                         categories={categories}
                         brands={brands}
-                        sortQuery={sortQuery}
-                        orderBy={orderBy}
+                        queryObject={queryObject}
                     />
                     <button onClick={() => filteringModal(false)}>Close</button>
                 </div>

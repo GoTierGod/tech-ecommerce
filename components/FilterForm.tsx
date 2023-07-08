@@ -8,67 +8,81 @@ import { faCaretRight } from '@fortawesome/free-solid-svg-icons'
 import { useRouter } from 'next/navigation'
 
 interface FilterFormProps {
-    search: string
+    searchText: string
     categories: Category[]
     brands: Brand[]
-    sortQuery: Function
-    orderBy: string
+    queryObject?: { [key: string]: string | string[] | undefined }
 }
 
 const FilterForm = ({
-    search,
+    searchText,
     categories,
     brands,
-    sortQuery,
-    orderBy
+    queryObject
 }: FilterFormProps) => {
     const router = useRouter()
 
-    // States for our controlled form
-    const [minPrice, setMinPrice] = useState('')
-    const [maxPrice, setMaxPrice] = useState('')
-    const [isGamer, setIsGamer] = useState('')
-    const [category, setCategory] = useState('')
-    const [brand, setBrand] = useState('')
-    const [installments, setInstallments] = useState('')
+    // CURRENT PARAMETERS
+    const {
+        min_price,
+        max_price,
+        is_gamer,
+        category,
+        brand,
+        installments,
+        order_by
+    } = queryObject ?? {}
 
-    // Construct a query string with all valid filters
+    // CONTROLLED FORM STATES
+    const [minPrice, setMinPrice] = useState((min_price as string) || '')
+    const [maxPrice, setMaxPrice] = useState((max_price as string) || '')
+    const [isGamer, setIsGamer] = useState((is_gamer as string) || '')
+    const [categoryState, setCategoryState] = useState(
+        (category as string) || ''
+    )
+    const [brandState, setBrandState] = useState((brand as string) || '')
+    const [installmentsState, setInstallmentsState] = useState(
+        (installments as string) || ''
+    )
+
+    // CONSTRUCT A QUERY STRING USING ALL VALID PARAMETERS
     const getQueryParams = useCallback(() => {
         const filters = []
 
         minPrice.length > 0 && filters.push(`min_price=${minPrice}`)
         maxPrice.length > 0 && filters.push(`max_price=${maxPrice}`)
         isGamer.length > 0 && filters.push(`is_gamer=${isGamer}`)
-        category.length > 0 && filters.push(`category=${category}`)
-        brand.length > 0 && filters.push(`brand=${brand}`)
-        installments.length > 0 && filters.push(`installments=${installments}`)
+        categoryState.length > 0 && filters.push(`category=${categoryState}`)
+        brandState.length > 0 && filters.push(`brand=${brandState}`)
+        installmentsState.length > 0 &&
+            filters.push(`installments=${installmentsState}`)
+        order_by && filters.push(`order_by=${order_by}`)
 
-        return sortQuery(filters.join('&'), orderBy)
+        return filters.length > 0 ? '?' + filters.join('&') : ''
     }, [
         minPrice,
         maxPrice,
         isGamer,
-        category,
-        brand,
-        installments,
-        sortQuery,
-        orderBy
+        categoryState,
+        brandState,
+        installmentsState,
+        order_by
     ])
 
-    // Filter results when the form is submitted
+    // FILTER PRODUCTS WHEN THE FORM IS SUBMITTED
     const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault()
 
-        router.push(`/search/${search + getQueryParams()}`)
+        router.push(`/search/${searchText + getQueryParams()}`)
     }
 
-    // Filter products if one of the dependecies changes
+    // FILTER PRODUCTS WHEN PARAMETERS CHANGES
     useEffect(() => {
-        router.push(`/search/${search + getQueryParams()}`)
+        router.push(`/search/${searchText + getQueryParams()}`)
 
         // minPrice and maxPrice needs to be omitted as dependencies
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [isGamer, category, brand, installments])
+    }, [isGamer, categoryState, brandState, installmentsState])
 
     return (
         <form onSubmit={e => handleSubmit(e)} className={style.form}>
@@ -82,16 +96,18 @@ const FilterForm = ({
                             name='min-price'
                             id='min-price'
                             placeholder='$ 0.00'
+                            value={minPrice}
                             onChange={e => setMinPrice(e.target.value)}
                         />
                     </div>
                     <div>
-                        <label htmlFor='min-price'>Max.</label>
+                        <label htmlFor='max-price'>Max.</label>
                         <input
                             type='number'
                             name='max-price'
                             id='max-price'
                             placeholder='$ ∞'
+                            value={maxPrice}
                             onChange={e => setMaxPrice(e.target.value)}
                         />
                     </div>
@@ -137,9 +153,10 @@ const FilterForm = ({
             <div className={style.categoryFilter}>
                 <label htmlFor='category'>Category</label>
                 <select
-                    onChange={e => setCategory(e.target.value)}
+                    onChange={e => setCategoryState(e.target.value)}
                     name='category'
                     id='category'
+                    value={categoryState}
                 >
                     <option value=''>Any</option>
                     {categories.map(cat => (
@@ -152,9 +169,10 @@ const FilterForm = ({
             <div className={style.brandFilter}>
                 <label htmlFor='brand'>Brands</label>
                 <select
-                    onChange={e => setBrand(e.target.value)}
+                    onChange={e => setBrandState(e.target.value)}
                     name='brand'
                     id='brand'
+                    value={brandState}
                 >
                     <option value=''>Any</option>
                     {brands.map(bra => (
@@ -167,9 +185,10 @@ const FilterForm = ({
             <div className={style.installmentsFilter}>
                 <label htmlFor='installments'>Installments</label>
                 <select
-                    onChange={e => setInstallments(e.target.value)}
+                    onChange={e => setInstallmentsState(e.target.value)}
                     name='installments'
                     id='installments'
+                    value={installmentsState}
                 >
                     <option value=''>Any</option>
                     <option value='6'>6</option>

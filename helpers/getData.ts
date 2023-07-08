@@ -2,9 +2,8 @@
 export const getData = async (url: string) => {
     const res = await fetch(url)
 
-    if (!res.ok) {
-        throw new Error('Failed to fetch data')
-    }
+    if (res.ok) return res.json()
+    else if (res.status === 404) return []
 
-    return res.json()
+    throw new Error('Filed to fetch')
 }
