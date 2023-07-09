@@ -200,10 +200,6 @@
     filter: drop-shadow(1px 1px var(--light-pink));
 }
 
-.options button:active svg {
-    transform: scale(1.25);
-}
-
 /* ------------------------- MEDIA QUERIES -------------------------  */
 @media screen and (min-width: 375px) {
     .image img {
