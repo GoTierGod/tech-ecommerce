@@ -15,7 +15,7 @@ const Offers = ({ products }: OffersProps) => {
     return (
         <section className={style.section}>
             <div className={style.grid}>
-                {products.map(product => (
+                {products.slice(0, 3).map(product => (
                     <Link
                         key={product.details.id}
                         href={`/product/${product.details.id}`}

@@ -31,7 +31,7 @@ const Gaming = ({ products }: GamingProps) => {
                 </Link>
             </div>
             <div className={style.grid}>
-                {products.map(product => (
+                {products.slice(0, 6).map(product => (
                     <Link
                         key={product.details.id}
                         href={`/product/${product.details.id}`}
