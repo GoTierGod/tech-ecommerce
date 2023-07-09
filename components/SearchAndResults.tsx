@@ -127,6 +127,15 @@ const SearchAndResults = ({
                 </div>
             </div>
             <div className={style.results}>
+                <div className={style.phoneOrderBy}>
+                    <h3>
+                        {orderBy === 'offer_price'
+                            ? 'Sorted by Lower Price'
+                            : orderBy === '-offer_price'
+                            ? 'Sorted by Higher Price'
+                            : 'Unsorted'}
+                    </h3>
+                </div>
                 <div className={style.desktopOrderBy}>
                     <h3>Order By</h3>
                     <div>

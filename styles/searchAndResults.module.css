@@ -265,8 +265,9 @@
     border-radius: 4px;
 }
 
-/* ------------------------- ORDER BY FOR WIDE SCREENS -------------------------  */
-.desktopOrderBy {
+/* ------------------------- ORDER BY INFO AND BUTTONS -------------------------  */
+.desktopOrderBy,
+.phoneOrderBy {
     display: none;
     justify-content: space-between;
     align-items: center;
@@ -283,7 +284,12 @@
     border-radius: 4px;
 }
 
-.desktopOrderBy h3 {
+.phoneOrderBy {
+    display: flex;
+    justify-content: center;
+}
+
+:where(.desktopOrderBy, .phoneOrderBy) h3 {
     font-size: 1.25rem;
     font-weight: 500;
 }
@@ -321,11 +327,11 @@
     transition: all 300ms;
 }
 
-.desktopOrderBy span {
+.desktopOrderBy button span {
     transition: all 300ms;
 }
 
-.desktopOrderBy svg {
+.desktopOrderBy button svg {
     height: 1rem;
 
     filter: drop-shadow(2px 2px transparent);
@@ -361,6 +367,10 @@
 
     .grid {
         grid-template-columns: repeat(1, 1fr);
+    }
+
+    .phoneOrderBy {
+        display: none;
     }
 
     .desktopOrderBy {
