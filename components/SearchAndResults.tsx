@@ -136,9 +136,9 @@ const SearchAndResults = ({
                 <div className={style.phoneOrderBy}>
                     <span>
                         {orderBy === 'offer_price'
-                            ? 'Sorted by Lower Price'
+                            ? 'Sorted by Lowest Price'
                             : orderBy === '-offer_price'
-                            ? 'Sorted by Higher Price'
+                            ? 'Sorted by Highest Price'
                             : 'Unsorted'}
                     </span>
                 </div>
@@ -162,7 +162,7 @@ const SearchAndResults = ({
                                       }
                             }
                         >
-                            <span>Lower Price</span>{' '}
+                            <span>Lowest Price</span>{' '}
                             <FontAwesomeIcon icon={faSortAmountDesc} />
                         </button>
                         <button
@@ -182,7 +182,7 @@ const SearchAndResults = ({
                                       }
                             }
                         >
-                            <span>Higher Price</span>{' '}
+                            <span>Highest Price</span>{' '}
                             <FontAwesomeIcon icon={faSortAmountAsc} />
                         </button>
                     </div>
@@ -221,7 +221,7 @@ const SearchAndResults = ({
                                 }}
                                 onClick={() => setOrderBy('offer_price')}
                             >
-                                Lower Price
+                                Lowest Price
                             </button>
                             <button
                                 style={{
@@ -232,7 +232,7 @@ const SearchAndResults = ({
                                 }}
                                 onClick={() => setOrderBy('-offer_price')}
                             >
-                                Higher Price
+                                Highest Price
                             </button>
                             <button
                                 style={{
