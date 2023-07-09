@@ -22,7 +22,19 @@
 
     background: var(--white);
 
+    border: 2px solid transparent;
     border-radius: 4px;
+
+    transition: all 300ms;
+}
+
+.card:hover {
+    border-color: var(--main);
+}
+
+.card:hover .name {
+    color: var(--main);
+    text-shadow: 1px 1px var(--light-pink);
 }
 
 /* ------------------------- IMAGE -------------------------  */
@@ -194,7 +206,7 @@
 @media screen and (min-width: 375px) {
     .image img {
         max-height: 125x;
-        max-width: 150px;
+        max-width: 125px;
     }
 }
 
@@ -220,6 +232,10 @@
     .image {
         width: fit-content;
         height: 100%;
+    }
+
+    .image img {
+        max-width: 150px;
     }
 
     .offer {
