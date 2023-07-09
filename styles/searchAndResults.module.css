@@ -289,7 +289,12 @@
     justify-content: center;
 }
 
-:where(.desktopOrderBy, .phoneOrderBy) h3 {
+.phoneOrderBy span {
+    font-size: 1rem;
+    font-weight: 400;
+}
+
+.desktopOrderBy h3 {
     font-size: 1.25rem;
     font-weight: 500;
 }
