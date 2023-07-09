@@ -1,7 +1,7 @@
 'use client'
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import style from '../styles/searchAndResults.module.css'
+import style from '../styles/search-and-results.module.css'
 
 import { Brand, Category } from '@/types/tables'
 import {

@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import style from '../styles/productRows.module.css'
+import style from '../styles/product-rows.module.css'
 
 import { CardProductDetails } from '@/types/products'
 

@@ -1,5 +1,5 @@
 import Image from 'next/image'
-import style from '../styles/verticalCard.module.css'
+import style from '../styles/vertical-card.module.css'
 
 import { CardProductDetails } from '@/types/products'
 import Link from 'next/link'
