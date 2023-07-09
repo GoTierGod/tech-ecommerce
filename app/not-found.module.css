@@ -1,0 +1,26 @@
+.notFound {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+
+    background: var(--dark);
+    color: var(--white);
+
+    min-height: 100vh;
+    min-width: 100vw;
+}
+
+.notFound :where(h1, h2) {
+    font-weight: 400;
+}
+
+.notFound span {
+    width: 2px;
+    height: 3rem;
+
+    background: var(--white);
+
+    border-radius: 4px;
+}
