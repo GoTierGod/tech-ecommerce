@@ -119,7 +119,7 @@ const FilterForm = ({
             <div className={style.gamingFilter}>
                 <h3>Gaming</h3>
                 <div>
-                    <span
+                    <button
                         style={{
                             background:
                                 isGamer === '' ? 'var(--main)' : 'var(--gray)'
@@ -129,8 +129,8 @@ const FilterForm = ({
                         }}
                     >
                         Any
-                    </span>
-                    <span
+                    </button>
+                    <button
                         style={{
                             background:
                                 isGamer === '1' ? 'var(--main)' : 'var(--gray)'
@@ -138,8 +138,8 @@ const FilterForm = ({
                         onClick={e => setIsGamer('1')}
                     >
                         Yes
-                    </span>
-                    <span
+                    </button>
+                    <button
                         style={{
                             background:
                                 isGamer === '0' ? 'var(--main)' : 'var(--gray)'
@@ -147,7 +147,7 @@ const FilterForm = ({
                         onClick={e => setIsGamer('0')}
                     >
                         No
-                    </span>
+                    </button>
                 </div>
             </div>
             <div className={style.categoryFilter}>

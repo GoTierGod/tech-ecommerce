@@ -36,6 +36,8 @@
     border: none;
     border-right: 0.75rem solid var(--gray);
     border-radius: 4px;
+
+    transition: all 300ms;
 }
 
 /* ------------------------- FORM FIELD TITLES -------------------------  */
@@ -112,15 +114,20 @@
     gap: 0.5rem;
 }
 
-.gamingFilter span {
+.gamingFilter button {
     padding: 0.5rem 0.75rem;
 
     background: var(--dark);
     color: var(--white);
 
+    font-size: 1rem;
+    font-family: inherit;
+
+    border: none;
     border-radius: 4px;
 
     cursor: pointer;
+    transition: all 300ms;
 }
 
 /* ------------------------- MORE FILTERS -------------------------  */
