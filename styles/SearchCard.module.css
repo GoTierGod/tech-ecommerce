@@ -198,12 +198,10 @@
     color: var(--main);
 
     filter: drop-shadow(1px 1px var(--light-pink));
-
-    transform: scale(1.25);
 }
 
 .options button:active svg {
-    transform: scale(1.5);
+    transform: scale(1.25);
 }
 
 /* ------------------------- MEDIA QUERIES -------------------------  */
