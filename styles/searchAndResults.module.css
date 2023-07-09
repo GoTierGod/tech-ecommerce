@@ -140,19 +140,6 @@
     cursor: pointer;
 }
 
-.results > div:nth-child(1) {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-
-    padding: 1rem;
-
-    background: var(--main);
-    color: var(--white);
-
-    border-radius: 4px;
-}
-
 /* ------------------------- GRID -------------------------  */
 .grid {
     display: grid;
@@ -280,14 +267,20 @@
 
 /* ------------------------- ORDER BY FOR WIDE SCREENS -------------------------  */
 .desktopOrderBy {
-    display: flex;
+    display: none;
     justify-content: space-between;
     align-items: center;
     gap: 0.5rem;
 
+    padding: 1rem;
     width: 100%;
 
+    background: var(--main);
+    color: var(--white);
+
     text-align: center;
+
+    border-radius: 4px;
 }
 
 .desktopOrderBy h3 {
@@ -368,5 +361,9 @@
 
     .grid {
         grid-template-columns: repeat(1, 1fr);
+    }
+
+    .desktopOrderBy {
+        display: flex;
     }
 }

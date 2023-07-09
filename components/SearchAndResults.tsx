@@ -127,65 +127,63 @@ const SearchAndResults = ({
                 </div>
             </div>
             <div className={style.results}>
-                <div>
-                    <div className={style.desktopOrderBy}>
-                        <h3>Order By</h3>
-                        <div>
-                            <button
-                                onClick={() => setOrderBy('offer_price')}
+                <div className={style.desktopOrderBy}>
+                    <h3>Order By</h3>
+                    <div>
+                        <button
+                            onClick={() => setOrderBy('offer_price')}
+                            style={
+                                orderBy === 'offer_price'
+                                    ? {
+                                          textShadow:
+                                              '1px 1px var(--light-pink)',
+                                          boxShadow:
+                                              '2px 2px var(--light-pink)',
+                                          transform:
+                                              'translateY(-2px) translateX(-2px)'
+                                      }
+                                    : {}
+                            }
+                        >
+                            <span>Lower Price</span>{' '}
+                            <FontAwesomeIcon
+                                icon={faSortAmountDesc}
                                 style={
                                     orderBy === 'offer_price'
                                         ? {
-                                              textShadow:
-                                                  '1px 1px var(--light-pink)',
-                                              boxShadow:
-                                                  '2px 2px var(--light-pink)',
-                                              transform:
-                                                  'translateY(-2px) translateX(-2px)'
+                                              filter: 'drop-shadow(2px 2px var(--light-pink))'
                                           }
                                         : {}
                                 }
-                            >
-                                <span>Lower Price</span>{' '}
-                                <FontAwesomeIcon
-                                    icon={faSortAmountDesc}
-                                    style={
-                                        orderBy === 'offer_price'
-                                            ? {
-                                                  filter: 'drop-shadow(2px 2px var(--light-pink))'
-                                              }
-                                            : {}
-                                    }
-                                />
-                            </button>
-                            <button
-                                onClick={() => setOrderBy('-offer_price')}
+                            />
+                        </button>
+                        <button
+                            onClick={() => setOrderBy('-offer_price')}
+                            style={
+                                orderBy === '-offer_price'
+                                    ? {
+                                          textShadow:
+                                              '1px 1px var(--light-pink)',
+                                          boxShadow:
+                                              '2px 2px var(--light-pink)',
+                                          transform:
+                                              'translateY(-2px) translateX(-2px)'
+                                      }
+                                    : {}
+                            }
+                        >
+                            <span>Higher Price</span>{' '}
+                            <FontAwesomeIcon
+                                icon={faSortAmountAsc}
                                 style={
                                     orderBy === '-offer_price'
                                         ? {
-                                              textShadow:
-                                                  '1px 1px var(--light-pink)',
-                                              boxShadow:
-                                                  '2px 2px var(--light-pink)',
-                                              transform:
-                                                  'translateY(-2px) translateX(-2px)'
+                                              filter: 'drop-shadow(2px 2px var(--light-pink))'
                                           }
                                         : {}
                                 }
-                            >
-                                <span>Higher Price</span>{' '}
-                                <FontAwesomeIcon
-                                    icon={faSortAmountAsc}
-                                    style={
-                                        orderBy === '-offer_price'
-                                            ? {
-                                                  filter: 'drop-shadow(2px 2px var(--light-pink))'
-                                              }
-                                            : {}
-                                    }
-                                />
-                            </button>
-                        </div>
+                            />
+                        </button>
                     </div>
                 </div>
                 <div className={style.grid}>
