@@ -122,7 +122,7 @@ const FilterForm = ({
                     <span
                         style={{
                             background:
-                                isGamer === '' ? 'var(--gray)' : 'var(--main)'
+                                isGamer === '' ? 'var(--main)' : 'var(--gray)'
                         }}
                         onClick={e => {
                             setIsGamer('')
@@ -133,7 +133,7 @@ const FilterForm = ({
                     <span
                         style={{
                             background:
-                                isGamer === '1' ? 'var(--gray)' : 'var(--main)'
+                                isGamer === '1' ? 'var(--main)' : 'var(--gray)'
                         }}
                         onClick={e => setIsGamer('1')}
                     >
@@ -142,7 +142,7 @@ const FilterForm = ({
                     <span
                         style={{
                             background:
-                                isGamer === '0' ? 'var(--gray)' : 'var(--main)'
+                                isGamer === '0' ? 'var(--main)' : 'var(--gray)'
                         }}
                         onClick={e => setIsGamer('0')}
                     >
@@ -157,6 +157,17 @@ const FilterForm = ({
                     name='category'
                     id='category'
                     value={categoryState}
+                    style={
+                        categoryState === ''
+                            ? {
+                                  background: 'var(--gray)',
+                                  borderColor: 'var(--gray)'
+                              }
+                            : {
+                                  background: 'var(--main)',
+                                  borderColor: 'var(--main)'
+                              }
+                    }
                 >
                     <option value=''>Any</option>
                     {categories.map(cat => (
@@ -173,6 +184,17 @@ const FilterForm = ({
                     name='brand'
                     id='brand'
                     value={brandState}
+                    style={
+                        brandState === ''
+                            ? {
+                                  background: 'var(--gray)',
+                                  borderColor: 'var(--gray)'
+                              }
+                            : {
+                                  background: 'var(--main)',
+                                  borderColor: 'var(--main)'
+                              }
+                    }
                 >
                     <option value=''>Any</option>
                     {brands.map(bra => (
@@ -189,6 +211,17 @@ const FilterForm = ({
                     name='installments'
                     id='installments'
                     value={installmentsState}
+                    style={
+                        installmentsState === ''
+                            ? {
+                                  background: 'var(--gray)',
+                                  borderColor: 'var(--gray)'
+                              }
+                            : {
+                                  background: 'var(--main)',
+                                  borderColor: 'var(--main)'
+                              }
+                    }
                 >
                     <option value=''>Any</option>
                     <option value='6'>6</option>

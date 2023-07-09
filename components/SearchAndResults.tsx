@@ -50,18 +50,24 @@ const SearchAndResults = ({
     // OPEN/CLOSE FILTERING MODAL
     const filteringModal = (bool: boolean) => {
         if (filteringModalRef.current) {
-            bool
-                ? filteringModalRef.current.showModal()
-                : filteringModalRef.current.close()
+            if (bool) {
+                filteringModalRef.current.showModal()
+                filteringModalRef.current.focus()
+            } else {
+                filteringModalRef.current.close()
+            }
         }
     }
 
     // OPEN/CLOSE SORTING MODAL
     const sortingModal = (bool: boolean) => {
         if (sortingModalRef.current) {
-            bool
-                ? sortingModalRef.current.showModal()
-                : sortingModalRef.current.close()
+            if (bool) {
+                sortingModalRef.current.showModal()
+                sortingModalRef.current.focus()
+            } else {
+                sortingModalRef.current.close()
+            }
         }
     }
 

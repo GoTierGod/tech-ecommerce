@@ -115,7 +115,7 @@
 .gamingFilter span {
     padding: 0.5rem 0.75rem;
 
-    background: var(--main);
+    background: var(--dark);
     color: var(--white);
 
     border-radius: 4px;
