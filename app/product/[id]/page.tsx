@@ -23,6 +23,7 @@ export default async function Product({ params }: { params: { id: string } }) {
     const product: FullProductDetails = await getData(
         `https://ft-drf-api.vercel.app/api/products/${id}`
     )
+
     const brandProducts: CardProductDetails[] = await getData(
         `https://ft-drf-api.vercel.app/api/products?brand=${product.details.brand.name}&limit=5`
     )
