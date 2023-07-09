@@ -237,14 +237,3 @@ export default async function Product({ params }: { params: { id: string } }) {
         </main>
     )
 }
-
-export const generateStaticParams = async () => {
-    const products: CardProductDetails[] = await getData(
-        `https://ft-drf-api.vercel.app/api/products`
-    )
-
-    return products.map(product => ({ id: String(product.details.id) }))
-}
-
-export const dynamicParams = false
-export const revalidate = 60
