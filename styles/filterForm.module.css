@@ -38,6 +38,14 @@
     border-radius: 4px;
 }
 
+/* ------------------------- FORM FIELD TITLES -------------------------  */
+.form h3,
+:where(.categoryFilter, .brandFilter, .installmentsFilter, .priceFilter)
+    > label {
+    font-size: 1.125rem;
+    font-weight: 500;
+}
+
 /* ------------------------- PRICE FILTER -------------------------  */
 .priceFilter {
     display: flex;

@@ -75,10 +75,6 @@
     overflow: hidden;
 }
 
-.details > div:nth-child(1) span {
-    font-size: 0.75rem;
-}
-
 /* ------------------------- BADGES -------------------------  */
 .badges {
     display: flex;
@@ -131,16 +127,19 @@
 
 .offer > span:nth-child(1) {
     font-size: 0.75rem;
+    font-weight: 400;
+
     text-decoration: line-through;
 }
 
 .offer > span:nth-child(2) {
     font-size: 1.25rem;
-    font-weight: 500;
+    font-weight: 450;
 }
 
 .offer > span:nth-child(3) {
     font-size: 0.75rem;
+    font-weight: 400;
 }
 
 .offer > span span {
@@ -177,8 +176,8 @@
 /* ------------------------- MEDIA QUERIES -------------------------  */
 @media screen and (min-width: 375px) {
     .image img {
-        max-height: 150px;
-        max-width: 125px;
+        max-height: 125x;
+        max-width: 150px;
     }
 }
 
@@ -206,11 +205,6 @@
         height: 100%;
     }
 
-    .image img {
-        max-height: 175px;
-        max-width: 150px;
-    }
-
     .offer {
         flex-direction: column;
     }
@@ -229,24 +223,9 @@
         overflow: hidden;
     }
 
-    .details > div:nth-child(1) span {
-        font-size: 1rem;
-    }
-
-    .offer > span:nth-child(1) {
-        font-size: 1rem;
-        text-decoration: line-through;
-        font-weight: 400;
-    }
-
     .offer > span:nth-child(2) {
-        font-size: 1.75rem;
-        font-weight: 300;
-    }
-
-    .offer > span:nth-child(3) {
-        font-size: 1rem;
-        font-weight: 400;
+        font-size: 1.5rem;
+        font-weight: 350;
     }
 
     .options {
@@ -258,10 +237,22 @@
         width: 100%;
         height: 100%;
 
-        padding: 1rem 2.5rem;
+        padding: 0.75rem 1.5rem;
     }
 
     .options svg {
-        height: 1.5rem;
+        height: 1.25rem;
+    }
+}
+
+@media screen and (min-width: 1024px) {
+    .offer > span:nth-child(2) {
+        font-size: 1.75rem;
+        font-weight: 350;
+    }
+
+    .offer > span:nth-child(3) {
+        font-size: 1rem;
+        font-weight: 350;
     }
 }

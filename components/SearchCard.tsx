@@ -28,7 +28,6 @@ const SearchCard = ({ product }: { product: CardProductDetails }) => {
                 <div className={style.details}>
                     <div>
                         <h4 className={style.name}>{product.details.name}</h4>
-                        <span>Offered by {product.details.brand.name}</span>
                     </div>
                     <div className={style.badges}>
                         <span className={style.bestSeller}>Best Seller</span>
@@ -56,10 +55,10 @@ const SearchCard = ({ product }: { product: CardProductDetails }) => {
                 </div>
             </Link>
             <div className={style.options}>
-                <button>
+                <button aria-label='Add to Favorites'>
                     <FontAwesomeIcon icon={faHeart} />
                 </button>
-                <button>
+                <button aria-label='Add to Cart'>
                     <FontAwesomeIcon icon={faCartPlus} />
                 </button>
             </div>
