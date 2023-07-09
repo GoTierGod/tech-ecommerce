@@ -144,54 +144,40 @@ const SearchAndResults = ({
                             style={
                                 orderBy === 'offer_price'
                                     ? {
-                                          textShadow:
-                                              '1px 1px var(--light-pink)',
                                           boxShadow:
-                                              '2px 2px var(--light-pink)',
+                                              '4px 4px var(--light-pink)',
                                           transform:
-                                              'translateY(-2px) translateX(-2px)'
+                                              'translateY(-4px) translateX(-4px)'
                                       }
-                                    : {}
+                                    : {
+                                          boxShadow: '4px 4px transparent',
+                                          transform:
+                                              'translateY(0) translateX(0)'
+                                      }
                             }
                         >
                             <span>Lower Price</span>{' '}
-                            <FontAwesomeIcon
-                                icon={faSortAmountDesc}
-                                style={
-                                    orderBy === 'offer_price'
-                                        ? {
-                                              filter: 'drop-shadow(2px 2px var(--light-pink))'
-                                          }
-                                        : {}
-                                }
-                            />
+                            <FontAwesomeIcon icon={faSortAmountDesc} />
                         </button>
                         <button
                             onClick={() => setOrderBy('-offer_price')}
                             style={
                                 orderBy === '-offer_price'
                                     ? {
-                                          textShadow:
-                                              '1px 1px var(--light-pink)',
                                           boxShadow:
-                                              '2px 2px var(--light-pink)',
+                                              '4px 4px var(--light-pink)',
                                           transform:
-                                              'translateY(-2px) translateX(-2px)'
+                                              'translateY(-4px) translateX(-4px)'
                                       }
-                                    : {}
+                                    : {
+                                          boxShadow: '4px 4px transparent',
+                                          transform:
+                                              'translateY(0) translateX(0)'
+                                      }
                             }
                         >
                             <span>Higher Price</span>{' '}
-                            <FontAwesomeIcon
-                                icon={faSortAmountAsc}
-                                style={
-                                    orderBy === '-offer_price'
-                                        ? {
-                                              filter: 'drop-shadow(2px 2px var(--light-pink))'
-                                          }
-                                        : {}
-                                }
-                            />
+                            <FontAwesomeIcon icon={faSortAmountAsc} />
                         </button>
                     </div>
                 </div>

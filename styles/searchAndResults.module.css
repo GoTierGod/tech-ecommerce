@@ -325,7 +325,7 @@
     border: 2px solid transparent;
     border-radius: 4px;
 
-    box-shadow: 2px 2px transparent;
+    box-shadow: 4px 4px transparent;
 
     transform: translateY(0) translateX(0);
     cursor: pointer;
@@ -338,8 +338,6 @@
 
 .desktopOrderBy button svg {
     height: 1rem;
-
-    filter: drop-shadow(2px 2px transparent);
 
     transition: all 300ms;
 }
