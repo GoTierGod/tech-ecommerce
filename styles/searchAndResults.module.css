@@ -290,22 +290,54 @@
     text-align: center;
 }
 
-.desktopOrderBy label {
+.desktopOrderBy h3 {
     font-size: 1.25rem;
     font-weight: 500;
 }
 
-.desktopOrderBy select {
+.desktopOrderBy div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+}
+
+.desktopOrderBy button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+
     padding: 0.5rem 0.75rem;
 
     background: var(--white);
-    color: var(--gray);
+    color: var(--main);
 
-    font-size: inherit;
+    font-size: 1rem;
+    font-family: inherit;
 
-    border: none;
-    border-right: 0.75rem solid var(--white);
+    text-shadow: 1px 1px transparent;
+
+    border: 2px solid transparent;
     border-radius: 4px;
+
+    box-shadow: 2px 2px transparent;
+
+    transform: translateY(0) translateX(0);
+    cursor: pointer;
+    transition: all 300ms;
+}
+
+.desktopOrderBy span {
+    transition: all 300ms;
+}
+
+.desktopOrderBy svg {
+    height: 1rem;
+
+    filter: drop-shadow(2px 2px transparent);
+
+    transition: all 300ms;
 }
 
 /* ------------------------- MEDIA QUERIES -------------------------  */

@@ -6,6 +6,7 @@ import style from '../styles/searchAndResults.module.css'
 import { Brand, Category } from '@/types/tables'
 import {
     faSearch,
+    faSortAmountAsc,
     faSortAmountDesc,
     faTasks
 } from '@fortawesome/free-solid-svg-icons'
@@ -128,17 +129,63 @@ const SearchAndResults = ({
             <div className={style.results}>
                 <div>
                     <div className={style.desktopOrderBy}>
-                        <label htmlFor='order-by'>Order By</label>
-                        <select
-                            onChange={e => setOrderBy(e.target.value)}
-                            name='order-by'
-                            id='order-by'
-                            value={orderBy}
-                        >
-                            <option value=''>Any</option>
-                            <option value='offer_price'>Lower Price</option>
-                            <option value='-offer_price'>Higher Price</option>
-                        </select>
+                        <h3>Order By</h3>
+                        <div>
+                            <button
+                                onClick={() => setOrderBy('offer_price')}
+                                style={
+                                    orderBy === 'offer_price'
+                                        ? {
+                                              textShadow:
+                                                  '1px 1px var(--light-pink)',
+                                              boxShadow:
+                                                  '2px 2px var(--light-pink)',
+                                              transform:
+                                                  'translateY(-2px) translateX(-2px)'
+                                          }
+                                        : {}
+                                }
+                            >
+                                <span>Lower Price</span>{' '}
+                                <FontAwesomeIcon
+                                    icon={faSortAmountDesc}
+                                    style={
+                                        orderBy === 'offer_price'
+                                            ? {
+                                                  filter: 'drop-shadow(2px 2px var(--light-pink))'
+                                              }
+                                            : {}
+                                    }
+                                />
+                            </button>
+                            <button
+                                onClick={() => setOrderBy('-offer_price')}
+                                style={
+                                    orderBy === '-offer_price'
+                                        ? {
+                                              textShadow:
+                                                  '1px 1px var(--light-pink)',
+                                              boxShadow:
+                                                  '2px 2px var(--light-pink)',
+                                              transform:
+                                                  'translateY(-2px) translateX(-2px)'
+                                          }
+                                        : {}
+                                }
+                            >
+                                <span>Higher Price</span>{' '}
+                                <FontAwesomeIcon
+                                    icon={faSortAmountAsc}
+                                    style={
+                                        orderBy === '-offer_price'
+                                            ? {
+                                                  filter: 'drop-shadow(2px 2px var(--light-pink))'
+                                              }
+                                            : {}
+                                    }
+                                />
+                            </button>
+                        </div>
                     </div>
                 </div>
                 <div className={style.grid}>
