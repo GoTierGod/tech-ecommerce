@@ -20,15 +20,15 @@ const Footer = () => {
                 <div className={style.socials}>
                     <h2>Follow Us</h2>
                     <div className={style.links}>
-                        <a href='' target='_blank'>
+                        <a href='https://www.facebook.com/' target='_blank'>
                             <FontAwesomeIcon icon={faFacebook} />
                             <span>Facebook</span>
                         </a>
-                        <a href='' target='_blank'>
+                        <a href='https://twitter.com/' target='_blank'>
                             <FontAwesomeIcon icon={faTwitter} />
                             <span>Twitter</span>
                         </a>
-                        <a href='' target='_blank'>
+                        <a href='https://www.instagram.com/' target='_blank'>
                             <FontAwesomeIcon icon={faInstagram} />
                             <span>Instagram</span>
                         </a>
