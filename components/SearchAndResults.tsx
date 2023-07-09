@@ -212,13 +212,39 @@ const SearchAndResults = ({
                     <div className={style.orderBy}>
                         <h2>Order By</h2>
                         <div>
-                            <button onClick={() => setOrderBy('offer_price')}>
+                            <button
+                                style={{
+                                    background:
+                                        orderBy === 'offer_price'
+                                            ? 'var(--main)'
+                                            : 'var(--gray)'
+                                }}
+                                onClick={() => setOrderBy('offer_price')}
+                            >
                                 Lower Price
                             </button>
-                            <button onClick={() => setOrderBy('-offer_price')}>
+                            <button
+                                style={{
+                                    background:
+                                        orderBy === '-offer_price'
+                                            ? 'var(--main)'
+                                            : 'var(--gray)'
+                                }}
+                                onClick={() => setOrderBy('-offer_price')}
+                            >
                                 Higher Price
                             </button>
-                            <button onClick={() => setOrderBy('')}>Any</button>
+                            <button
+                                style={{
+                                    background:
+                                        orderBy === ''
+                                            ? 'var(--main)'
+                                            : 'var(--gray)'
+                                }}
+                                onClick={() => setOrderBy('')}
+                            >
+                                Any
+                            </button>
                         </div>
                     </div>
                     <button onClick={() => sortingModal(false)}>Close</button>
