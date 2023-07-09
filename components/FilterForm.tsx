@@ -92,23 +92,28 @@ const FilterForm = ({
                     <div>
                         <label htmlFor='min-price'>Min.</label>
                         <input
-                            type='number'
+                            type='text'
                             name='min-price'
                             id='min-price'
-                            placeholder='$ 0.00'
-                            value={minPrice}
-                            onChange={e => setMinPrice(e.target.value)}
+                            placeholder='$ 0'
+                            value={minPrice.length > 0 ? `$ ${minPrice}` : ''}
+                            onChange={e =>
+                                setMinPrice(e.target.value.replace(/\D/g, ''))
+                            }
                         />
                     </div>
                     <div>
                         <label htmlFor='max-price'>Max.</label>
                         <input
-                            type='number'
+                            type='text'
                             name='max-price'
                             id='max-price'
-                            placeholder='$ ∞'
-                            value={maxPrice}
-                            onChange={e => setMaxPrice(e.target.value)}
+                            placeholder='$ infinity'
+                            value={maxPrice.length > 0 ? `$ ${maxPrice}` : ''}
+                            onChange={e => {
+                                console.log(maxPrice)
+                                setMaxPrice(e.target.value.replace(/\D/g, ''))
+                            }}
                         />
                     </div>
                     <button type='submit'>
