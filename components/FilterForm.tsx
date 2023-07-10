@@ -9,9 +9,9 @@ import { useRouter } from 'next/navigation'
 
 interface FilterFormProps {
     searchText: string
+    queryObject?: { [key: string]: string | string[] | undefined }
     categories: Category[]
     brands: Brand[]
-    queryObject?: { [key: string]: string | string[] | undefined }
 }
 
 const FilterForm = ({

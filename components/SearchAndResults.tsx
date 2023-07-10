@@ -13,33 +13,43 @@ import {
 import FilterForm from './FilterForm'
 import { CardProductDetails } from '@/types/products'
 import SearchCard from './SearchCard'
-import { MutableRefObject, useEffect, useMemo, useRef, useState } from 'react'
+import {
+    MutableRefObject,
+    useCallback,
+    useEffect,
+    useMemo,
+    useRef,
+    useState
+} from 'react'
 import { useRouter } from 'next/navigation'
 
 interface SearchProps {
     searchText: string
-    categories: Category[]
-    brands: Brand[]
-    products: CardProductDetails[]
     queryObject?: { [key: string]: string | string[] | undefined }
     queryString: string
+    pages: number
+    products: CardProductDetails[]
+    categories: Category[]
+    brands: Brand[]
 }
 
 const SearchAndResults = ({
     searchText,
-    categories,
-    brands,
-    products,
     queryObject,
-    queryString
+    queryString,
+    pages,
+    products,
+    categories,
+    brands
 }: SearchProps) => {
     const router = useRouter()
 
     // CURRENT ORDER_BY PARAMETER
-    const { order_by } = queryObject ?? {}
+    const { order_by, page } = queryObject ?? {}
 
     // ORDER BY
     const [orderBy, setOrderBy] = useState((order_by as string) || '')
+    const [currentPage, setCurrentPage] = useState((page as string) || '1')
 
     // MODAL REFERNECES
     const filteringModalRef: MutableRefObject<null | HTMLDialogElement> =
@@ -86,6 +96,18 @@ const SearchAndResults = ({
         return queryString.length > 0 ? '?' + queryString.replace('?', '') : ''
     }, [queryString, orderBy])
 
+    // CHANGE PAGE
+    const changePage = useCallback(
+        (toPage: string) => {
+            if (toPage === 'next' && Number(currentPage) < pages) {
+                setCurrentPage(prevPage => (Number(prevPage) + 1).toString())
+            } else if (toPage === 'prev' && Number(currentPage) > 0) {
+                setCurrentPage(prevPage => (Number(prevPage) - 1).toString())
+            }
+        },
+        [currentPage, pages]
+    )
+
     // CLOSE MODALS AFTER MAKING A REQUEST
     useEffect(() => {
         filteringModal(false)
@@ -97,6 +119,17 @@ const SearchAndResults = ({
         router.push(`/search/${searchText + sortQuery}`)
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [orderBy])
+
+    // PAGE CHANGE
+    useEffect(() => {
+        router.push(
+            `/search/${
+                searchText +
+                queryString.replace(/page=\d/, `page=${currentPage}`)
+            }`
+        )
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [currentPage])
 
     return (
         <div className={style.wrapper}>
@@ -125,9 +158,9 @@ const SearchAndResults = ({
                         </h2>
                         <FilterForm
                             searchText={searchText}
+                            queryObject={queryObject}
                             categories={categories}
                             brands={brands}
-                            queryObject={queryObject}
                         />
                     </div>
                 </div>
@@ -195,14 +228,28 @@ const SearchAndResults = ({
                         />
                     ))}
                 </div>
+                <div className={style.pagination}>
+                    <h2>
+                        {`${Number(currentPage) * 10 - 10}-${
+                            Number(currentPage) * 10
+                        } of ${pages * 10} Products`}
+                    </h2>
+                    <div>
+                        <button onClick={() => changePage('prev')}>Prev</button>
+                        <div />
+                        <span>{currentPage}</span>
+                        <div />
+                        <button onClick={() => changePage('next')}>Next</button>
+                    </div>
+                </div>
             </div>
             <dialog ref={filteringModalRef} className={style.modal}>
                 <div>
                     <FilterForm
                         searchText={searchText}
+                        queryObject={queryObject}
                         categories={categories}
                         brands={brands}
-                        queryObject={queryObject}
                     />
                     <button onClick={() => filteringModal(false)}>Close</button>
                 </div>

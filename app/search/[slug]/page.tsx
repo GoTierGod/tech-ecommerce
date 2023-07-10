@@ -5,6 +5,7 @@ import { CardProductDetails } from '@/types/products'
 import { Brand, Category } from '@/types/tables'
 import SearchAndResults from '@/components/SearchAndResults'
 import { notFound } from 'next/navigation'
+import { SearchResponse } from '@/types/search'
 
 export default async function Search({
     params,
@@ -24,7 +25,8 @@ export default async function Search({
         category,
         brand,
         installments,
-        order_by
+        order_by,
+        page
     } = searchParams ?? {}
 
     // CONSTRUCT THE QUERY STRING
@@ -38,6 +40,7 @@ export default async function Search({
         brand && filters.push(`brand=${brand}`)
         installments && filters.push(`installments=${installments}`)
         order_by && filters.push(`order_by=${order_by}`)
+        page ? filters.push(`page=${page}`) : filters.push(`page=1`)
 
         return filters.length > 0 ? '?' + filters.join('&') : ''
     }
@@ -46,33 +49,26 @@ export default async function Search({
     const readableSearch = search.replace(/(\s|\%20)+/g, ',')
 
     // PRODUCTS
-    let products: CardProductDetails[] | false = await getData(
+    const searchRes: SearchResponse | false = await getData(
         `https://ft-drf-api.vercel.app/api/search/${
             readableSearch + getQueryString()
         }`
     )
 
-    if (!products) return notFound()
+    if (!searchRes) return notFound()
 
-    // CATEGORIES
-    const categories: Category[] | [] = await getData(
-        `https://ft-drf-api.vercel.app/api/search/categories/${readableSearch}`
-    )
-
-    // BRANDS
-    const brands: Brand[] | [] = await getData(
-        `https://ft-drf-api.vercel.app/api/search/brands/${readableSearch}`
-    )
+    const { pages, products, categories, brands } = searchRes as SearchResponse
 
     return (
         <main>
             <SearchAndResults
                 searchText={readableSearch}
-                categories={categories}
-                brands={brands}
-                products={products}
                 queryObject={searchParams}
                 queryString={getQueryString()}
+                pages={pages}
+                products={products}
+                categories={categories}
+                brands={brands}
             />
         </main>
     )

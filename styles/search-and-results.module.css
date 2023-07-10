@@ -140,6 +140,83 @@
     cursor: pointer;
 }
 
+/* ------------------------- PAGINATION -------------------------  */
+.pagination {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+
+    padding: 1.5rem;
+
+    width: 100%;
+
+    background: var(--white);
+
+    border-radius: 4px;
+}
+
+.pagination h2 {
+    font-size: 1.25rem;
+    font-weight: 500;
+}
+
+.pagination > div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+}
+
+.pagination span {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    padding: 0.5rem 0.75rem;
+
+    background: var(--gray);
+    color: var(--white);
+
+    border-radius: 4px;
+}
+
+.pagination > div > div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    height: 1rem;
+    width: 1rem;
+
+    background: var(--gray);
+    color: transparent;
+
+    border: none;
+    border-radius: 4px;
+}
+
+.pagination button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    padding: 0.5rem 0.75rem;
+
+    background: var(--main);
+    color: var(--white);
+
+    font-size: 1rem;
+    font-family: inherit;
+
+    border: none;
+
+    border-radius: 4px;
+
+    cursor: pointer;
+}
+
 /* ------------------------- GRID -------------------------  */
 .grid {
     display: grid;
