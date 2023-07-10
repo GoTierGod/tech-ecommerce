@@ -16,20 +16,25 @@ import ProductRows from '@/components/ProductRows'
 import { getStars } from '@/helpers/getStars'
 import { getDeliveryDay } from '@/helpers/getDeliveryDay'
 import { getInstallments } from '@/helpers/getInstallments'
+import { notFound } from 'next/navigation'
 
 export default async function Product({ params }: { params: { id: string } }) {
     const { id } = params
 
-    const product: FullProductDetails = await getData(
+    const product: FullProductDetails | false = await getData(
         `https://ft-drf-api.vercel.app/api/products/${id}`
     )
 
-    const brandProducts: CardProductDetails[] = await getData(
+    if (!product) return notFound()
+
+    const brandProducts: CardProductDetails[] | false = await getData(
         `https://ft-drf-api.vercel.app/api/products?brand=${product.details.brand.name}&limit=5`
     )
-    const relatedProducts: CardProductDetails[] = await getData(
+    const relatedProducts: CardProductDetails[] | false = await getData(
         `https://ft-drf-api.vercel.app/api/products?brand=${product.details.brand.name}&limit=6`
     )
+
+    if (!brandProducts || !relatedProducts) return notFound()
 
     const defaultImg = product.images.find(image => image.is_default)
 

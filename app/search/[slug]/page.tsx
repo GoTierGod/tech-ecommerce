@@ -4,6 +4,7 @@ import { getData } from '@/helpers/getData'
 import { CardProductDetails } from '@/types/products'
 import { Brand, Category } from '@/types/tables'
 import SearchAndResults from '@/components/SearchAndResults'
+import { notFound } from 'next/navigation'
 
 export default async function Search({
     params,
@@ -45,20 +46,22 @@ export default async function Search({
     const readableSearch = search.replace(/(\s|\%20)+/g, ',')
 
     // PRODUCTS
-    let products: CardProductDetails[] = await getData(
+    let products: CardProductDetails[] | false = await getData(
         `https://ft-drf-api.vercel.app/api/search/${
             readableSearch + getQueryString()
         }`
     )
 
+    if (!products) return notFound()
+
     // CATEGORIES
-    const categories: Category[] = await getData(
-        `https://ft-drf-api.vercel.app/api/categories`
+    const categories: Category[] | [] = await getData(
+        `https://ft-drf-api.vercel.app/api/search/categories/${readableSearch}`
     )
 
     // BRANDS
-    const brands: Brand[] = await getData(
-        `https://ft-drf-api.vercel.app/api/brands`
+    const brands: Brand[] | [] = await getData(
+        `https://ft-drf-api.vercel.app/api/search/brands/${readableSearch}`
     )
 
     return (

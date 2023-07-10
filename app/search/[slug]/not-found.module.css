@@ -1,0 +1,41 @@
+.notFound {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+
+    padding: 2rem;
+    padding-top: 99px;
+
+    background: var(--dark);
+    color: var(--white);
+
+    min-height: 100vh;
+    min-width: 100vw;
+}
+
+.notFound h1 {
+    text-align: center;
+}
+
+.notFound div {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+}
+
+.notFound h2 {
+    text-align: center;
+}
+
+.notFound ul {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 0.5rem;
+
+    padding: 0 2rem;
+}

@@ -1,6 +1,6 @@
 .notFound {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     gap: 1rem;
@@ -11,6 +11,8 @@
     background: var(--dark);
     color: var(--white);
 
+    text-align: center;
+
     min-height: 100vh;
     min-width: 100vw;
 }
@@ -20,8 +22,8 @@
 }
 
 .notFound span {
-    width: 2px;
-    height: 3rem;
+    width: 7em;
+    height: 2px;
 
     background: var(--white);
 
