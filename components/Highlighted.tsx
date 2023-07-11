@@ -20,7 +20,7 @@ const Highlighted = ({ products }: HighlightedProps) => {
                             <h4>{product.details.category.title}</h4>
                         </div>
                         <Link href='/' className={style.link}>
-                            {product.details.category.title}
+                            <span>{product.details.category.title}</span>
                         </Link>
                     </div>
                     <Link
