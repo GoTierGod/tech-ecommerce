@@ -57,11 +57,36 @@
     background: var(--white);
     color: var(--main);
 
+    border: 2px solid transparent;
     border-radius: 4px;
+
+    transition: all 300ms;
+}
+
+.link span {
+    text-overflow: 1px 1px transparent;
+
+    transition: all 300ms;
 }
 
 .link svg {
     height: 1rem;
+
+    filter: drop-shadow(1px 1px transparent);
+
+    transition: all 300ms;
+}
+
+.link:hover {
+    border-color: var(--light-pink);
+}
+
+.link:hover span {
+    text-shadow: 1px 1px var(--light-pink);
+}
+
+.link:hover svg {
+    filter: drop-shadow(1px 1px var(--light-pink));
 }
 
 /* ------------------------- GRID -------------------------  */
@@ -80,7 +105,14 @@
 
     background: var(--white);
 
+    border: 2px solid transparent;
     border-radius: 4px;
+
+    transition: all 300ms;
+}
+
+.product:hover {
+    border-color: var(--main);
 }
 
 /* ------------------------- IMAGE -------------------------  */
