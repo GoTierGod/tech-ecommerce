@@ -84,7 +84,6 @@ const SearchAndResults = ({
     // CONSTRUCT A QUERY STRING THAT ALSO SUPPORTS SORTING
     const sortQuery = useMemo(() => {
         if (orderBy) {
-            console.log('SortQuery')
             const unsortedQuery = queryString
                 .replace(/order_by=[^&]*/, '')
                 .replace('?', '')
@@ -130,7 +129,6 @@ const SearchAndResults = ({
 
     // SORT PRODUCTS IF ORDER_BY PARAMETER IS DEFINED
     useEffect(() => {
-        console.log(`Sorting... ${orderBy} | ${sortQuery}`)
         router.push(`/search/${searchText + sortQuery}`)
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [orderBy])
