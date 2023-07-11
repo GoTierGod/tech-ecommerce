@@ -12,9 +12,20 @@
 
     background: var(--white);
 
+    border: 2px solid transparent;
     border-radius: 4px;
 
     overflow: hidden;
+    transition: all 300ms;
+}
+
+.card:hover {
+    border-color: var(--main);
+}
+
+.card:hover .name {
+    color: var(--main);
+    text-shadow: 1px 1px var(--light-pink);
 }
 
 /* ------------------------- IMAGE -------------------------  */
@@ -94,8 +105,10 @@
     height: 0.95rem;
 
     font-weight: 500;
+    text-shadow: 1px 1px transparent;
 
     overflow: hidden;
+    transition: all 300ms;
 }
 
 /* ------------------------- BEST SELLER -------------------------  */
