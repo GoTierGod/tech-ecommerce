@@ -6,9 +6,10 @@ import { Brand, Category } from '@/types/tables'
 import SearchAndResults from '@/components/SearchAndResults'
 import { notFound } from 'next/navigation'
 import { SearchResponse } from '@/types/search'
+import { unescape } from 'querystring'
 
 export const metadata = {
-    title: 'Tech | Search'
+    title: 'Search | Tech'
 }
 
 export default async function Search({
@@ -50,12 +51,12 @@ export default async function Search({
     }
 
     // SEARCHED STRING IN A READABLE FORMAT
-    const readableSearch = search.replace(/(\s|\%20)+/g, ',')
+    const readableSearch = unescape(search)
 
     // PRODUCTS
     const searchRes: SearchResponse | false = await getData(
         `https://ft-drf-api.vercel.app/api/search/${
-            readableSearch + getQueryString()
+            readableSearch.replace(/\s+/, ',') + getQueryString()
         }`
     )
 

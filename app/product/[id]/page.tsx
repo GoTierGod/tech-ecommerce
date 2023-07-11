@@ -27,7 +27,7 @@ export default async function Product({ params }: { params: { id: string } }) {
     )
 
     if (!product) return notFound()
-    metadata.title = `Tech | ${product.details.name}`
+    metadata.title = `${product.details.name} | Tech`
 
     const brandProducts: CardProductDetails[] | false = await getData(
         `https://ft-drf-api.vercel.app/api/products?brand=${product.details.brand.name}&limit=5`

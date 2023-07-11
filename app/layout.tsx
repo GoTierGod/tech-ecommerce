@@ -6,7 +6,7 @@ import Header from '@/components/Header'
 const josefinSans = Josefin_Sans({ subsets: ['latin'] })
 
 export const metadata = {
-    title: 'Tech | Home',
+    title: 'Home | Tech',
     description: 'The best products in technology'
 }
 
