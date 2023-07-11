@@ -7,6 +7,10 @@ import SearchAndResults from '@/components/SearchAndResults'
 import { notFound } from 'next/navigation'
 import { SearchResponse } from '@/types/search'
 
+export const metadata = {
+    title: 'Tech | Search'
+}
+
 export default async function Search({
     params,
     searchParams

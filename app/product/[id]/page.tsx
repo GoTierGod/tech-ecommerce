@@ -17,6 +17,7 @@ import { getStars } from '@/helpers/getStars'
 import { getDeliveryDay } from '@/helpers/getDeliveryDay'
 import { getInstallments } from '@/helpers/getInstallments'
 import { notFound } from 'next/navigation'
+import { metadata } from '@/app/layout'
 
 export default async function Product({ params }: { params: { id: string } }) {
     const { id } = params
@@ -26,6 +27,7 @@ export default async function Product({ params }: { params: { id: string } }) {
     )
 
     if (!product) return notFound()
+    metadata.title = `Tech | ${product.details.name}`
 
     const brandProducts: CardProductDetails[] | false = await getData(
         `https://ft-drf-api.vercel.app/api/products?brand=${product.details.brand.name}&limit=5`
