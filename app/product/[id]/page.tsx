@@ -135,7 +135,7 @@ export default async function Product({ params }: { params: { id: string } }) {
                                     Best Seller
                                 </span>
                             </div>
-                            <div>
+                            <div className={style.rating}>
                                 <span>
                                     {getStars(
                                         product.reviews_counter,
@@ -143,11 +143,8 @@ export default async function Product({ params }: { params: { id: string } }) {
                                     )}
                                 </span>
                                 <span>
-                                    (
-                                    <Link href='/'>
-                                        {product.reviews_counter} Reviews
-                                    </Link>
-                                    )
+                                    {product.rating || '5.0'}{' '}
+                                    <FontAwesomeIcon icon={faStar} />
                                 </span>
                             </div>
                         </div>
@@ -199,7 +196,7 @@ export default async function Product({ params }: { params: { id: string } }) {
                                         Best Seller
                                     </span>
                                 </div>
-                                <div>
+                                <div className={style.rating}>
                                     <span>
                                         {getStars(
                                             product.reviews_counter,
@@ -207,11 +204,8 @@ export default async function Product({ params }: { params: { id: string } }) {
                                         )}
                                     </span>
                                     <span>
-                                        (
-                                        <Link href='/'>
-                                            {product.reviews_counter} Reviews
-                                        </Link>
-                                        )
+                                        {product.rating || '5.0'}{' '}
+                                        <FontAwesomeIcon icon={faStar} />
                                     </span>
                                 </div>
                             </div>

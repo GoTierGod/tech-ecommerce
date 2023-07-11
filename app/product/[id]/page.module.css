@@ -62,7 +62,7 @@
     border-radius: 4px;
 }
 
-.header > div {
+.header > div:not(.rating) {
     display: flex;
     flex-direction: column;
     gap: 0.25rem;
@@ -87,18 +87,38 @@
     border-radius: 4px;
 }
 
-.header > div:nth-child(2) span:nth-child(1) {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
 .header svg {
     height: 1rem;
 }
 
 .header a {
     color: var(--main);
+}
+
+/* ------------------------- RATING -------------------------  */
+.rating {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.rating > span:last-of-type {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5rem;
+
+    padding: 0.5rem 0.75rem;
+
+    background: var(--main);
+    color: var(--white);
+
+    font-size: 1.5rem;
+    font-weight: 400;
+
+    border-radius: 4px;
 }
 
 /* ------------------------- MORE BRAND PRODUCTS -------------------------  */
