@@ -96,6 +96,14 @@ const SearchAndResults = ({
         return queryString.length > 0 ? '?' + queryString.replace('?', '') : ''
     }, [queryString, orderBy])
 
+    // SORTING CHANGES
+    const changeSorting = (val: string) => {
+        if (orderBy === val) setOrderBy('')
+        else setOrderBy(val)
+
+        sortingModal(false)
+    }
+
     // CHANGE PAGE
     const changePage = useCallback(
         (toPage: string) => {
@@ -161,6 +169,7 @@ const SearchAndResults = ({
                             queryObject={queryObject}
                             categories={categories}
                             brands={brands}
+                            filteringModal={filteringModal}
                         />
                     </div>
                 </div>
@@ -179,7 +188,7 @@ const SearchAndResults = ({
                     <h3>Order By</h3>
                     <div>
                         <button
-                            onClick={() => setOrderBy('offer_price')}
+                            onClick={() => changeSorting('offer_price')}
                             style={
                                 orderBy === 'offer_price'
                                     ? {
@@ -199,7 +208,7 @@ const SearchAndResults = ({
                             <FontAwesomeIcon icon={faSortAmountDesc} />
                         </button>
                         <button
-                            onClick={() => setOrderBy('-offer_price')}
+                            onClick={() => changeSorting('-offer_price')}
                             style={
                                 orderBy === '-offer_price'
                                     ? {
@@ -250,6 +259,7 @@ const SearchAndResults = ({
                         queryObject={queryObject}
                         categories={categories}
                         brands={brands}
+                        filteringModal={filteringModal}
                     />
                     <button onClick={() => filteringModal(false)}>Close</button>
                 </div>
@@ -266,7 +276,7 @@ const SearchAndResults = ({
                                             ? 'var(--main)'
                                             : 'var(--gray)'
                                 }}
-                                onClick={() => setOrderBy('offer_price')}
+                                onClick={() => changeSorting('offer_price')}
                             >
                                 Lowest Price
                             </button>
@@ -277,7 +287,7 @@ const SearchAndResults = ({
                                             ? 'var(--main)'
                                             : 'var(--gray)'
                                 }}
-                                onClick={() => setOrderBy('-offer_price')}
+                                onClick={() => changeSorting('-offer_price')}
                             >
                                 Highest Price
                             </button>
@@ -288,7 +298,7 @@ const SearchAndResults = ({
                                             ? 'var(--main)'
                                             : 'var(--gray)'
                                 }}
-                                onClick={() => setOrderBy('')}
+                                onClick={() => changeSorting('')}
                             >
                                 Any
                             </button>

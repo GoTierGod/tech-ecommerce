@@ -12,13 +12,15 @@ interface FilterFormProps {
     queryObject?: { [key: string]: string | string[] | undefined }
     categories: Category[]
     brands: Brand[]
+    filteringModal: Function
 }
 
 const FilterForm = ({
     searchText,
     categories,
     brands,
-    queryObject
+    queryObject,
+    filteringModal
 }: FilterFormProps) => {
     const router = useRouter()
 
@@ -72,8 +74,35 @@ const FilterForm = ({
     // FILTER PRODUCTS WHEN THE FORM IS SUBMITTED
     const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault()
+        filteringModal(false)
 
         router.push(`/search/${searchText + getQueryParams()}`)
+    }
+
+    // FILTERING CHANGES
+    const changeIsGamer = (val: string) => {
+        if (val === isGamer) setIsGamer('')
+        else setIsGamer(val)
+
+        filteringModal(false)
+    }
+
+    const changeCategory = (val: string) => {
+        setCategoryState(val)
+
+        filteringModal(false)
+    }
+
+    const changeBrands = (val: string) => {
+        setBrandState(val)
+
+        filteringModal(false)
+    }
+
+    const changeInstallments = (val: string) => {
+        setInstallmentsState(val)
+
+        filteringModal(false)
     }
 
     // FILTER PRODUCTS WHEN PARAMETERS CHANGES
@@ -110,10 +139,9 @@ const FilterForm = ({
                             id='max-price'
                             placeholder='$ infinity'
                             value={maxPrice.length > 0 ? `$ ${maxPrice}` : ''}
-                            onChange={e => {
-                                console.log(maxPrice)
+                            onChange={e =>
                                 setMaxPrice(e.target.value.replace(/\D/g, ''))
-                            }}
+                            }
                         />
                     </div>
                     <button type='submit'>
@@ -129,9 +157,7 @@ const FilterForm = ({
                             background:
                                 isGamer === '' ? 'var(--main)' : 'var(--gray)'
                         }}
-                        onClick={e => {
-                            setIsGamer('')
-                        }}
+                        onClick={e => changeIsGamer('')}
                     >
                         Any
                     </button>
@@ -140,7 +166,7 @@ const FilterForm = ({
                             background:
                                 isGamer === '1' ? 'var(--main)' : 'var(--gray)'
                         }}
-                        onClick={e => setIsGamer('1')}
+                        onClick={e => changeIsGamer('1')}
                     >
                         Yes
                     </button>
@@ -149,7 +175,7 @@ const FilterForm = ({
                             background:
                                 isGamer === '0' ? 'var(--main)' : 'var(--gray)'
                         }}
-                        onClick={e => setIsGamer('0')}
+                        onClick={e => changeIsGamer('0')}
                     >
                         No
                     </button>
@@ -158,7 +184,7 @@ const FilterForm = ({
             <div className={style.categoryFilter}>
                 <label htmlFor='category'>Category</label>
                 <select
-                    onChange={e => setCategoryState(e.target.value)}
+                    onChange={e => changeCategory(e.target.value)}
                     name='category'
                     id='category'
                     value={categoryState}
@@ -185,7 +211,7 @@ const FilterForm = ({
             <div className={style.brandFilter}>
                 <label htmlFor='brand'>Brands</label>
                 <select
-                    onChange={e => setBrandState(e.target.value)}
+                    onChange={e => changeBrands(e.target.value)}
                     name='brand'
                     id='brand'
                     value={brandState}
@@ -212,7 +238,7 @@ const FilterForm = ({
             <div className={style.installmentsFilter}>
                 <label htmlFor='installments'>Installments</label>
                 <select
-                    onChange={e => setInstallmentsState(e.target.value)}
+                    onChange={e => changeInstallments(e.target.value)}
                     name='installments'
                     id='installments'
                     value={installmentsState}
