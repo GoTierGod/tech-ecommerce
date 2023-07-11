@@ -115,6 +115,7 @@ const FilterForm = ({
 
     return (
         <form onSubmit={e => handleSubmit(e)} className={style.form}>
+            {/* MIN AND MAX PRICE */}
             <div className={style.priceFilter}>
                 <h3>Price</h3>
                 <div>
@@ -149,6 +150,7 @@ const FilterForm = ({
                     </button>
                 </div>
             </div>
+            {/* IS GAMER */}
             <div className={style.gamingFilter}>
                 <h3>Gaming</h3>
                 <div>
@@ -181,6 +183,7 @@ const FilterForm = ({
                     </button>
                 </div>
             </div>
+            {/* CATEGORY */}
             <div className={style.categoryFilter}>
                 <label htmlFor='category'>Category</label>
                 <select
@@ -208,6 +211,7 @@ const FilterForm = ({
                     ))}
                 </select>
             </div>
+            {/* BRAND */}
             <div className={style.brandFilter}>
                 <label htmlFor='brand'>Brands</label>
                 <select
@@ -235,6 +239,7 @@ const FilterForm = ({
                     ))}
                 </select>
             </div>
+            {/* INSTALLMENTS */}
             <div className={style.installmentsFilter}>
                 <label htmlFor='installments'>Installments</label>
                 <select

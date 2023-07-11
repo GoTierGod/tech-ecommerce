@@ -141,7 +141,9 @@ const SearchAndResults = ({
 
     return (
         <div className={style.wrapper}>
+            {/* HEADER IN SMALL SCREENS / LEFT SIDE IN WIDE SCREENS */}
             <div className={style.header}>
+                {/* FOR SMALL SCREENS */}
                 <div className={style.mobile}>
                     <div>
                         <button onClick={() => sortingModal(true)}>
@@ -153,6 +155,7 @@ const SearchAndResults = ({
                     </div>
                     <h2>{searchText.replace(/(\s|\%20)+/g, ' ')}</h2>
                 </div>
+                {/* FOR WIDE SCREENS */}
                 <div className={style.desktop}>
                     <div>
                         <h2>
@@ -174,7 +177,9 @@ const SearchAndResults = ({
                     </div>
                 </div>
             </div>
+            {/* RESULTS */}
             <div className={style.results}>
+                {/* FEEDBACK ABOUT THE CURRENT SORTING TYPE */}
                 <div className={style.phoneOrderBy}>
                     <span>
                         {orderBy === 'offer_price'
@@ -184,6 +189,7 @@ const SearchAndResults = ({
                             : 'Unsorted'}
                     </span>
                 </div>
+                {/* SORTING BUTTONS FOR WIDE SCREENS */}
                 <div className={style.desktopOrderBy}>
                     <h3>Order By</h3>
                     <div>
@@ -229,6 +235,7 @@ const SearchAndResults = ({
                         </button>
                     </div>
                 </div>
+                {/* PRODUCTS FOUND. GRID IN SMALL SCREENS / LIST IN WIDE SCREENS */}
                 <div className={style.grid}>
                     {products.map(product => (
                         <SearchCard
@@ -237,6 +244,7 @@ const SearchAndResults = ({
                         />
                     ))}
                 </div>
+                {/* PAGINATION */}
                 <div className={style.pagination}>
                     <h2>
                         {`${Number(currentPage) * 10 - 10}-${
@@ -252,6 +260,7 @@ const SearchAndResults = ({
                     </div>
                 </div>
             </div>
+            {/* FILTERING MODAL */}
             <dialog ref={filteringModalRef} className={style.modal}>
                 <div>
                     <FilterForm
@@ -264,6 +273,7 @@ const SearchAndResults = ({
                     <button onClick={() => filteringModal(false)}>Close</button>
                 </div>
             </dialog>
+            {/* SORTING MODAL */}
             <dialog ref={sortingModalRef} className={style.modal}>
                 <div>
                     <div className={style.orderBy}>
