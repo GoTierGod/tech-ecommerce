@@ -59,8 +59,12 @@ export default async function Product({ params }: { params: { id: string } }) {
             {/* ------------------------- OPTIONS -------------------------  */}
             <div className={style.options}>
                 <span>stock: {product.details.stock}</span>
-                <Link href='/'>Buy Now</Link>
-                <Link href='/'>Add to Cart</Link>
+                <Link href='/'>
+                    <span>Buy Now</span>
+                </Link>
+                <Link href='/'>
+                    <span>Add to Cart</span>
+                </Link>
             </div>
             {/* ------------------------- DELIVERY -------------------------  */}
             <div className={style.delivery}>
@@ -83,7 +87,9 @@ export default async function Product({ params }: { params: { id: string } }) {
                         <FontAwesomeIcon icon={faShieldAlt} />{' '}
                         {product.details.months_warranty} Months
                     </span>
-                    <Link href='/'>Read More</Link>
+                    <Link href='/'>
+                        <span>Read More</span>
+                    </Link>
                 </div>
                 <div>
                     <h3>FT Points</h3>
@@ -91,7 +97,9 @@ export default async function Product({ params }: { params: { id: string } }) {
                         <FontAwesomeIcon icon={faStar} />{' '}
                         {Number(product.details.price)} Points
                     </span>
-                    <Link href='/'>Log In</Link>
+                    <Link href='/'>
+                        <span>Log In</span>
+                    </Link>
                 </div>
             </div>
             {/* ------------------------- PAYMENT -------------------------  */}
@@ -190,7 +198,7 @@ export default async function Product({ params }: { params: { id: string } }) {
                         <div className={style.category}>
                             <h3>See more in this category</h3>
                             <Link href='/'>
-                                {product.details.category.title}
+                                <span>{product.details.category.title}</span>
                             </Link>
                         </div>
                         {/* ------------------------- FOR SMALL SCREENS -------------------------  */}
