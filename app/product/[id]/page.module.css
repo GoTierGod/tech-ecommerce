@@ -101,50 +101,6 @@
     color: var(--main);
 }
 
-/* ------------------------- IMAGES -------------------------  */
-.images {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    align-items: center;
-    gap: 1rem;
-
-    padding: 1.5rem;
-
-    background: var(--white);
-
-    border-radius: 4px;
-
-    overflow: hidden;
-}
-
-.images > img {
-    position: sticky;
-    height: 300px;
-    width: 90%;
-
-    object-fit: contain;
-}
-
-.images div {
-    display: flex;
-    gap: 0.5rem;
-
-    width: fit-content;
-    max-width: 75vw;
-
-    overflow-x: scroll;
-}
-
-.images div img {
-    padding: 0.5rem;
-
-    border: 2px solid var(--light-main);
-    border-radius: 4px;
-
-    object-fit: contain;
-}
-
 /* ------------------------- MORE BRAND PRODUCTS -------------------------  */
 .brandProducts {
     display: flex;
@@ -548,24 +504,6 @@
         display: grid;
         grid-template-columns: 2fr 1fr;
     }
-
-    .images {
-        flex-direction: row-reverse;
-        justify-content: center;
-
-        width: 100%;
-        height: fit-content;
-    }
-
-    .images > img {
-        height: 375px;
-    }
-
-    .images > div {
-        flex-direction: column;
-
-        overflow-x: visible;
-    }
 }
 
 @media screen and (min-width: 1024px) {
@@ -579,9 +517,5 @@
 
     .brandProducts > div:nth-child(2) > a:nth-child(-n + 4) {
         display: flex;
-    }
-
-    .images > img {
-        height: 450px;
     }
 }

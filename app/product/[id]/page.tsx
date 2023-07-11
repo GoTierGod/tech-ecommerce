@@ -10,7 +10,6 @@ import {
     faTruck
 } from '@fortawesome/free-solid-svg-icons'
 import Link from 'next/link'
-import Image from 'next/image'
 import VerticalCard from '@/components/VerticalCard'
 import ProductRows from '@/components/ProductRows'
 import { getStars } from '@/helpers/getStars'
@@ -18,6 +17,7 @@ import { getDeliveryDay } from '@/helpers/getDeliveryDay'
 import { getInstallments } from '@/helpers/getInstallments'
 import { notFound } from 'next/navigation'
 import { metadata } from '@/app/layout'
+import ProductImages from '@/components/ProductImages'
 
 export default async function Product({ params }: { params: { id: string } }) {
     const { id } = params
@@ -37,8 +37,6 @@ export default async function Product({ params }: { params: { id: string } }) {
     )
 
     if (!brandProducts || !relatedProducts) return notFound()
-
-    const defaultImg = product.images.find(image => image.is_default)
 
     const content = (
         <div className={style.content}>
@@ -154,27 +152,7 @@ export default async function Product({ params }: { params: { id: string } }) {
                             </div>
                         </div>
                         {/* ------------------------- IMAGES -------------------------  */}
-                        <div className={style.images}>
-                            <Image
-                                src={defaultImg?.url || ''}
-                                alt={defaultImg?.description || ''}
-                                width={450}
-                                height={450}
-                                quality='100'
-                            />
-                            <div>
-                                {product.images.map(image => (
-                                    <Image
-                                        key={image.id}
-                                        src={image.url}
-                                        alt={image.description}
-                                        height={48}
-                                        width={48}
-                                        quality='100'
-                                    />
-                                ))}
-                            </div>
-                        </div>
+                        <ProductImages images={product.images} />
                         {/* ------------------------- MORE BRAND PRODUCTS -------------------------  */}
                         <div className={style.brandProducts}>
                             <div>
