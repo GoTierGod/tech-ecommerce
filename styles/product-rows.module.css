@@ -37,6 +37,7 @@
     background: var(--white);
     color: var(--main);
 
+    border: 2px solid transparent;
     border-radius: 4px;
 
     transition: all 300ms;
@@ -44,6 +45,7 @@
 
 .topLink span {
     font-size: 1rem;
+    text-shadow: 1px 1px transparent;
 
     transition: all 300ms;
 }
@@ -51,7 +53,21 @@
 .topLink svg {
     height: 1rem;
 
+    filter: drop-shadow(1px 1px transparent);
+
     transition: all 300ms;
+}
+
+.topLink:hover {
+    border-color: var(--light-pink);
+}
+
+.topLink:hover span {
+    text-shadow: 1px 1px var(--light-pink);
+}
+
+.topLink:hover svg {
+    filter: drop-shadow(1px 1px var(--light-pink));
 }
 
 /* ------------------------- GRID -------------------------  */
@@ -81,6 +97,7 @@
     background: var(--white);
     color: var(--main);
 
+    border: 2px solid transparent;
     border-radius: 4px;
 
     transition: all 300ms;
@@ -88,14 +105,28 @@
 
 .bottomLink span {
     font-size: 1rem;
+    text-shadow: 1px 1px transparent;
 
     transition: all 300ms;
 }
 
 .bottomLink svg {
     height: 1rem;
+    filter: drop-shadow(1px 1px transparent);
 
     transition: all 300ms;
+}
+
+.bottomLink:hover {
+    border-color: var(--main);
+}
+
+.bottomLink:hover span {
+    text-shadow: 1px 1px var(--light-pink);
+}
+
+.bottomLink:hover svg {
+    filter: drop-shadow(1px 1px var(--light-pink));
 }
 
 @media screen and (min-width: 600px) {
