@@ -3,6 +3,7 @@
     position: fixed;
 
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
 
@@ -17,7 +18,7 @@
 }
 
 /* ------------------------- HEADER CONTENT CONTAINER -------------------------  */
-.header > div {
+.header > div:nth-child(1) {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -27,6 +28,91 @@
 
     width: 100%;
     max-width: 1200px;
+}
+
+/* ------------------------- DROPDOWN MENU -------------------------  */
+.dropdownMenu {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+
+    padding: 1rem;
+    width: 100%;
+
+    padding: 0;
+    height: 0;
+    overflow: hidden;
+}
+
+.dropdownMenu > div {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+
+    width: 100%;
+}
+
+.dropdownMenu div div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+
+    width: 100%;
+}
+
+.dropdownMenu > a,
+.dropdownMenu div a {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+
+    padding: 0.75rem 1rem;
+    width: 100%;
+
+    background-color: var(--gray);
+    color: var(--white);
+
+    border-radius: 4px;
+}
+
+.dropdownMenu > a svg {
+    height: 1.25rem;
+}
+
+.dropdownMenu ul {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+
+    list-style: none;
+}
+
+.dropdownMenu li a {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    padding: 0.5rem 0.75rem;
+
+    background: var(--main);
+    color: var(--white);
+
+    font-size: 1rem;
+    font-family: inherit;
+
+    border-radius: 4px;
+}
+
+.dropdownMenu a:hover {
+    background: var(--white);
+    color: var(--main);
 }
 
 /* ------------------------- LOGO -------------------------  */
@@ -200,6 +286,30 @@
     .cart {
         display: flex;
     }
+
+    .dropdownMenu > div {
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .dropdownMenu div > a {
+        width: fit-content;
+    }
+
+    .dropdownMenu div div {
+        width: fit-content;
+    }
+
+    .dropdownMenu div div a:nth-child(1) {
+        display: none;
+    }
+}
+
+@media screen and (min-width: 600px) {
+    .dropdownMenu ul {
+        gap: 0.5rem;
+    }
 }
 
 @media screen and (min-width: 768px) {
@@ -210,10 +320,15 @@
     .categoriesSelect {
         display: flex;
     }
+
+    .dropdownMenu > div {
+        display: none;
+    }
 }
 
 @media screen and (min-width: 1024px) {
-    .dropdownBtn {
+    .dropdownBtn,
+    .dropdownMenu {
         display: none;
     }
 

@@ -9,9 +9,17 @@ import {
     faBars,
     faCircleUser,
     faCartShopping,
-    faSearch
+    faSearch,
+    faHeart
 } from '@fortawesome/free-solid-svg-icons'
-import { FormEvent, useEffect, useState } from 'react'
+import {
+    FormEvent,
+    MutableRefObject,
+    useCallback,
+    useEffect,
+    useRef,
+    useState
+} from 'react'
 import { usePathname, useRouter } from 'next/navigation'
 import { Category } from '@/types/tables'
 
@@ -31,11 +39,26 @@ export default function Header({ categories }: HeaderProps) {
     const path = usePathname()
     const [searchStr, setSearchStr] = useState('')
     const [category, setCategory] = useState('')
+    const dropdownMenuRef = useRef(null)
 
     const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault()
         ;/.*[a-z].*/i.test(searchStr) && router.push(`/search/${searchStr}`)
     }
+
+    const toggleDropdownMenu = useCallback(() => {
+        if (dropdownMenuRef.current) {
+            const element: HTMLDivElement = dropdownMenuRef.current
+
+            if (element.offsetHeight.toString() === '0') {
+                element.style.height = 'auto'
+                element.style.padding = '1rem'
+            } else {
+                element.style.height = '0'
+                element.style.padding = '0'
+            }
+        }
+    }, [dropdownMenuRef])
 
     useEffect(() => {
         if (path !== `/search/${category}`) setCategory('')
@@ -96,7 +119,7 @@ export default function Header({ categories }: HeaderProps) {
                         ))}
                     </select>
                 </div>
-                <div className={style.dropdownBtn}>
+                <div onClick={toggleDropdownMenu} className={style.dropdownBtn}>
                     <FontAwesomeIcon icon={faBars} height='1rem' />
                 </div>
                 <nav className={style.wsNav}>
@@ -122,6 +145,38 @@ export default function Header({ categories }: HeaderProps) {
                 <Link href='/' className={style.cart} aria-label='Cart'>
                     <FontAwesomeIcon icon={faCartShopping} />
                 </Link>
+            </div>
+            <div ref={dropdownMenuRef} className={style.dropdownMenu}>
+                <div>
+                    <Link href='/'>
+                        <FontAwesomeIcon icon={faCircleUser} />
+                        <span>Iván Zamorano</span>
+                    </Link>
+                    <div>
+                        <Link href='/'>
+                            <FontAwesomeIcon icon={faCartShopping} />
+                            <span>Cart</span>
+                        </Link>
+                        <Link href='/'>
+                            <FontAwesomeIcon icon={faHeart} />
+                            <span>Favorites</span>
+                        </Link>
+                    </div>
+                </div>
+                <ul>
+                    <li>
+                        <Link href='/'>Offers</Link>
+                    </li>
+                    <li>
+                        <Link href='/'>Contact</Link>
+                    </li>
+                    <li>
+                        <Link href='/'>About</Link>
+                    </li>
+                    <li>
+                        <Link href='/'>Home</Link>
+                    </li>
+                </ul>
             </div>
         </header>
     )
