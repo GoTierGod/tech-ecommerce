@@ -120,7 +120,7 @@
     list-style: none;
 }
 
-.links li:not(:nth-child(1)) a {
+.links li a {
     padding: 0.5rem 0.75rem;
 
     border-radius: 4px;
@@ -128,14 +128,14 @@
     transition: all 300ms;
 }
 
-.links li:not(:nth-child(1)) a:hover {
+.links li a:hover {
     background: var(--white);
     color: var(--gray);
 }
 
 /* ------------------------- CATEGORIES SELECT -------------------------  */
 .categoriesSelect {
-    display: flex;
+    display: none;
     justify-content: center;
     align-items: center;
 }
@@ -180,7 +180,7 @@
 
 /* ------------------------- CART -------------------------  */
 .cart {
-    display: flex;
+    display: none;
     justify-content: center;
     align-items: center;
 
@@ -196,8 +196,18 @@
 }
 
 /* ------------------------- MEDIA QUERIES -------------------------  */
+@media screen and (min-width: 425px) {
+    .cart {
+        display: flex;
+    }
+}
+
 @media screen and (min-width: 768px) {
     .profile {
+        display: flex;
+    }
+
+    .categoriesSelect {
         display: flex;
     }
 }

@@ -71,7 +71,7 @@ export default function Header({ categories }: HeaderProps) {
                         type='search'
                         name='search'
                         id='search'
-                        placeholder='search products...'
+                        placeholder='Search products...'
                         value={searchStr}
                         onChange={e => setSearchStr(e.target.value)}
                     />
@@ -79,31 +79,28 @@ export default function Header({ categories }: HeaderProps) {
                         <FontAwesomeIcon icon={faSearch} />
                     </button>
                 </form>
+                <div className={style.categoriesSelect}>
+                    <select
+                        name='categories'
+                        id='categories'
+                        onChange={e => setCategory(e.target.value)}
+                        value={category}
+                    >
+                        <option value='' hidden>
+                            Categories
+                        </option>
+                        {categories.map(category => (
+                            <option key={category.id} value={category.title}>
+                                {titleCase(category.title)}
+                            </option>
+                        ))}
+                    </select>
+                </div>
                 <div className={style.dropdownBtn}>
                     <FontAwesomeIcon icon={faBars} height='1rem' />
                 </div>
                 <nav className={style.wsNav}>
                     <ul className={style.links}>
-                        <li className={style.categoriesSelect}>
-                            <select
-                                name='categories'
-                                id='categories'
-                                onChange={e => setCategory(e.target.value)}
-                                value={category}
-                            >
-                                <option value='' hidden>
-                                    Categories
-                                </option>
-                                {categories.map(category => (
-                                    <option
-                                        key={category.id}
-                                        value={category.title}
-                                    >
-                                        {titleCase(category.title)}
-                                    </option>
-                                ))}
-                            </select>
-                        </li>
                         <li>
                             <Link href='/'>Offers</Link>
                         </li>
