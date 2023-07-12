@@ -39,6 +39,7 @@ export default function Header({ categories }: HeaderProps) {
 
     useEffect(() => {
         if (path !== `/search/${category}`) setCategory('')
+        if (!path.includes('/search/')) setSearchStr('')
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [path])
 
