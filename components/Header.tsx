@@ -11,23 +11,9 @@ import {
     faCartShopping,
     faSearch
 } from '@fortawesome/free-solid-svg-icons'
-import { FormEvent, useState } from 'react'
-import { useRouter } from 'next/navigation'
-
-const CategoryOptions = [
-    {
-        value: 'smartphones',
-        href: '/'
-    },
-    {
-        value: 'laptops',
-        href: '/'
-    },
-    {
-        value: 'graphic-cards',
-        href: '/'
-    }
-]
+import { FormEvent, useEffect, useState } from 'react'
+import { usePathname, useRouter } from 'next/navigation'
+import { Category } from '@/types/tables'
 
 const titleCase = (str: string) =>
     str
@@ -35,15 +21,34 @@ const titleCase = (str: string) =>
         .split(' ')
         .map(word => word[0].toUpperCase() + word.substring(1))
 
+interface HeaderProps {
+    categories: Category[]
+}
+
 // WEBSITE HEADER/NAVBAR
-const Header = () => {
-    const [searchStr, setSearchStr] = useState('')
+export default function Header({ categories }: HeaderProps) {
     const router = useRouter()
+    const path = usePathname()
+    const [searchStr, setSearchStr] = useState('')
+    const [category, setCategory] = useState('')
 
     const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault()
         ;/.*[a-z].*/i.test(searchStr) && router.push(`/search/${searchStr}`)
     }
+
+    useEffect(() => {
+        if (path !== `/search/${category}`) setCategory('')
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [path])
+
+    useEffect(() => {
+        if (category) {
+            router.push(`/search/${category}`)
+            setSearchStr('')
+        }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [category])
 
     return (
         <header className={style.header}>
@@ -78,15 +83,22 @@ const Header = () => {
                 </div>
                 <nav className={style.wsNav}>
                     <ul className={style.links}>
-                        <li className={style.categoriesBtn}>
-                            <select name='categoriesBtn' id='categoriesBtn'>
-                                <option value=''>Categories</option>
-                                {CategoryOptions.map(category => (
+                        <li className={style.categoriesSelect}>
+                            <select
+                                name='categories'
+                                id='categories'
+                                onChange={e => setCategory(e.target.value)}
+                                value={category}
+                            >
+                                <option value='' hidden>
+                                    Categories
+                                </option>
+                                {categories.map(category => (
                                     <option
-                                        key={category.value}
-                                        value={category.value}
+                                        key={category.id}
+                                        value={category.title}
                                     >
-                                        {titleCase(category.value)}
+                                        {titleCase(category.title)}
                                     </option>
                                 ))}
                             </select>
@@ -116,5 +128,3 @@ const Header = () => {
         </header>
     )
 }
-
-export default Header
