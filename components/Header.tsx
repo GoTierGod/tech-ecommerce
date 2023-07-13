@@ -12,22 +12,10 @@ import {
     faSearch,
     faHeart
 } from '@fortawesome/free-solid-svg-icons'
-import {
-    FormEvent,
-    MutableRefObject,
-    useCallback,
-    useEffect,
-    useRef,
-    useState
-} from 'react'
+import { FormEvent, useCallback, useEffect, useRef, useState } from 'react'
 import { usePathname, useRouter } from 'next/navigation'
 import { Category } from '@/types/tables'
-
-const titleCase = (str: string) =>
-    str
-        .replace(/\s/g, ' ')
-        .split(' ')
-        .map(word => word[0].toUpperCase() + word.substring(1))
+import { titleCase } from '@/helpers/titleCase'
 
 interface HeaderProps {
     categories: Category[]
