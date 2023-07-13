@@ -250,14 +250,13 @@
         height: 1.2rem;
 
         font-size: 1.25rem;
-        font-weight: 500;
 
         overflow: hidden;
     }
 
     .offer > span:nth-child(2) {
         font-size: 1.5rem;
-        font-weight: 350;
+        font-weight: 325;
     }
 
     .options {
@@ -280,11 +279,14 @@
 @media screen and (min-width: 1024px) {
     .offer > span:nth-child(2) {
         font-size: 1.75rem;
-        font-weight: 350;
     }
 
     .offer > span:nth-child(3) {
         font-size: 1rem;
         font-weight: 350;
+    }
+
+    .offer > span span {
+        font-weight: 375;
     }
 }
