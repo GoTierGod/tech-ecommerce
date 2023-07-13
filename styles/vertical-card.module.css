@@ -105,7 +105,9 @@
 
     height: 0.95rem;
 
-    font-weight: 400;
+    font-size: 1.125rem;
+    font-weight: 375;
+
     text-shadow: 1px 1px transparent;
 
     overflow: hidden;
