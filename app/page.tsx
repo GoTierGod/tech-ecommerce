@@ -7,6 +7,10 @@ import Offers from '@/components/Offers'
 import Highlighted from '@/components/Highlighted'
 import Gaming from '@/components/Gaming'
 
+export const metadata = {
+    title: 'Home | Tech'
+}
+
 export default async function Home() {
     const laptops: CardProductDetails[] = await getData(
         `https://ft-drf-api.vercel.app/api/products?category=laptops&limit=6`
