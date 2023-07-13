@@ -486,10 +486,6 @@
     font-weight: 500;
 }
 
-.description p {
-    line-break: anywhere;
-}
-
 /* ------------------------- MEDIA QUERIES -------------------------  */
 @media screen and (min-width: 425px) {
     .wp > div {

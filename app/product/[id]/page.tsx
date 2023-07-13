@@ -18,6 +18,7 @@ import { getInstallments } from '@/helpers/getInstallments'
 import { notFound } from 'next/navigation'
 import { metadata } from '@/app/layout'
 import ProductImages from '@/components/ProductImages'
+import { respectLineBreaks } from '@/helpers/respectLineBreaks'
 
 export default async function Product({ params }: { params: { id: string } }) {
     const { id } = params
@@ -181,7 +182,9 @@ export default async function Product({ params }: { params: { id: string } }) {
                         {/* ------------------------- DESCRIPTION -------------------------  */}
                         <div className={style.description}>
                             <h3>Description</h3>
-                            <p>{product.details.description}</p>
+                            <p>
+                                {respectLineBreaks(product.details.description)}
+                            </p>
                         </div>
                     </div>
                     {/* ------------------------- FOR WIDE SCREENS -------------------------  */}
