@@ -69,7 +69,9 @@
 }
 
 .header h2 {
-    font-weight: 600;
+    font-size: 1.5rem;
+    font-weight: 500;
+    line-height: 1.625rem;
 }
 
 .bestSeller {
@@ -235,23 +237,24 @@
 }
 
 .offer > span:nth-child(1) {
-    font-size: 1.125rem;
-    font-weight: 400;
+    font-size: 1rem;
+    font-weight: 375;
 
     text-decoration: line-through;
 }
 
 .offer > span:nth-child(2) {
     font-size: 2.5rem;
-    font-weight: 300;
+    font-weight: 325;
 }
 
 .offer > span:nth-child(3) {
     font-size: 1rem;
+    font-weight: 375;
 }
 
 .offer span > span {
-    font-weight: 500;
+    font-weight: 425;
 }
 
 /* ------------------------- OPTIONS -------------------------  */
@@ -271,7 +274,8 @@
 }
 
 .options > span {
-    font-size: 1rem;
+    font-size: 1.125rem;
+    font-weight: 375;
 
     padding-bottom: 0.5rem;
 }
@@ -296,6 +300,7 @@
 
 .options a span {
     font-size: 1rem;
+    font-weight: 500;
     text-shadow: 1px 1px transparent;
 
     transition: all 300ms;
@@ -324,7 +329,7 @@
 
 .delivery h3 {
     font-size: 1.25rem;
-    font-weight: 500;
+    font-weight: 400;
 }
 
 .delivery svg {
@@ -334,6 +339,9 @@
 .delivery > span {
     display: flex;
     gap: 1rem;
+
+    font-size: 1rem;
+    font-weight: 375;
 }
 
 /* ------------------------- WARRANTY AND POINTS -------------------------  */
@@ -341,6 +349,11 @@
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 0.5rem;
+}
+
+.wp h3 {
+    font-size: 1.25rem;
+    font-weight: 400;
 }
 
 .wp > div {
@@ -360,11 +373,14 @@
     border-radius: 4px;
 }
 
-.wp span {
+.wp div > span {
     display: flex;
     justify-content: center;
     align-items: center;
     gap: 0.5rem;
+
+    font-size: 1rem;
+    font-weight: 375;
 }
 
 .wp svg {
@@ -389,6 +405,8 @@
 
 .wp a span {
     font-size: 1rem;
+    font-weight: 500;
+
     text-shadow: 1px 1px transparent;
 
     transition: all 300ms;
@@ -419,7 +437,7 @@
 
 .payment h3 {
     font-size: 1.25rem;
-    font-weight: 500;
+    font-weight: 400;
 }
 
 .payment > div {
@@ -448,7 +466,7 @@
     align-items: center;
 
     font-size: 1.125rem;
-    font-weight: 500;
+    font-weight: 400;
 
     padding: 0.5rem;
 
@@ -466,6 +484,9 @@
     padding: 0.5rem;
 
     width: 100%;
+
+    font-size: 1.125rem;
+    font-weight: 375;
 }
 
 /* ------------------------- DESCRIPTION -------------------------  */
@@ -482,8 +503,8 @@
 }
 
 .description h3 {
-    font-size: 1.25;
-    font-weight: 500;
+    font-size: 1.25rem;
+    font-weight: 400;
 }
 
 .description p {

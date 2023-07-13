@@ -57,7 +57,7 @@ export default async function Product({ params }: { params: { id: string } }) {
             </div>
             {/* ------------------------- OPTIONS -------------------------  */}
             <div className={style.options}>
-                <span>stock: {product.details.stock}</span>
+                <span>Stock: {product.details.stock}</span>
                 <Link href='/'>
                     <span>Buy Now</span>
                 </Link>
