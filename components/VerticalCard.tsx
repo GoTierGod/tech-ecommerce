@@ -5,6 +5,7 @@ import { CardProductDetails } from '@/types/products'
 import Link from 'next/link'
 import { formatPrice } from '@/helpers/formatPrice'
 import { getDiscount } from '@/helpers/getDiscount'
+import { respectLineBreaks } from '@/helpers/respectLineBreaks'
 
 interface VerticalCardProps {
     product: CardProductDetails
@@ -43,7 +44,7 @@ const VerticalCard = ({ product }: VerticalCardProps) => {
                 <h4 className={style.name}>{product.details.name}</h4>
                 <span className={style.bestSeller}>Best Seller</span>
                 <p className={style.description}>
-                    {product.details.description}
+                    {respectLineBreaks(product.details.description)}
                 </p>
             </div>
         </Link>
