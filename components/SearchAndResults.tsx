@@ -22,6 +22,7 @@ import {
     useState
 } from 'react'
 import { useRouter } from 'next/navigation'
+import { titleCase } from '@/helpers/titleCase'
 
 interface SearchProps {
     searchText: string
@@ -158,20 +159,20 @@ const SearchAndResults = ({
                             <FontAwesomeIcon icon={faTasks} /> Filter
                         </button>
                     </div>
-                    <h2>{searchText.replace(/(\s|\%20)+/g, ' ')}</h2>
+                    <h2>{titleCase(searchText)}</h2>
                 </div>
                 {/* FOR WIDE SCREENS */}
                 <div className={style.desktop}>
                     <div>
-                        <h2>
+                        <span>
                             Searched Text <FontAwesomeIcon icon={faSearch} />
-                        </h2>
-                        <p>{searchText.replace(/(\s|\%20)+/g, ' ')}</p>
+                        </span>
+                        <h2>{titleCase(searchText)}</h2>
                     </div>
                     <div>
-                        <h2>
+                        <span>
                             Filters <FontAwesomeIcon icon={faTasks} />
-                        </h2>
+                        </span>
                         <FilterForm
                             searchText={searchText}
                             queryObject={queryObject}
