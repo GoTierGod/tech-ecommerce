@@ -15,15 +15,21 @@ export default async function Home() {
     const laptops: CardProductDetails[] = await getData(
         `https://ft-drf-api.vercel.app/api/products?category=laptops&limit=6`
     )
+    const headphones: CardProductDetails[] = await getData(
+        `https://ft-drf-api.vercel.app/api/products?category=headphones&limit=6`
+    )
+    const smartphones: CardProductDetails[] = await getData(
+        `https://ft-drf-api.vercel.app/api/products?category=smartphones&limit=6`
+    )
 
     const offers: CardProductDetails[] = await getData(
         `https://ft-drf-api.vercel.app/api/products?category=monitors&limit=3`
     )
 
-    const smartphone: CardProductDetails[] = await getData(
+    const highlightedOne: CardProductDetails[] = await getData(
         `https://ft-drf-api.vercel.app/api/products?category=smartphones&limit=1`
     )
-    const headphones: CardProductDetails[] = await getData(
+    const highlightedTwo: CardProductDetails[] = await getData(
         `https://ft-drf-api.vercel.app/api/products?category=headphones&limit=1`
     )
 
@@ -36,10 +42,16 @@ export default async function Home() {
             <div className={style.home}>
                 <Offers products={offers} />
                 <ProductRows title='Laptops' products={laptops} url='/' />
-                <Highlighted products={[smartphone[0], headphones[0]]} />
-                <ProductRows title='Laptops' products={laptops} url='/' />
+                <Highlighted
+                    products={[highlightedOne[0], highlightedTwo[0]]}
+                />
+                <ProductRows title='Headphones' products={headphones} url='/' />
                 <Gaming products={gaming} />
-                <ProductRows title='Laptops' products={laptops} url='/' />
+                <ProductRows
+                    title='Smartphones'
+                    products={smartphones}
+                    url='/'
+                />
             </div>
         </main>
     )
