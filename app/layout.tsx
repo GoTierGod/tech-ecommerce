@@ -4,6 +4,7 @@ import { Josefin_Sans } from 'next/font/google'
 import Header from '@/components/Header'
 import { Category } from '@/types/tables'
 import { getData } from '@/helpers/getData'
+import { AuthProvider } from '@/context/AuthContext'
 
 const josefinSans = Josefin_Sans({ subsets: ['latin'] })
 
@@ -23,11 +24,13 @@ export default async function RootLayout({
 
     return (
         <html lang='en'>
-            <body className={josefinSans.className}>
-                <Header categories={categories} />
-                {children}
-                <Footer />
-            </body>
+            <AuthProvider>
+                <body className={josefinSans.className}>
+                    <Header categories={categories} />
+                    {children}
+                    <Footer />
+                </body>
+            </AuthProvider>
         </html>
     )
 }
