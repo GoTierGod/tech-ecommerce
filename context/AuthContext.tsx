@@ -1,8 +1,8 @@
 'use client'
 
 import { UserTokens } from '@/app/api/login/route'
+import Cookies from 'js-cookie'
 import jwtDecode from 'jwt-decode'
-import { cookies } from 'next/dist/client/components/headers'
 import { FormEvent, ReactNode, createContext, useState } from 'react'
 
 interface AuthContextProps {
@@ -19,8 +19,11 @@ interface AuthProviderProps {
 }
 
 export const AuthProvider = ({ children }: AuthProviderProps) => {
-    const [authTokens, setAuthTokens] = useState(null)
-    const [user, setUser] = useState(null)
+    const cookie = Cookies.get('authTokens')
+    const tokens: UserTokens | null = cookie ? JSON.parse(cookie) : null
+
+    const [authTokens, setAuthTokens] = useState(tokens || null)
+    const [user, setUser] = useState(tokens ? jwtDecode(tokens.access) : null)
 
     const loginUser = async (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault()
@@ -42,6 +45,8 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
 
             setAuthTokens(data)
             setUser(jwtDecode(data.access))
+
+            Cookies.set('authTokens', JSON.stringify(data))
         }
     }
 
