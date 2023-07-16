@@ -3,8 +3,8 @@ import { redirect } from 'next/navigation'
 import LoginForm from '@/components/LoginForm'
 import { getUser } from '@/helpers/getUser'
 
-export default function Login() {
-    const user = getUser()
+export default async function Login() {
+    const user = await getUser()
 
     if (user) redirect('/')
     else
