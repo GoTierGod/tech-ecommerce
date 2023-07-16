@@ -3,14 +3,18 @@ import { cookies } from 'next/dist/client/components/headers'
 import jwtDecode from 'jwt-decode'
 
 export const getUser = () => {
-    const authTokens = cookies().get('authTokens')
+    try {
+        const authTokens = cookies().get('authTokens')
 
-    if (authTokens) {
-        const userTokens: UserTokens = JSON.parse(authTokens.value)
-        const user: DecodedUserInfo = jwtDecode(userTokens.access)
+        if (authTokens) {
+            const userTokens: UserTokens = JSON.parse(authTokens.value)
+            const user: DecodedUserInfo = jwtDecode(userTokens.access)
 
-        return user.username
+            return user.username
+        }
+
+        return null
+    } catch (err) {
+        return null
     }
-
-    return null
 }

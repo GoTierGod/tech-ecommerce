@@ -13,24 +13,28 @@ export interface DecodedUserInfo {
 }
 
 export async function POST(req: NextRequest) {
-    const body = await req.json()
+    try {
+        const body = await req.json()
 
-    const res = await fetch(`${apiUrl}/api/token/`, {
-        method: 'post',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-            username: body.username,
-            password: body.password
+        const res = await fetch(`${apiUrl}/api/token/`, {
+            method: 'post',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                username: body.username,
+                password: body.password
+            })
         })
-    })
 
-    if (res.ok) {
-        const userTokens: UserTokens = await res.json()
+        if (res.ok) {
+            const userTokens: UserTokens = await res.json()
 
-        cookies().set('authTokens', JSON.stringify(userTokens))
+            cookies().set('authTokens', JSON.stringify(userTokens))
 
-        return NextResponse.json(userTokens, { status: 200 })
+            return NextResponse.json(userTokens, { status: 200 })
+        }
+
+        return NextResponse.json({}, { status: 401 })
+    } catch (err) {
+        return NextResponse.json({}, { status: 401 })
     }
-
-    return NextResponse.json({}, { status: 401 })
 }

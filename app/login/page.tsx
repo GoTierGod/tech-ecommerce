@@ -1,12 +1,12 @@
 import style from './page.module.css'
-import { cookies } from 'next/dist/client/components/headers'
 import { redirect } from 'next/navigation'
 import LoginForm from '@/components/LoginForm'
+import { getUser } from '@/helpers/getUser'
 
 export default function Login() {
-    const cookie = cookies().has('authTokens')
+    const user = getUser()
 
-    if (cookie) redirect('/')
+    if (user) redirect('/')
     else
         return (
             <main>
