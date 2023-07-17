@@ -16,7 +16,7 @@ import { FormEvent, useCallback, useEffect, useRef, useState } from 'react'
 import { usePathname, useRouter } from 'next/navigation'
 import { Category } from '@/types/tables'
 import { titleCase } from '@/helpers/titleCase'
-import { UserData } from '@/types/users'
+import { Customer, User, UserData } from '@/types/users'
 
 interface HeaderProps {
     categories: Category[]
@@ -128,31 +128,49 @@ export default function Header({ categories, user }: HeaderProps) {
                         </li>
                     </ul>
                 </nav>
-                <Link href='/' className={style.profile} aria-label='Profile'>
-                    <span>Iván</span>
+                <Link
+                    href={user ? '/' : '/login'}
+                    className={style.profile}
+                    aria-label='Profile'
+                >
+                    <span>
+                        {user
+                            ? (user as User).username ||
+                              (user as Customer).user.username
+                            : 'Log in'}
+                    </span>
                     <FontAwesomeIcon icon={faCircleUser} />
                 </Link>
-                <Link href='/' className={style.cart} aria-label='Cart'>
-                    <FontAwesomeIcon icon={faCartShopping} />
-                </Link>
+                {user && (
+                    <Link href='/' className={style.cart} aria-label='Cart'>
+                        <FontAwesomeIcon icon={faCartShopping} />
+                    </Link>
+                )}
             </div>
             <div ref={dropdownMenuRef} className={style.dropdownMenu}>
-                <div>
-                    <Link href='/'>
-                        <FontAwesomeIcon icon={faCircleUser} />
-                        <span>Iván Zamorano</span>
-                    </Link>
+                {user && (
                     <div>
                         <Link href='/'>
-                            <FontAwesomeIcon icon={faCartShopping} />
-                            <span>Cart</span>
+                            <FontAwesomeIcon icon={faCircleUser} />
+                            <span>
+                                {user
+                                    ? (user as User).username ||
+                                      (user as Customer).user.username
+                                    : 'Log in'}
+                            </span>
                         </Link>
-                        <Link href='/'>
-                            <FontAwesomeIcon icon={faHeart} />
-                            <span>Favorites</span>
-                        </Link>
+                        <div>
+                            <Link href='/'>
+                                <FontAwesomeIcon icon={faCartShopping} />
+                                <span>Cart</span>
+                            </Link>
+                            <Link href='/'>
+                                <FontAwesomeIcon icon={faHeart} />
+                                <span>Favorites</span>
+                            </Link>
+                        </div>
                     </div>
-                </div>
+                )}
                 <ul>
                     <li>
                         <Link href='/'>Offers</Link>

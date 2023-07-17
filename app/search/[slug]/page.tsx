@@ -1,8 +1,6 @@
 import style from './page.module.css'
 
 import { getData } from '@/helpers/getData'
-import { CardProductDetails } from '@/types/products'
-import { Brand, Category } from '@/types/tables'
 import SearchAndResults from '@/components/SearchAndResults'
 import { notFound } from 'next/navigation'
 import { SearchResponse } from '@/types/search'
