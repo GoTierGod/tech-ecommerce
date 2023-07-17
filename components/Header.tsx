@@ -16,13 +16,15 @@ import { FormEvent, useCallback, useEffect, useRef, useState } from 'react'
 import { usePathname, useRouter } from 'next/navigation'
 import { Category } from '@/types/tables'
 import { titleCase } from '@/helpers/titleCase'
+import { UserData } from '@/types/users'
 
 interface HeaderProps {
     categories: Category[]
+    user: UserData
 }
 
 // WEBSITE HEADER/NAVBAR
-export default function Header({ categories }: HeaderProps) {
+export default function Header({ categories, user }: HeaderProps) {
     const router = useRouter()
     const path = usePathname()
     const [searchStr, setSearchStr] = useState('')

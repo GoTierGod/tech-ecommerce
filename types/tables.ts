@@ -1,16 +1,4 @@
-export interface User {
-    id: number
-    username: string
-    password: string
-    first_name: string
-    last_name: string
-    email: string
-    is_superuser: boolean
-    is_staff: boolean
-    is_active: boolean
-    last_login: unknown
-    date_joined: unknown
-}
+import { Customer, DeliveryMan } from './users'
 
 export interface Category {
     id: number
@@ -25,32 +13,6 @@ export interface Brand {
     description: string
     website_url: string
     logo_url: string
-}
-
-export interface Customer {
-    id: number
-    birthdate: unknown
-    gender: string
-    phone: string
-    country: string
-    city: string
-    address: string
-    points: number
-    user: User
-}
-
-export interface DeliveryMan {
-    id: number
-    birthdate: unknown
-    gender: string
-    phone: string
-    country: string
-    city: string
-    address: string
-    vehicle_capacity: string
-    license_plate_number: string
-    availability: boolean
-    user: User
 }
 
 export interface Product {

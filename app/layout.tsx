@@ -4,6 +4,8 @@ import { Josefin_Sans } from 'next/font/google'
 import Header from '@/components/Header'
 import { Category } from '@/types/tables'
 import { getData } from '@/helpers/getData'
+import { getUser } from '@/helpers/getUser'
+import { UserData } from '@/types/users'
 
 const josefinSans = Josefin_Sans({ subsets: ['latin'] })
 
@@ -21,10 +23,12 @@ export default async function RootLayout({
         `https://ft-drf-api.vercel.app/api/categories`
     )
 
+    const user: UserData = await getUser()
+
     return (
         <html lang='en'>
             <body className={josefinSans.className}>
-                <Header categories={categories} />
+                <Header categories={categories} user={user} />
                 {children}
                 <Footer />
             </body>

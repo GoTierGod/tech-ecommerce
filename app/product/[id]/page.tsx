@@ -19,6 +19,8 @@ import { notFound } from 'next/navigation'
 import { metadata } from '@/app/layout'
 import ProductImages from '@/components/ProductImages'
 import { respectLineBreaks } from '@/helpers/respectLineBreaks'
+import { getUser } from '@/helpers/getUser'
+import { UserData } from '@/types/users'
 
 export default async function Product({ params }: { params: { id: string } }) {
     const { id } = params
@@ -38,6 +40,8 @@ export default async function Product({ params }: { params: { id: string } }) {
     )
 
     if (!brandProducts || !relatedProducts) return notFound()
+
+    const user: UserData = await getUser()
 
     const content = (
         <div className={style.content}>

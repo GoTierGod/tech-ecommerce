@@ -23,6 +23,7 @@ import {
 } from 'react'
 import { useRouter } from 'next/navigation'
 import { titleCase } from '@/helpers/titleCase'
+import { UserData } from '@/types/users'
 
 interface SearchProps {
     searchText: string
@@ -32,6 +33,7 @@ interface SearchProps {
     products: CardProductDetails[]
     categories: Category[]
     brands: Brand[]
+    user: UserData
 }
 
 const SearchAndResults = ({
@@ -41,7 +43,8 @@ const SearchAndResults = ({
     pages,
     products,
     categories,
-    brands
+    brands,
+    user
 }: SearchProps) => {
     const router = useRouter()
 
@@ -247,6 +250,7 @@ const SearchAndResults = ({
                         <SearchCard
                             key={product.details.id}
                             product={product}
+                            user={user}
                         />
                     ))}
                 </div>

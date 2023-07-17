@@ -7,6 +7,7 @@ import SearchAndResults from '@/components/SearchAndResults'
 import { notFound } from 'next/navigation'
 import { SearchResponse } from '@/types/search'
 import { unescape } from 'querystring'
+import { getUser } from '@/helpers/getUser'
 
 export const metadata = {
     title: 'Search | Tech'
@@ -64,6 +65,8 @@ export default async function Search({
 
     const { pages, products, categories, brands } = searchRes as SearchResponse
 
+    const user = await getUser()
+
     return (
         <main>
             <SearchAndResults
@@ -74,6 +77,7 @@ export default async function Search({
                 products={products}
                 categories={categories}
                 brands={brands}
+                user={user}
             />
         </main>
     )

@@ -8,8 +8,15 @@ import { getInstallments } from '@/helpers/getInstallments'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCartPlus, faHeart } from '@fortawesome/free-solid-svg-icons'
 import { getDiscount } from '@/helpers/getDiscount'
+import { UserData } from '@/types/users'
 
-const SearchCard = ({ product }: { product: CardProductDetails }) => {
+const SearchCard = ({
+    product,
+    user
+}: {
+    product: CardProductDetails
+    user: UserData
+}) => {
     return (
         <div className={style.wrapper}>
             <Link
@@ -54,14 +61,16 @@ const SearchCard = ({ product }: { product: CardProductDetails }) => {
                     </div>
                 </div>
             </Link>
-            <div className={style.options}>
-                <button aria-label='Add to Favorites'>
-                    <FontAwesomeIcon icon={faHeart} />
-                </button>
-                <button aria-label='Add to Cart'>
-                    <FontAwesomeIcon icon={faCartPlus} />
-                </button>
-            </div>
+            {user && (
+                <div className={style.options}>
+                    <button aria-label='Add to Favorites'>
+                        <FontAwesomeIcon icon={faHeart} />
+                    </button>
+                    <button aria-label='Add to Cart'>
+                        <FontAwesomeIcon icon={faCartPlus} />
+                    </button>
+                </div>
+            )}
         </div>
     )
 }
