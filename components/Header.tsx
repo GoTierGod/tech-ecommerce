@@ -17,6 +17,8 @@ import { usePathname, useRouter } from 'next/navigation'
 import { Category } from '@/types/tables'
 import { titleCase } from '@/helpers/titleCase'
 import { Customer, User, UserData } from '@/types/users'
+import { cookies } from 'next/dist/client/components/headers'
+import Cookies from 'js-cookie'
 
 interface HeaderProps {
     categories: Category[]
@@ -63,6 +65,19 @@ export default function Header({ categories, user }: HeaderProps) {
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [category])
+
+    useEffect(() => {
+        if (dropdownMenuRef.current) {
+            const element: HTMLDivElement = dropdownMenuRef.current
+
+            if (element.offsetHeight > 0) toggleDropdownMenu()
+        }
+    }, [path, dropdownMenuRef, toggleDropdownMenu])
+
+    useEffect(() => {
+        if (user && !Cookies.get('authTokens')) router.refresh()
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [path])
 
     return (
         <header className={style.header}>
