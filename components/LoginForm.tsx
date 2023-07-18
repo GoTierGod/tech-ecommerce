@@ -22,8 +22,12 @@ export default function LoginForm() {
             })
         })
 
-        if (res.ok) router.replace('/')
-        else console.log('Something went wrong')
+        if (res.ok) {
+            // REFRESH THE PAGE TO UPDATE THE USER PROP
+            router.refresh()
+            // GO TO HOME PAGE WITHOUT STORING THE LOGIN PATH
+            router.replace('/')
+        } else console.log('Something went wrong')
     }
 
     return (
