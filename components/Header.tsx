@@ -124,9 +124,12 @@ export default function Header({ categories, user }: HeaderProps) {
                         ))}
                     </select>
                 </div>
-                <div onClick={toggleDropdownMenu} className={style.dropdownBtn}>
+                <button
+                    onClick={toggleDropdownMenu}
+                    className={style.dropdownBtn}
+                >
                     <FontAwesomeIcon icon={faBars} height='1rem' />
-                </div>
+                </button>
                 <nav className={style.wsNav}>
                     <ul className={style.links}>
                         <li>

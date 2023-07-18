@@ -190,7 +190,12 @@
 
     background: var(--gray);
 
+    font-size: 1rem;
+    font-family: inherit;
+
+    border: none;
     border-radius: 4px;
+
     cursor: pointer;
 }
 
