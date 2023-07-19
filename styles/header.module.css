@@ -321,6 +321,10 @@
 }
 
 @media screen and (min-width: 600px) {
+    .categoriesSelect {
+        display: flex;
+    }
+
     .dropdownMenu ul {
         gap: 0.5rem;
     }
@@ -329,10 +333,6 @@
 @media screen and (min-width: 768px) {
     .logout,
     .profile {
-        display: flex;
-    }
-
-    .categoriesSelect {
         display: flex;
     }
 

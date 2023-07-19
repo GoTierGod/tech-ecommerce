@@ -171,35 +171,35 @@ export default function Header({ categories, user }: HeaderProps) {
                 )}
             </div>
             <div ref={dropdownMenuRef} className={style.dropdownMenu}>
-                {user && (
+                <div>
                     <div>
-                        <div>
-                            <Link href='/'>
-                                <FontAwesomeIcon icon={faCircleUser} />
-                                <span>
-                                    {user
-                                        ? (user as User).username ||
-                                          (user as Customer).user.username
-                                        : 'Log in'}
-                                </span>
-                            </Link>
+                        <Link href={user ? '/' : '/login'}>
+                            <FontAwesomeIcon icon={faCircleUser} />
+                            <span>
+                                {user
+                                    ? (user as User).username ||
+                                      (user as Customer).user.username
+                                    : 'Log in'}
+                            </span>
+                        </Link>
+                        {user && (
                             <Link href='/logout'>
                                 <FontAwesomeIcon icon={faSignOut} />
                                 <span>Log Out</span>
                             </Link>
-                        </div>
-                        <div>
-                            <Link href='/'>
-                                <FontAwesomeIcon icon={faCartShopping} />
-                                <span>Cart</span>
-                            </Link>
-                            <Link href='/'>
-                                <FontAwesomeIcon icon={faHeart} />
-                                <span>Favorites</span>
-                            </Link>
-                        </div>
+                        )}
                     </div>
-                )}
+                    <div>
+                        <Link href='/'>
+                            <FontAwesomeIcon icon={faCartShopping} />
+                            <span>Cart</span>
+                        </Link>
+                        <Link href='/'>
+                            <FontAwesomeIcon icon={faHeart} />
+                            <span>Favorites</span>
+                        </Link>
+                    </div>
+                </div>
                 <ul>
                     <li>
                         <Link href='/'>Offers</Link>
