@@ -6,6 +6,7 @@ import { Category } from '@/types/tables'
 import { getData } from '@/helpers/getData'
 import { getUser } from '@/helpers/getUser'
 import { UserData } from '@/types/users'
+import { refreshTokens } from '@/helpers/refreshTokens'
 
 const josefinSans = Josefin_Sans({ subsets: ['latin'] })
 
@@ -23,7 +24,7 @@ export default async function RootLayout({
         `https://ft-drf-api.vercel.app/api/categories`
     )
 
-    const user: UserData = await getUser()
+    let user = await getUser()
 
     return (
         <html lang='en'>

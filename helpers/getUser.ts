@@ -5,6 +5,7 @@ import { apiUrl } from './apiUrl'
 
 export const getUser = async () => {
     try {
+        // USER AUTH TOKENS STORED AS COOKIES
         const authTokens = cookies().get('authTokens')
 
         if (authTokens) {
@@ -12,8 +13,10 @@ export const getUser = async () => {
             const decodedUser: DecodedUserInfo = jwtDecode(userTokens.access)
             const username = decodedUser.username
 
+            // POST REQUEST TO GET USER INFORMATION
             const res = await fetch(`${apiUrl}/api/user/`, {
                 method: 'post',
+                cache: 'no-cache',
                 headers: {
                     'Content-Type': 'application/json',
                     Authorization: `Bearer ${userTokens.access}`
@@ -21,9 +24,10 @@ export const getUser = async () => {
                 body: JSON.stringify({ username: username })
             })
 
+            // IF THE ACCESS TOKEN WAS VALID, RETURN THE USER DATA
             if (res.ok) {
-                const customer = await res.json()
-                return customer
+                const data = await res.json()
+                return data
             }
         }
 

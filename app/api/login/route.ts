@@ -8,8 +8,12 @@ export interface UserTokens {
 }
 
 export interface DecodedUserInfo {
+    user_id: number
     username: string
-    [key: string]: any
+    token_type: string
+    exp: number
+    iat: number
+    jti: string
 }
 
 export async function POST(req: NextRequest) {
