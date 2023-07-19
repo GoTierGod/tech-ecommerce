@@ -162,7 +162,7 @@ export default function Header({ categories, user }: HeaderProps) {
                 </Link>
                 {user && (
                     <Link
-                        href='/logout'
+                        href='/api/logout'
                         className={style.logout}
                         aria-label='Log Out'
                     >
@@ -183,7 +183,7 @@ export default function Header({ categories, user }: HeaderProps) {
                             </span>
                         </Link>
                         {user && (
-                            <Link href='/logout'>
+                            <Link href='/api/logout'>
                                 <FontAwesomeIcon icon={faSignOut} />
                                 <span>Log Out</span>
                             </Link>
