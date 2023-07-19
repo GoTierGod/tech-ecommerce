@@ -14,7 +14,6 @@ export default function LogoutHandler() {
             if (res.ok) setState('Successfully Log Out')
             else setState('Something Went Wrong...')
         })()
-        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
     return <h1>{state}</h1>

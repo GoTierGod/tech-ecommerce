@@ -1,7 +1,7 @@
 import { cookies } from 'next/dist/client/components/headers'
 import { NextRequest, NextResponse } from 'next/server'
 
-export async function POSTs(req: NextRequest) {
+export async function POST(req: NextRequest) {
     const authTokens = cookies().get('authTokens')
 
     if (authTokens) {
