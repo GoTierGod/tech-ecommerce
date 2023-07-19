@@ -111,7 +111,7 @@
     border-radius: 4px;
 }
 
-.dropdownMenu a:hover {
+.dropdownMenu li a:hover {
     background: var(--white);
     color: var(--main);
 }
@@ -281,7 +281,8 @@
     height: 1rem;
 }
 
-/* ------------------------- CART -------------------------  */
+/* ------------------------- LOGOUT & CART -------------------------  */
+.logout,
 .cart {
     display: none;
     justify-content: center;
@@ -294,6 +295,7 @@
     border-radius: 4px;
 }
 
+.logout svg,
 .cart svg {
     height: 1rem;
 }
@@ -305,7 +307,6 @@
     }
 
     .dropdownMenu > div {
-        flex-direction: row;
         justify-content: center;
         align-items: center;
     }
@@ -317,10 +318,6 @@
     .dropdownMenu div div {
         width: fit-content;
     }
-
-    .dropdownMenu div div a:nth-child(1) {
-        display: none;
-    }
 }
 
 @media screen and (min-width: 600px) {
@@ -330,6 +327,7 @@
 }
 
 @media screen and (min-width: 768px) {
+    .logout,
     .profile {
         display: flex;
     }
@@ -338,7 +336,7 @@
         display: flex;
     }
 
-    .dropdownMenu > div {
+    .dropdownMenu > div > div:nth-child(1) {
         display: none;
     }
 }

@@ -10,7 +10,8 @@ import {
     faCircleUser,
     faCartShopping,
     faSearch,
-    faHeart
+    faHeart,
+    faSignOut
 } from '@fortawesome/free-solid-svg-icons'
 import { FormEvent, useCallback, useEffect, useRef, useState } from 'react'
 import { usePathname, useRouter } from 'next/navigation'
@@ -160,23 +161,33 @@ export default function Header({ categories, user }: HeaderProps) {
                     <FontAwesomeIcon icon={faCircleUser} />
                 </Link>
                 {user && (
-                    <Link href='/' className={style.cart} aria-label='Cart'>
-                        <FontAwesomeIcon icon={faCartShopping} />
+                    <Link
+                        href='/logout'
+                        className={style.logout}
+                        aria-label='Log Out'
+                    >
+                        <FontAwesomeIcon icon={faSignOut} />
                     </Link>
                 )}
             </div>
             <div ref={dropdownMenuRef} className={style.dropdownMenu}>
                 {user && (
                     <div>
-                        <Link href='/'>
-                            <FontAwesomeIcon icon={faCircleUser} />
-                            <span>
-                                {user
-                                    ? (user as User).username ||
-                                      (user as Customer).user.username
-                                    : 'Log in'}
-                            </span>
-                        </Link>
+                        <div>
+                            <Link href='/'>
+                                <FontAwesomeIcon icon={faCircleUser} />
+                                <span>
+                                    {user
+                                        ? (user as User).username ||
+                                          (user as Customer).user.username
+                                        : 'Log in'}
+                                </span>
+                            </Link>
+                            <Link href='/logout'>
+                                <FontAwesomeIcon icon={faSignOut} />
+                                <span>Log Out</span>
+                            </Link>
+                        </div>
                         <div>
                             <Link href='/'>
                                 <FontAwesomeIcon icon={faCartShopping} />
