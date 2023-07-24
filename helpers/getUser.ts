@@ -3,11 +3,13 @@ import { cookies } from 'next/dist/client/components/headers'
 import jwtDecode from 'jwt-decode'
 import { apiUrl } from './apiUrl'
 
-export const getUser = async () => {
+// FETCH USER DATA USING VALID ACCESS TOKENS STORED IN COOKIES
+export const getUser = async (): Promise<null | object> => {
     try {
-        // USER AUTH TOKENS STORED AS COOKIES
+        // USER AUTH TOKENS STORED IN COOKIES
         const authTokens = cookies().get('authTokens')
 
+        // CHECK IF THE REQUIRED COOKIES EXISTS
         if (authTokens) {
             const userTokens: UserTokens = JSON.parse(authTokens.value)
             const decodedUser: DecodedUserInfo = jwtDecode(userTokens.access)
@@ -24,7 +26,7 @@ export const getUser = async () => {
                 body: JSON.stringify({ username: username })
             })
 
-            // IF THE ACCESS TOKEN WAS VALID, RETURN THE USER DATA
+            // IF THE ACCESS TOKEN IS VALID, RETURN THE USER DATA
             if (res.ok) {
                 const data = await res.json()
                 return data

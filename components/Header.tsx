@@ -16,7 +16,7 @@ import {
 import { FormEvent, useCallback, useEffect, useRef, useState } from 'react'
 import { usePathname, useRouter } from 'next/navigation'
 import { Category } from '@/types/tables'
-import { titleCase } from '@/helpers/titleCase'
+import { formatTitleCase } from '@/helpers/formatTitleCase'
 import { Customer, User, UserData } from '@/types/users'
 import { cookies } from 'next/dist/client/components/headers'
 import Cookies from 'js-cookie'
@@ -127,7 +127,7 @@ export default function Header({ categories, user }: HeaderProps) {
                         </option>
                         {categories.map(category => (
                             <option key={category.id} value={category.title}>
-                                {titleCase(category.title)}
+                                {formatTitleCase(category.title)}
                             </option>
                         ))}
                     </select>

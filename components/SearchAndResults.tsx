@@ -22,7 +22,7 @@ import {
     useState
 } from 'react'
 import { useRouter } from 'next/navigation'
-import { titleCase } from '@/helpers/titleCase'
+import { formatTitleCase } from '@/helpers/formatTitleCase'
 import { UserData } from '@/types/users'
 
 interface SearchProps {
@@ -162,7 +162,7 @@ const SearchAndResults = ({
                             <FontAwesomeIcon icon={faTasks} /> Filter
                         </button>
                     </div>
-                    <h2>{titleCase(searchText)}</h2>
+                    <h2>{formatTitleCase(searchText)}</h2>
                 </div>
                 {/* FOR WIDE SCREENS */}
                 <div className={style.desktop}>
@@ -170,7 +170,7 @@ const SearchAndResults = ({
                         <span>
                             Searched Text <FontAwesomeIcon icon={faSearch} />
                         </span>
-                        <h2>{titleCase(searchText)}</h2>
+                        <h2>{formatTitleCase(searchText)}</h2>
                     </div>
                     <div>
                         <span>

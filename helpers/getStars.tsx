@@ -1,9 +1,13 @@
 import { faStar, faStarHalf } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { ReactElement } from 'react'
 
-// GET STARS ACCORDING TO RATING USING FONT AWESOME ICONS
-export const getStars = (reviews_ct: number, rating: number) => {
-    const stars: Array<JSX.Element> = []
+// GET STARS ACCORDING TO RATING
+export const getStars = (
+    reviews_ct: number,
+    rating: number
+): Array<ReactElement> => {
+    const stars: Array<ReactElement> = []
 
     if (!reviews_ct) {
         for (let i = 0; i < 5; i++) {

@@ -1,4 +1,5 @@
-export const titleCase = (str: string): string =>
+// TEXT IN TITLE CASE
+export const formatTitleCase = (str: string): string =>
     str
         .replace(/\s/g, ' ')
         .split(' ')
