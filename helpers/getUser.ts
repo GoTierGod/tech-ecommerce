@@ -4,7 +4,7 @@ import jwtDecode from 'jwt-decode'
 import { apiUrl } from './apiUrl'
 
 // FETCH USER DATA USING VALID ACCESS TOKENS STORED IN COOKIES
-export const getUser = async (): Promise<null | object> => {
+export const getUser = async () => {
     try {
         // USER AUTH TOKENS STORED IN COOKIES
         const authTokens = cookies().get('authTokens')
