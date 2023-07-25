@@ -22,6 +22,19 @@ import { respectLineBreaks } from '@/helpers/respectLineBreaks'
 import { getUser } from '@/helpers/getUser'
 import { UserData } from '@/types/users'
 
+import visaLogo from '../../../public/images/payments/visa.svg'
+import mastercardLogo from '../../../public/images/payments/mastercard.svg'
+import americanExpressLogo from '../../../public/images/payments/american-express.svg'
+import dinersClubLogo from '../../../public/images/payments/diners-club-international.svg'
+import Image from 'next/image'
+
+const paymentLogos = [
+    { src: visaLogo, alt: 'Visa' },
+    { src: mastercardLogo, alt: 'Mastercard' },
+    { src: americanExpressLogo, alt: 'American Express' },
+    { src: dinersClubLogo, alt: 'Diners Club International' }
+]
+
 export default async function Product({ params }: { params: { id: string } }) {
     const { id } = params
 
@@ -110,17 +123,21 @@ export default async function Product({ params }: { params: { id: string } }) {
                 <h3>Payment Methods</h3>
                 <div>
                     <div>
-                        <h4>Credit Cards</h4>
-                        <span>
-                            {getInstallments(
-                                product.details.installments,
-                                product.details.offer_price
-                            )}
-                        </span>
+                        <h4>Credit cards</h4>
+                        <h5>
+                            Available in{' '}
+                            <span>
+                                {getInstallments(
+                                    product.details.installments,
+                                    product.details.offer_price
+                                )}
+                            </span>
+                        </h5>
                     </div>
                     <div>
-                        <h4>Others</h4>
-                        <span>$ {product.details.offer_price}</span>
+                        {paymentLogos.map(pay => (
+                            <Image key={pay.alt} src={pay.src} alt={pay.alt} />
+                        ))}
                     </div>
                 </div>
             </div>
