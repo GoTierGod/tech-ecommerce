@@ -1,7 +1,7 @@
 import style from './page.module.css'
 
-import { getData } from '@/helpers/getData'
 import { CardProductDetails, FullProductDetails } from '@/types/products'
+
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {
     faBox,
@@ -9,15 +9,18 @@ import {
     faStar,
     faTruck
 } from '@fortawesome/free-solid-svg-icons'
+import Image from 'next/image'
 import Link from 'next/link'
+
 import VerticalCard from '@/components/VerticalCard'
 import ProductRows from '@/components/ProductRows'
+import ProductImages from '@/components/ProductImages'
+import { getData } from '@/helpers/getData'
 import { getStars } from '@/helpers/getStars'
 import { getDeliveryDay } from '@/helpers/getDeliveryDay'
 import { getInstallments } from '@/helpers/getInstallments'
 import { notFound } from 'next/navigation'
 import { metadata } from '@/app/layout'
-import ProductImages from '@/components/ProductImages'
 import { respectLineBreaks } from '@/helpers/respectLineBreaks'
 import { getUser } from '@/helpers/getUser'
 import { UserData } from '@/types/users'
@@ -26,7 +29,6 @@ import visaLogo from '../../../public/images/payments/visa.svg'
 import mastercardLogo from '../../../public/images/payments/mastercard.svg'
 import americanExpressLogo from '../../../public/images/payments/american-express.svg'
 import dinersClubLogo from '../../../public/images/payments/diners-club-international.svg'
-import Image from 'next/image'
 
 const paymentLogos = [
     { src: visaLogo, alt: 'Visa' },
@@ -94,6 +96,14 @@ export default async function Product({ params }: { params: { id: string } }) {
                     Pick up your package for free starting from{' '}
                     {getDeliveryDay()}
                 </span>
+            </div>
+            {/* ------------------------- BRAND INFO -------------------------  */}
+            <div className={style.brand}>
+                <h3>
+                    Offered by <span>{product.details.brand.name}</span>
+                </h3>
+                <p>{product.details.brand.description}</p>
+                <Link href={'/'}>See more of this brand</Link>
             </div>
             {/* ------------------------- WARRANTY AND POINTS -------------------------  */}
             <div className={style.wp}>
