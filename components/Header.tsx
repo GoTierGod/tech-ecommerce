@@ -155,7 +155,7 @@ export default function Header({ categories, user }: HeaderProps) {
                     </ul>
                 </nav>
                 <Link
-                    href={user ? '/' : '/login'}
+                    href={user ? '/profile' : '/login'}
                     className={style.profile}
                     aria-label='Profile'
                 >
