@@ -1,0 +1,158 @@
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+
+    width: 100%;
+    max-width: 1200px;
+}
+
+.top {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+
+    width: 100%;
+}
+
+.topLeft,
+.topRight {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.topLeft :where(h1, div) {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5rem;
+
+    padding: 1rem;
+
+    background: var(--main);
+    color: var(--white);
+
+    border-radius: 4px;
+}
+
+.top h1 {
+    font-size: 1.25rem;
+    font-weight: 400;
+}
+
+.top span {
+    font-size: 1rem;
+    font-weight: 375;
+}
+
+.details {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+
+    width: 100%;
+}
+
+.group {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5rem;
+
+    width: 100%;
+}
+
+.cell {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+
+    padding: 1rem;
+    width: 100%;
+
+    background: var(--white);
+
+    border-radius: 4px;
+}
+
+.cell h2 {
+    font-size: 1.25rem;
+    font-weight: 400;
+}
+
+.cell p {
+    font-size: 1rem;
+    font-weight: 375;
+}
+
+.bottom {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+
+    width: 100%;
+}
+
+.edit,
+.logout,
+.delete {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    padding: 1rem;
+    width: 100%;
+
+    background: var(--gray);
+    color: var(--white);
+
+    font-size: 1rem;
+    font-family: inherit;
+    font-weight: 375;
+
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.delete {
+    background: var(--danger);
+    color: var(--white);
+}
+
+.topRight :where(.logout, .delete) {
+    display: none;
+}
+
+@media screen and (min-width: 768px) {
+    .top {
+        flex-direction: row;
+        justify-content: space-between;
+    }
+
+    .topLeft {
+        flex-direction: row;
+    }
+
+    .topRight {
+        flex-direction: row;
+    }
+
+    .topRight :where(.logout, .delete) {
+        display: flex;
+    }
+
+    .group {
+        flex-direction: row;
+    }
+
+    .bottom {
+        display: none;
+    }
+}
