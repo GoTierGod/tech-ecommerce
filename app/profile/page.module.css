@@ -116,6 +116,8 @@
     font-family: inherit;
     font-weight: 375;
 
+    white-space: nowrap;
+
     border: none;
     border-radius: 4px;
     cursor: pointer;
@@ -154,5 +156,10 @@
 
     .bottom {
         display: none;
+    }
+
+    .topLeft :where(h1, div),
+    .topRight :where(.edit, .logout, .delete) {
+        padding: 0.5rem 0.75rem;
     }
 }
