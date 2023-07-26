@@ -6,6 +6,7 @@ import { notFound } from 'next/navigation'
 import { SearchResponse } from '@/types/search'
 import { unescape } from 'querystring'
 import { getUser } from '@/helpers/getUser'
+import { CustomerData } from '@/types/users'
 
 export const metadata = {
     title: 'Search | Tech'
@@ -63,7 +64,7 @@ export default async function Search({
 
     const { pages, products, categories, brands } = searchRes as SearchResponse
 
-    const user = await getUser()
+    const user: CustomerData = await getUser()
 
     return (
         <main>

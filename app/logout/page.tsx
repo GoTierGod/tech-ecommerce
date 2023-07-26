@@ -4,9 +4,10 @@ import { getUser } from '@/helpers/getUser'
 import Link from 'next/link'
 import { redirect } from 'next/navigation'
 import LogoutHandler from '@/components/LogoutHandler'
+import { CustomerData } from '@/types/users'
 
 export default async function Logout() {
-    const user = await getUser()
+    const user: CustomerData = await getUser()
 
     if (!user) redirect('/')
     else

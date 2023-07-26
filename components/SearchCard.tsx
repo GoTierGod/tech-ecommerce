@@ -8,14 +8,14 @@ import { getInstallments } from '@/helpers/getInstallments'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCartPlus, faHeart } from '@fortawesome/free-solid-svg-icons'
 import { getDiscount } from '@/helpers/getDiscount'
-import { UserData } from '@/types/users'
+import { CustomerData } from '@/types/users'
 
 const SearchCard = ({
     product,
     user
 }: {
     product: CardProductDetails
-    user: UserData
+    user: CustomerData
 }) => {
     return (
         <div className={style.wrapper}>

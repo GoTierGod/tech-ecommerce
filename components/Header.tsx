@@ -17,13 +17,13 @@ import { FormEvent, useCallback, useEffect, useRef, useState } from 'react'
 import { usePathname, useRouter } from 'next/navigation'
 import { Category } from '@/types/tables'
 import { formatTitleCase } from '@/helpers/formatTitleCase'
-import { Customer, User, UserData } from '@/types/users'
+import { Customer, User, CustomerData } from '@/types/users'
 import { cookies } from 'next/dist/client/components/headers'
 import Cookies from 'js-cookie'
 
 interface HeaderProps {
     categories: Category[]
-    user: UserData
+    user: CustomerData
 }
 
 // WEBSITE HEADER/NAVBAR
@@ -159,12 +159,7 @@ export default function Header({ categories, user }: HeaderProps) {
                     className={style.profile}
                     aria-label='Profile'
                 >
-                    <span>
-                        {user
-                            ? (user as User).username ||
-                              (user as Customer).user.username
-                            : 'Log in'}
-                    </span>
+                    <span>{user ? user.user.username : 'Log in'}</span>
                     <FontAwesomeIcon icon={faCircleUser} />
                 </Link>
                 {user && (
@@ -182,12 +177,7 @@ export default function Header({ categories, user }: HeaderProps) {
                     <div>
                         <Link href={user ? '/' : '/login'}>
                             <FontAwesomeIcon icon={faCircleUser} />
-                            <span>
-                                {user
-                                    ? (user as User).username ||
-                                      (user as Customer).user.username
-                                    : 'Log in'}
-                            </span>
+                            <span>{user ? user.user.username : 'Log in'}</span>
                         </Link>
                         {user && (
                             <Link href='/logout'>

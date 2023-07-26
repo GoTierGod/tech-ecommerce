@@ -23,7 +23,7 @@ import {
 } from 'react'
 import { useRouter } from 'next/navigation'
 import { formatTitleCase } from '@/helpers/formatTitleCase'
-import { UserData } from '@/types/users'
+import { CustomerData } from '@/types/users'
 
 interface SearchProps {
     searchText: string
@@ -33,7 +33,7 @@ interface SearchProps {
     products: CardProductDetails[]
     categories: Category[]
     brands: Brand[]
-    user: UserData
+    user: CustomerData
 }
 
 const SearchAndResults = ({

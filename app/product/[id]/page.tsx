@@ -23,7 +23,7 @@ import { notFound } from 'next/navigation'
 import { metadata } from '@/app/layout'
 import { respectLineBreaks } from '@/helpers/respectLineBreaks'
 import { getUser } from '@/helpers/getUser'
-import { UserData } from '@/types/users'
+import { CustomerData } from '@/types/users'
 
 import visaLogo from '../../../public/images/payments/visa.svg'
 import mastercardLogo from '../../../public/images/payments/mastercard.svg'
@@ -56,7 +56,7 @@ export default async function Product({ params }: { params: { id: string } }) {
 
     if (!brandProducts || !relatedProducts) return notFound()
 
-    const user: UserData = await getUser()
+    const user: CustomerData = await getUser()
 
     const content = (
         <div className={style.content}>

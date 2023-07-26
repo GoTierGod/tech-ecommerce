@@ -40,4 +40,4 @@ export interface DeliveryMan {
     user: User
 }
 
-export type UserData = Customer | User | null
+export type CustomerData = Customer | null
