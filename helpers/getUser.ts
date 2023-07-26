@@ -16,7 +16,7 @@ export const getUser = async () => {
             const username = decodedUser.username
 
             // POST REQUEST TO GET USER INFORMATION
-            const res = await fetch(`${apiUrl}/api/user/`, {
+            const res = await fetch(`${apiUrl}/api/customer/`, {
                 method: 'post',
                 cache: 'no-cache',
                 headers: {
