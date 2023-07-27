@@ -1,4 +1,4 @@
-import style from '../styles/user-edit.module.css'
+import style from '../styles/user-update.module.css'
 
 import { useFormik } from 'formik'
 import * as Yup from 'yup'
@@ -30,7 +30,24 @@ const requiredValidation: { [key: string]: any } = {
             .required('Enter your username')
     },
     email: { email: Yup.string().email().required() },
-    password: { password: Yup.string().required() },
+    password: {
+        password: Yup.string()
+            .required()
+            .min(10, 'At least 10 characters')
+            .matches(/^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[^A-Za-z\d]).+$/),
+        newPass: Yup.string()
+            .required()
+            .min(10, 'At least 10 characters')
+            .matches(
+                /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[^A-Za-z\d]).+$/,
+                'Password must contain at least one uppercase letter, one lowercase letter, one digit, and one special character'
+            ),
+        confirmNewPass: Yup.string()
+            .required('Please confirm your password')
+            .test('passwords-match', 'Passwords must match', function (value) {
+                return this.parent.newPass === value
+            })
+    },
     phone: { phone: Yup.string().required() },
     countrycity: {
         country: Yup.string().required(),
@@ -107,14 +124,32 @@ export default function UserUpdate({ editing, fieldUpdated }: UserUpdateProps) {
             </div>
         ),
         password: (
-            <div className={style.inputField}>
-                <label htmlFor='password'>New Password</label>
-                <input
-                    type='password'
-                    id='password'
-                    {...Formik.getFieldProps('password')}
-                />
-            </div>
+            <>
+                <div className={style.inputField}>
+                    <label htmlFor='password'>Password</label>
+                    <input
+                        type='password'
+                        id='password'
+                        {...Formik.getFieldProps('password')}
+                    />
+                </div>
+                <div className={style.inputField}>
+                    <label htmlFor='newpass'>New password</label>
+                    <input
+                        type='newpass'
+                        id='newpass'
+                        {...Formik.getFieldProps('newPass')}
+                    />
+                </div>
+                <div className={style.inputField}>
+                    <label htmlFor='confirmnewpass'>Confirm new Password</label>
+                    <input
+                        type='confirmnewpass'
+                        id='confirmnewpass'
+                        {...Formik.getFieldProps('confirmNewPass')}
+                    />
+                </div>
+            </>
         ),
         phone: (
             <div className={style.inputField}>
@@ -199,12 +234,14 @@ export default function UserUpdate({ editing, fieldUpdated }: UserUpdateProps) {
     }
 
     return (
-        <form className={style.form} onSubmit={Formik.handleSubmit}>
-            {formFields[editing]}
-            <div>
-                <button type='submit'>Update</button>
-                <button onClick={() => fieldUpdated()}>Cancel</button>
-            </div>
-        </form>
+        <div className={style.wrapper}>
+            <form className={style.form} onSubmit={Formik.handleSubmit}>
+                {formFields[editing]}
+                <div>
+                    <button type='submit'>Update</button>
+                    <button onClick={() => fieldUpdated()}>Cancel</button>
+                </div>
+            </form>
+        </div>
     )
 }
