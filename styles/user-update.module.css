@@ -73,12 +73,13 @@
     font-size: 1rem;
     font-family: inherit;
 
-    border: none;
+    border: 2px solid var(--gray);
     border-radius: 4px;
 }
 
 .inputField select {
     border-right: 0.75rem solid var(--gray);
+    outline: 2px solid var(--gray);
 }
 
 .checking {

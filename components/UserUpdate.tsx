@@ -126,30 +126,78 @@ export default function UserUpdate({ editing, fieldUpdated }: UserUpdateProps) {
     const formFields: { [key: string]: ReactElement } = {
         username: (
             <div className={style.inputField}>
-                <label htmlFor='username'>New Username</label>
+                <label
+                    htmlFor='username'
+                    style={{
+                        color:
+                            Object.keys(Formik.errors)[0] === 'username'
+                                ? 'var(--danger)'
+                                : 'var(--gray)'
+                    }}
+                >
+                    New Username
+                </label>
                 <input
                     type='text'
                     id='username'
                     {...Formik.getFieldProps('username')}
+                    style={{
+                        borderColor:
+                            Object.keys(Formik.errors)[0] === 'username'
+                                ? 'var(--danger)'
+                                : 'var(--gray)'
+                    }}
                 />
             </div>
         ),
         email: (
             <>
                 <div className={style.inputField}>
-                    <label htmlFor='password'>Password</label>
+                    <label
+                        htmlFor='password'
+                        style={{
+                            color:
+                                Object.keys(Formik.errors)[0] === 'password'
+                                    ? 'var(--danger)'
+                                    : 'var(--gray)'
+                        }}
+                    >
+                        Password
+                    </label>
                     <input
                         type='password'
                         id='password'
                         {...Formik.getFieldProps('password')}
+                        style={{
+                            borderColor:
+                                Object.keys(Formik.errors)[0] === 'password'
+                                    ? 'var(--danger)'
+                                    : 'var(--gray)'
+                        }}
                     />
                 </div>
                 <div className={style.inputField}>
-                    <label htmlFor='email'>New Email</label>
+                    <label
+                        htmlFor='email'
+                        style={{
+                            color:
+                                Object.keys(Formik.errors)[0] === 'email'
+                                    ? 'var(--danger)'
+                                    : 'var(--gray)'
+                        }}
+                    >
+                        New Email
+                    </label>
                     <input
                         type='email'
                         id='email'
                         {...Formik.getFieldProps('email')}
+                        style={{
+                            borderColor:
+                                Object.keys(Formik.errors)[0] === 'email'
+                                    ? 'var(--danger)'
+                                    : 'var(--gray)'
+                        }}
                     />
                 </div>
             </>
@@ -157,112 +205,297 @@ export default function UserUpdate({ editing, fieldUpdated }: UserUpdateProps) {
         password: (
             <>
                 <div className={style.inputField}>
-                    <label htmlFor='password'>Password</label>
+                    <label
+                        htmlFor='password'
+                        style={{
+                            color:
+                                Object.keys(Formik.errors)[0] === 'password'
+                                    ? 'var(--danger)'
+                                    : 'var(--gray)'
+                        }}
+                    >
+                        Password
+                    </label>
                     <input
                         type='password'
                         id='password'
                         {...Formik.getFieldProps('password')}
+                        style={{
+                            borderColor:
+                                Object.keys(Formik.errors)[0] === 'password'
+                                    ? 'var(--danger)'
+                                    : 'var(--gray)'
+                        }}
                     />
                 </div>
                 <div className={style.inputField}>
-                    <label htmlFor='newpass'>New password</label>
+                    <label
+                        htmlFor='newpass'
+                        style={{
+                            color:
+                                Object.keys(Formik.errors)[0] === 'newPass'
+                                    ? 'var(--danger)'
+                                    : 'var(--gray)'
+                        }}
+                    >
+                        New password
+                    </label>
                     <input
                         type='password'
                         id='newpass'
                         {...Formik.getFieldProps('newPass')}
+                        style={{
+                            borderColor:
+                                Object.keys(Formik.errors)[0] === 'newPass'
+                                    ? 'var(--danger)'
+                                    : 'var(--gray)'
+                        }}
                     />
                 </div>
                 <div className={style.inputField}>
-                    <label htmlFor='confirmnewpass'>Confirm new Password</label>
+                    <label
+                        htmlFor='confirmnewpass'
+                        style={{
+                            color:
+                                Object.keys(Formik.errors)[0] ===
+                                'confirmNewPass'
+                                    ? 'var(--danger)'
+                                    : 'var(--gray)'
+                        }}
+                    >
+                        Confirm new Password
+                    </label>
                     <input
                         type='password'
                         id='confirmnewpass'
                         {...Formik.getFieldProps('confirmNewPass')}
+                        style={{
+                            borderColor:
+                                Object.keys(Formik.errors)[0] ===
+                                'confirmNewPass'
+                                    ? 'var(--danger)'
+                                    : 'var(--gray)'
+                        }}
                     />
                 </div>
             </>
         ),
         phone: (
             <div className={style.inputField}>
-                <label htmlFor='phone'>New Phone</label>
+                <label
+                    htmlFor='phone'
+                    style={{
+                        color:
+                            Object.keys(Formik.errors)[0] === 'phone'
+                                ? 'var(--danger)'
+                                : 'var(--gray)'
+                    }}
+                >
+                    New Phone
+                </label>
                 <input
                     type='text'
                     id='phone'
                     {...Formik.getFieldProps('phone')}
+                    style={{
+                        borderColor:
+                            Object.keys(Formik.errors)[0] === 'phone'
+                                ? 'var(--danger)'
+                                : 'var(--gray)'
+                    }}
                 />
             </div>
         ),
         countrycity: (
             <>
                 <div className={style.inputField}>
-                    <label htmlFor='country'>Country</label>
+                    <label
+                        htmlFor='country'
+                        style={{
+                            color:
+                                Object.keys(Formik.errors)[0] === 'country'
+                                    ? 'var(--danger)'
+                                    : 'var(--gray)'
+                        }}
+                    >
+                        Country
+                    </label>
                     <input
                         type='text'
                         id='country'
                         {...Formik.getFieldProps('country')}
+                        style={{
+                            borderColor:
+                                Object.keys(Formik.errors)[0] === 'country'
+                                    ? 'var(--danger)'
+                                    : 'var(--gray)'
+                        }}
                     />
                 </div>
                 <div className={style.inputField}>
-                    <label htmlFor='city'>City</label>
+                    <label
+                        htmlFor='city'
+                        style={{
+                            color:
+                                Object.keys(Formik.errors)[0] === 'city'
+                                    ? 'var(--danger)'
+                                    : 'var(--gray)'
+                        }}
+                    >
+                        City
+                    </label>
                     <input
                         type='text'
                         id='city'
                         {...Formik.getFieldProps('city')}
+                        style={{
+                            borderColor:
+                                Object.keys(Formik.errors)[0] === 'city'
+                                    ? 'var(--danger)'
+                                    : 'var(--gray)'
+                        }}
                     />
                 </div>
             </>
         ),
         address: (
             <div className={style.inputField}>
-                <label htmlFor='address'>Address</label>
+                <label
+                    htmlFor='address'
+                    style={{
+                        color:
+                            Object.keys(Formik.errors)[0] === 'address'
+                                ? 'var(--danger)'
+                                : 'var(--gray)'
+                    }}
+                >
+                    Address
+                </label>
                 <input
                     type='text'
                     id='address'
                     {...Formik.getFieldProps('address')}
+                    style={{
+                        borderColor:
+                            Object.keys(Formik.errors)[0] === 'address'
+                                ? 'var(--danger)'
+                                : 'var(--gray)'
+                    }}
                 />
             </div>
         ),
         firstname: (
             <div className={style.inputField}>
-                <label htmlFor='firstname'>First Name</label>
+                <label
+                    htmlFor='firstname'
+                    style={{
+                        color:
+                            Object.keys(Formik.errors)[0] === 'firstname'
+                                ? 'var(--danger)'
+                                : 'var(--gray)'
+                    }}
+                >
+                    First Name
+                </label>
                 <input
                     type='text'
                     id='firstname'
                     {...Formik.getFieldProps('firstname')}
+                    style={{
+                        borderColor:
+                            Object.keys(Formik.errors)[0] === 'firstname'
+                                ? 'var(--danger)'
+                                : 'var(--gray)'
+                    }}
                 />
             </div>
         ),
         lastname: (
             <div className={style.inputField}>
-                <label htmlFor='lastname'>Last Name</label>
+                <label
+                    htmlFor='lastname'
+                    style={{
+                        color:
+                            Object.keys(Formik.errors)[0] === 'lastname'
+                                ? 'var(--danger)'
+                                : 'var(--gray)'
+                    }}
+                >
+                    Last Name
+                </label>
                 <input
                     type='text'
                     id='lastname'
                     {...Formik.getFieldProps('lastname')}
+                    style={{
+                        borderColor:
+                            Object.keys(Formik.errors)[0] === 'lastname'
+                                ? 'var(--danger)'
+                                : 'var(--gray)'
+                    }}
                 />
             </div>
         ),
         birthdate: (
             <div className={style.inputField}>
-                <label htmlFor='birthdate'>Birthdate</label>
+                <label
+                    htmlFor='birthdate'
+                    style={{
+                        color:
+                            Object.keys(Formik.errors)[0] === 'birthdate'
+                                ? 'var(--danger)'
+                                : 'var(--gray)'
+                    }}
+                >
+                    Birthdate
+                </label>
                 <input
                     type='date'
                     id='birthdate'
                     {...Formik.getFieldProps('birthdate')}
+                    style={{
+                        borderColor:
+                            Object.keys(Formik.errors)[0] === 'birthdate'
+                                ? 'var(--danger)'
+                                : 'var(--gray)'
+                    }}
                 />
             </div>
         ),
         gender: (
             <div className={style.inputField}>
-                <label htmlFor='gender'>Gender</label>
-                <select id='gender' {...Formik.getFieldProps('gender')}>
-                    <option value='M'>Male</option>
+                <label
+                    htmlFor='gender'
+                    style={{
+                        color:
+                            Object.keys(Formik.errors)[0] === 'gender'
+                                ? 'var(--danger)'
+                                : 'var(--gray)'
+                    }}
+                >
+                    Gender
+                </label>
+                <select
+                    id='gender'
+                    {...Formik.getFieldProps('gender')}
+                    style={{
+                        outlineColor:
+                            Object.keys(Formik.errors)[0] === 'password'
+                                ? 'var(--danger)'
+                                : 'var(--gray)'
+                    }}
+                >
+                    <option value='M' defaultChecked>
+                        Male
+                    </option>
                     <option value='F'>Female</option>
                     <option value='O'>Other</option>
                 </select>
             </div>
         )
     }
+
+    useEffect(() => console.log(Formik.errors), [Formik.errors])
 
     return (
         <div className={style.wrapper}>
