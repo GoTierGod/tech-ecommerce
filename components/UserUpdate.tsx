@@ -8,8 +8,8 @@ import { ReactElement } from 'react'
 // REQUIRED FORM FIELDS
 const requiredFields: { [key: string]: object } = {
     username: { username: '' },
-    email: { email: '' },
-    password: { password: '' },
+    email: { password: '', email: '' },
+    password: { password: '', newPass: '', confirmNewPass: '' },
     phone: { phone: '' },
     countrycity: { country: '', city: '' },
     address: { address: '' },
@@ -29,14 +29,20 @@ const requiredValidation: { [key: string]: any } = {
             )
             .required('Enter your username')
     },
-    email: { email: Yup.string().email().required() },
+    email: {
+        password: Yup.string()
+            .required('Enter your password')
+            .min(10, 'At least 10 characters')
+            .matches(/^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[^A-Za-z\d]).+$/),
+        email: Yup.string().email().required('Enter a new email')
+    },
     password: {
         password: Yup.string()
-            .required()
+            .required('Enter your current password')
             .min(10, 'At least 10 characters')
             .matches(/^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[^A-Za-z\d]).+$/),
         newPass: Yup.string()
-            .required()
+            .required('Enter a new password')
             .min(10, 'At least 10 characters')
             .matches(
                 /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[^A-Za-z\d]).+$/,
@@ -48,12 +54,12 @@ const requiredValidation: { [key: string]: any } = {
                 return this.parent.newPass === value
             })
     },
-    phone: { phone: Yup.string().required() },
+    phone: { phone: Yup.string().required('Enter a new phone number') },
     countrycity: {
-        country: Yup.string().required(),
-        city: Yup.string().required()
+        country: Yup.string().required('Enter a new country'),
+        city: Yup.string().required('Enter a new city')
     },
-    address: { address: Yup.string().required() },
+    address: { address: Yup.string().required('Enter a new address') },
     firstname: {
         firstname: Yup.string()
             .matches(
@@ -68,10 +74,10 @@ const requiredValidation: { [key: string]: any } = {
                 /^[a-záéíóúñ]+$/i,
                 'Your name can only contain consesutive letters'
             )
-            .required('Enter your first name')
+            .required('Enter your last name')
     },
-    birthdate: { birthdate: Yup.date().required() },
-    gender: { gender: Yup.string().required() }
+    birthdate: { birthdate: Yup.date().required('Enter your birthdate') },
+    gender: { gender: Yup.string().required('Select your gender') }
 }
 
 interface UserUpdateProps {
@@ -114,14 +120,24 @@ export default function UserUpdate({ editing, fieldUpdated }: UserUpdateProps) {
             </div>
         ),
         email: (
-            <div className={style.inputField}>
-                <label htmlFor='email'>New Email</label>
-                <input
-                    type='email'
-                    id='email'
-                    {...Formik.getFieldProps('email')}
-                />
-            </div>
+            <>
+                <div className={style.inputField}>
+                    <label htmlFor='password'>Password</label>
+                    <input
+                        type='password'
+                        id='password'
+                        {...Formik.getFieldProps('password')}
+                    />
+                </div>
+                <div className={style.inputField}>
+                    <label htmlFor='email'>New Email</label>
+                    <input
+                        type='email'
+                        id='email'
+                        {...Formik.getFieldProps('email')}
+                    />
+                </div>
+            </>
         ),
         password: (
             <>
