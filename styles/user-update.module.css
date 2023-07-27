@@ -1,3 +1,16 @@
+.wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    padding: 3rem;
+    width: 100%;
+
+    background: var(--white);
+
+    border-radius: 4px;
+}
+
 .form {
     display: flex;
     flex-direction: column;
@@ -5,13 +18,8 @@
     align-items: center;
     gap: 1rem;
 
-    padding: 1.5rem;
     width: 100%;
-    max-width: 450px;
-
-    background: var(--white);
-
-    border-radius: 4px;
+    max-width: 300px;
 }
 
 .form > div:last-of-type {
@@ -71,4 +79,10 @@
 
 .inputField select {
     border-right: 0.75rem solid var(--gray);
+}
+
+@media screen and (min-width: 768px) {
+    .wrapper {
+        aspect-ratio: 3/1;
+    }
 }

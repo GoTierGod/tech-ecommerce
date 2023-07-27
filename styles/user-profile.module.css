@@ -12,7 +12,6 @@
 .top {
     display: flex;
     flex-direction: column;
-    gap: 1rem;
 
     width: 100%;
 }
@@ -147,9 +146,15 @@
 }
 
 @media screen and (min-width: 768px) {
+    .wrapper {
+        padding: 5vh 1rem;
+        padding: 5dvh 1rem;
+    }
+
     .top {
         flex-direction: row;
         justify-content: space-between;
+        gap: 1rem;
     }
 
     .topLeft {
