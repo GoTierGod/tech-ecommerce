@@ -7,7 +7,7 @@ import { Customer } from '@/types/users'
 import { faEdit, faStar } from '@fortawesome/free-solid-svg-icons'
 import { useCallback, useState } from 'react'
 import { getAge } from '@/helpers/getAge'
-import UserEdit from './UserEdit'
+import UserUpdate from './UserUpdate'
 
 interface UserProfileProps {
     customer: Customer
@@ -136,7 +136,7 @@ export default function UserProfile({ customer }: UserProfileProps) {
                     </div>
                 </div>
             ) : (
-                <UserEdit editing={updating} fieldUpdated={fieldUpdated} />
+                <UserUpdate editing={updating} fieldUpdated={fieldUpdated} />
             )}
             <div className={style.bottom}>
                 <button className={style.logout}>Log Out</button>
