@@ -81,6 +81,24 @@
     border-right: 0.75rem solid var(--gray);
 }
 
+.checking {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+
+    padding: 1rem 0;
+
+    text-align: center;
+
+    font-weight: 375;
+}
+
+.checking svg {
+    height: 1rem;
+}
+
 @media screen and (min-width: 768px) {
     .wrapper {
         aspect-ratio: 3/1;

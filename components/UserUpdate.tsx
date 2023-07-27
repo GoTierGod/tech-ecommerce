@@ -3,10 +3,31 @@ import style from '../styles/user-update.module.css'
 import { useFormik } from 'formik'
 import * as Yup from 'yup'
 
-import { ReactElement } from 'react'
+import { ReactElement, useEffect } from 'react'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import {
+    faCheck,
+    faCheckCircle,
+    faXmark,
+    faXmarkCircle
+} from '@fortawesome/free-solid-svg-icons'
+
+// FIELDS TO VERIFY IF THEY WERE TOUCHED
+const fieldsTouched: { [key: string]: string[] } = {
+    username: ['username'],
+    email: ['password', 'email'],
+    password: ['password', 'newPass', 'confirmNewPass'],
+    phone: ['phone'],
+    countrycity: ['country', 'city'],
+    address: ['address'],
+    firstname: ['firstname'],
+    lastname: ['lastname'],
+    birthdate: ['birthdate'],
+    gender: ['gender']
+}
 
 // REQUIRED FORM FIELDS
-const requiredFields: { [key: string]: object } = {
+const requiredFields: { [key: string]: { [key: string]: any } } = {
     username: { username: '' },
     email: { password: '', email: '' },
     password: { password: '', newPass: '', confirmNewPass: '' },
@@ -30,17 +51,11 @@ const requiredValidation: { [key: string]: any } = {
             .required('Enter your username')
     },
     email: {
-        password: Yup.string()
-            .required('Enter your password')
-            .min(10, 'At least 10 characters')
-            .matches(/^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[^A-Za-z\d]).+$/),
+        password: Yup.string().required('Enter your password'),
         email: Yup.string().email().required('Enter a new email')
     },
     password: {
-        password: Yup.string()
-            .required('Enter your current password')
-            .min(10, 'At least 10 characters')
-            .matches(/^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[^A-Za-z\d]).+$/),
+        password: Yup.string().required('Enter your current password'),
         newPass: Yup.string()
             .required('Enter a new password')
             .min(10, 'At least 10 characters')
@@ -152,7 +167,7 @@ export default function UserUpdate({ editing, fieldUpdated }: UserUpdateProps) {
                 <div className={style.inputField}>
                     <label htmlFor='newpass'>New password</label>
                     <input
-                        type='newpass'
+                        type='password'
                         id='newpass'
                         {...Formik.getFieldProps('newPass')}
                     />
@@ -160,7 +175,7 @@ export default function UserUpdate({ editing, fieldUpdated }: UserUpdateProps) {
                 <div className={style.inputField}>
                     <label htmlFor='confirmnewpass'>Confirm new Password</label>
                     <input
-                        type='confirmnewpass'
+                        type='password'
                         id='confirmnewpass'
                         {...Formik.getFieldProps('confirmNewPass')}
                     />
@@ -253,6 +268,31 @@ export default function UserUpdate({ editing, fieldUpdated }: UserUpdateProps) {
         <div className={style.wrapper}>
             <form className={style.form} onSubmit={Formik.handleSubmit}>
                 {formFields[editing]}
+                <div className={style.checking}>
+                    {fieldsTouched[editing].find(
+                        field => Formik.touched[field]
+                    ) ? (
+                        Formik.isValid ? (
+                            <>
+                                <FontAwesomeIcon
+                                    icon={faCheckCircle}
+                                    color='var(--main)'
+                                />
+                                {'Everything OK!'}
+                            </>
+                        ) : (
+                            <>
+                                <FontAwesomeIcon
+                                    icon={faXmarkCircle}
+                                    color='var(--danger)'
+                                />
+                                {Object.values(Formik.errors)[0] as string}
+                            </>
+                        )
+                    ) : (
+                        ''
+                    )}
+                </div>
                 <div>
                     <button type='submit'>Update</button>
                     <button onClick={() => fieldUpdated()}>Cancel</button>
