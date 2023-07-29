@@ -13,7 +13,7 @@ export default function LoginForm() {
         const username = e.currentTarget.username.value
         const password = e.currentTarget.password.value
 
-        const res = await fetch(`/api/login`, {
+        const res = await fetch(`/api/auth/login`, {
             method: 'post',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({

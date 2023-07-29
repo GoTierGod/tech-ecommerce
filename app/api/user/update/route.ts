@@ -1,6 +1,6 @@
 import { cookies } from 'next/dist/client/components/headers'
 import { NextRequest, NextResponse } from 'next/server'
-import { UserTokens } from '../../login/route'
+import { UserTokens } from '../../auth/login/route'
 import { apiUrl } from '@/helpers/apiUrl'
 
 export async function POST(req: NextRequest) {

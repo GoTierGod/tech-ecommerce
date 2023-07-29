@@ -1,4 +1,4 @@
-import { DecodedUserInfo, UserTokens } from '@/app/api/login/route'
+import { DecodedUserInfo, UserTokens } from '@/app/api/auth/login/route'
 import { cookies } from 'next/dist/client/components/headers'
 import jwtDecode from 'jwt-decode'
 import { apiUrl } from './apiUrl'

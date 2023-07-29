@@ -80,7 +80,7 @@ export default function Header({ categories, user }: HeaderProps) {
 
         if (!user && Cookies.get('authTokens')) {
             ;(async () => {
-                const res = await fetch('/api/refresh', { method: 'post' })
+                const res = await fetch('/api/auth/refresh', { method: 'post' })
                 if (res.ok) router.refresh()
             })()
         }
