@@ -7,6 +7,7 @@ import { useFormik } from 'formik'
 import Link from 'next/link'
 import * as Yup from 'yup'
 import { faCheckCircle, faXmarkCircle } from '@fortawesome/free-solid-svg-icons'
+import { useRouter } from 'next/navigation'
 
 const fieldsTouched: string[] = [
     'username',
@@ -17,6 +18,8 @@ const fieldsTouched: string[] = [
 ]
 
 export default function UserRegister() {
+    const router = useRouter()
+
     const Formik = useFormik({
         initialValues: {
             username: '',
@@ -26,7 +29,16 @@ export default function UserRegister() {
             birthdate: ''
         },
         onSubmit: async values => {
-            console.log(JSON.stringify(values))
+            const res = await fetch('/api/user/create', {
+                method: 'post',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(values)
+            })
+
+            if (res.status === 200 || res.status === 201) {
+                console.log(`${res.status} ${res.statusText}`)
+                router.replace('/')
+            } else console.log('Failed')
         },
         validationSchema: Yup.object({
             username: Yup.string()

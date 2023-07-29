@@ -5,12 +5,7 @@ import * as Yup from 'yup'
 
 import { ReactElement, useEffect } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import {
-    faCheck,
-    faCheckCircle,
-    faXmark,
-    faXmarkCircle
-} from '@fortawesome/free-solid-svg-icons'
+import { faCheckCircle, faXmarkCircle } from '@fortawesome/free-solid-svg-icons'
 
 // FIELDS TO VERIFY IF THEY WERE TOUCHED
 const fieldsTouched: { [key: string]: string[] } = {

@@ -1,5 +1,7 @@
 import { apiUrl } from '@/helpers/apiUrl'
 import { NextRequest, NextResponse } from 'next/server'
+import { UserTokens } from '../../login/route'
+import { cookies } from 'next/dist/client/components/headers'
 
 export async function POST(req: NextRequest) {
     try {
@@ -10,7 +12,7 @@ export async function POST(req: NextRequest) {
         const password = body.password
         const birthdate = body.birthdate
 
-        const res = await fetch(`${apiUrl}/customer/create/`, {
+        const res = await fetch(`${apiUrl}/api/customer/create/`, {
             method: 'post',
             headers: {
                 'Content-Type': 'application/json'
@@ -24,7 +26,24 @@ export async function POST(req: NextRequest) {
         })
 
         if (res.ok) {
-            return NextResponse.json({}, { status: 200 })
+            const res = await fetch(`${apiUrl}/api/token/`, {
+                method: 'post',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    username: username,
+                    password: password
+                })
+            })
+
+            if (res.ok) {
+                const userTokens: UserTokens = await res.json()
+
+                cookies().set('authTokens', JSON.stringify(userTokens))
+
+                return NextResponse.json({}, { status: 200 })
+            }
+
+            return NextResponse.json({}, { status: 201 })
         }
 
         return NextResponse.json({}, { status: 400 })
