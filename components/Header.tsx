@@ -135,6 +135,7 @@ export default function Header({ categories, user }: HeaderProps) {
                 <button
                     onClick={toggleDropdownMenu}
                     className={style.dropdownBtn}
+                    aria-label='Dropdown menu'
                 >
                     <FontAwesomeIcon icon={faBars} height='1rem' />
                 </button>
@@ -175,7 +176,7 @@ export default function Header({ categories, user }: HeaderProps) {
             <div ref={dropdownMenuRef} className={style.dropdownMenu}>
                 <div>
                     <div>
-                        <Link href={user ? '/' : '/login'}>
+                        <Link href={user ? '/profile' : '/login'}>
                             <FontAwesomeIcon icon={faCircleUser} />
                             <span>{user ? user.user.username : 'Log in'}</span>
                         </Link>
