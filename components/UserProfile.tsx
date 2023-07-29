@@ -8,6 +8,7 @@ import { faEdit, faStar } from '@fortawesome/free-solid-svg-icons'
 import { useCallback, useState } from 'react'
 import { getAge } from '@/helpers/getAge'
 import UserUpdate from './UserUpdate'
+import Link from 'next/link'
 
 interface UserProfileProps {
     customer: Customer
@@ -36,7 +37,9 @@ export default function UserProfile({ customer }: UserProfileProps) {
                     </div>
                 </div>
                 <div className={style.topRight}>
-                    <button className={style.logout}>Log Out</button>
+                    <Link className={style.logout} href='/logout'>
+                        Log Out
+                    </Link>
                     <button className={style.delete}>Delete Account</button>
                 </div>
             </div>

@@ -5,12 +5,7 @@ import * as Yup from 'yup'
 
 import { ReactElement, useEffect } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import {
-    faCheck,
-    faCheckCircle,
-    faXmark,
-    faXmarkCircle
-} from '@fortawesome/free-solid-svg-icons'
+import { faCheckCircle, faXmarkCircle } from '@fortawesome/free-solid-svg-icons'
 
 // FIELDS TO VERIFY IF THEY WERE TOUCHED
 const fieldsTouched: { [key: string]: string[] } = {
@@ -44,21 +39,27 @@ const requiredFields: { [key: string]: { [key: string]: any } } = {
 const requiredValidation: { [key: string]: any } = {
     username: {
         username: Yup.string()
+            .required('Enter your username')
+            .min(8, 'At least 8 characters')
+            .max(16, 'Maximum 16 characters')
             .matches(
-                /^[a-záéíóúñ\d]+$/i,
+                /^[a-z\d]+$/i,
                 'Your username can only contain letters and numbers'
             )
-            .required('Enter your username')
     },
     email: {
         password: Yup.string().required('Enter your password'),
-        email: Yup.string().email().required('Enter a new email')
+        email: Yup.string()
+            .email()
+            .required('Enter a new email')
+            .max(255, 'Maximum 255 characters')
     },
     password: {
         password: Yup.string().required('Enter your current password'),
         newPass: Yup.string()
             .required('Enter a new password')
             .min(10, 'At least 10 characters')
+            .max(64, 'Maximum 64 characters')
             .matches(
                 /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[^A-Za-z\d]).+$/,
                 'Password must contain at least one uppercase letter, one lowercase letter, one digit, and one special character'
@@ -71,10 +72,18 @@ const requiredValidation: { [key: string]: any } = {
     },
     phone: { phone: Yup.string().required('Enter a new phone number') },
     countrycity: {
-        country: Yup.string().required('Enter a new country'),
-        city: Yup.string().required('Enter a new city')
+        country: Yup.string()
+            .required('Enter a new country')
+            .max(255, 'Maximum 255 characters'),
+        city: Yup.string()
+            .required('Enter a new city')
+            .max(255, 'Maximum 255 characters')
     },
-    address: { address: Yup.string().required('Enter a new address') },
+    address: {
+        address: Yup.string()
+            .required('Enter a new address')
+            .max(255, 'Maximum 255 characters')
+    },
     firstname: {
         firstname: Yup.string()
             .matches(
@@ -82,6 +91,7 @@ const requiredValidation: { [key: string]: any } = {
                 'Your name can only contain consesutive letters'
             )
             .required('Enter your first name')
+            .max(255, 'Maximum 255 characters')
     },
     lastname: {
         lastname: Yup.string()
@@ -90,8 +100,19 @@ const requiredValidation: { [key: string]: any } = {
                 'Your name can only contain consesutive letters'
             )
             .required('Enter your last name')
+            .max(255, 'Maximum 255 characters')
     },
-    birthdate: { birthdate: Yup.date().required('Enter your birthdate') },
+    birthdate: {
+        birthdate: Yup.date()
+            .required('Enter your birthdate')
+            .test('age', 'You must be at least 18 years old', function (value) {
+                const currentDate = new Date()
+                const birthdate = new Date(value)
+                const age = currentDate.getFullYear() - birthdate.getFullYear()
+                const isAdult = age >= 18
+                return isAdult
+            })
+    },
     gender: { gender: Yup.string().required('Select your gender') }
 }
 
