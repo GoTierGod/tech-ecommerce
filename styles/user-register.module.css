@@ -1,0 +1,107 @@
+.wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    width: 100%;
+    max-width: 1200px;
+}
+
+.wrapper > div {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+
+    padding: 3rem;
+    width: 100%;
+    max-width: 450px;
+
+    background: var(--white);
+
+    border-radius: 4px;
+}
+
+.wrapper h1 {
+    padding-bottom: 1rem;
+
+    font-size: 1.5rem;
+    font-weight: 400;
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+
+    width: 100%;
+
+    background: var(--white);
+    color: var(--gray);
+
+    border-radius: 4px;
+}
+
+.options {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+
+    padding-top: 1rem;
+}
+
+.options :where(button, a) {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    padding: 0.5rem 0.75rem;
+
+    background: var(--gray);
+    color: var(--white);
+
+    font-size: 1rem;
+    font-weight: 375;
+    font-family: inherit;
+
+    text-align: center;
+
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.options button[type='submit'] {
+    background: var(--main);
+}
+
+.inputField {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+
+    width: 100%;
+}
+
+.inputField label {
+    font-size: 1.25rem;
+    font-weight: 400;
+}
+
+.inputField input {
+    padding: 0.5rem 0.75rem;
+
+    background: var(--gray);
+    color: var(--white);
+
+    font-weight: 375;
+    font-size: 1rem;
+    font-family: inherit;
+
+    border: 2px solid var(--gray);
+    border-radius: 4px;
+}
