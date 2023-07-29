@@ -35,9 +35,16 @@ export default function UserRegister() {
                 body: JSON.stringify(values)
             })
 
-            if (res.status === 200 || res.status === 201) {
-                console.log(`${res.status} ${res.statusText}`)
+            if (res.ok) {
+                console.log(
+                    `${res.status} ${res.statusText} = Created and logged in`
+                )
                 router.replace('/')
+            } else if (res.status === 201) {
+                console.log(
+                    `${res.status} ${res.statusText} = Created, please logged in`
+                )
+                router.replace('/login')
             } else console.log('Failed')
         },
         validationSchema: Yup.object({
