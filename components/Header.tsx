@@ -75,17 +75,17 @@ export default function Header({ categories, user }: HeaderProps) {
         }
     }, [path, dropdownMenuRef, toggleDropdownMenu])
 
-    useEffect(() => {
-        if (user && !Cookies.get('authTokens')) router.refresh()
+    // useEffect(() => {
+    //     if (user && !Cookies.get('authTokens')) router.refresh()
 
-        if (!user && Cookies.get('authTokens')) {
-            ;(async () => {
-                const res = await fetch('/api/auth/refresh', { method: 'post' })
-                if (res.ok) router.refresh()
-            })()
-        }
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [path])
+    //     if (!user && Cookies.get('authTokens')) {
+    //         ;(async () => {
+    //             const res = await fetch('/api/auth/refresh', { method: 'post' })
+    //             if (res.ok) router.refresh()
+    //         })()
+    //     }
+    //     // eslint-disable-next-line react-hooks/exhaustive-deps
+    // }, [path])
 
     return (
         <header className={style.header}>

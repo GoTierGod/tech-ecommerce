@@ -6,7 +6,7 @@ import { redirect } from 'next/navigation'
 export default async function Profile() {
     const user: CustomerData = await getUser()
 
-    if (!user) return redirect('/')
+    if (!user) redirect('/api/auth/ref?path=profile')
     else
         return (
             <main>
