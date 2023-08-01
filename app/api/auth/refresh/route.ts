@@ -5,12 +5,12 @@ import { NextRequest, NextResponse } from 'next/server'
 import { UserTokens } from '../login/route'
 
 export async function GET(req: NextRequest) {
-    console.log('REFRESHING...')
     // PATH TO REDIRECT
     const { searchParams } = new URL(req.url)
     const path = searchParams.get('path')
     const auth = searchParams.get('auth')
     if (!path) redirect('/')
+    console.log('REFRESHING... ' + path)
 
     // USER AUTH TOKENS STORED AS COOKIES
     const authTokens = cookies().get('authTokens')
@@ -39,14 +39,14 @@ export async function GET(req: NextRequest) {
         if (res.ok) {
             const data = await res.json()
             cookies().set('authTokens', JSON.stringify(data))
-            if (Boolean(Number(auth))) redirect(`/${path}`)
+            if (Boolean(Number(auth))) redirect(`${path}`)
             else redirect('/')
         }
         // OTHERWISE  DELETE AUTH TOKENS COOKIE AND REDIRECT
         else {
             cookies().delete('authTokens')
             if (Boolean(Number(auth))) redirect(`/login`)
-            else redirect(`/${path}`)
+            else redirect(`${path}`)
         }
     }
 
@@ -57,6 +57,6 @@ export async function GET(req: NextRequest) {
             cookies().set('authTokens', JSON.stringify(data))
         } else cookies().delete('authTokens')
 
-        redirect(`/${path}`)
+        redirect(`${path}`)
     }
 }
