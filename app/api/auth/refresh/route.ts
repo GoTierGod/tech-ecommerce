@@ -18,42 +18,45 @@ export async function GET(req: NextRequest) {
 
     // CHECK FOR A VALID REFRESH TOKEN
     const userTokens: UserTokens = JSON.parse(authTokens.value)
-    if (userTokens?.refresh) {
-        // POST REQUEST TO REFRESH TOKENS
-        const res = await fetch(`${apiUrl}/api/token/refresh/`, {
-            method: 'post',
-            cache: 'no-cache',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({ refresh: userTokens.refresh })
-        })
+    if (!userTokens.refresh) redirect('/')
 
-        // IF AUTHENTICATION MATTERS
-        if (path) {
-            // IF THE REFRESH TOKEN WAS VALID, SET THE NEW AUTH TOKENS COOKIE AND REDIRECT
-            if (res.ok) {
-                const data = await res.json()
-                cookies().set('authTokens', JSON.stringify(data))
-                if (Boolean(auth)) redirect(`/${path}`)
-                else redirect('/')
-            }
-            // OTHERWISE  DELETE AUTH TOKENS COOKIE AND REDIRECT
-            else {
-                cookies().delete('authTokens')
-                if (Boolean(auth)) redirect(`/login`)
-                else redirect(`/${path}`)
-            }
+    // POST REQUEST TO REFRESH TOKENS
+    const res = await fetch(`${apiUrl}/api/token/refresh/`, {
+        method: 'post',
+        cache: 'no-cache',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ refresh: userTokens.refresh })
+    })
+
+    // IF AUTHENTICATION MATTERS
+    if (auth) {
+        // CHECK FOR AN INVALID AUTH PARAMETER
+        if (!['0', '1'].includes(auth)) redirect('/')
+
+        // IF THE REFRESH TOKEN WAS VALID, SET THE NEW AUTH TOKENS COOKIE AND REDIRECT
+        if (res.ok) {
+            const data = await res.json()
+            cookies().set('authTokens', JSON.stringify(data))
+            if (Boolean(Number(auth))) redirect(`/${path}`)
+            else redirect('/')
         }
-
-        // IF AUTHENTICATION DOESN'T MATTER
+        // OTHERWISE  DELETE AUTH TOKENS COOKIE AND REDIRECT
         else {
-            if (res.ok) {
-                const data = await res.json()
-                cookies().set('authTokens', JSON.stringify(data))
-            } else cookies().delete('authTokens')
-
-            redirect(`/${path}`)
+            cookies().delete('authTokens')
+            if (Boolean(Number(auth))) redirect(`/login`)
+            else redirect(`/${path}`)
         }
+    }
+
+    // IF AUTHENTICATION DOESN'T MATTER
+    else {
+        if (res.ok) {
+            const data = await res.json()
+            cookies().set('authTokens', JSON.stringify(data))
+        } else cookies().delete('authTokens')
+
+        redirect(`/${path}`)
     }
 }
