@@ -23,7 +23,7 @@ export default async function RootLayout({
         `https://ft-drf-api.vercel.app/api/categories`
     )
 
-    let user: CustomerData = await getUser()
+    const user: CustomerData = await getUser()
 
     return (
         <html lang='en'>

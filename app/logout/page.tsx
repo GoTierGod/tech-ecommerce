@@ -9,7 +9,7 @@ import { CustomerData } from '@/types/users'
 export default async function Logout() {
     const user: CustomerData = await getUser()
 
-    if (!user) redirect('/')
+    if (!user) redirect('/api/auth/refresh?path=logout&auth=true')
     else
         return (
             <main className={style.logout}>
