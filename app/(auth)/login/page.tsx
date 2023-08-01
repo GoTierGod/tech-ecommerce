@@ -1,6 +1,6 @@
 import style from './page.module.css'
 import { redirect } from 'next/navigation'
-import LoginForm from '@/components/LoginForm'
+import UserLogin from '@/components/UserLogin'
 import { getUser } from '@/helpers/getUser'
 import { CustomerData } from '@/types/users'
 
@@ -11,9 +11,7 @@ export default async function Login() {
     else
         return (
             <main>
-                <div className={style.wrapper}>
-                    <LoginForm />
-                </div>
+                <UserLogin />
             </main>
         )
 }
