@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from 'react'
 
-export default function LogoutHandler() {
+export default function UserLogout() {
     const [state, setState] = useState('Logging out...')
 
     useEffect(() => {
