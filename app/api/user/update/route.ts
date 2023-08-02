@@ -1,6 +1,6 @@
 import { cookies } from 'next/dist/client/components/headers'
 import { NextRequest, NextResponse } from 'next/server'
-import { UserTokens } from '../../auth/login/route'
+import { APIResponse, UserTokens } from '../../auth/login/route'
 import { apiUrl } from '@/helpers/apiUrl'
 
 export async function POST(req: NextRequest) {
@@ -44,18 +44,29 @@ export async function POST(req: NextRequest) {
                     .map(entry => [entry.key, entry.value as string])
             )
 
-            // const res = await fetch(`${apiUrl}/api/edit/`, {
-            //     method: 'post',
-            //     headers: {
-            //         'Content-Type': 'application/json',
-            //         Authorization: `Bearer ${userTokens.access}`
-            //     },
-            //     body: JSON.stringify(updatedFields)
-            // })
+            const res = await fetch(`${apiUrl}/api/edit/`, {
+                method: 'post',
+                headers: {
+                    'Content-Type': 'application/json',
+                    Authorization: `Bearer ${userTokens.access}`
+                },
+                body: JSON.stringify(updatedFields)
+            })
 
-            return NextResponse.json({}, { status: 200 })
+            if (res.ok) {
+                const apiResponse: APIResponse = await res.json()
+                return NextResponse.json(apiResponse, { status: 200 })
+            }
+
+            const errorResponse: APIResponse = await res.json()
+            return NextResponse.json(errorResponse, { status: res.status })
         } catch (err) {
-            return NextResponse.json({}, { status: 401 })
+            console.log(err)
+
+            return NextResponse.json(
+                { message: 'Something went wrong' },
+                { status: 400 }
+            )
         }
     }
 

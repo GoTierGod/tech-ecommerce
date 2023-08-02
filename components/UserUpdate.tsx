@@ -6,6 +6,7 @@ import * as Yup from 'yup'
 import { ReactElement, useEffect } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCheckCircle, faXmarkCircle } from '@fortawesome/free-solid-svg-icons'
+import { APIResponse } from '@/app/api/auth/login/route'
 
 // FIELDS TO VERIFY IF THEY WERE TOUCHED
 const fieldsTouched: { [key: string]: string[] } = {
@@ -134,10 +135,12 @@ export default function UserUpdate({ editing, fieldUpdated }: UserUpdateProps) {
 
             if (res.ok) {
                 // DO SOMETHING
+                const apiResponse: APIResponse = await res.json()
+                console.log(apiResponse.message)
                 fieldUpdated()
             } else {
-                // DO SOMEHING ELSE
-                fieldUpdated()
+                const errorResponse: APIResponse = await res.json()
+                console.log(errorResponse.message)
             }
         },
         validationSchema: Yup.object(requiredValidation[editing])

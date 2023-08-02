@@ -1,6 +1,6 @@
 import { apiUrl } from '@/helpers/apiUrl'
 import { NextRequest, NextResponse } from 'next/server'
-import { UserTokens } from '../../auth/login/route'
+import { APIResponse, UserTokens } from '../../auth/login/route'
 import { cookies } from 'next/dist/client/components/headers'
 
 export async function POST(req: NextRequest) {
@@ -12,6 +12,7 @@ export async function POST(req: NextRequest) {
         const password = body.password
         const birthdate = body.birthdate
 
+        // CREATE USER
         const res = await fetch(`${apiUrl}/api/customer/create/`, {
             method: 'post',
             headers: {
@@ -25,7 +26,8 @@ export async function POST(req: NextRequest) {
             })
         })
 
-        if (res.ok) {
+        // TRY TO LOGIN
+        if (res.status === 201) {
             const res = await fetch(`${apiUrl}/api/token/`, {
                 method: 'post',
                 headers: { 'Content-Type': 'application/json' },
@@ -40,14 +42,26 @@ export async function POST(req: NextRequest) {
 
                 cookies().set('authTokens', JSON.stringify(userTokens))
 
-                return NextResponse.json({}, { status: 200 })
+                return NextResponse.json(
+                    { message: 'Registered and logged in' },
+                    { status: 200 }
+                )
             }
 
-            return NextResponse.json({}, { status: 201 })
+            return NextResponse.json(
+                { message: 'Successfully registered' },
+                { status: 201 }
+            )
         }
 
-        return NextResponse.json({}, { status: 400 })
+        const errorResponse: APIResponse = await res.json()
+        return NextResponse.json(errorResponse, { status: res.status })
     } catch (err) {
-        return NextResponse.json({}, { status: 400 })
+        console.log(err)
+
+        return NextResponse.json(
+            { message: 'Something went wrong' },
+            { status: 400 }
+        )
     }
 }

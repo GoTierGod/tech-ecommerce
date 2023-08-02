@@ -6,6 +6,7 @@ import { useFormik } from 'formik'
 import * as Yup from 'yup'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCheckCircle, faXmarkCircle } from '@fortawesome/free-solid-svg-icons'
+import { APIResponse } from '@/app/api/auth/login/route'
 
 const fieldsTouched: string[] = [
     'username',
@@ -31,7 +32,10 @@ export default function UserLogin() {
             })
 
             if (res.ok) router.replace('/')
-            else console.log('Something went wrong')
+            else {
+                const errorResponse: APIResponse = await res.json()
+                console.log(errorResponse.message)
+            }
         },
         validationSchema: Yup.object({
             username: Yup.string()

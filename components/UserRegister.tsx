@@ -8,6 +8,7 @@ import Link from 'next/link'
 import * as Yup from 'yup'
 import { faCheckCircle, faXmarkCircle } from '@fortawesome/free-solid-svg-icons'
 import { useRouter } from 'next/navigation'
+import { APIResponse } from '@/app/api/auth/login/route'
 
 const fieldsTouched: string[] = [
     'username',
@@ -36,16 +37,17 @@ export default function UserRegister() {
             })
 
             if (res.ok) {
-                console.log(
-                    `${res.status} ${res.statusText} = Created and logged in`
-                )
+                const apiResponse: APIResponse = await res.json()
+                console.log(apiResponse.message)
                 router.replace('/')
             } else if (res.status === 201) {
-                console.log(
-                    `${res.status} ${res.statusText} = Created, please logged in`
-                )
+                const apiResponse: APIResponse = await res.json()
+                console.log(apiResponse.message)
                 router.replace('/login')
-            } else console.log('Failed')
+            } else {
+                const errorResponse: APIResponse = await res.json()
+                console.log(errorResponse.message)
+            }
         },
         validationSchema: Yup.object({
             username: Yup.string()

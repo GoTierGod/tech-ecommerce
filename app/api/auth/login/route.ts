@@ -2,6 +2,10 @@ import { apiUrl } from '@/helpers/apiUrl'
 import { cookies } from 'next/dist/client/components/headers'
 import { NextRequest, NextResponse } from 'next/server'
 
+export interface APIResponse {
+    message: string
+}
+
 export interface UserTokens {
     refresh: string
     access: string
@@ -34,11 +38,20 @@ export async function POST(req: NextRequest) {
 
             cookies().set('authTokens', JSON.stringify(userTokens))
 
-            return NextResponse.json(userTokens, { status: 200 })
+            return NextResponse.json(
+                { message: 'Successfully logged in' },
+                { status: 200 }
+            )
         }
 
-        return NextResponse.json({}, { status: 401 })
+        const errorResponse: APIResponse = await res.json()
+        return NextResponse.json(errorResponse, { status: res.status })
     } catch (err) {
-        return NextResponse.json({}, { status: 401 })
+        console.log(err)
+
+        return NextResponse.json(
+            { message: 'Something went wrong' },
+            { status: 400 }
+        )
     }
 }
