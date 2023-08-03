@@ -9,6 +9,8 @@ import * as Yup from 'yup'
 import { faCheckCircle, faXmarkCircle } from '@fortawesome/free-solid-svg-icons'
 import { useRouter } from 'next/navigation'
 import { APIResponse } from '@/app/api/auth/login/route'
+import { useState } from 'react'
+import ErrorDisplay from './ErrorDisplay'
 
 const fieldsTouched: string[] = [
     'username',
@@ -20,6 +22,9 @@ const fieldsTouched: string[] = [
 
 export default function UserRegister() {
     const router = useRouter()
+    const [err, setErr] = useState(
+        null as null | { message: string; status: number; statusText: string }
+    )
 
     const Formik = useFormik({
         initialValues: {
@@ -37,16 +42,18 @@ export default function UserRegister() {
             })
 
             if (res.ok) {
-                const apiResponse: APIResponse = await res.json()
-                console.log(apiResponse.message)
                 router.replace('/')
             } else if (res.status === 201) {
-                const apiResponse: APIResponse = await res.json()
-                console.log(apiResponse.message)
                 router.replace('/login')
             } else {
                 const errorResponse: APIResponse = await res.json()
-                console.log(errorResponse.message)
+
+                Formik.resetForm()
+                setErr({
+                    message: errorResponse.message,
+                    status: res.status,
+                    statusText: res.statusText
+                })
             }
         },
         validationSchema: Yup.object({
@@ -96,169 +103,208 @@ export default function UserRegister() {
         })
     })
 
+    const ErrorReset = () => setErr(null)
+
     return (
-        <div className={style.wrapper}>
-            <div>
-                <h1>Sign Up</h1>
-                <form className={style.form} onSubmit={Formik.handleSubmit}>
-                    <div className={style.inputField}>
-                        <label
-                            htmlFor='username'
-                            style={{
-                                color:
-                                    Object.keys(Formik.errors)[0] === 'username'
-                                        ? 'var(--danger)'
-                                        : 'var(--gray)'
-                            }}
+        <main
+            style={
+                err
+                    ? {
+                          background: 'var(--gray)',
+                          padding: '2rem',
+                          paddingTop: '99px',
+                          minHeight: '100vh',
+                          minWidth: '100%'
+                      }
+                    : {}
+            }
+        >
+            {!err ? (
+                <div className={style.wrapper}>
+                    <div>
+                        <h1>Sign Up</h1>
+                        <form
+                            className={style.form}
+                            onSubmit={Formik.handleSubmit}
                         >
-                            Username
-                        </label>
-                        <input
-                            type='text'
-                            id='username'
-                            {...Formik.getFieldProps('username')}
-                            style={{
-                                borderColor:
-                                    Object.keys(Formik.errors)[0] === 'username'
-                                        ? 'var(--danger)'
-                                        : 'var(--gray)'
-                            }}
-                        />
+                            <div className={style.inputField}>
+                                <label
+                                    htmlFor='username'
+                                    style={{
+                                        color:
+                                            Object.keys(Formik.errors)[0] ===
+                                            'username'
+                                                ? 'var(--danger)'
+                                                : 'var(--gray)'
+                                    }}
+                                >
+                                    Username
+                                </label>
+                                <input
+                                    type='text'
+                                    id='username'
+                                    {...Formik.getFieldProps('username')}
+                                    style={{
+                                        borderColor:
+                                            Object.keys(Formik.errors)[0] ===
+                                            'username'
+                                                ? 'var(--danger)'
+                                                : 'var(--gray)'
+                                    }}
+                                />
+                            </div>
+                            <div className={style.inputField}>
+                                <label
+                                    htmlFor='password'
+                                    style={{
+                                        color:
+                                            Object.keys(Formik.errors)[0] ===
+                                            'password'
+                                                ? 'var(--danger)'
+                                                : 'var(--gray)'
+                                    }}
+                                >
+                                    Password
+                                </label>
+                                <input
+                                    type='password'
+                                    id='password'
+                                    {...Formik.getFieldProps('password')}
+                                    style={{
+                                        borderColor:
+                                            Object.keys(Formik.errors)[0] ===
+                                            'password'
+                                                ? 'var(--danger)'
+                                                : 'var(--gray)'
+                                    }}
+                                />
+                            </div>
+                            <div className={style.inputField}>
+                                <label
+                                    htmlFor='confirmPassword'
+                                    style={{
+                                        color:
+                                            Object.keys(Formik.errors)[0] ===
+                                            'confirmPassword'
+                                                ? 'var(--danger)'
+                                                : 'var(--gray)'
+                                    }}
+                                >
+                                    Confirm password
+                                </label>
+                                <input
+                                    type='password'
+                                    id='confirmPassword'
+                                    {...Formik.getFieldProps('confirmPassword')}
+                                    style={{
+                                        borderColor:
+                                            Object.keys(Formik.errors)[0] ===
+                                            'confirmPassword'
+                                                ? 'var(--danger)'
+                                                : 'var(--gray)'
+                                    }}
+                                />
+                            </div>
+                            <div className={style.inputField}>
+                                <label
+                                    htmlFor='email'
+                                    style={{
+                                        color:
+                                            Object.keys(Formik.errors)[0] ===
+                                            'email'
+                                                ? 'var(--danger)'
+                                                : 'var(--gray)'
+                                    }}
+                                >
+                                    Email
+                                </label>
+                                <input
+                                    type='email'
+                                    id='email'
+                                    {...Formik.getFieldProps('email')}
+                                    style={{
+                                        borderColor:
+                                            Object.keys(Formik.errors)[0] ===
+                                            'email'
+                                                ? 'var(--danger)'
+                                                : 'var(--gray)'
+                                    }}
+                                />
+                            </div>
+                            <div className={style.inputField}>
+                                <label
+                                    htmlFor='birthdate'
+                                    style={{
+                                        color:
+                                            Object.keys(Formik.errors)[0] ===
+                                            'birthdate'
+                                                ? 'var(--danger)'
+                                                : 'var(--gray)'
+                                    }}
+                                >
+                                    Birthdate
+                                </label>
+                                <input
+                                    type='date'
+                                    id='birthdate'
+                                    {...Formik.getFieldProps('birthdate')}
+                                    style={{
+                                        borderColor:
+                                            Object.keys(Formik.errors)[0] ===
+                                            'birthdate'
+                                                ? 'var(--danger)'
+                                                : 'var(--gray)'
+                                    }}
+                                />
+                            </div>
+                            <div className={style.checking}>
+                                {fieldsTouched.find(
+                                    field =>
+                                        (
+                                            Formik.touched as {
+                                                [key: string]: string
+                                            }
+                                        )[field]
+                                ) ? (
+                                    Formik.isValid ? (
+                                        <>
+                                            <FontAwesomeIcon
+                                                icon={faCheckCircle}
+                                                color='var(--main)'
+                                            />
+                                            {'Everything OK!'}
+                                        </>
+                                    ) : (
+                                        <>
+                                            <FontAwesomeIcon
+                                                icon={faXmarkCircle}
+                                                color='var(--danger)'
+                                            />
+                                            {
+                                                Object.values(
+                                                    Formik.errors
+                                                )[0] as string
+                                            }
+                                        </>
+                                    )
+                                ) : (
+                                    ''
+                                )}
+                            </div>
+                            <div className={style.options}>
+                                <button type='submit'>Sign Up</button>
+                                <Link href='/'>Back to Home</Link>
+                            </div>
+                        </form>
                     </div>
-                    <div className={style.inputField}>
-                        <label
-                            htmlFor='password'
-                            style={{
-                                color:
-                                    Object.keys(Formik.errors)[0] === 'password'
-                                        ? 'var(--danger)'
-                                        : 'var(--gray)'
-                            }}
-                        >
-                            Password
-                        </label>
-                        <input
-                            type='password'
-                            id='password'
-                            {...Formik.getFieldProps('password')}
-                            style={{
-                                borderColor:
-                                    Object.keys(Formik.errors)[0] === 'password'
-                                        ? 'var(--danger)'
-                                        : 'var(--gray)'
-                            }}
-                        />
-                    </div>
-                    <div className={style.inputField}>
-                        <label
-                            htmlFor='confirmPassword'
-                            style={{
-                                color:
-                                    Object.keys(Formik.errors)[0] ===
-                                    'confirmPassword'
-                                        ? 'var(--danger)'
-                                        : 'var(--gray)'
-                            }}
-                        >
-                            Confirm password
-                        </label>
-                        <input
-                            type='password'
-                            id='confirmPassword'
-                            {...Formik.getFieldProps('confirmPassword')}
-                            style={{
-                                borderColor:
-                                    Object.keys(Formik.errors)[0] ===
-                                    'confirmPassword'
-                                        ? 'var(--danger)'
-                                        : 'var(--gray)'
-                            }}
-                        />
-                    </div>
-                    <div className={style.inputField}>
-                        <label
-                            htmlFor='email'
-                            style={{
-                                color:
-                                    Object.keys(Formik.errors)[0] === 'email'
-                                        ? 'var(--danger)'
-                                        : 'var(--gray)'
-                            }}
-                        >
-                            Email
-                        </label>
-                        <input
-                            type='email'
-                            id='email'
-                            {...Formik.getFieldProps('email')}
-                            style={{
-                                borderColor:
-                                    Object.keys(Formik.errors)[0] === 'email'
-                                        ? 'var(--danger)'
-                                        : 'var(--gray)'
-                            }}
-                        />
-                    </div>
-                    <div className={style.inputField}>
-                        <label
-                            htmlFor='birthdate'
-                            style={{
-                                color:
-                                    Object.keys(Formik.errors)[0] ===
-                                    'birthdate'
-                                        ? 'var(--danger)'
-                                        : 'var(--gray)'
-                            }}
-                        >
-                            Birthdate
-                        </label>
-                        <input
-                            type='date'
-                            id='birthdate'
-                            {...Formik.getFieldProps('birthdate')}
-                            style={{
-                                borderColor:
-                                    Object.keys(Formik.errors)[0] ===
-                                    'birthdate'
-                                        ? 'var(--danger)'
-                                        : 'var(--gray)'
-                            }}
-                        />
-                    </div>
-                    <div className={style.checking}>
-                        {fieldsTouched.find(
-                            field =>
-                                (Formik.touched as { [key: string]: string })[
-                                    field
-                                ]
-                        ) ? (
-                            Formik.isValid ? (
-                                <>
-                                    <FontAwesomeIcon
-                                        icon={faCheckCircle}
-                                        color='var(--main)'
-                                    />
-                                    {'Everything OK!'}
-                                </>
-                            ) : (
-                                <>
-                                    <FontAwesomeIcon
-                                        icon={faXmarkCircle}
-                                        color='var(--danger)'
-                                    />
-                                    {Object.values(Formik.errors)[0] as string}
-                                </>
-                            )
-                        ) : (
-                            ''
-                        )}
-                    </div>
-                    <div className={style.options}>
-                        <button type='submit'>Sign Up</button>
-                        <Link href='/'>Back to Home</Link>
-                    </div>
-                </form>
-            </div>
-        </div>
+                </div>
+            ) : (
+                <ErrorDisplay
+                    {...err}
+                    action={ErrorReset}
+                    actionText='Try again'
+                />
+            )}
+        </main>
     )
 }

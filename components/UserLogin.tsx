@@ -39,7 +39,6 @@ export default function UserLogin() {
             if (res.ok) router.replace('/')
             else {
                 const errorResponse: APIResponse = await res.json()
-                console.log(errorResponse.message)
 
                 Formik.resetForm()
                 setErr({
@@ -179,7 +178,7 @@ export default function UserLogin() {
                 <ErrorDisplay
                     {...err}
                     action={ErrorReset}
-                    actionText='Try gain'
+                    actionText='Try again'
                 />
             )}
         </main>
