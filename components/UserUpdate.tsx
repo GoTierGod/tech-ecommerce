@@ -120,9 +120,14 @@ const requiredValidation: { [key: string]: any } = {
 interface UserUpdateProps {
     editing: string
     fieldUpdated: Function
+    setErr: Function
 }
 
-export default function UserUpdate({ editing, fieldUpdated }: UserUpdateProps) {
+export default function UserUpdate({
+    editing,
+    fieldUpdated,
+    setErr
+}: UserUpdateProps) {
     // FORM VALIDATION
     const Formik = useFormik({
         initialValues: requiredFields[editing],
@@ -135,12 +140,17 @@ export default function UserUpdate({ editing, fieldUpdated }: UserUpdateProps) {
 
             if (res.ok) {
                 // DO SOMETHING
-                const apiResponse: APIResponse = await res.json()
-                console.log(apiResponse.message)
                 fieldUpdated()
             } else {
                 const errorResponse: APIResponse = await res.json()
                 console.log(errorResponse.message)
+
+                Formik.resetForm()
+                setErr({
+                    message: errorResponse.message,
+                    status: res.status,
+                    statusText: res.statusText
+                })
             }
         },
         validationSchema: Yup.object(requiredValidation[editing])

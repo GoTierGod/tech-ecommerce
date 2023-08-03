@@ -7,10 +7,5 @@ export default async function Profile() {
     const user: CustomerData = await getUser()
 
     if (!user) redirect('/api/auth/refresh?path=/profile&auth=1')
-    else
-        return (
-            <main>
-                <UserProfile customer={user} />
-            </main>
-        )
+    else return <UserProfile customer={user} />
 }
