@@ -44,8 +44,11 @@ export async function POST(req: NextRequest) {
             )
         }
 
-        const errorResponse: APIResponse = await res.json()
-        return NextResponse.json(errorResponse, { status: res.status })
+        const errorResponse: { detail: string } = await res.json()
+        return NextResponse.json(
+            { message: errorResponse.detail },
+            { status: res.status }
+        )
     } catch (err) {
         console.log(err)
 
