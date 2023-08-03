@@ -44,7 +44,7 @@ export async function POST(req: NextRequest) {
                     .map(entry => [entry.key, entry.value as string])
             )
 
-            const res = await fetch(`${apiUrl}/api/edit/`, {
+            const res = await fetch(`${apiUrl}/api/customer/update/`, {
                 method: 'post',
                 headers: {
                     'Content-Type': 'application/json',
@@ -70,5 +70,5 @@ export async function POST(req: NextRequest) {
         }
     }
 
-    return NextResponse.json({}, { status: 401 })
+    return NextResponse.json({ message: 'Unauthorized' }, { status: 401 })
 }

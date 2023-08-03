@@ -143,7 +143,6 @@ export default function UserUpdate({
                 fieldUpdated()
             } else {
                 const errorResponse: APIResponse = await res.json()
-                console.log(errorResponse.message)
 
                 Formik.resetForm()
                 setErr({
