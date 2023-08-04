@@ -8,6 +8,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCheckCircle, faXmarkCircle } from '@fortawesome/free-solid-svg-icons'
 import { APIResponse } from '@/app/api/auth/login/route'
 import { Customer } from '@/types/users'
+import { useRouter } from 'next/navigation'
 
 // FIELDS TO VERIFY IF THEY WERE TOUCHED
 const fieldsTouched: { [key: string]: string[] } = {
@@ -50,6 +51,8 @@ export default function UserUpdate({
     setErr,
     customer
 }: UserUpdateProps) {
+    const router = useRouter()
+
     // REQUIRED FORM VALIDATION
     const requiredValidation: { [key: string]: any } = {
         username: {
@@ -206,6 +209,7 @@ export default function UserUpdate({
             })
 
             if (res.ok) {
+                router.refresh()
                 fieldUpdated()
             } else {
                 const errorResponse: APIResponse = await res.json()
