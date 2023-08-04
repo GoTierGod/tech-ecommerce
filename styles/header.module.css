@@ -288,6 +288,7 @@
     display: none;
     justify-content: center;
     align-items: center;
+    gap: 1rem;
 
     padding: 0.5rem 0.75rem;
 
@@ -299,6 +300,13 @@
 .logout svg,
 .cart svg {
     height: 1rem;
+}
+
+:where(.logout, .cart) span {
+    font-size: 1rem;
+    font-weight: 375;
+
+    white-space: nowrap;
 }
 
 /* ------------------------- MEDIA QUERIES -------------------------  */

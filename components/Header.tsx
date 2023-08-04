@@ -11,7 +11,8 @@ import {
     faCartShopping,
     faSearch,
     faHeart,
-    faSignOut
+    faSignOut,
+    faSignIn
 } from '@fortawesome/free-solid-svg-icons'
 import { FormEvent, useCallback, useEffect, useRef, useState } from 'react'
 import { usePathname, useRouter } from 'next/navigation'
@@ -156,18 +157,22 @@ export default function Header({ categories, user }: HeaderProps) {
                 <Link
                     href={user ? '/profile' : '/login'}
                     className={style.profile}
-                    aria-label='Profile'
                 >
-                    <span>{user ? user.user.username : 'Log in'}</span>
                     <FontAwesomeIcon icon={faCircleUser} />
+                    <span>{user ? user.user.username : 'Log in'}</span>
                 </Link>
-                {user && (
+                {user ? (
                     <Link
                         href='/logout'
                         className={style.logout}
                         aria-label='Log Out'
                     >
                         <FontAwesomeIcon icon={faSignOut} />
+                    </Link>
+                ) : (
+                    <Link href='/register' className={style.logout}>
+                        <FontAwesomeIcon icon={faSignIn} />
+                        <span>Sign Up</span>
                     </Link>
                 )}
             </div>
@@ -178,10 +183,15 @@ export default function Header({ categories, user }: HeaderProps) {
                             <FontAwesomeIcon icon={faCircleUser} />
                             <span>{user ? user.user.username : 'Log in'}</span>
                         </Link>
-                        {user && (
+                        {user ? (
                             <Link href='/logout'>
                                 <FontAwesomeIcon icon={faSignOut} />
                                 <span>Log Out</span>
+                            </Link>
+                        ) : (
+                            <Link href='/register'>
+                                <FontAwesomeIcon icon={faSignIn} />
+                                <span>Sign Up</span>
                             </Link>
                         )}
                     </div>
