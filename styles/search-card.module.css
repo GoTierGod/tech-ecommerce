@@ -108,6 +108,7 @@
     color: var(--white);
 
     font-size: 0.75rem;
+    white-space: nowrap;
 
     border-radius: 4px;
 }
@@ -125,6 +126,7 @@
     color: var(--white);
 
     font-size: 0.75rem;
+    white-space: nowrap;
 
     border-radius: 4px;
 }
@@ -141,6 +143,7 @@
 .offer > span:nth-child(1) {
     font-size: 0.75rem;
     font-weight: 375;
+    white-space: nowrap;
 
     text-decoration: line-through;
 }
@@ -148,6 +151,7 @@
 .offer > span:nth-child(2) {
     font-size: 1.25rem;
     font-weight: 375;
+    white-space: nowrap;
 }
 
 .offer > span:nth-child(3) {

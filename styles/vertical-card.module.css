@@ -58,10 +58,15 @@
 /* ------------------------- OFFER -------------------------  */
 .offer {
     display: flex;
-    flex-direction: column;
+    flex-wrap: wrap;
+    flex-direction: row;
     justify-content: space-between;
     align-items: flex-start;
-    gap: 0.25rem;
+    gap: 0.5rem;
+}
+
+.offer span {
+    white-space: nowrap;
 }
 
 .offer div {
@@ -128,6 +133,7 @@
     color: var(--white);
 
     font-size: 0.75rem;
+    white-space: nowrap;
 
     border-radius: 4px;
 }
@@ -153,11 +159,6 @@
 @media screen and (min-width: 375px) {
     .image img {
         max-width: 125px;
-    }
-
-    .offer {
-        flex-direction: row;
-        gap: 0.5rem;
     }
 }
 

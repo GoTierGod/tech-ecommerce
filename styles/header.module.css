@@ -81,8 +81,8 @@
     border-radius: 4px;
 }
 
-.dropdownMenu > a svg {
-    height: 1.25rem;
+.dropdownMenu div a span {
+    white-space: nowrap;
 }
 
 .dropdownMenu ul {
@@ -275,6 +275,8 @@
 .profile span {
     font-size: 1rem;
     font-weight: 375;
+
+    white-space: nowrap;
 }
 
 .profile svg {
