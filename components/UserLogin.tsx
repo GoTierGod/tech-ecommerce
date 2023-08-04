@@ -56,7 +56,7 @@ export default function UserLogin() {
             password: Yup.string()
                 .required('Enter your password')
                 .min(10, 'At least 10 characters')
-                .max(64, 'Maximum 64 characters')
+                .max(32, 'Maximum 32 characters')
         })
     })
 

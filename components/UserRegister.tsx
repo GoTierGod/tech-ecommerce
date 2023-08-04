@@ -68,7 +68,7 @@ export default function UserRegister() {
             password: Yup.string()
                 .required('Create a password')
                 .min(10, 'At least 10 characters')
-                .max(64, 'Maximum 64 characters')
+                .max(32, 'Maximum 32 characters')
                 .matches(
                     /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[^A-Za-z\d]).+$/,
                     'Password must contain at least one uppercase letter, one lowercase letter, one digit, and one special character'
