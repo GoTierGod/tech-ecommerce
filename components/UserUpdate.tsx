@@ -24,20 +24,6 @@ const fieldsTouched: { [key: string]: string[] } = {
     gender: ['gender']
 }
 
-// REQUIRED FORM FIELDS
-const requiredFields: { [key: string]: { [key: string]: any } } = {
-    username: { username: '' },
-    email: { password: '', email: '' },
-    password: { password: '', newPass: '', confirmNewPass: '' },
-    phone: { phone: '' },
-    countrycity: { country: '', city: '' },
-    address: { address: '' },
-    firstname: { firstname: '' },
-    lastname: { lastname: '' },
-    birthdate: { birthdate: '' },
-    gender: { gender: '' }
-}
-
 interface UserUpdateProps {
     editing: string
     fieldUpdated: Function
@@ -52,6 +38,20 @@ export default function UserUpdate({
     customer
 }: UserUpdateProps) {
     const router = useRouter()
+
+    // REQUIRED FORM FIELDS
+    const requiredFields: { [key: string]: { [key: string]: any } } = {
+        username: { username: '' },
+        email: { password: '', email: '' },
+        password: { password: '', newPass: '', confirmNewPass: '' },
+        phone: { phone: '' },
+        countrycity: { country: '', city: '' },
+        address: { address: '' },
+        firstname: { firstname: '' },
+        lastname: { lastname: '' },
+        birthdate: { birthdate: customer.birthdate },
+        gender: { gender: customer.gender }
+    }
 
     // REQUIRED FORM VALIDATION
     const requiredValidation: { [key: string]: any } = {
