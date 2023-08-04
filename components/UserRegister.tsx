@@ -83,7 +83,7 @@ export default function UserRegister() {
                     }
                 ),
             email: Yup.string()
-                .email()
+                .email('Enter a valid email')
                 .required('Enter an email')
                 .max(255, 'Maximum 255 characters'),
             birthdate: Yup.date()

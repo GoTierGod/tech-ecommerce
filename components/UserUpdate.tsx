@@ -72,7 +72,7 @@ export default function UserUpdate({
         email: {
             password: Yup.string().required('Enter your password'),
             email: Yup.string()
-                .email()
+                .email('Enter a valid email')
                 .required('Enter a new email')
                 .max(255, 'Maximum 255 characters')
                 .not(
