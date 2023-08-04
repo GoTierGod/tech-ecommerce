@@ -174,6 +174,7 @@ export default function UserProfile({ customer }: UserProfileProps) {
                             editing={updating}
                             fieldUpdated={fieldUpdated}
                             setErr={setErr}
+                            customer={customer}
                         />
                     )}
                     <div className={style.bottom}>

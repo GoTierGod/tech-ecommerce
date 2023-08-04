@@ -3,10 +3,11 @@ import style from '../styles/user-update.module.css'
 import { useFormik } from 'formik'
 import * as Yup from 'yup'
 
-import { ReactElement, useEffect } from 'react'
+import { ReactElement } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCheckCircle, faXmarkCircle } from '@fortawesome/free-solid-svg-icons'
 import { APIResponse } from '@/app/api/auth/login/route'
+import { Customer } from '@/types/users'
 
 // FIELDS TO VERIFY IF THEY WERE TOUCHED
 const fieldsTouched: { [key: string]: string[] } = {
@@ -36,98 +37,164 @@ const requiredFields: { [key: string]: { [key: string]: any } } = {
     gender: { gender: '' }
 }
 
-// REQUIRED FORM VALIDATION
-const requiredValidation: { [key: string]: any } = {
-    username: {
-        username: Yup.string()
-            .required('Enter your username')
-            .min(8, 'At least 8 characters')
-            .max(16, 'Maximum 16 characters')
-            .matches(
-                /^[a-z\d]+$/i,
-                'Your username can only contain letters and numbers'
-            )
-    },
-    email: {
-        password: Yup.string().required('Enter your password'),
-        email: Yup.string()
-            .email()
-            .required('Enter a new email')
-            .max(255, 'Maximum 255 characters')
-    },
-    password: {
-        password: Yup.string().required('Enter your current password'),
-        newPass: Yup.string()
-            .required('Enter a new password')
-            .min(10, 'At least 10 characters')
-            .max(32, 'Maximum 32 characters')
-            .matches(
-                /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[^A-Za-z\d]).+$/,
-                'Password must contain at least one uppercase letter, one lowercase letter, one digit, and one special character'
-            ),
-        confirmNewPass: Yup.string()
-            .required('Please confirm your password')
-            .test('passwords-match', 'Passwords must match', function (value) {
-                return this.parent.newPass === value
-            })
-    },
-    phone: { phone: Yup.string().required('Enter a new phone number') },
-    countrycity: {
-        country: Yup.string()
-            .required('Enter a new country')
-            .max(255, 'Maximum 255 characters'),
-        city: Yup.string()
-            .required('Enter a new city')
-            .max(255, 'Maximum 255 characters')
-    },
-    address: {
-        address: Yup.string()
-            .required('Enter a new address')
-            .max(255, 'Maximum 255 characters')
-    },
-    firstname: {
-        firstname: Yup.string()
-            .matches(
-                /^[a-záéíóúñ]+$/i,
-                'Your name can only contain consesutive letters'
-            )
-            .required('Enter your first name')
-            .max(255, 'Maximum 255 characters')
-    },
-    lastname: {
-        lastname: Yup.string()
-            .matches(
-                /^[a-záéíóúñ]+$/i,
-                'Your name can only contain consesutive letters'
-            )
-            .required('Enter your last name')
-            .max(255, 'Maximum 255 characters')
-    },
-    birthdate: {
-        birthdate: Yup.date()
-            .required('Enter your birthdate')
-            .test('age', 'You must be at least 18 years old', function (value) {
-                const currentDate = new Date()
-                const birthdate = new Date(value)
-                const age = currentDate.getFullYear() - birthdate.getFullYear()
-                const isAdult = age >= 18
-                return isAdult
-            })
-    },
-    gender: { gender: Yup.string().required('Select your gender') }
-}
-
 interface UserUpdateProps {
     editing: string
     fieldUpdated: Function
     setErr: Function
+    customer: Customer
 }
 
 export default function UserUpdate({
     editing,
     fieldUpdated,
-    setErr
+    setErr,
+    customer
 }: UserUpdateProps) {
+    // REQUIRED FORM VALIDATION
+    const requiredValidation: { [key: string]: any } = {
+        username: {
+            username: Yup.string()
+                .required('Enter your username')
+                .min(8, 'At least 8 characters')
+                .max(16, 'Maximum 16 characters')
+                .matches(
+                    /^[a-z\d]+$/i,
+                    'Your username can only contain letters and numbers'
+                )
+                .not(
+                    [customer.user.username],
+                    'Username must be different from your current username'
+                )
+        },
+        email: {
+            password: Yup.string().required('Enter your password'),
+            email: Yup.string()
+                .email()
+                .required('Enter a new email')
+                .max(255, 'Maximum 255 characters')
+                .not(
+                    [customer.user.email],
+                    'Email must be different from your current email'
+                )
+        },
+        password: {
+            password: Yup.string().required('Enter your current password'),
+            newPass: Yup.string()
+                .required('Enter a new password')
+                .min(10, 'At least 10 characters')
+                .max(32, 'Maximum 32 characters')
+                .matches(
+                    /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[^A-Za-z\d]).+$/,
+                    'Password must contain at least one uppercase letter, one lowercase letter, one digit, and one special character'
+                ),
+            confirmNewPass: Yup.string()
+                .required('Please confirm your password')
+                .test(
+                    'passwords-match',
+                    'Passwords must match',
+                    function (value) {
+                        return this.parent.newPass === value
+                    }
+                )
+        },
+        phone: {
+            phone: Yup.string()
+                .required('Enter a new phone number')
+                .not(
+                    [customer.phone],
+                    'Phone must be different from your current phone'
+                )
+        },
+        countrycity: {
+            country: Yup.string()
+                .required('Enter a new country')
+                .max(255, 'Maximum 255 characters')
+                .not(
+                    [customer.country],
+                    'Country must be different from your current country'
+                ),
+            city: Yup.string()
+                .required('Enter a new city')
+                .max(255, 'Maximum 255 characters')
+                .not(
+                    [customer.city],
+                    'City must be different from your current city'
+                )
+        },
+        address: {
+            address: Yup.string()
+                .required('Enter a new address')
+                .max(255, 'Maximum 255 characters')
+                .not(
+                    [customer.address],
+                    'Address must be different from your current address'
+                )
+        },
+        firstname: {
+            firstname: Yup.string()
+                .matches(
+                    /^[a-záéíóúñ]+$/i,
+                    'Your name can only contain consesutive letters'
+                )
+                .required('Enter your first name')
+                .max(255, 'Maximum 255 characters')
+                .not(
+                    [customer.user.first_name],
+                    'Name must be different from your current name'
+                )
+        },
+        lastname: {
+            lastname: Yup.string()
+                .matches(
+                    /^[a-záéíóúñ]+$/i,
+                    'Your name can only contain consesutive letters'
+                )
+                .required('Enter your last name')
+                .max(255, 'Maximum 255 characters')
+                .not(
+                    [customer.user.username],
+                    'Last name must be different from your current last name'
+                )
+        },
+        birthdate: {
+            birthdate: Yup.date()
+                .required('Enter your birthdate')
+                .test(
+                    'age',
+                    'You must be at least 18 years old',
+                    function (value) {
+                        const currentDate = new Date()
+                        const birthdate = new Date(value)
+                        const age =
+                            currentDate.getFullYear() - birthdate.getFullYear()
+                        const isAdult = age >= 18
+                        return isAdult
+                    }
+                )
+                .test(
+                    'not-same-as-current',
+                    'Birthdate must be different from your current birthdate',
+                    function (value) {
+                        const currentBirthdate = new Date(customer.birthdate)
+                        const newBirthdate = new Date(value)
+
+                        return (
+                            currentBirthdate.toISOString().slice(0, 10) !==
+                            newBirthdate.toISOString().slice(0, 10)
+                        )
+                    }
+                )
+        },
+        gender: {
+            gender: Yup.string()
+                .required('Select your gender')
+                .not(
+                    [customer.gender],
+                    'Gender must be different from your current gender'
+                )
+        }
+    }
+
     // FORM VALIDATION
     const Formik = useFormik({
         initialValues: requiredFields[editing],
@@ -139,7 +206,6 @@ export default function UserUpdate({
             })
 
             if (res.ok) {
-                // DO SOMETHING
                 fieldUpdated()
             } else {
                 const errorResponse: APIResponse = await res.json()
@@ -527,8 +593,6 @@ export default function UserUpdate({
             </div>
         )
     }
-
-    useEffect(() => console.log(Formik.errors), [Formik.errors])
 
     return (
         <div className={style.wrapper}>
