@@ -33,7 +33,7 @@ export default function ProductImages({ images }: ProductImagesProps) {
                         height={48}
                         width={48}
                         quality='100'
-                        onClick={() => setCurrentImg(image)}
+                        onMouseOver={() => setCurrentImg(image)}
                         style={{
                             borderColor:
                                 currentImg.id === image.id
