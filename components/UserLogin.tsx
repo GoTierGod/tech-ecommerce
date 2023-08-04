@@ -37,8 +37,10 @@ export default function UserLogin() {
                 body: JSON.stringify(values)
             })
 
-            if (res.ok) router.replace('/')
-            else {
+            if (res.ok) {
+                router.refresh()
+                router.push('/')
+            } else {
                 const errorResponse: APIResponse = await res.json()
 
                 Formik.resetForm()
