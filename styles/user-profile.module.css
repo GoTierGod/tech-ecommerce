@@ -9,6 +9,10 @@
     max-width: 1200px;
 }
 
+.wrapper svg {
+    height: 1rem;
+}
+
 .top {
     display: flex;
     flex-direction: column;
