@@ -11,8 +11,8 @@ export default function UserLogout() {
                 method: 'post'
             })
 
-            if (res.ok) setState('Successfully Log Out')
-            else setState('Something Went Wrong...')
+            if (res.ok) setState('Successfully Logged Out')
+            else setState('Something Went Wrong... ')
         })()
     }, [])
 
