@@ -37,7 +37,7 @@
     align-items: center;
     gap: 1rem;
 
-    padding: 1rem;
+    padding-top: 1rem;
     width: 100%;
 
     padding: 0;
@@ -319,14 +319,6 @@
         justify-content: center;
         align-items: center;
     }
-
-    .dropdownMenu div > a {
-        width: fit-content;
-    }
-
-    .dropdownMenu div div {
-        width: fit-content;
-    }
 }
 
 @media screen and (min-width: 600px) {
@@ -336,6 +328,15 @@
 
     .dropdownMenu ul {
         gap: 0.5rem;
+    }
+
+    .dropdownMenu > div {
+        width: fit-content;
+    }
+
+    .dropdownMenu div div {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
     }
 }
 

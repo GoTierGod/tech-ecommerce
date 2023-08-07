@@ -45,7 +45,7 @@ export default function Header({ categories, user }: HeaderProps) {
 
             if (element.offsetHeight.toString() === '0') {
                 element.style.height = 'auto'
-                element.style.padding = '1rem'
+                element.style.paddingTop = '1rem'
             } else {
                 element.style.height = '0'
                 element.style.padding = '0'
