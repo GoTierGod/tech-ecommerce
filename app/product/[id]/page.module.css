@@ -574,6 +574,10 @@
         display: grid;
         grid-template-columns: 2fr 1fr;
     }
+
+    .wp {
+        grid-template-columns: 1fr;
+    }
 }
 
 @media screen and (min-width: 1024px) {
@@ -587,5 +591,9 @@
 
     .brandProducts > div:nth-child(2) > a:nth-child(-n + 4) {
         display: flex;
+    }
+
+    .wp {
+        grid-template-columns: repeat(2, 1fr);
     }
 }
