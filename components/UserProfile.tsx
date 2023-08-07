@@ -72,7 +72,10 @@ export default function UserProfile({ customer }: UserProfileProps) {
                                     <h2>Username</h2>
                                     <p>{customer.user.username}</p>
                                 </div>
-                                <button onClick={() => updateField('username')}>
+                                <button
+                                    aria-label='Edit'
+                                    onClick={() => updateField('username')}
+                                >
                                     <FontAwesomeIcon icon={faEdit} />
                                 </button>
                             </div>
@@ -81,7 +84,10 @@ export default function UserProfile({ customer }: UserProfileProps) {
                                     <h2>Email</h2>
                                     <p>{customer.user.email}</p>
                                 </div>
-                                <button onClick={() => updateField('email')}>
+                                <button
+                                    aria-label='Edit'
+                                    onClick={() => updateField('email')}
+                                >
                                     <FontAwesomeIcon icon={faEdit} />
                                 </button>
                             </div>
@@ -90,7 +96,10 @@ export default function UserProfile({ customer }: UserProfileProps) {
                                     <h2>Password</h2>
                                     <p>**************</p>
                                 </div>
-                                <button onClick={() => updateField('password')}>
+                                <button
+                                    aria-label='Edit'
+                                    onClick={() => updateField('password')}
+                                >
                                     <FontAwesomeIcon icon={faEdit} />
                                 </button>
                             </div>
@@ -99,7 +108,10 @@ export default function UserProfile({ customer }: UserProfileProps) {
                                     <h2>Phone</h2>
                                     <p>{customer.phone}</p>
                                 </div>
-                                <button onClick={() => updateField('phone')}>
+                                <button
+                                    aria-label='Edit'
+                                    onClick={() => updateField('phone')}
+                                >
                                     <FontAwesomeIcon icon={faEdit} />
                                 </button>
                             </div>
@@ -111,6 +123,7 @@ export default function UserProfile({ customer }: UserProfileProps) {
                                     </p>
                                 </div>
                                 <button
+                                    aria-label='Edit'
                                     onClick={() => updateField('countrycity')}
                                 >
                                     <FontAwesomeIcon icon={faEdit} />
@@ -121,7 +134,10 @@ export default function UserProfile({ customer }: UserProfileProps) {
                                     <h2>Address</h2>
                                     <p>{customer.address}</p>
                                 </div>
-                                <button onClick={() => updateField('address')}>
+                                <button
+                                    aria-label='Edit'
+                                    onClick={() => updateField('address')}
+                                >
                                     <FontAwesomeIcon icon={faEdit} />
                                 </button>
                             </div>
@@ -131,6 +147,7 @@ export default function UserProfile({ customer }: UserProfileProps) {
                                     <p>{customer.user.first_name}</p>
                                 </div>
                                 <button
+                                    aria-label='Edit'
                                     onClick={() => updateField('firstname')}
                                 >
                                     <FontAwesomeIcon icon={faEdit} />
@@ -141,7 +158,10 @@ export default function UserProfile({ customer }: UserProfileProps) {
                                     <h2>Lastname</h2>
                                     <p>{customer.user.last_name}</p>
                                 </div>
-                                <button onClick={() => updateField('lastname')}>
+                                <button
+                                    aria-label='Edit'
+                                    onClick={() => updateField('lastname')}
+                                >
                                     <FontAwesomeIcon icon={faEdit} />
                                 </button>
                             </div>
@@ -154,6 +174,7 @@ export default function UserProfile({ customer }: UserProfileProps) {
                                     <p>{customer.birthdate}</p>
                                 </div>
                                 <button
+                                    aria-label='Edit'
                                     onClick={() => updateField('birthdate')}
                                 >
                                     <FontAwesomeIcon icon={faEdit} />
@@ -164,7 +185,10 @@ export default function UserProfile({ customer }: UserProfileProps) {
                                     <h2>Gender</h2>
                                     <p>{customer.gender}</p>
                                 </div>
-                                <button onClick={() => updateField('gender')}>
+                                <button
+                                    aria-label='Edit'
+                                    onClick={() => updateField('gender')}
+                                >
                                     <FontAwesomeIcon icon={faEdit} />
                                 </button>
                             </div>
