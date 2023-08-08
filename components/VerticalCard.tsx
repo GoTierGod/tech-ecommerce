@@ -1,18 +1,18 @@
-import Image from 'next/image'
 import style from '../styles/vertical-card.module.css'
 
-import { CardProductDetails } from '@/types/products'
+import Image from 'next/image'
 import Link from 'next/link'
+
+import { CardProductDetails } from '@/types/products'
+import { respectLineBreaks } from '@/helpers/respectLineBreaks'
 import { formatPrice } from '@/helpers/formatPrice'
 import { getDiscount } from '@/helpers/getDiscount'
-import { respectLineBreaks } from '@/helpers/respectLineBreaks'
 
 interface VerticalCardProps {
     product: CardProductDetails
 }
 
-// VERTICAL CARD FOR PRODUCT DETAILS
-const VerticalCard = ({ product }: VerticalCardProps) => {
+export default function VerticalCard({ product }: VerticalCardProps) {
     return (
         <Link href={`/product/${product.details.id}`} className={style.card}>
             <div className={style.image}>
@@ -26,13 +26,13 @@ const VerticalCard = ({ product }: VerticalCardProps) => {
             </div>
             <div className={style.details}>
                 <div className={style.offer}>
-                    <div>
+                    <div className={style.price}>
                         <span>$ {formatPrice(product.details.price)}</span>
                         <span>
                             $ {formatPrice(product.details.offer_price)}
                         </span>
                     </div>
-                    <span>
+                    <span className={style.discount}>
                         {' '}
                         {getDiscount(
                             product.details.price,
@@ -50,5 +50,3 @@ const VerticalCard = ({ product }: VerticalCardProps) => {
         </Link>
     )
 }
-
-export default VerticalCard
