@@ -20,7 +20,6 @@ import { getStars } from '@/helpers/getStars'
 import { getDeliveryDay } from '@/helpers/getDeliveryDay'
 import { getInstallments } from '@/helpers/getInstallments'
 import { notFound } from 'next/navigation'
-import { metadata } from '@/app/layout'
 import { respectLineBreaks } from '@/helpers/respectLineBreaks'
 import { getUser } from '@/helpers/getUser'
 import { CustomerData } from '@/types/users'
@@ -29,6 +28,7 @@ import visaLogo from '../../../public/images/payments/visa.svg'
 import mastercardLogo from '../../../public/images/payments/mastercard.svg'
 import americanExpressLogo from '../../../public/images/payments/american-express.svg'
 import dinersClubLogo from '../../../public/images/payments/diners-club-international.svg'
+import { Metadata } from 'next'
 
 const paymentLogos = [
     { src: visaLogo, alt: 'Visa' },
@@ -36,6 +36,10 @@ const paymentLogos = [
     { src: americanExpressLogo, alt: 'American Express' },
     { src: dinersClubLogo, alt: 'Diners Club International' }
 ]
+
+export const metadata: Metadata = {
+    title: 'Product | Tech'
+}
 
 export default async function Product({ params }: { params: { id: string } }) {
     const { id } = params

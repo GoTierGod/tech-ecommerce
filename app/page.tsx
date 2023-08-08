@@ -6,8 +6,9 @@ import { getData } from '@/helpers/getData'
 import Offers from '@/components/Offers'
 import Highlighted from '@/components/Highlighted'
 import Gaming from '@/components/Gaming'
+import { Metadata } from 'next'
 
-export const metadata = {
+export const metadata: Metadata = {
     title: 'Home | Tech'
 }
 

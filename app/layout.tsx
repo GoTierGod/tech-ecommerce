@@ -6,11 +6,12 @@ import { Category } from '@/types/tables'
 import { getData } from '@/helpers/getData'
 import { getUser } from '@/helpers/getUser'
 import { CustomerData } from '@/types/users'
+import { Metadata } from 'next'
 
 const josefinSans = Josefin_Sans({ subsets: ['latin'] })
 
-export const metadata = {
-    title: 'Home | Tech',
+export const metadata: Metadata = {
+    title: 'Tech',
     description: 'The best products in technology'
 }
 

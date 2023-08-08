@@ -7,8 +7,10 @@ import { SearchResponse } from '@/types/search'
 import { unescape } from 'querystring'
 import { getUser } from '@/helpers/getUser'
 import { CustomerData } from '@/types/users'
+import { formatTitleCase } from '@/helpers/formatTitleCase'
+import { Metadata } from 'next'
 
-export const metadata = {
+export const metadata: Metadata = {
     title: 'Search | Tech'
 }
 
@@ -52,6 +54,7 @@ export default async function Search({
 
     // SEARCHED STRING IN A READABLE FORMAT
     const readableSearch = unescape(search)
+    metadata.title = `${formatTitleCase(readableSearch)} | Tech`
 
     // PRODUCTS
     const searchRes: SearchResponse | false = await getData(
