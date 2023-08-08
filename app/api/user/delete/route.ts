@@ -26,6 +26,8 @@ export async function POST(req: NextRequest) {
             })
 
             if (res.ok) {
+                cookies().delete('authTokens')
+
                 const apiResponse: APIResponse = await res.json()
                 return NextResponse.json(apiResponse, { status: 200 })
             }
