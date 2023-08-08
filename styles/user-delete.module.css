@@ -1,0 +1,166 @@
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+
+    width: 100%;
+    max-width: 1200px;
+}
+
+.wrapper > div {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5rem;
+
+    width: 100%;
+    max-width: 450px;
+
+    text-align: center;
+}
+
+.wrapper h1 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    padding: 1rem;
+    width: 100%;
+
+    background: var(--main);
+    color: var(--white);
+
+    font-size: 1.5rem;
+    font-weight: 400;
+
+    border-radius: 4px;
+}
+
+.feedback {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+
+    padding: 1.25rem;
+    width: 100%;
+
+    background: var(--white);
+
+    border-radius: 4px;
+}
+
+.wrapper h2 {
+    font-size: 1.125rem;
+    font-weight: 400;
+}
+
+.wrapper p {
+    font-size: 1rem;
+    font-weight: 375;
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1.5rem;
+
+    padding: 1.5rem;
+    width: 100%;
+
+    background: var(--white);
+
+    border-radius: 4px;
+}
+
+.inputField {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+
+    width: 100%;
+    max-width: 300px;
+}
+
+.inputField label {
+    font-size: 1rem;
+    font-weight: 375;
+}
+
+.inputField input {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    padding: 0.5rem 0.75rem;
+
+    background: var(--gray);
+    color: var(--white);
+
+    font-size: 1rem;
+    font-weight: 375;
+    font-family: inherit;
+
+    border: 2px solid var(--gray);
+    border-radius: 4px;
+}
+
+.inputField label > span {
+    font-weight: 450;
+}
+
+.checking {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+
+    padding: 1rem 0;
+
+    text-align: center;
+
+    font-weight: 375;
+}
+
+.checking svg {
+    height: 1rem;
+}
+
+.options {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+}
+
+.options :where(button, a) {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    padding: 0.5rem 0.75rem;
+
+    background: var(--gray);
+    color: var(--white);
+
+    font-size: 1rem;
+    font-weight: 375;
+    font-family: inherit;
+
+    border: none;
+    border-radius: 4px;
+
+    cursor: pointer;
+}
+
+.options button[type='submit'] {
+    background: var(--danger);
+}

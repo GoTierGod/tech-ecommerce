@@ -60,9 +60,9 @@ export default function UserProfile({ customer }: UserProfileProps) {
                             <Link className={style.logout} href='/logout'>
                                 Log Out
                             </Link>
-                            <button className={style.delete}>
+                            <Link className={style.delete} href='/delete'>
                                 Delete Account
-                            </button>
+                            </Link>
                         </div>
                     </div>
                     {!updating ? (
@@ -202,9 +202,13 @@ export default function UserProfile({ customer }: UserProfileProps) {
                         />
                     )}
                     <div className={style.bottom}>
-                        <button className={style.logout}>Log Out</button>
+                        <Link className={style.logout} href='/logout'>
+                            Log Out
+                        </Link>
                         <span>--- Be Careful ---</span>
-                        <button className={style.delete}>Delete Account</button>
+                        <Link className={style.delete} href='/delete'>
+                            Delete Account
+                        </Link>
                     </div>
                 </div>
             ) : (
