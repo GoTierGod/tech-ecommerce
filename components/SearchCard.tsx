@@ -1,27 +1,27 @@
 import style from '../styles/search-card.module.css'
 
 import Link from 'next/link'
-
-import { CardProductDetails } from '@/types/products'
 import Image from 'next/image'
-import { getInstallments } from '@/helpers/getInstallments'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCartPlus, faHeart } from '@fortawesome/free-solid-svg-icons'
-import { getDiscount } from '@/helpers/getDiscount'
-import { CustomerData } from '@/types/users'
 
-const SearchCard = ({
-    product,
-    user
-}: {
+import { CardProductDetails } from '@/types/products'
+import { CustomerData } from '@/types/users'
+import { getInstallments } from '@/helpers/getInstallments'
+import { getDiscount } from '@/helpers/getDiscount'
+
+interface SearchCardProps {
     product: CardProductDetails
     user: CustomerData
-}) => {
+}
+
+export default function SearchCard({ product, user }: SearchCardProps) {
     return (
         <div className={style.wrapper}>
             <Link
                 href={`/product/${product.details.id}`}
                 className={style.card}
+                aria-label={product.details.name}
             >
                 <div className={style.image}>
                     <Image
@@ -33,9 +33,7 @@ const SearchCard = ({
                     />
                 </div>
                 <div className={style.details}>
-                    <div>
-                        <h4 className={style.name}>{product.details.name}</h4>
-                    </div>
+                    <h4 className={style.name}>{product.details.name}</h4>
                     <div className={style.badges}>
                         <span className={style.bestSeller}>Best Seller</span>
                         <span className={style.discount}>
@@ -74,5 +72,3 @@ const SearchCard = ({
         </div>
     )
 }
-
-export default SearchCard
