@@ -1,17 +1,17 @@
-import Link from 'next/link'
-import style from '../styles/offers.module.css'
+import style from '../styles/offers-section.module.css'
 
-import { CardProductDetails } from '@/types/products'
+import Link from 'next/link'
 import Image from 'next/image'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faRightLong } from '@fortawesome/free-solid-svg-icons'
+
+import { CardProductDetails } from '@/types/products'
 
 interface OffersProps {
     products: CardProductDetails[]
 }
 
-// SECTION SHOWING 3 RANDOM OFFERS
-const Offers = ({ products }: OffersProps) => {
+export default function OffersSection({ products }: OffersProps) {
     return (
         <section className={style.section}>
             <div className={style.grid}>
@@ -44,5 +44,3 @@ const Offers = ({ products }: OffersProps) => {
         </section>
     )
 }
-
-export default Offers

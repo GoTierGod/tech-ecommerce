@@ -13,7 +13,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 
 import VerticalCard from '@/components/VerticalCard'
-import ProductRows from '@/components/ProductRows'
+import ProductRows from '@/components/ProductsSection'
 import ProductImages from '@/components/ProductImages'
 import { getData } from '@/helpers/getData'
 import { getStars } from '@/helpers/getStars'

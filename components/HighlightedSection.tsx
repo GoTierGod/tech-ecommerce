@@ -1,15 +1,16 @@
+import style from '../styles/highlighted-section.module.css'
+
 import Image from 'next/image'
-import style from '../styles/highlighted.module.css'
+import Link from 'next/link'
 
 import { CardProductDetails } from '@/types/products'
-import Link from 'next/link'
 
 interface HighlightedProps {
     products: CardProductDetails[]
 }
 
 // SECTION SHOWING TWO HIGHLIGHTED CATEGORIES AND ONE PRODUCT FOR EACH ONE
-const Highlighted = ({ products }: HighlightedProps) => {
+export default function HighlightedSection({ products }: HighlightedProps) {
     return (
         <section className={style.section}>
             {products.map(product => (
@@ -40,5 +41,3 @@ const Highlighted = ({ products }: HighlightedProps) => {
         </section>
     )
 }
-
-export default Highlighted

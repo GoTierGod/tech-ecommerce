@@ -1,10 +1,10 @@
+import style from '../styles/products-section.module.css'
+
 import Link from 'next/link'
-import style from '../styles/product-rows.module.css'
-
-import { CardProductDetails } from '@/types/products'
-
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faRightLong } from '@fortawesome/free-solid-svg-icons'
+
+import { CardProductDetails } from '@/types/products'
 import VerticalCard from './VerticalCard'
 
 interface ProductRowsProps {
@@ -14,7 +14,11 @@ interface ProductRowsProps {
 }
 
 // A GRID MADE OF VERTICAL CARDS
-const ProductRows = ({ title, products, url }: ProductRowsProps) => {
+export default function ProductsSection({
+    title,
+    products,
+    url
+}: ProductRowsProps) {
     return (
         <section className={style.section}>
             <div className={style.header}>
@@ -36,5 +40,3 @@ const ProductRows = ({ title, products, url }: ProductRowsProps) => {
         </section>
     )
 }
-
-export default ProductRows

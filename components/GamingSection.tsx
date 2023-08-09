@@ -1,15 +1,15 @@
+import style from '../styles/gaming-section.module.css'
+
 import Link from 'next/link'
-import style from '../styles/gaming.module.css'
+import Image from 'next/image'
 
 import { CardProductDetails } from '@/types/products'
-import Image from 'next/image'
 
 interface GamingProps {
     products: CardProductDetails[]
 }
 
-// SECTION SHOWING 6 GAMING PRODUCTS
-const Gaming = ({ products }: GamingProps) => {
+export default function GamingSection({ products }: GamingProps) {
     return (
         <section className={style.section}>
             <div className={style.header}>
@@ -50,5 +50,3 @@ const Gaming = ({ products }: GamingProps) => {
         </section>
     )
 }
-
-export default Gaming

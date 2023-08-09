@@ -1,12 +1,12 @@
 import style from './page.module.css'
 
-import ProductRows from '@/components/ProductRows'
+import ProductsSection from '@/components/ProductsSection'
 import { CardProductDetails } from '@/types/products'
 import { getData } from '@/helpers/getData'
-import Offers from '@/components/Offers'
-import Highlighted from '@/components/Highlighted'
-import Gaming from '@/components/Gaming'
+import OffersSection from '@/components/OffersSection'
+import HighlightedSection from '@/components/HighlightedSection'
 import { Metadata } from 'next'
+import GamingSection from '@/components/GamingSection'
 
 export const metadata: Metadata = {
     title: 'Home | Tech'
@@ -41,14 +41,18 @@ export default async function Home() {
     return (
         <main>
             <div className={style.home}>
-                <Offers products={offers} />
-                <ProductRows title='Laptops' products={laptops} url='/' />
-                <Highlighted
+                <OffersSection products={offers} />
+                <ProductsSection title='Laptops' products={laptops} url='/' />
+                <HighlightedSection
                     products={[highlightedOne[0], highlightedTwo[0]]}
                 />
-                <ProductRows title='Headphones' products={headphones} url='/' />
-                <Gaming products={gaming} />
-                <ProductRows
+                <ProductsSection
+                    title='Headphones'
+                    products={headphones}
+                    url='/'
+                />
+                <GamingSection products={gaming} />
+                <ProductsSection
                     title='Smartphones'
                     products={smartphones}
                     url='/'
