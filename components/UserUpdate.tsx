@@ -233,7 +233,7 @@ export default function UserUpdate({
 
     const requiredFormElements: { [key: string]: ReactElement } = {
         username: (
-            <div className={style.inputField}>
+            <div className={style.formField}>
                 <label
                     htmlFor='username'
                     style={{
@@ -260,7 +260,7 @@ export default function UserUpdate({
         ),
         email: (
             <>
-                <div className={style.inputField}>
+                <div className={style.formField}>
                     <label
                         htmlFor='password'
                         style={{
@@ -284,7 +284,7 @@ export default function UserUpdate({
                         }}
                     />
                 </div>
-                <div className={style.inputField}>
+                <div className={style.formField}>
                     <label
                         htmlFor='email'
                         style={{
@@ -312,7 +312,7 @@ export default function UserUpdate({
         ),
         password: (
             <>
-                <div className={style.inputField}>
+                <div className={style.formField}>
                     <label
                         htmlFor='password'
                         style={{
@@ -336,7 +336,7 @@ export default function UserUpdate({
                         }}
                     />
                 </div>
-                <div className={style.inputField}>
+                <div className={style.formField}>
                     <label
                         htmlFor='newpass'
                         style={{
@@ -360,7 +360,7 @@ export default function UserUpdate({
                         }}
                     />
                 </div>
-                <div className={style.inputField}>
+                <div className={style.formField}>
                     <label
                         htmlFor='confirmnewpass'
                         style={{
@@ -389,7 +389,7 @@ export default function UserUpdate({
             </>
         ),
         phone: (
-            <div className={style.inputField}>
+            <div className={style.formField}>
                 <label
                     htmlFor='phone'
                     style={{
@@ -416,7 +416,7 @@ export default function UserUpdate({
         ),
         countrycity: (
             <>
-                <div className={style.inputField}>
+                <div className={style.formField}>
                     <label
                         htmlFor='country'
                         style={{
@@ -440,7 +440,7 @@ export default function UserUpdate({
                         }}
                     />
                 </div>
-                <div className={style.inputField}>
+                <div className={style.formField}>
                     <label
                         htmlFor='city'
                         style={{
@@ -467,7 +467,7 @@ export default function UserUpdate({
             </>
         ),
         address: (
-            <div className={style.inputField}>
+            <div className={style.formField}>
                 <label
                     htmlFor='address'
                     style={{
@@ -493,7 +493,7 @@ export default function UserUpdate({
             </div>
         ),
         firstname: (
-            <div className={style.inputField}>
+            <div className={style.formField}>
                 <label
                     htmlFor='firstname'
                     style={{
@@ -519,7 +519,7 @@ export default function UserUpdate({
             </div>
         ),
         lastname: (
-            <div className={style.inputField}>
+            <div className={style.formField}>
                 <label
                     htmlFor='lastname'
                     style={{
@@ -545,7 +545,7 @@ export default function UserUpdate({
             </div>
         ),
         birthdate: (
-            <div className={style.inputField}>
+            <div className={style.formField}>
                 <label
                     htmlFor='birthdate'
                     style={{
@@ -571,7 +571,7 @@ export default function UserUpdate({
             </div>
         ),
         gender: (
-            <div className={style.inputField}>
+            <div className={style.formField}>
                 <label
                     htmlFor='gender'
                     style={{

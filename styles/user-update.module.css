@@ -50,7 +50,7 @@
     background: var(--main);
 }
 
-.inputField {
+.formField {
     display: flex;
     flex-direction: column;
     gap: 0.5rem;
@@ -58,12 +58,12 @@
     width: 100%;
 }
 
-.inputField label {
+.formField label {
     font-size: 1.25rem;
     font-weight: 400;
 }
 
-.inputField :where(input, select) {
+.formField :where(input, select) {
     padding: 0.5rem 0.75rem;
 
     background: var(--gray);
@@ -77,7 +77,7 @@
     border-radius: 4px;
 }
 
-.inputField select {
+.formField select {
     border-right: 0.75rem solid var(--gray);
     outline: 2px solid var(--gray);
 }

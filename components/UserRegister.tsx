@@ -131,7 +131,7 @@ export default function UserRegister() {
                             className={style.form}
                             onSubmit={Formik.handleSubmit}
                         >
-                            <div className={style.inputField}>
+                            <div className={style.formField}>
                                 <label
                                     htmlFor='username'
                                     style={{
@@ -157,7 +157,7 @@ export default function UserRegister() {
                                     }}
                                 />
                             </div>
-                            <div className={style.inputField}>
+                            <div className={style.formField}>
                                 <label
                                     htmlFor='password'
                                     style={{
@@ -183,7 +183,7 @@ export default function UserRegister() {
                                     }}
                                 />
                             </div>
-                            <div className={style.inputField}>
+                            <div className={style.formField}>
                                 <label
                                     htmlFor='confirmPassword'
                                     style={{
@@ -209,7 +209,7 @@ export default function UserRegister() {
                                     }}
                                 />
                             </div>
-                            <div className={style.inputField}>
+                            <div className={style.formField}>
                                 <label
                                     htmlFor='email'
                                     style={{
@@ -235,7 +235,7 @@ export default function UserRegister() {
                                     }}
                                 />
                             </div>
-                            <div className={style.inputField}>
+                            <div className={style.formField}>
                                 <label
                                     htmlFor='birthdate'
                                     style={{
