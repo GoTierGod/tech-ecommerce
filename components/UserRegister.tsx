@@ -6,7 +6,11 @@ import style from '../styles/user-register.module.css'
 import { useFormik } from 'formik'
 import Link from 'next/link'
 import * as Yup from 'yup'
-import { faCheckCircle, faXmarkCircle } from '@fortawesome/free-solid-svg-icons'
+import {
+    faCheckCircle,
+    faHandPeace,
+    faXmarkCircle
+} from '@fortawesome/free-solid-svg-icons'
 import { useRouter } from 'next/navigation'
 import { APIResponse } from '@/app/api/auth/login/route'
 import { useState } from 'react'
@@ -288,7 +292,10 @@ export default function UserRegister() {
                                         </>
                                     )
                                 ) : (
-                                    ''
+                                    <>
+                                        <FontAwesomeIcon icon={faHandPeace} />
+                                        <span>Welcome!</span>
+                                    </>
                                 )}
                             </div>
                             <div className={style.options}>

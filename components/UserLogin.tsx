@@ -5,7 +5,11 @@ import { useRouter } from 'next/navigation'
 import { useFormik } from 'formik'
 import * as Yup from 'yup'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faCheckCircle, faXmarkCircle } from '@fortawesome/free-solid-svg-icons'
+import {
+    faCheckCircle,
+    faHandPeace,
+    faXmarkCircle
+} from '@fortawesome/free-solid-svg-icons'
 import { APIResponse } from '@/app/api/auth/login/route'
 import { useState } from 'react'
 import ErrorDisplay from './ErrorDisplay'
@@ -170,7 +174,10 @@ export default function UserLogin() {
                                         </>
                                     )
                                 ) : (
-                                    ''
+                                    <>
+                                        <FontAwesomeIcon icon={faHandPeace} />
+                                        <span>Welcome back!</span>
+                                    </>
                                 )}
                             </div>
                             <div className={style.options}>
