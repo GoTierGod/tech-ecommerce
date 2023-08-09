@@ -1,11 +1,9 @@
-/* ------------------------- SECTION -------------------------  */
 .section {
     display: flex;
     flex-direction: column;
     gap: 0.5rem;
 }
 
-/* ------------------------- HEADER -------------------------  */
 .header {
     display: flex;
     justify-content: space-between;
@@ -19,13 +17,11 @@
     border-radius: 4px;
 }
 
-/* ------------------------- TITLE -------------------------  */
 .header h4 {
     font-size: 1.5rem;
     font-weight: 500;
 }
 
-/* ------------------------- TOP LINK -------------------------  */
 .topLink {
     display: none;
     justify-content: center;
@@ -40,7 +36,7 @@
     border: 2px solid transparent;
     border-radius: 4px;
 
-    transition: all 300ms;
+    transition: border-color 300ms;
 }
 
 .topLink span {
@@ -49,7 +45,7 @@
 
     text-shadow: 1px 1px transparent;
 
-    transition: all 300ms;
+    transition: text-shadow 300ms;
 }
 
 .topLink svg {
@@ -57,7 +53,7 @@
 
     filter: drop-shadow(1px 1px transparent);
 
-    transition: all 300ms;
+    transition: filter 300ms;
 }
 
 .topLink:hover {
@@ -72,7 +68,6 @@
     filter: drop-shadow(1px 1px var(--light-pink));
 }
 
-/* ------------------------- GRID -------------------------  */
 .grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
@@ -87,7 +82,6 @@
     display: flex;
 }
 
-/* ------------------------- BOTTOM LINK -------------------------  */
 .bottomLink {
     display: flex;
     justify-content: space-between;
@@ -102,7 +96,7 @@
     border: 2px solid transparent;
     border-radius: 4px;
 
-    transition: all 300ms;
+    transition: border-color 300ms;
 }
 
 .bottomLink span {
@@ -111,14 +105,14 @@
 
     text-shadow: 1px 1px transparent;
 
-    transition: all 300ms;
+    transition: text-shadow 300ms;
 }
 
 .bottomLink svg {
     height: 1rem;
     filter: drop-shadow(1px 1px transparent);
 
-    transition: all 300ms;
+    transition: filter 300ms;
 }
 
 .bottomLink:hover {
@@ -152,10 +146,6 @@
         display: flex;
     }
 
-    .bottomLink {
-        display: none;
-    }
-
     .grid {
         grid-template-columns: repeat(4, 1fr);
     }
@@ -166,6 +156,10 @@
 
     .grid > a:nth-child(-n + 4) {
         display: flex;
+    }
+
+    .bottomLink {
+        display: none;
     }
 }
 

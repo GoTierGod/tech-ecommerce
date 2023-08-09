@@ -13,7 +13,6 @@ interface ProductRowsProps {
     url: string
 }
 
-// A GRID MADE OF VERTICAL CARDS
 export default function ProductsSection({
     title,
     products,
