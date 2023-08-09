@@ -1,29 +1,20 @@
-/* ------------------------- SECTION -------------------------  */
 .section {
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    align-items: center;
     gap: 1rem;
 
     width: 100%;
 }
 
-/* ------------------------- CARD -------------------------  */
 .card {
     display: flex;
     gap: 0.5rem;
-
-    width: 100%;
-
-    border-radius: 4px;
 }
 
 .card:nth-child(even) {
     flex-direction: row-reverse;
 }
 
-/* ------------------------- HEADER -------------------------  */
 .header {
     display: flex;
     flex-direction: column;
@@ -41,7 +32,7 @@
     border-radius: 4px;
 }
 
-.header div:nth-child(1) {
+.title {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -49,17 +40,16 @@
     gap: 0.5rem;
 }
 
-.header div:nth-child(1) span {
+.title span {
     font-size: 1rem;
     font-weight: 375;
 }
 
-.header h4 {
+.title h4 {
     font-size: 1.25rem;
     font-weight: 400;
 }
 
-/* ------------------------- LINK -------------------------  */
 .link {
     display: flex;
     justify-content: center;
@@ -75,16 +65,16 @@
     border: 2px solid transparent;
     border-radius: 4px;
 
-    transition: all 300ms;
+    transition: border-color 300ms;
 }
 
 .link span {
     font-size: 1rem;
-    font-weight: 500;
+    font-weight: 450;
 
     text-shadow: 1px 1px transparent;
 
-    transition: all 300ms;
+    transition: text-shadow 300ms;
 }
 
 .link:hover {
@@ -95,7 +85,6 @@
     text-shadow: 1px 1px var(--light-pink);
 }
 
-/* ------------------------- IMAGE -------------------------  */
 .image {
     display: flex;
     flex-direction: column;
@@ -109,7 +98,7 @@
     border: 2px solid transparent;
     border-radius: 4px;
 
-    transition: all 300ms;
+    transition: border-color 300ms;
 }
 
 .image img {
@@ -128,7 +117,7 @@
 }
 
 @media screen and (min-width: 425px) {
-    .header h4 {
+    .title h4 {
         font-size: 1.5rem;
     }
 }

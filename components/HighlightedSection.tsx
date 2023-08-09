@@ -9,14 +9,13 @@ interface HighlightedProps {
     products: CardProductDetails[]
 }
 
-// SECTION SHOWING TWO HIGHLIGHTED CATEGORIES AND ONE PRODUCT FOR EACH ONE
 export default function HighlightedSection({ products }: HighlightedProps) {
     return (
         <section className={style.section}>
             {products.map(product => (
                 <article key={product.details.id} className={style.card}>
                     <div className={style.header}>
-                        <div>
+                        <div className={style.title}>
                             <span>The best offers in</span>
                             <h4>{product.details.category.title}</h4>
                         </div>
