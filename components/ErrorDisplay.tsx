@@ -3,19 +3,19 @@
 import style from '../styles/error-display.module.css'
 
 interface ErrorDisplayProps {
-    message: string
     status: number
     statusText: string
     action: Function
     actionText: string
+    message: string
 }
 
 export default function ErrorDisplay({
-    message,
     status,
     statusText,
     action,
-    actionText
+    actionText,
+    message
 }: ErrorDisplayProps) {
     return (
         <div className={style.wrapper}>

@@ -1,4 +1,3 @@
-/* ------------------------- HEADER -------------------------  */
 .header {
     position: fixed;
 
@@ -18,8 +17,7 @@
     z-index: 25;
 }
 
-/* ------------------------- HEADER CONTENT CONTAINER -------------------------  */
-.header > div:nth-child(1) {
+.wrapper {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -29,93 +27,6 @@
     max-width: 1200px;
 }
 
-/* ------------------------- DROPDOWN MENU -------------------------  */
-.dropdownMenu {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: 1rem;
-
-    padding-top: 1rem;
-    width: 100%;
-
-    padding: 0;
-    height: 0;
-    overflow: hidden;
-}
-
-.dropdownMenu > div {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: 1rem;
-
-    width: 100%;
-}
-
-.dropdownMenu div div {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 1rem;
-
-    width: 100%;
-}
-
-.dropdownMenu > a,
-.dropdownMenu div a {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 1rem;
-
-    padding: 0.75rem 1rem;
-    width: 100%;
-
-    background-color: var(--gray);
-    color: var(--white);
-
-    border-radius: 4px;
-}
-
-.dropdownMenu div a span {
-    white-space: nowrap;
-}
-
-.dropdownMenu ul {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-
-    list-style: none;
-}
-
-.dropdownMenu li a {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-    padding: 0.5rem 0.75rem;
-
-    background: var(--main);
-    color: var(--white);
-
-    font-size: 1rem;
-    font-weight: 375;
-    font-family: inherit;
-
-    border-radius: 4px;
-}
-
-.dropdownMenu li a:hover {
-    background: var(--white);
-    color: var(--main);
-}
-
-/* ------------------------- LOGO -------------------------  */
 .logo {
     padding: 0.5rem 0.75rem;
 
@@ -130,7 +41,6 @@
     width: 48px;
 }
 
-/* ------------------------- SEARCH BAR -------------------------  */
 .searchBar {
     display: flex;
     justify-content: center;
@@ -179,7 +89,6 @@
     height: 1rem;
 }
 
-/* ------------------------- PROFILE -------------------------  */
 .dropdownBtn {
     display: flex;
     justify-content: center;
@@ -198,22 +107,21 @@
     cursor: pointer;
 }
 
-/* ------------------------- NAVIGATION LINKS -------------------------  */
-.wsNav {
+.wideNav {
     display: none;
 }
 
-.links {
+.wideNav .links {
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
-.links li {
+.wideNav .links li {
     list-style: none;
 }
 
-.links li a {
+.wideNav .links li a {
     padding: 0.5rem 0.75rem;
 
     font-size: 1rem;
@@ -224,12 +132,11 @@
     transition: all 300ms;
 }
 
-.links li a:hover {
+.wideNav .links li a:hover {
     background: var(--white);
     color: var(--gray);
 }
 
-/* ------------------------- CATEGORIES SELECT -------------------------  */
 .categoriesSelect {
     display: none;
     justify-content: center;
@@ -257,7 +164,6 @@
     outline: none;
 }
 
-/* ------------------------- PROFILE -------------------------  */
 .profile {
     display: none;
     justify-content: center;
@@ -282,7 +188,6 @@
     height: 1rem;
 }
 
-/* ------------------------- LOGOUT & CART -------------------------  */
 .logout,
 .cart {
     display: none;
@@ -309,13 +214,105 @@
     white-space: nowrap;
 }
 
-/* ------------------------- MEDIA QUERIES -------------------------  */
+.dropdownMenu {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+
+    padding-top: 1rem;
+    width: 100%;
+
+    padding: 0;
+    height: 0;
+    overflow: hidden;
+}
+
+.dropdownMenu :where(.options, .links) {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+
+    width: 100%;
+}
+
+.options > div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+
+    width: 100%;
+}
+
+.options a {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+
+    padding: 0.75rem 1rem;
+    width: 100%;
+
+    background-color: var(--gray);
+    color: var(--white);
+
+    border-radius: 4px;
+}
+
+.options a span {
+    white-space: nowrap;
+}
+
+.smallNav {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.smallNav .links {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+
+    list-style: none;
+}
+
+.smallNav .links a {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    padding: 0.5rem 0.75rem;
+
+    background: var(--main);
+    color: var(--white);
+
+    font-size: 1rem;
+    font-weight: 375;
+    font-family: inherit;
+
+    border-radius: 4px;
+
+    transition: background-color 300ms, color 300ms;
+}
+
+.smallNav .links a:hover {
+    background-color: var(--white);
+    color: var(--main);
+}
+
 @media screen and (min-width: 425px) {
     .cart {
         display: flex;
     }
 
-    .dropdownMenu > div {
+    .dropdownMenu :where(.options, .links) {
         justify-content: center;
         align-items: center;
     }
@@ -326,15 +323,15 @@
         display: flex;
     }
 
-    .dropdownMenu ul {
+    .smallNav .links {
         gap: 0.5rem;
     }
 
-    .dropdownMenu > div {
+    .dropdownMenu :where(.options, .links) {
         width: fit-content;
     }
 
-    .dropdownMenu div div {
+    .options div {
         display: grid;
         grid-template-columns: repeat(2, 1fr);
     }
@@ -346,26 +343,26 @@
         display: flex;
     }
 
-    .dropdownMenu > div > div:nth-child(1) {
+    .options div:nth-child(1) {
         display: none;
     }
 }
 
 @media screen and (min-width: 1024px) {
-    .dropdownBtn,
-    .dropdownMenu {
-        display: none;
-    }
-
-    .wsNav {
-        display: flex;
-    }
-
     .searchBar {
         width: 25%;
     }
 
     .searchBar input {
         width: 100%;
+    }
+
+    .dropdownBtn,
+    .dropdownMenu {
+        display: none;
+    }
+
+    .wideNav {
+        display: flex;
     }
 }

@@ -4,6 +4,7 @@ import style from '../styles/header.module.css'
 
 import Link from 'next/link'
 import Image from 'next/image'
+import { usePathname, useRouter } from 'next/navigation'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {
     faBars,
@@ -15,18 +16,17 @@ import {
     faSignIn
 } from '@fortawesome/free-solid-svg-icons'
 import { FormEvent, useCallback, useEffect, useRef, useState } from 'react'
-import { usePathname, useRouter } from 'next/navigation'
+import Cookies from 'js-cookie'
+
 import { Category } from '@/types/tables'
 import { formatTitleCase } from '@/helpers/formatTitleCase'
 import { CustomerData } from '@/types/users'
-import Cookies from 'js-cookie'
 
 interface HeaderProps {
     categories: Category[]
     user: CustomerData
 }
 
-// WEBSITE HEADER/NAVBAR
 export default function Header({ categories, user }: HeaderProps) {
     const router = useRouter()
     const path = usePathname()
@@ -88,7 +88,7 @@ export default function Header({ categories, user }: HeaderProps) {
 
     return (
         <header className={style.header}>
-            <div>
+            <div className={style.wrapper}>
                 <Link href='/' className={style.logo}>
                     <Image
                         src='/next.svg'
@@ -138,7 +138,7 @@ export default function Header({ categories, user }: HeaderProps) {
                 >
                     <FontAwesomeIcon icon={faBars} height='1rem' />
                 </button>
-                <nav className={style.wsNav}>
+                <nav className={style.wideNav}>
                     <ul className={style.links}>
                         <li>
                             <Link href='/'>Offers</Link>
@@ -177,7 +177,7 @@ export default function Header({ categories, user }: HeaderProps) {
                 )}
             </div>
             <div ref={dropdownMenuRef} className={style.dropdownMenu}>
-                <div>
+                <div className={style.options}>
                     <div>
                         <Link href={user ? '/profile' : '/login'}>
                             <FontAwesomeIcon icon={faCircleUser} />
@@ -206,20 +206,22 @@ export default function Header({ categories, user }: HeaderProps) {
                         </Link>
                     </div>
                 </div>
-                <ul>
-                    <li>
-                        <Link href='/'>Offers</Link>
-                    </li>
-                    <li>
-                        <Link href='/'>Contact</Link>
-                    </li>
-                    <li>
-                        <Link href='/'>About</Link>
-                    </li>
-                    <li>
-                        <Link href='/'>Home</Link>
-                    </li>
-                </ul>
+                <nav className={style.smallNav}>
+                    <ul className={style.links}>
+                        <li>
+                            <Link href='/'>Offers</Link>
+                        </li>
+                        <li>
+                            <Link href='/'>Contact</Link>
+                        </li>
+                        <li>
+                            <Link href='/'>About</Link>
+                        </li>
+                        <li>
+                            <Link href='/'>Home</Link>
+                        </li>
+                    </ul>
+                </nav>
             </div>
         </header>
     )
