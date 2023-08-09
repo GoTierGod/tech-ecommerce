@@ -13,7 +13,7 @@ export default function GamingSection({ products }: GamingProps) {
     return (
         <section className={style.section}>
             <div className={style.header}>
-                <div>
+                <div className={style.title}>
                     <span>Desktops - Laptops - Graphic Cards and more..</span>
                     <h4>The Best Gaming Offers</h4>
                 </div>
