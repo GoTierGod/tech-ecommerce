@@ -5,42 +5,50 @@ import * as Yup from 'yup'
 
 import { ReactElement } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faCheckCircle, faXmarkCircle } from '@fortawesome/free-solid-svg-icons'
+import {
+    faCheckCircle,
+    faUserPen,
+    faXmarkCircle
+} from '@fortawesome/free-solid-svg-icons'
 import { APIResponse } from '@/app/api/auth/login/route'
 import { Customer } from '@/types/users'
 import { useRouter } from 'next/navigation'
 
-// FIELDS TO VERIFY IF THEY WERE TOUCHED
-const fieldsTouched: { [key: string]: string[] } = {
-    username: ['username'],
-    email: ['password', 'email'],
-    password: ['password', 'newPass', 'confirmNewPass'],
-    phone: ['phone'],
-    countrycity: ['country', 'city'],
-    address: ['address'],
-    firstname: ['firstname'],
-    lastname: ['lastname'],
-    birthdate: ['birthdate'],
-    gender: ['gender']
-}
-
 interface UserUpdateProps {
-    editing: string
+    updating: string
     fieldUpdated: Function
     setErr: Function
     customer: Customer
+    customerInfoKeys: { [key: string]: string }
+    customerInfoValues: { [key: string]: string }
 }
 
 export default function UserUpdate({
-    editing,
+    updating,
     fieldUpdated,
     setErr,
-    customer
+    customer,
+    customerInfoKeys,
+    customerInfoValues
 }: UserUpdateProps) {
     const router = useRouter()
 
-    // REQUIRED FORM FIELDS
-    const requiredFields: { [key: string]: { [key: string]: any } } = {
+    const requiredFieldsName: { [key: string]: string[] } = {
+        username: ['username'],
+        email: ['password', 'email'],
+        password: ['password', 'newPass', 'confirmNewPass'],
+        phone: ['phone'],
+        countrycity: ['country', 'city'],
+        address: ['address'],
+        firstname: ['firstname'],
+        lastname: ['lastname'],
+        birthdate: ['birthdate'],
+        gender: ['gender']
+    }
+
+    const requiredFieldsInitialValue: {
+        [key: string]: { [key: string]: any }
+    } = {
         username: { username: '' },
         email: { password: '', email: '' },
         password: { password: '', newPass: '', confirmNewPass: '' },
@@ -53,11 +61,10 @@ export default function UserUpdate({
         gender: { gender: customer.gender }
     }
 
-    // REQUIRED FORM VALIDATION
     const requiredValidation: { [key: string]: any } = {
         username: {
             username: Yup.string()
-                .required('Enter your username')
+                .required('Enter a new username')
                 .min(8, 'At least 8 characters')
                 .max(16, 'Maximum 16 characters')
                 .matches(
@@ -198,9 +205,8 @@ export default function UserUpdate({
         }
     }
 
-    // FORM VALIDATION
     const Formik = useFormik({
-        initialValues: requiredFields[editing],
+        initialValues: requiredFieldsInitialValue[updating],
         onSubmit: async values => {
             const res = await fetch('/api/user/update', {
                 method: 'post',
@@ -222,11 +228,10 @@ export default function UserUpdate({
                 })
             }
         },
-        validationSchema: Yup.object(requiredValidation[editing])
+        validationSchema: Yup.object(requiredValidation[updating])
     })
 
-    // OBJECT STORING FORM FIELDS
-    const formFields: { [key: string]: ReactElement } = {
+    const requiredFormElements: { [key: string]: ReactElement } = {
         username: (
             <div className={style.inputField}>
                 <label
@@ -601,9 +606,9 @@ export default function UserUpdate({
     return (
         <div className={style.wrapper}>
             <form className={style.form} onSubmit={Formik.handleSubmit}>
-                {formFields[editing]}
+                {requiredFormElements[updating]}
                 <div className={style.checking}>
-                    {fieldsTouched[editing].find(
+                    {requiredFieldsName[updating].find(
                         field => Formik.touched[field]
                     ) ? (
                         Formik.isValid ? (
@@ -612,7 +617,7 @@ export default function UserUpdate({
                                     icon={faCheckCircle}
                                     color='var(--main)'
                                 />
-                                {'Everything OK!'}
+                                <span>{'Everything OK!'}</span>
                             </>
                         ) : (
                             <>
@@ -620,11 +625,22 @@ export default function UserUpdate({
                                     icon={faXmarkCircle}
                                     color='var(--danger)'
                                 />
-                                {Object.values(Formik.errors)[0] as string}
+                                <span>
+                                    {Object.values(Formik.errors)[0] as string}
+                                </span>
                             </>
                         )
                     ) : (
-                        ''
+                        <>
+                            <FontAwesomeIcon icon={faUserPen} />
+                            <span>
+                                Updating{' '}
+                                {customerInfoKeys[updating].toLocaleLowerCase()}{' '}
+                                &quot;
+                                <span>{customerInfoValues[updating]}</span>
+                                &quot;
+                            </span>
+                        </>
                     )}
                 </div>
                 <div>

@@ -32,6 +32,32 @@ export default function UserProfile({ customer }: UserProfileProps) {
 
     const fieldUpdated = useCallback(() => setUpdating(false), [setUpdating])
 
+    const customerInfoKeys: { [key: string]: string } = {
+        username: 'Username',
+        email: 'Email',
+        password: 'Password',
+        phone: 'Phone',
+        countrycity: 'Country & City',
+        address: 'Address',
+        firstname: 'Name',
+        lastname: 'Last Name',
+        birthdate: 'Birthdate',
+        gender: 'Gender'
+    }
+
+    const customerInfoValues: { [key: string]: string } = {
+        username: customer.user.username,
+        email: customer.user.email,
+        password: '**************',
+        phone: customer.phone,
+        countrycity: `${customer.country} / ${customer.city}`,
+        address: customer.address,
+        firstname: customer.user.first_name,
+        lastname: customer.user.last_name,
+        birthdate: customer.birthdate,
+        gender: customer.gender
+    }
+
     const ResetError = () => setErr(null)
 
     return (
@@ -75,8 +101,8 @@ export default function UserProfile({ customer }: UserProfileProps) {
                                 onClick={() => updateField('username')}
                             >
                                 <div>
-                                    <h2>Username</h2>
-                                    <p>{customer.user.username}</p>
+                                    <h2>{customerInfoKeys.username}</h2>
+                                    <p>{customerInfoValues.username}</p>
                                 </div>
                                 <FontAwesomeIcon icon={faEdit} />
                             </button>
@@ -86,8 +112,8 @@ export default function UserProfile({ customer }: UserProfileProps) {
                                 onClick={() => updateField('email')}
                             >
                                 <div>
-                                    <h2>Email</h2>
-                                    <p>{customer.user.email}</p>
+                                    <h2>{customerInfoKeys.email}</h2>
+                                    <p>{customerInfoValues.email}</p>
                                 </div>
                                 <FontAwesomeIcon icon={faEdit} />
                             </button>
@@ -97,8 +123,8 @@ export default function UserProfile({ customer }: UserProfileProps) {
                                 onClick={() => updateField('password')}
                             >
                                 <div>
-                                    <h2>Password</h2>
-                                    <p>**************</p>
+                                    <h2>{customerInfoKeys.password}</h2>
+                                    <p>{customerInfoValues.password}</p>
                                 </div>
                                 <FontAwesomeIcon icon={faEdit} />
                             </button>
@@ -108,8 +134,8 @@ export default function UserProfile({ customer }: UserProfileProps) {
                                 onClick={() => updateField('phone')}
                             >
                                 <div>
-                                    <h2>Phone</h2>
-                                    <p>{customer.phone}</p>
+                                    <h2>{customerInfoKeys.phone}</h2>
+                                    <p>{customerInfoValues.phone}</p>
                                 </div>
                                 <FontAwesomeIcon icon={faEdit} />
                             </button>
@@ -119,10 +145,8 @@ export default function UserProfile({ customer }: UserProfileProps) {
                                 onClick={() => updateField('countrycity')}
                             >
                                 <div>
-                                    <h2>Country / City</h2>
-                                    <p>
-                                        {customer.country} / {customer.city}
-                                    </p>
+                                    <h2>{customerInfoKeys.countrycity}</h2>
+                                    <p>{customerInfoValues.countrycity}</p>
                                 </div>
                                 <FontAwesomeIcon icon={faEdit} />
                             </button>
@@ -132,8 +156,8 @@ export default function UserProfile({ customer }: UserProfileProps) {
                                 onClick={() => updateField('address')}
                             >
                                 <div>
-                                    <h2>Address</h2>
-                                    <p>{customer.address}</p>
+                                    <h2>{customerInfoKeys.address}</h2>
+                                    <p>{customerInfoValues.address}</p>
                                 </div>
                                 <FontAwesomeIcon icon={faEdit} />
                             </button>
@@ -143,8 +167,8 @@ export default function UserProfile({ customer }: UserProfileProps) {
                                 onClick={() => updateField('firstname')}
                             >
                                 <div>
-                                    <h2>Name</h2>
-                                    <p>{customer.user.first_name}</p>
+                                    <h2>{customerInfoKeys.firstname}</h2>
+                                    <p>{customerInfoValues.firstname}</p>
                                 </div>
                                 <FontAwesomeIcon icon={faEdit} />
                             </button>
@@ -154,8 +178,8 @@ export default function UserProfile({ customer }: UserProfileProps) {
                                 onClick={() => updateField('lastname')}
                             >
                                 <div>
-                                    <h2>Lastname</h2>
-                                    <p>{customer.user.last_name}</p>
+                                    <h2>{customerInfoKeys.lastname}</h2>
+                                    <p>{customerInfoValues.lastname}</p>
                                 </div>
                                 <FontAwesomeIcon icon={faEdit} />
                             </button>
@@ -166,10 +190,10 @@ export default function UserProfile({ customer }: UserProfileProps) {
                             >
                                 <div>
                                     <h2>
-                                        Birthdate ({getAge(customer.birthdate)}{' '}
-                                        yo)
+                                        {customerInfoKeys.birthdate} (
+                                        {getAge(customer.birthdate)} yo)
                                     </h2>
-                                    <p>{customer.birthdate}</p>
+                                    <p>{customerInfoValues.birthdate}</p>
                                 </div>
                                 <FontAwesomeIcon icon={faEdit} />
                             </button>
@@ -179,18 +203,20 @@ export default function UserProfile({ customer }: UserProfileProps) {
                                 onClick={() => updateField('gender')}
                             >
                                 <div>
-                                    <h2>Gender</h2>
-                                    <p>{customer.gender}</p>
+                                    <h2>{customerInfoKeys.gender}</h2>
+                                    <p>{customerInfoValues.gender}</p>
                                 </div>
                                 <FontAwesomeIcon icon={faEdit} />
                             </div>
                         </div>
                     ) : (
                         <UserUpdate
-                            editing={updating}
+                            updating={updating}
                             fieldUpdated={fieldUpdated}
                             setErr={setErr}
                             customer={customer}
+                            customerInfoKeys={customerInfoKeys}
+                            customerInfoValues={customerInfoValues}
                         />
                     )}
                     <div className={style.bottom}>
