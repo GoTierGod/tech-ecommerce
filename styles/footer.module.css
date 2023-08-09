@@ -1,4 +1,3 @@
-/* ------------------------- Footer -------------------------  */
 .footer {
     display: flex;
     justify-content: center;
@@ -10,7 +9,7 @@
     box-shadow: -1px -1px 2px var(--dark);
 }
 
-.footer > div {
+.wrapper {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -26,23 +25,14 @@
 }
 
 .footer h2 {
-    font-size: 1.5rem;
+    font-size: 1.25rem;
     font-weight: 400;
 }
 
-.footer p {
-    font-size: 1rem;
-    font-weight: 350;
-
-    line-height: 1.25rem;
-}
-
-/* ------------------------- ICONS -------------------------  */
 .footer svg {
-    height: 1.5rem;
+    height: 1.25rem;
 }
 
-/* ------------------------- SOCIAL LINKS -------------------------  */
 .socials {
     display: flex;
     flex-direction: column;
@@ -59,11 +49,6 @@
     gap: 1rem;
 }
 
-.links span {
-    font-size: 1rem;
-    font-weight: 375;
-}
-
 .links a {
     display: flex;
     justify-content: center;
@@ -71,7 +56,11 @@
     gap: 1rem;
 }
 
-/* ------------------------- USEFUL INFORMATION -------------------------  */
+.links span {
+    font-size: 1rem;
+    font-weight: 375;
+}
+
 .usefulInfo {
     display: flex;
     flex-direction: column;
@@ -91,12 +80,14 @@
 }
 
 .usefulInfo p {
-    max-width: 300px;
+    font-size: 1rem;
+    font-weight: 375;
+
+    line-height: 1.25rem;
 }
 
-/* ------------------------- MEDIA QUERIES -------------------------  */
 @media screen and (min-width: 768px) {
-    .footer > div {
+    .wrapper {
         padding: 6rem 3rem;
     }
 

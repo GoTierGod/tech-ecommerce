@@ -12,11 +12,10 @@ import {
     faBoxOpen
 } from '@fortawesome/free-solid-svg-icons'
 
-// WEBSITE FOOTER
-const Footer = () => {
+export default function Footer() {
     return (
         <footer className={style.footer}>
-            <div>
+            <div className={style.wrapper}>
                 <div className={style.socials}>
                     <h2>Follow Us</h2>
                     <div className={style.links}>
@@ -67,5 +66,3 @@ const Footer = () => {
         </footer>
     )
 }
-
-export default Footer
