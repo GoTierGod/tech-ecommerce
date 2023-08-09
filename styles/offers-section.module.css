@@ -1,15 +1,11 @@
-/* ------------------------- SECTION -------------------------  */
 .section {
     display: flex;
     flex-direction: column;
     gap: 0.5rem;
 
     width: 100%;
-
-    border-radius: 4px;
 }
 
-/* ------------------------- HEADER -------------------------  */
 .header {
     display: flex;
     flex-wrap: wrap;
@@ -28,26 +24,24 @@
     border-radius: 4px;
 }
 
-/* ------------------------- TITLE -------------------------  */
-.header > div {
+.title {
     display: flex;
     flex-direction: column;
     gap: 0.5rem;
 }
 
-.header div span {
+.title span {
     font-size: 1rem;
     font-weight: 375;
 }
 
-.header h4 {
+.title h4 {
     font-size: 1.5rem;
     font-weight: 400;
 
     width: 200px;
 }
 
-/* ------------------------- LINK -------------------------  */
 .link {
     display: flex;
     justify-content: space-between;
@@ -56,25 +50,22 @@
 
     padding: 0.75rem 1rem;
 
-    height: fit-content;
-    width: fit-content;
-
     background: var(--white);
     color: var(--main);
 
     border: 2px solid transparent;
     border-radius: 4px;
 
-    transition: all 300ms;
+    transition: border-color 300ms;
 }
 
 .link span {
     font-size: 1rem;
     font-weight: 500;
 
-    text-overflow: 1px 1px transparent;
+    text-shadow: 1px 1px transparent;
 
-    transition: all 300ms;
+    transition: text-shadow 300ms;
 }
 
 .link svg {
@@ -82,7 +73,7 @@
 
     filter: drop-shadow(1px 1px transparent);
 
-    transition: all 300ms;
+    transition: filter 300ms;
 }
 
 .link:hover {
@@ -97,33 +88,28 @@
     filter: drop-shadow(1px 1px var(--light-pink));
 }
 
-/* ------------------------- GRID -------------------------  */
 .grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 0.5rem;
 }
 
-/* ------------------------- PRODUCT -------------------------  */
 .product {
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    align-items: center;
 
     background: var(--white);
 
     border: 2px solid transparent;
     border-radius: 4px;
 
-    transition: all 300ms;
+    transition: border-color 300ms;
 }
 
 .product:hover {
     border-color: var(--main);
 }
 
-/* ------------------------- IMAGE -------------------------  */
 .product img {
     padding: 1rem;
 
@@ -135,7 +121,6 @@
     object-fit: contain;
 }
 
-/* ------------------------- MEDIA QUERIES -------------------------  */
 @media screen and (min-width: 768px) {
     .section {
         display: grid;

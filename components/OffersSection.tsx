@@ -32,7 +32,7 @@ export default function OffersSection({ products }: OffersProps) {
                 ))}
             </div>
             <div className={style.header}>
-                <div>
+                <div className={style.title}>
                     <span>Only for a few hours</span>
                     <h4>Take Advantage Of This Offers</h4>
                 </div>
