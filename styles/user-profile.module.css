@@ -63,47 +63,75 @@
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+    align-items: center;
     gap: 0.5rem;
 
     padding: 1rem;
     width: 100%;
 
     background: var(--white);
+    color: var(--gray);
 
+    border: 2px solid transparent;
     border-radius: 4px;
+
+    transition: border-color 300ms;
+    cursor: pointer;
 }
 
 .cell > div {
     display: flex;
     flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
     gap: 0.5rem;
-}
-
-.cell button {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-    background: transparent;
-    color: var(--gray);
-
-    font-size: 1rem;
-    font-weight: 375;
-    font-family: inherit;
-
-    border: none;
-    border: 4px;
-    cursor: pointer;
 }
 
 .cell h2 {
     font-size: 1.25rem;
     font-weight: 400;
+
+    text-shadow: 1px 1px transparent;
+
+    transition: color 300ms, text-shadow 300ms;
 }
 
 .cell p {
     font-size: 1rem;
     font-weight: 375;
+
+    width: fit-content;
+
+    transition: transform 300ms, font-weight 300ms;
+}
+
+.cell svg {
+    height: 1rem;
+
+    filter: drop-shadow(2px 2px transparent);
+
+    transition: color 300ms, filter 300ms;
+}
+
+.cell:hover {
+    border-color: var(--main);
+}
+
+.cell:hover h2 {
+    color: var(--main);
+
+    text-shadow: 1px 1px var(--light-pink);
+}
+
+.cell:hover p {
+    transform: translateX(0.5rem);
+    font-weight: 450;
+}
+
+.cell:hover svg {
+    color: var(--main);
+
+    filter: drop-shadow(2px 2px var(--light-pink));
 }
 
 .bottom {

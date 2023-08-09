@@ -1,14 +1,16 @@
 'use client'
 
-import { formatTitleCase } from '@/helpers/formatTitleCase'
 import style from '../styles/user-profile.module.css'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { Customer } from '@/types/users'
-import { faEdit, faStar } from '@fortawesome/free-solid-svg-icons'
+
+import Link from 'next/link'
 import { useCallback, useState } from 'react'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faEdit, faStar } from '@fortawesome/free-solid-svg-icons'
+
+import { Customer } from '@/types/users'
+import { formatTitleCase } from '@/helpers/formatTitleCase'
 import { getAge } from '@/helpers/getAge'
 import UserUpdate from './UserUpdate'
-import Link from 'next/link'
 import ErrorDisplay from './ErrorDisplay'
 
 interface UserProfileProps {
@@ -67,105 +69,101 @@ export default function UserProfile({ customer }: UserProfileProps) {
                     </div>
                     {!updating ? (
                         <div className={style.details}>
-                            <div className={style.cell}>
+                            <button
+                                className={style.cell}
+                                aria-label='Edit username'
+                                onClick={() => updateField('username')}
+                            >
                                 <div>
                                     <h2>Username</h2>
                                     <p>{customer.user.username}</p>
                                 </div>
-                                <button
-                                    aria-label='Edit'
-                                    onClick={() => updateField('username')}
-                                >
-                                    <FontAwesomeIcon icon={faEdit} />
-                                </button>
-                            </div>
-                            <div className={style.cell}>
+                                <FontAwesomeIcon icon={faEdit} />
+                            </button>
+                            <button
+                                className={style.cell}
+                                aria-label='Edit email'
+                                onClick={() => updateField('email')}
+                            >
                                 <div>
                                     <h2>Email</h2>
                                     <p>{customer.user.email}</p>
                                 </div>
-                                <button
-                                    aria-label='Edit'
-                                    onClick={() => updateField('email')}
-                                >
-                                    <FontAwesomeIcon icon={faEdit} />
-                                </button>
-                            </div>
-                            <div className={style.cell}>
+                                <FontAwesomeIcon icon={faEdit} />
+                            </button>
+                            <button
+                                className={style.cell}
+                                aria-label='Edit password'
+                                onClick={() => updateField('password')}
+                            >
                                 <div>
                                     <h2>Password</h2>
                                     <p>**************</p>
                                 </div>
-                                <button
-                                    aria-label='Edit'
-                                    onClick={() => updateField('password')}
-                                >
-                                    <FontAwesomeIcon icon={faEdit} />
-                                </button>
-                            </div>
-                            <div className={style.cell}>
+                                <FontAwesomeIcon icon={faEdit} />
+                            </button>
+                            <button
+                                className={style.cell}
+                                aria-label='Edit phone number'
+                                onClick={() => updateField('phone')}
+                            >
                                 <div>
                                     <h2>Phone</h2>
                                     <p>{customer.phone}</p>
                                 </div>
-                                <button
-                                    aria-label='Edit'
-                                    onClick={() => updateField('phone')}
-                                >
-                                    <FontAwesomeIcon icon={faEdit} />
-                                </button>
-                            </div>
-                            <div className={style.cell}>
+                                <FontAwesomeIcon icon={faEdit} />
+                            </button>
+                            <button
+                                className={style.cell}
+                                aria-label='Edit country and city'
+                                onClick={() => updateField('countrycity')}
+                            >
                                 <div>
                                     <h2>Country / City</h2>
                                     <p>
                                         {customer.country} / {customer.city}
                                     </p>
                                 </div>
-                                <button
-                                    aria-label='Edit'
-                                    onClick={() => updateField('countrycity')}
-                                >
-                                    <FontAwesomeIcon icon={faEdit} />
-                                </button>
-                            </div>
-                            <div className={style.cell}>
+                                <FontAwesomeIcon icon={faEdit} />
+                            </button>
+                            <button
+                                className={style.cell}
+                                aria-label='Edit address'
+                                onClick={() => updateField('address')}
+                            >
                                 <div>
                                     <h2>Address</h2>
                                     <p>{customer.address}</p>
                                 </div>
-                                <button
-                                    aria-label='Edit'
-                                    onClick={() => updateField('address')}
-                                >
-                                    <FontAwesomeIcon icon={faEdit} />
-                                </button>
-                            </div>
-                            <div className={style.cell}>
+                                <FontAwesomeIcon icon={faEdit} />
+                            </button>
+                            <button
+                                className={style.cell}
+                                aria-label='Edit first name'
+                                onClick={() => updateField('firstname')}
+                            >
                                 <div>
                                     <h2>Name</h2>
                                     <p>{customer.user.first_name}</p>
                                 </div>
-                                <button
-                                    aria-label='Edit'
-                                    onClick={() => updateField('firstname')}
-                                >
-                                    <FontAwesomeIcon icon={faEdit} />
-                                </button>
-                            </div>
-                            <div className={style.cell}>
+                                <FontAwesomeIcon icon={faEdit} />
+                            </button>
+                            <button
+                                className={style.cell}
+                                aria-label='Edit last name'
+                                onClick={() => updateField('lastname')}
+                            >
                                 <div>
                                     <h2>Lastname</h2>
                                     <p>{customer.user.last_name}</p>
                                 </div>
-                                <button
-                                    aria-label='Edit'
-                                    onClick={() => updateField('lastname')}
-                                >
-                                    <FontAwesomeIcon icon={faEdit} />
-                                </button>
-                            </div>
-                            <div className={style.cell}>
+                                <FontAwesomeIcon icon={faEdit} />
+                            </button>
+                            <button
+                                className={style.cell}
+                                aria-label='Edit birthdate'
+                                onClick={() => updateField('birthdate')}
+                            >
                                 <div>
                                     <h2>
                                         Birthdate ({getAge(customer.birthdate)}{' '}
@@ -173,24 +171,18 @@ export default function UserProfile({ customer }: UserProfileProps) {
                                     </h2>
                                     <p>{customer.birthdate}</p>
                                 </div>
-                                <button
-                                    aria-label='Edit'
-                                    onClick={() => updateField('birthdate')}
-                                >
-                                    <FontAwesomeIcon icon={faEdit} />
-                                </button>
-                            </div>
-                            <div className={style.cell}>
+                                <FontAwesomeIcon icon={faEdit} />
+                            </button>
+                            <div
+                                className={style.cell}
+                                aria-label='Edit gender'
+                                onClick={() => updateField('gender')}
+                            >
                                 <div>
                                     <h2>Gender</h2>
                                     <p>{customer.gender}</p>
                                 </div>
-                                <button
-                                    aria-label='Edit'
-                                    onClick={() => updateField('gender')}
-                                >
-                                    <FontAwesomeIcon icon={faEdit} />
-                                </button>
+                                <FontAwesomeIcon icon={faEdit} />
                             </div>
                         </div>
                     ) : (
