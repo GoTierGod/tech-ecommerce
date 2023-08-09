@@ -1,10 +1,11 @@
 'use client'
 
-import { ProductImage } from '@/types/tables'
-import Image from 'next/image'
 import style from '../styles/product-images.module.css'
 
+import Image from 'next/image'
 import { useState } from 'react'
+
+import { ProductImage } from '@/types/tables'
 
 interface ProductImagesProps {
     images: ProductImage[]
@@ -18,13 +19,14 @@ export default function ProductImages({ images }: ProductImagesProps) {
     return (
         <div className={style.images}>
             <Image
+                className={style.currImg}
                 src={currentImg.url}
                 alt={currentImg.description}
                 width={450}
                 height={450}
                 quality='100'
             />
-            <div>
+            <div className={style.imgList}>
                 {images.map(image => (
                     <Image
                         key={image.id}

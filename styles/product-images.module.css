@@ -14,7 +14,7 @@
     overflow: hidden;
 }
 
-.images > img {
+.currImg {
     position: sticky;
     height: 300px;
     width: 90%;
@@ -22,7 +22,7 @@
     object-fit: contain;
 }
 
-.images div {
+.imgList {
     display: flex;
     gap: 0.5rem;
 
@@ -32,7 +32,7 @@
     overflow-x: scroll;
 }
 
-.images div img {
+.imgList img {
     padding: 0.25rem;
 
     border: 2px solid var(--light-main);
@@ -41,7 +41,7 @@
     object-fit: contain;
 
     cursor: pointer;
-    transition: all 300ms;
+    transition: border-color 300ms;
 }
 
 @media screen and (min-width: 768px) {
@@ -53,11 +53,11 @@
         height: fit-content;
     }
 
-    .images > img {
+    .currImg {
         height: 375px;
     }
 
-    .images > div {
+    .imgList {
         flex-direction: column;
 
         overflow-x: visible;
@@ -65,7 +65,7 @@
 }
 
 @media screen and (min-width: 1024px) {
-    .images > img {
+    .currImg {
         height: 450px;
     }
 }
