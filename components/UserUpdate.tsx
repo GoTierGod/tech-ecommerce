@@ -162,7 +162,7 @@ export default function UserUpdate({
                 .required('Enter your last name')
                 .max(255, 'Maximum 255 characters')
                 .not(
-                    [customer.user.username],
+                    [customer.user.last_name],
                     'Last name must be different from your current last name'
                 )
         },
