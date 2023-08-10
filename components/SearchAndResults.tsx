@@ -29,6 +29,7 @@ interface SearchProps {
     searchText: string
     queryObject?: { [key: string]: string | string[] | undefined }
     queryString: string
+    results: number
     pages: number
     products: CardProductDetails[]
     categories: Category[]
@@ -40,6 +41,7 @@ const SearchAndResults = ({
     searchText,
     queryObject,
     queryString,
+    results,
     pages,
     products,
     categories,
@@ -48,20 +50,16 @@ const SearchAndResults = ({
 }: SearchProps) => {
     const router = useRouter()
 
-    // CURRENT ORDER_BY PARAMETER
     const { order_by, page } = queryObject ?? {}
 
-    // ORDER BY
     const [orderBy, setOrderBy] = useState((order_by as string) || '')
     const [currentPage, setCurrentPage] = useState((page as string) || '1')
 
-    // MODAL REFERNECES
     const filteringModalRef: MutableRefObject<null | HTMLDialogElement> =
         useRef(null)
     const sortingModalRef: MutableRefObject<null | HTMLDialogElement> =
         useRef(null)
 
-    // OPEN/CLOSE FILTERING MODAL
     const filteringModal = (bool: boolean) => {
         if (filteringModalRef.current) {
             if (bool) {
@@ -73,7 +71,6 @@ const SearchAndResults = ({
         }
     }
 
-    // OPEN/CLOSE SORTING MODAL
     const sortingModal = (bool: boolean) => {
         if (sortingModalRef.current) {
             if (bool) {
@@ -105,7 +102,6 @@ const SearchAndResults = ({
             : ''
     }, [queryString, orderBy])
 
-    // SORTING CHANGES
     const changeSorting = (val: string) => {
         if (orderBy === val) setOrderBy('')
         else setOrderBy(val)
@@ -113,7 +109,6 @@ const SearchAndResults = ({
         sortingModal(false)
     }
 
-    // CHANGE PAGE
     const changePage = useCallback(
         (toPage: string) => {
             if (toPage === 'next' && Number(currentPage) < pages) {
@@ -125,13 +120,11 @@ const SearchAndResults = ({
         [currentPage, pages]
     )
 
-    // CLOSE MODALS AFTER MAKING A REQUEST
     useEffect(() => {
         filteringModal(false)
         sortingModal(false)
     }, [queryString])
 
-    // SORT PRODUCTS IF ORDER_BY PARAMETER IS DEFINED
     useEffect(() => {
         router.push(`/search/${searchText + sortQuery}`)
         // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -150,9 +143,7 @@ const SearchAndResults = ({
 
     return (
         <div className={style.wrapper}>
-            {/* HEADER IN SMALL SCREENS / LEFT SIDE IN WIDE SCREENS */}
             <div className={style.header}>
-                {/* FOR SMALL SCREENS */}
                 <div className={style.mobile}>
                     <div>
                         <button onClick={() => sortingModal(true)}>
@@ -162,17 +153,24 @@ const SearchAndResults = ({
                             <FontAwesomeIcon icon={faTasks} /> Filter
                         </button>
                     </div>
-                    <h2>{formatTitleCase(searchText)}</h2>
+                    <div className={style.searchedText}>
+                        <span>{results} Results for</span>
+                        <h2>{formatTitleCase(searchText)}</h2>
+                    </div>
                 </div>
-                {/* FOR WIDE SCREENS */}
                 <div className={style.desktop}>
-                    <div>
+                    <div className={style.searched}>
                         <span>
                             Searched Text <FontAwesomeIcon icon={faSearch} />
                         </span>
-                        <h2>{formatTitleCase(searchText)}</h2>
+                        <div className={style.searchedText}>
+                            <span>
+                                <span>{results}</span> Results for
+                            </span>
+                            <h2>{formatTitleCase(searchText)}</h2>
+                        </div>
                     </div>
-                    <div>
+                    <div className={style.filters}>
                         <span>
                             Filters <FontAwesomeIcon icon={faTasks} />
                         </span>
@@ -186,10 +184,8 @@ const SearchAndResults = ({
                     </div>
                 </div>
             </div>
-            {/* RESULTS */}
             <div className={style.results}>
-                {/* FEEDBACK ABOUT THE CURRENT SORTING TYPE */}
-                <div className={style.phoneOrderBy}>
+                <div className={style.currentOrderBy}>
                     <span>
                         {orderBy === 'offer_price'
                             ? 'Sorted by Lowest Price'
@@ -198,7 +194,6 @@ const SearchAndResults = ({
                             : 'Unsorted'}
                     </span>
                 </div>
-                {/* SORTING BUTTONS FOR WIDE SCREENS */}
                 <div className={style.desktopOrderBy}>
                     <h3>Order By</h3>
                     <div>
@@ -244,7 +239,6 @@ const SearchAndResults = ({
                         </button>
                     </div>
                 </div>
-                {/* PRODUCTS FOUND. GRID IN SMALL SCREENS / LIST IN WIDE SCREENS */}
                 <div className={style.grid}>
                     {products.map(product => (
                         <SearchCard
@@ -254,12 +248,18 @@ const SearchAndResults = ({
                         />
                     ))}
                 </div>
-                {/* PAGINATION */}
                 <div className={style.pagination}>
                     <h2>
-                        {`${Number(currentPage) * 10 - 10}-${
-                            Number(currentPage) * 10
-                        } of ${pages * 10} Products`}
+                        {`${
+                            results <= 10
+                                ? `1-${results}`
+                                : `${
+                                      (Number(currentPage) - 1) * 10 + 1
+                                  }-${Math.min(
+                                      Number(currentPage) * 10,
+                                      results
+                                  )}`
+                        } of ${results} Products`}
                     </h2>
                     <div>
                         <button onClick={() => changePage('prev')}>Prev</button>
@@ -270,7 +270,6 @@ const SearchAndResults = ({
                     </div>
                 </div>
             </div>
-            {/* FILTERING MODAL */}
             <dialog ref={filteringModalRef} className={style.modal}>
                 <div>
                     <FilterForm
@@ -283,10 +282,9 @@ const SearchAndResults = ({
                     <button onClick={() => filteringModal(false)}>Close</button>
                 </div>
             </dialog>
-            {/* SORTING MODAL */}
             <dialog ref={sortingModalRef} className={style.modal}>
                 <div>
-                    <div className={style.orderBy}>
+                    <div className={style.mobileOrderBy}>
                         <h2>Order By</h2>
                         <div>
                             <button

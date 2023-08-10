@@ -1,4 +1,3 @@
-/* ------------------------- PAGE -------------------------  */
 .wrapper {
     display: flex;
     flex-direction: column;
@@ -8,7 +7,6 @@
     max-width: 1200px;
 }
 
-/* ------------------------- HEADER -------------------------  */
 .header {
     display: flex;
     flex-direction: column;
@@ -20,6 +18,39 @@
 
 .header svg {
     height: 1rem;
+}
+
+.mobile,
+.desktop {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.searchedText {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+
+    padding: 1rem;
+
+    background: var(--white);
+
+    border-radius: 4px;
+}
+
+.searchedText span {
+    font-size: 1rem;
+    font-weight: 350;
+}
+
+.searchedText span span {
+    font-weight: 375;
+}
+
+.searchedText h2 {
+    font-size: 1.125rem;
+    font-weight: 400;
 }
 
 .mobile button {
@@ -44,38 +75,18 @@
     cursor: pointer;
 }
 
-.mobile,
-.desktop {
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-}
-
 .mobile > div {
     display: flex;
     gap: 0.5rem;
 }
 
-.mobile h2 {
-    display: flex;
-
-    padding: 1rem;
-
-    background: var(--white);
-
-    font-size: 1.125rem;
-    font-weight: 500;
-
-    border-radius: 4px;
-}
-
-.desktop > div:nth-child(1) {
+.desktop .searched {
     display: flex;
     flex-direction: column;
     gap: 0.5rem;
 }
 
-.desktop div span {
+.desktop :where(.searched, .filters) > span {
     display: flex;
     justify-content: space-between;
     gap: 1rem;
@@ -114,7 +125,6 @@
     display: none;
 }
 
-/* ------------------------- RESULTS -------------------------  */
 .results {
     display: flex;
     flex-direction: column;
@@ -123,27 +133,12 @@
     width: 100%;
 }
 
-.results > div > button {
-    display: none;
-    justify-content: center;
-    align-items: center;
-    gap: 1rem;
-
-    padding: 0.75rem 1rem;
-
-    background: var(--white);
-    color: var(--gray);
-
-    font-size: 1rem;
-    font-family: inherit;
-
-    border: none;
-    border-radius: 4px;
-
-    cursor: pointer;
+.grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.5rem;
 }
 
-/* ------------------------- PAGINATION -------------------------  */
 .pagination {
     display: flex;
     flex-direction: column;
@@ -162,7 +157,7 @@
 
 .pagination h2 {
     font-size: 1.25rem;
-    font-weight: 500;
+    font-weight: 400;
 }
 
 .pagination > div {
@@ -220,14 +215,6 @@
     cursor: pointer;
 }
 
-/* ------------------------- GRID -------------------------  */
-.grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 0.5rem;
-}
-
-/* ------------------------- MODAL -------------------------  */
 .modal[open] {
     left: 0;
     top: 0;
@@ -301,74 +288,8 @@
     text-shadow: 1px 1px var(--light-pink);
 }
 
-/* ------------------------- ORDER BY -------------------------  */
-.orderBy {
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-
-    text-align: center;
-}
-
-.orderBy > div {
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-
-    padding: 1rem;
-
-    background: var(--white);
-
-    border: 4px;
-    border-radius: 4px;
-}
-
-.orderBy h2 {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-    padding: 1rem;
-
-    background: var(--white);
-
-    font-size: 1.25rem;
-    font-weight: 400;
-
-    border-radius: 4px;
-}
-
-.orderBy button {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-    padding: 0.75rem 1rem;
-
-    background: var(--gray);
-    color: var(--white);
-
-    font-size: 1rem;
-    font-family: inherit;
-
-    text-shadow: 1px 1px transparent;
-
-    border: 2px solid transparent;
-    border-radius: 4px;
-
-    transition: all 300ms;
-    cursor: pointer;
-}
-
-.orderBy button:hover {
-    border-color: var(--main);
-
-    text-shadow: 1px 1px var(--main);
-}
-
-/* ------------------------- ORDER BY INFO AND BUTTONS -------------------------  */
 .desktopOrderBy,
-.phoneOrderBy {
+.currentOrderBy {
     display: none;
     justify-content: space-between;
     align-items: center;
@@ -385,12 +306,32 @@
     border-radius: 4px;
 }
 
-.phoneOrderBy {
+.currentOrderBy {
     display: flex;
     justify-content: center;
 }
 
-.phoneOrderBy span {
+.desktopOrderBy button {
+    display: none;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+
+    padding: 0.75rem 1rem;
+
+    background: var(--white);
+    color: var(--gray);
+
+    font-size: 1rem;
+    font-family: inherit;
+
+    border: none;
+    border-radius: 4px;
+
+    cursor: pointer;
+}
+
+.currentOrderBy span {
     font-size: 1rem;
     font-weight: 400;
 }
@@ -443,7 +384,70 @@
     transition: all 300ms;
 }
 
-/* ------------------------- MEDIA QUERIES -------------------------  */
+.mobileOrderBy {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+
+    text-align: center;
+}
+
+.mobileOrderBy > div {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+
+    padding: 1rem;
+
+    background: var(--white);
+
+    border: 4px;
+    border-radius: 4px;
+}
+
+.mobileOrderBy h2 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    padding: 1rem;
+
+    background: var(--white);
+
+    font-size: 1.25rem;
+    font-weight: 400;
+
+    border-radius: 4px;
+}
+
+.mobileOrderBy button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    padding: 0.75rem 1rem;
+
+    background: var(--gray);
+    color: var(--white);
+
+    font-size: 1rem;
+    font-family: inherit;
+
+    text-shadow: 1px 1px transparent;
+
+    border: 2px solid transparent;
+    border-radius: 4px;
+
+    transition: all 300ms;
+    cursor: pointer;
+}
+
+.mobileOrderBy button:hover {
+    border-color: var(--main);
+
+    text-shadow: 1px 1px var(--main);
+}
+
 @media screen and (min-width: 600px) {
     .grid {
         grid-template-columns: repeat(3, 1fr);
@@ -465,19 +469,19 @@
         display: flex;
     }
 
-    .results > div > button {
-        display: flex;
-    }
-
     .grid {
         grid-template-columns: repeat(1, 1fr);
     }
 
-    .phoneOrderBy {
-        display: none;
+    .desktopOrderBy button {
+        display: flex;
     }
 
     .desktopOrderBy {
         display: flex;
+    }
+
+    .phoneOrderBy {
+        display: none;
     }
 }

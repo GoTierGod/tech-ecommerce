@@ -65,7 +65,8 @@ export default async function Search({
 
     if (!searchRes) return notFound()
 
-    const { pages, products, categories, brands } = searchRes as SearchResponse
+    const { results, pages, products, categories, brands } =
+        searchRes as SearchResponse
 
     const user: CustomerData = await getUser()
 
@@ -75,6 +76,7 @@ export default async function Search({
                 searchText={readableSearch}
                 queryObject={searchParams}
                 queryString={getQueryString()}
+                results={results}
                 pages={pages}
                 products={products}
                 categories={categories}
