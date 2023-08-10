@@ -481,7 +481,7 @@
         display: flex;
     }
 
-    .phoneOrderBy {
+    .currentOrderBy {
         display: none;
     }
 }
