@@ -154,7 +154,9 @@ const SearchAndResults = ({
                         </button>
                     </div>
                     <div className={style.searchedText}>
-                        <span>{results} Results for</span>
+                        <span>
+                            <span>{results}</span> Results for
+                        </span>
                         <h2>{formatTitleCase(searchText)}</h2>
                     </div>
                 </div>
