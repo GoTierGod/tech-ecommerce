@@ -12,18 +12,15 @@ export const getUser = async () => {
         // CHECK IF THE REQUIRED COOKIES EXISTS
         if (authTokens) {
             const userTokens: UserTokens = JSON.parse(authTokens.value)
-            const decodedUser: DecodedUserInfo = jwtDecode(userTokens.access)
-            const username = decodedUser.username
 
             // POST REQUEST TO GET USER INFORMATION
             const res = await fetch(`${apiUrl}/api/customer/`, {
-                method: 'post',
+                method: 'get',
                 cache: 'no-cache',
                 headers: {
                     'Content-Type': 'application/json',
                     Authorization: `Bearer ${userTokens.access}`
-                },
-                body: JSON.stringify({ username: username })
+                }
             })
 
             // IF THE ACCESS TOKEN IS VALID, RETURN THE USER DATA
