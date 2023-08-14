@@ -45,7 +45,7 @@ export async function POST(req: NextRequest) {
             )
 
             const res = await fetch(`${apiUrl}/api/customer/update/`, {
-                method: 'post',
+                method: 'patch',
                 headers: {
                     'Content-Type': 'application/json',
                     Authorization: `Bearer ${userTokens.access}`

@@ -15,7 +15,7 @@ export async function POST(req: NextRequest) {
             const password = body.password
 
             const res = await fetch(`${apiUrl}/api/customer/delete/`, {
-                method: 'post',
+                method: 'delete',
                 headers: {
                     'Content-Type': 'application/json',
                     Authorization: `Bearer ${userTokens.access}`
