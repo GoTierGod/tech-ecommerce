@@ -3,10 +3,10 @@ import style from '../styles/gaming-section.module.css'
 import Link from 'next/link'
 import Image from 'next/image'
 
-import { CardProductDetails } from '@/types/products'
+import { ComposedProductInfo } from '@/types/products'
 
 interface GamingProps {
-    products: CardProductDetails[]
+    products: ComposedProductInfo[]
 }
 
 export default function GamingSection({ products }: GamingProps) {
@@ -38,8 +38,8 @@ export default function GamingSection({ products }: GamingProps) {
                         className={style.product}
                     >
                         <Image
-                            src={product.image.url}
-                            alt={product.image.description}
+                            src={product.default_img.url}
+                            alt={product.default_img.description}
                             width={250}
                             height={250}
                             quality='25'

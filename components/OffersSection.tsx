@@ -5,10 +5,10 @@ import Image from 'next/image'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faRightLong } from '@fortawesome/free-solid-svg-icons'
 
-import { CardProductDetails } from '@/types/products'
+import { ComposedProductInfo } from '@/types/products'
 
 interface OffersProps {
-    products: CardProductDetails[]
+    products: ComposedProductInfo[]
 }
 
 export default function OffersSection({ products }: OffersProps) {
@@ -22,8 +22,8 @@ export default function OffersSection({ products }: OffersProps) {
                         className={style.product}
                     >
                         <Image
-                            src={product.image.url}
-                            alt={product.image.description}
+                            src={product.default_img.url}
+                            alt={product.default_img.description}
                             width={150}
                             height={150}
                             quality='25'

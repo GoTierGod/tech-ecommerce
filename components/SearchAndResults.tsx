@@ -11,7 +11,7 @@ import {
     faTasks
 } from '@fortawesome/free-solid-svg-icons'
 import FilterForm from './FilterForm'
-import { CardProductDetails } from '@/types/products'
+import { ComposedProductInfo } from '@/types/products'
 import SearchCard from './SearchCard'
 import {
     MutableRefObject,
@@ -31,7 +31,7 @@ interface SearchProps {
     queryString: string
     results: number
     pages: number
-    products: CardProductDetails[]
+    products: ComposedProductInfo[]
     categories: Category[]
     brands: Brand[]
     user: CustomerData

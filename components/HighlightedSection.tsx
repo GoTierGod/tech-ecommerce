@@ -3,10 +3,10 @@ import style from '../styles/highlighted-section.module.css'
 import Image from 'next/image'
 import Link from 'next/link'
 
-import { CardProductDetails } from '@/types/products'
+import { ComposedProductInfo } from '@/types/products'
 
 interface HighlightedProps {
-    products: CardProductDetails[]
+    products: ComposedProductInfo[]
 }
 
 export default function HighlightedSection({ products }: HighlightedProps) {
@@ -28,8 +28,8 @@ export default function HighlightedSection({ products }: HighlightedProps) {
                         className={style.image}
                     >
                         <Image
-                            src={product.image.url}
-                            alt={product.image.description}
+                            src={product.default_img.url}
+                            alt={product.default_img.description}
                             width={250}
                             height={250}
                             quality='25'

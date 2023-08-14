@@ -1,7 +1,7 @@
 import style from './page.module.css'
 
 import ProductsSection from '@/components/ProductsSection'
-import { CardProductDetails } from '@/types/products'
+import { ComposedProductInfo } from '@/types/products'
 import { getData } from '@/helpers/getData'
 import OffersSection from '@/components/OffersSection'
 import HighlightedSection from '@/components/HighlightedSection'
@@ -13,28 +13,28 @@ export const metadata: Metadata = {
 }
 
 export default async function Home() {
-    const laptops: CardProductDetails[] = await getData(
+    const laptops: ComposedProductInfo[] = await getData(
         `https://ft-drf-api.vercel.app/api/products?category=laptops&limit=6`
     )
-    const headphones: CardProductDetails[] = await getData(
+    const headphones: ComposedProductInfo[] = await getData(
         `https://ft-drf-api.vercel.app/api/products?category=headphones&limit=6`
     )
-    const smartphones: CardProductDetails[] = await getData(
+    const smartphones: ComposedProductInfo[] = await getData(
         `https://ft-drf-api.vercel.app/api/products?category=smartphones&limit=6`
     )
 
-    const offers: CardProductDetails[] = await getData(
+    const offers: ComposedProductInfo[] = await getData(
         `https://ft-drf-api.vercel.app/api/products?category=monitors&limit=3`
     )
 
-    const highlightedOne: CardProductDetails[] = await getData(
+    const highlightedOne: ComposedProductInfo[] = await getData(
         `https://ft-drf-api.vercel.app/api/products?category=smartphones&limit=1`
     )
-    const highlightedTwo: CardProductDetails[] = await getData(
+    const highlightedTwo: ComposedProductInfo[] = await getData(
         `https://ft-drf-api.vercel.app/api/products?category=headphones&limit=1`
     )
 
-    const gaming: CardProductDetails[] = await getData(
+    const gaming: ComposedProductInfo[] = await getData(
         `https://ft-drf-api.vercel.app/api/products?is_gamer=true&limit=6`
     )
 

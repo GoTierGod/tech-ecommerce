@@ -4,12 +4,12 @@ import Link from 'next/link'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faRightLong } from '@fortawesome/free-solid-svg-icons'
 
-import { CardProductDetails } from '@/types/products'
+import { ComposedProductInfo } from '@/types/products'
 import VerticalCard from './VerticalCard'
 
 interface ProductRowsProps {
     title: string
-    products: CardProductDetails[]
+    products: ComposedProductInfo[]
     url: string
 }
 

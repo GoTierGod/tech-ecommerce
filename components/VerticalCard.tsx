@@ -3,13 +3,13 @@ import style from '../styles/vertical-card.module.css'
 import Image from 'next/image'
 import Link from 'next/link'
 
-import { CardProductDetails } from '@/types/products'
+import { ComposedProductInfo } from '@/types/products'
 import { respectLineBreaks } from '@/helpers/respectLineBreaks'
 import { formatPrice } from '@/helpers/formatPrice'
 import { getDiscount } from '@/helpers/getDiscount'
 
 interface VerticalCardProps {
-    product: CardProductDetails
+    product: ComposedProductInfo
 }
 
 export default function VerticalCard({ product }: VerticalCardProps) {
@@ -17,8 +17,8 @@ export default function VerticalCard({ product }: VerticalCardProps) {
         <Link href={`/product/${product.details.id}`} className={style.card}>
             <div className={style.image}>
                 <Image
-                    src={product.image.url}
-                    alt={product.image.description}
+                    src={product.default_img.url}
+                    alt={product.default_img.description}
                     height={250}
                     width={250}
                     quality='25'

@@ -21,10 +21,8 @@ export default async function Search({
     params: { slug: string }
     searchParams?: { [key: string]: string | string[] | undefined }
 }) {
-    // SEARCHED TEXT
     const { slug: search } = params
 
-    // SEARCH PARAMS
     const {
         min_price,
         max_price,
@@ -36,7 +34,6 @@ export default async function Search({
         page
     } = searchParams ?? {}
 
-    // CONSTRUCT THE QUERY STRING
     const getQueryString = () => {
         const filters = []
 
@@ -52,11 +49,9 @@ export default async function Search({
         return filters.length > 0 ? '?' + filters.join('&') : ''
     }
 
-    // SEARCHED STRING IN A READABLE FORMAT
     const readableSearch = unescape(search)
     metadata.title = `${formatTitleCase(readableSearch)} | Tech`
 
-    // PRODUCTS
     const searchRes: SearchResponse | false = await getData(
         `https://ft-drf-api.vercel.app/api/search/${
             readableSearch.replace(/\s+/, ',') + getQueryString()

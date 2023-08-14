@@ -5,13 +5,13 @@ import Image from 'next/image'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCartPlus, faHeart } from '@fortawesome/free-solid-svg-icons'
 
-import { CardProductDetails } from '@/types/products'
+import { ComposedProductInfo } from '@/types/products'
 import { CustomerData } from '@/types/users'
 import { getInstallments } from '@/helpers/getInstallments'
 import { getDiscount } from '@/helpers/getDiscount'
 
 interface SearchCardProps {
-    product: CardProductDetails
+    product: ComposedProductInfo
     user: CustomerData
 }
 
@@ -25,8 +25,8 @@ export default function SearchCard({ product, user }: SearchCardProps) {
             >
                 <div className={style.image}>
                     <Image
-                        src={product.image.url}
-                        alt={product.image.description}
+                        src={product.default_img.url}
+                        alt={product.default_img.description}
                         width={250}
                         height={250}
                         quality='25'
