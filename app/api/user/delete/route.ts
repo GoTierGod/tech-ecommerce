@@ -3,7 +3,7 @@ import { NextRequest, NextResponse } from 'next/server'
 import { APIResponse, UserTokens } from '../../auth/login/route'
 import { apiUrl } from '@/helpers/apiUrl'
 
-export async function DELETE(req: NextRequest) {
+export async function POST(req: NextRequest) {
     const authTokens = cookies().get('authTokens')
 
     if (authTokens) {
@@ -35,6 +35,8 @@ export async function DELETE(req: NextRequest) {
             const errorResponse: APIResponse = await res.json()
             return NextResponse.json(errorResponse, { status: res.status })
         } catch (err) {
+            console.log(err)
+
             return NextResponse.json(
                 { message: 'Something went wrong' },
                 { status: 400 }

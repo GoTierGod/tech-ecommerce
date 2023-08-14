@@ -10,7 +10,6 @@ export async function GET(req: NextRequest) {
     const path = searchParams.get('path')
     const auth = searchParams.get('auth')
     if (!path) redirect('/')
-    console.log('REFRESHING... ' + path)
 
     // USER AUTH TOKENS STORED AS COOKIES
     const authTokens = cookies().get('authTokens')

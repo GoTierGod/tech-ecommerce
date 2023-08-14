@@ -25,7 +25,6 @@ export default async function RootLayout({
     )
 
     const user: CustomerData = await getUser()
-    console.log(user)
 
     return (
         <html lang='en'>
