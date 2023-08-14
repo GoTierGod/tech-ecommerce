@@ -35,7 +35,11 @@ export default function SearchCard({ product, user }: SearchCardProps) {
                 <div className={style.details}>
                     <h4 className={style.name}>{product.details.name}</h4>
                     <div className={style.badges}>
-                        <span className={style.bestSeller}>Best Seller</span>
+                        {product.best_seller && (
+                            <span className={style.bestSeller}>
+                                Best Seller
+                            </span>
+                        )}
                         <span className={style.discount}>
                             {getDiscount(
                                 product.details.price,

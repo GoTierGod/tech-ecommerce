@@ -44,18 +44,18 @@ export const metadata: Metadata = {
 export default async function Product({ params }: { params: { id: string } }) {
     const { id } = params
 
-    const products: ComposedProductInfo | false = await getData(
+    const product: ComposedProductInfo | false = await getData(
         `https://ft-drf-api.vercel.app/api/products/${id}`
     )
 
-    if (!products) return notFound()
-    metadata.title = `${products.details.name} | Tech`
+    if (!product) return notFound()
+    metadata.title = `${product.details.name} | Tech`
 
     const brandProducts: ComposedProductInfo[] | false = await getData(
-        `https://ft-drf-api.vercel.app/api/products?brand=${products.details.brand.name}&limit=5`
+        `https://ft-drf-api.vercel.app/api/products?brand=${product.details.brand.name}&limit=5`
     )
     const relatedProducts: ComposedProductInfo[] | false = await getData(
-        `https://ft-drf-api.vercel.app/api/products?brand=${products.details.brand.name}&limit=6`
+        `https://ft-drf-api.vercel.app/api/products?brand=${product.details.brand.name}&limit=6`
     )
 
     if (!brandProducts || !relatedProducts) return notFound()
@@ -66,21 +66,21 @@ export default async function Product({ params }: { params: { id: string } }) {
         <div className={style.content}>
             {/* ------------------------- OFFER -------------------------  */}
             <div className={style.offer}>
-                <span>$ {products.details.price}</span>
-                <span>$ {products.details.offer_price}</span>
+                <span>$ {product.details.price}</span>
+                <span>$ {product.details.offer_price}</span>
                 <span>
                     Available in{' '}
                     <span>
                         {getInstallments(
-                            products.details.installments,
-                            products.details.offer_price
+                            product.details.installments,
+                            product.details.offer_price
                         )}
                     </span>
                 </span>
             </div>
             {/* ------------------------- OPTIONS -------------------------  */}
             <div className={style.options}>
-                <span>Stock: {products.details.stock}</span>
+                <span>Stock: {product.details.stock}</span>
                 <Link href='/'>
                     <span>Buy Now</span>
                 </Link>
@@ -104,9 +104,9 @@ export default async function Product({ params }: { params: { id: string } }) {
             {/* ------------------------- BRAND INFO -------------------------  */}
             <div className={style.brand}>
                 <h3>
-                    Offered by <span>{products.details.brand.name}</span>
+                    Offered by <span>{product.details.brand.name}</span>
                 </h3>
-                <p>{products.details.brand.description}</p>
+                <p>{product.details.brand.description}</p>
                 <Link href={'/'}>See more of this brand</Link>
             </div>
             {/* ------------------------- WARRANTY AND POINTS -------------------------  */}
@@ -115,7 +115,7 @@ export default async function Product({ params }: { params: { id: string } }) {
                     <h3>Warranty</h3>
                     <span>
                         <FontAwesomeIcon icon={faShieldAlt} />{' '}
-                        {products.details.months_warranty} Months
+                        {product.details.months_warranty} Months
                     </span>
                     <Link href='/'>
                         <span>Read More</span>
@@ -125,7 +125,7 @@ export default async function Product({ params }: { params: { id: string } }) {
                     <h3>FT Points</h3>
                     <span>
                         <FontAwesomeIcon icon={faStar} />{' '}
-                        {Number(products.details.price)} Points
+                        {Number(product.details.price)} Points
                     </span>
                     <Link href='/'>
                         <span>Log In</span>
@@ -142,8 +142,8 @@ export default async function Product({ params }: { params: { id: string } }) {
                             Available in{' '}
                             <span>
                                 {getInstallments(
-                                    products.details.installments,
-                                    products.details.offer_price
+                                    product.details.installments,
+                                    product.details.offer_price
                                 )}
                             </span>
                         </h5>
@@ -166,30 +166,32 @@ export default async function Product({ params }: { params: { id: string } }) {
                         {/* ------------------------- HEADER -------------------------  */}
                         <div className={style.header}>
                             <div>
-                                <h2>{products.details.name}</h2>
-                                <span className={style.bestSeller}>
-                                    Best Seller
-                                </span>
+                                <h2>{product.details.name}</h2>
+                                {product.best_seller && (
+                                    <span className={style.bestSeller}>
+                                        Best Seller
+                                    </span>
+                                )}
                             </div>
                             <div className={style.rating}>
                                 <span>
                                     {getStars(
-                                        products.reviews_counter,
-                                        products.rating
+                                        product.reviews_counter,
+                                        product.rating
                                     )}
                                 </span>
                                 <span>
-                                    {products.rating || '5.0'}{' '}
+                                    {product.rating || '5.0'}{' '}
                                     <FontAwesomeIcon icon={faStar} />
                                 </span>
                             </div>
                         </div>
                         {/* ------------------------- IMAGES -------------------------  */}
-                        <ProductImages images={products.images} />
+                        <ProductImages images={product.images} />
                         {/* ------------------------- MORE BRAND PRODUCTS -------------------------  */}
                         <div className={style.brandProducts}>
                             <div>
-                                <h3>More of {products.details.brand.name}</h3>
+                                <h3>More of {product.details.brand.name}</h3>
                             </div>
                             <div>
                                 {brandProducts
@@ -209,7 +211,7 @@ export default async function Product({ params }: { params: { id: string } }) {
                         <div className={style.category}>
                             <h3>See more in this category</h3>
                             <Link href='/'>
-                                <span>{products.details.category.title}</span>
+                                <span>{product.details.category.title}</span>
                             </Link>
                         </div>
                         {/* ------------------------- FOR SMALL SCREENS -------------------------  */}
@@ -218,9 +220,7 @@ export default async function Product({ params }: { params: { id: string } }) {
                         <div className={style.description}>
                             <h3>Description</h3>
                             <p>
-                                {respectLineBreaks(
-                                    products.details.description
-                                )}
+                                {respectLineBreaks(product.details.description)}
                             </p>
                         </div>
                     </div>
@@ -231,20 +231,22 @@ export default async function Product({ params }: { params: { id: string } }) {
                             {/* ------------------------- HEADER -------------------------  */}
                             <div className={style.header}>
                                 <div>
-                                    <h2>{products.details.name}</h2>
-                                    <span className={style.bestSeller}>
-                                        Best Seller
-                                    </span>
+                                    <h2>{product.details.name}</h2>
+                                    {product.best_seller && (
+                                        <span className={style.bestSeller}>
+                                            Best Seller
+                                        </span>
+                                    )}
                                 </div>
                                 <div className={style.rating}>
                                     <span>
                                         {getStars(
-                                            products.reviews_counter,
-                                            products.rating
+                                            product.reviews_counter,
+                                            product.rating
                                         )}
                                     </span>
                                     <span>
-                                        {products.rating || '5.0'}{' '}
+                                        {product.rating || '5.0'}{' '}
                                         <FontAwesomeIcon icon={faStar} />
                                     </span>
                                 </div>

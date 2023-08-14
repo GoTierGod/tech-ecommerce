@@ -42,7 +42,9 @@ export default function VerticalCard({ product }: VerticalCardProps) {
                     </span>
                 </div>
                 <h4 className={style.name}>{product.details.name}</h4>
-                <span className={style.bestSeller}>Best Seller</span>
+                {product.best_seller && (
+                    <span className={style.bestSeller}>Best Seller</span>
+                )}
                 <p className={style.description}>
                     {respectLineBreaks(product.details.description)}
                 </p>
