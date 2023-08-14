@@ -209,7 +209,7 @@ export default function UserUpdate({
         initialValues: requiredFieldsInitialValue[updating],
         onSubmit: async values => {
             const res = await fetch('/api/user/update', {
-                method: 'post',
+                method: 'patch',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(values)
             })

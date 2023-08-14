@@ -3,7 +3,7 @@ import { NextRequest, NextResponse } from 'next/server'
 import { APIResponse, UserTokens } from '../../auth/login/route'
 import { apiUrl } from '@/helpers/apiUrl'
 
-export async function POST(req: NextRequest) {
+export async function DELETE(req: NextRequest) {
     const authTokens = cookies().get('authTokens')
 
     if (authTokens) {
