@@ -5,7 +5,7 @@ import Image from 'next/image'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faRightLong } from '@fortawesome/free-solid-svg-icons'
 
-import { ComposedProductInfo } from '@/types/products'
+import { ComposedProductInfo } from '@/types/product'
 
 interface OffersProps {
     products: ComposedProductInfo[]

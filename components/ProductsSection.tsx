@@ -4,7 +4,7 @@ import Link from 'next/link'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faRightLong } from '@fortawesome/free-solid-svg-icons'
 
-import { ComposedProductInfo } from '@/types/products'
+import { ComposedProductInfo } from '@/types/product'
 import VerticalCard from './VerticalCard'
 
 interface ProductRowsProps {

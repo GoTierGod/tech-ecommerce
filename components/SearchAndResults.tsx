@@ -3,7 +3,7 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import style from '../styles/search-and-results.module.css'
 
-import { Brand, Category } from '@/types/tables'
+import { Brand, Category } from '@/types/table'
 import {
     faSearch,
     faSortAmountAsc,
@@ -11,7 +11,7 @@ import {
     faTasks
 } from '@fortawesome/free-solid-svg-icons'
 import FilterForm from './FilterForm'
-import { ComposedProductInfo } from '@/types/products'
+import { ComposedProductInfo } from '@/types/product'
 import SearchCard from './SearchCard'
 import {
     MutableRefObject,
@@ -23,7 +23,7 @@ import {
 } from 'react'
 import { useRouter } from 'next/navigation'
 import { formatTitleCase } from '@/helpers/formatTitleCase'
-import { CustomerData } from '@/types/users'
+import { CustomerData } from '@/types/user'
 
 interface SearchProps {
     searchText: string

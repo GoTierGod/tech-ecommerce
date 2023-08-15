@@ -1,6 +1,6 @@
 import style from './page.module.css'
 
-import { ComposedProductInfo } from '@/types/products'
+import { ComposedProductInfo } from '@/types/product'
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {
@@ -22,7 +22,7 @@ import { getInstallments } from '@/helpers/getInstallments'
 import { notFound } from 'next/navigation'
 import { respectLineBreaks } from '@/helpers/respectLineBreaks'
 import { getUser } from '@/helpers/getUser'
-import { CustomerData } from '@/types/users'
+import { CustomerData } from '@/types/user'
 
 import visaLogo from '../../../public/images/payments/visa.svg'
 import mastercardLogo from '../../../public/images/payments/mastercard.svg'

@@ -3,7 +3,7 @@ import style from '../styles/highlighted-section.module.css'
 import Image from 'next/image'
 import Link from 'next/link'
 
-import { ComposedProductInfo } from '@/types/products'
+import { ComposedProductInfo } from '@/types/product'
 
 interface HighlightedProps {
     products: ComposedProductInfo[]

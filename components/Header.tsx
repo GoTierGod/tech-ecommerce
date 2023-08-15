@@ -18,9 +18,9 @@ import {
 import { FormEvent, useCallback, useEffect, useRef, useState } from 'react'
 import Cookies from 'js-cookie'
 
-import { Category } from '@/types/tables'
+import { Category } from '@/types/table'
 import { formatTitleCase } from '@/helpers/formatTitleCase'
-import { CustomerData } from '@/types/users'
+import { CustomerData } from '@/types/user'
 
 interface HeaderProps {
     categories: Category[]

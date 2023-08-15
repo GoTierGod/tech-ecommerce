@@ -6,7 +6,7 @@ import { notFound } from 'next/navigation'
 import { SearchResponse } from '@/types/search'
 import { unescape } from 'querystring'
 import { getUser } from '@/helpers/getUser'
-import { CustomerData } from '@/types/users'
+import { CustomerData } from '@/types/user'
 import { formatTitleCase } from '@/helpers/formatTitleCase'
 import { Metadata } from 'next'
 

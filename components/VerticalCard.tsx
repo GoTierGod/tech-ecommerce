@@ -3,7 +3,7 @@ import style from '../styles/vertical-card.module.css'
 import Image from 'next/image'
 import Link from 'next/link'
 
-import { ComposedProductInfo } from '@/types/products'
+import { ComposedProductInfo } from '@/types/product'
 import { respectLineBreaks } from '@/helpers/respectLineBreaks'
 import { formatPrice } from '@/helpers/formatPrice'
 import { getDiscount } from '@/helpers/getDiscount'

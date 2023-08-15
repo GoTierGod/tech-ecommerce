@@ -1,7 +1,7 @@
 import style from './page.module.css'
 
 import ProductsSection from '@/components/ProductsSection'
-import { ComposedProductInfo } from '@/types/products'
+import { ComposedProductInfo } from '@/types/product'
 import { getData } from '@/helpers/getData'
 import OffersSection from '@/components/OffersSection'
 import HighlightedSection from '@/components/HighlightedSection'

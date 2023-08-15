@@ -3,7 +3,7 @@ import style from '../styles/gaming-section.module.css'
 import Link from 'next/link'
 import Image from 'next/image'
 
-import { ComposedProductInfo } from '@/types/products'
+import { ComposedProductInfo } from '@/types/product'
 
 interface GamingProps {
     products: ComposedProductInfo[]

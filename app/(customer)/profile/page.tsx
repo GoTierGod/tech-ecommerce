@@ -1,5 +1,5 @@
 import { getUser } from '@/helpers/getUser'
-import { CustomerData } from '@/types/users'
+import { CustomerData } from '@/types/user'
 import UserProfile from '@/components/UserProfile'
 import { redirect } from 'next/navigation'
 import { formatTitleCase } from '@/helpers/formatTitleCase'

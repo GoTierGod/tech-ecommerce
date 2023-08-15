@@ -5,8 +5,8 @@ import Image from 'next/image'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCartPlus, faHeart } from '@fortawesome/free-solid-svg-icons'
 
-import { ComposedProductInfo } from '@/types/products'
-import { CustomerData } from '@/types/users'
+import { ComposedProductInfo } from '@/types/product'
+import { CustomerData } from '@/types/user'
 import { getInstallments } from '@/helpers/getInstallments'
 import { getDiscount } from '@/helpers/getDiscount'
 

@@ -1,4 +1,4 @@
-import { Product, ProductImage } from './tables'
+import { Product, ProductImage } from './table'
 
 export interface ComposedProductInfo {
     details: Product

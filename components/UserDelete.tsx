@@ -3,7 +3,7 @@
 import style from '../styles/user-delete.module.css'
 
 import Link from 'next/link'
-import { Customer } from '@/types/users'
+import { Customer } from '@/types/user'
 import { useFormik } from 'formik'
 import * as Yup from 'yup'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
