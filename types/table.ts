@@ -59,9 +59,6 @@ export interface Review {
 
 export interface Order {
     id: number
-    total_cost: string
-    quantity: number
-    shipping_charge: string
     delivered: boolean
     purchase_date: unknown
     delivery_term: unknown
@@ -70,10 +67,17 @@ export interface Order {
     country: string
     city: string
     address: string
-    postal_code: string
-    customer: Customer | number
-    product: Product | number
-    delivery_man: DeliveryMan | number
+    postal_code: string | null
+    delivery_man: string | null
+}
+
+export interface OrderItem {
+    id: number
+    total_cost: number
+    quantity: number
+    customer: string
+    product: Product
+    order: Order
 }
 
 export interface CardItem {
