@@ -1,7 +1,8 @@
 import { cookies } from 'next/dist/client/components/headers'
 import { NextRequest, NextResponse } from 'next/server'
-import { APIResponse, UserTokens } from '../../auth/login/route'
 import { apiUrl } from '@/helpers/apiUrl'
+import { APIResponse } from '@/types/api-response'
+import { UserTokens } from '@/types/tokens'
 
 export async function PATCH(req: NextRequest) {
     const authTokens = cookies().get('authTokens')

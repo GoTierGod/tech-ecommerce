@@ -1,36 +1,22 @@
 import { apiUrl } from '@/helpers/apiUrl'
+import { LoginRequestData } from '@/types/api-request'
+import { UserTokens } from '@/types/tokens'
 import { cookies } from 'next/dist/client/components/headers'
 import { NextRequest, NextResponse } from 'next/server'
-
-export interface APIResponse {
-    message: string
-}
-
-export interface UserTokens {
-    refresh: string
-    access: string
-}
-
-export interface DecodedUserInfo {
-    user_id: number
-    username: string
-    token_type: string
-    exp: number
-    iat: number
-    jti: string
-}
 
 export async function POST(req: NextRequest) {
     try {
         const body = await req.json()
 
+        const loginData: LoginRequestData = {
+            username: body.username,
+            password: body.password
+        }
+
         const res = await fetch(`${apiUrl}/api/token/`, {
             method: 'post',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-                username: body.username,
-                password: body.password
-            })
+            body: JSON.stringify(loginData)
         })
 
         if (res.ok) {
