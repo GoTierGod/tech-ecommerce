@@ -23,6 +23,7 @@ export default function SearchCard({ product, user }: SearchCardProps) {
                 href={`/product/${product.details.id}`}
                 className={style.card}
                 aria-label={product.details.name}
+                prefetch={false}
             >
                 <div className={style.image}>
                     <Image

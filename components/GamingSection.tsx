@@ -36,6 +36,7 @@ export default function GamingSection({ products }: GamingProps) {
                         key={product.details.id}
                         href={`/product/${product.details.id}`}
                         className={style.product}
+                        prefetch={false}
                     >
                         <Image
                             src={product.default_img.url}

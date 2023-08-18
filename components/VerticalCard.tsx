@@ -14,7 +14,11 @@ interface VerticalCardProps {
 
 export default function VerticalCard({ product }: VerticalCardProps) {
     return (
-        <Link href={`/product/${product.details.id}`} className={style.card}>
+        <Link
+            href={`/product/${product.details.id}`}
+            className={style.card}
+            prefetch={false}
+        >
             <div className={style.image}>
                 <Image
                     src={product.default_img.url}

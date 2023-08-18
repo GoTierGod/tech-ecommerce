@@ -20,6 +20,7 @@ export default function OffersSection({ products }: OffersProps) {
                         key={product.details.id}
                         href={`/product/${product.details.id}`}
                         className={style.product}
+                        prefetch={false}
                     >
                         <Image
                             src={product.default_img.url}

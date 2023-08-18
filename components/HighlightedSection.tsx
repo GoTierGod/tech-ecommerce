@@ -26,6 +26,7 @@ export default function HighlightedSection({ products }: HighlightedProps) {
                     <Link
                         href={`/product/${product.details.id}`}
                         className={style.image}
+                        prefetch={false}
                     >
                         <Image
                             src={product.default_img.url}
