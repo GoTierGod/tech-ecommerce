@@ -3,28 +3,26 @@ import { NextRequest, NextResponse } from 'next/server'
 import { apiUrl } from '@/helpers/apiUrl'
 import { APIResponse } from '@/types/api-response'
 import { UserDeleteRequestData } from '@/types/api-request'
-import { UserTokens } from '@/types/tokens'
+import { AuthTokens } from '@/types/tokens'
 
 export async function POST(req: NextRequest) {
-    const authTokens = cookies().get('authTokens')
+    const authCookies = cookies().get('authTokens')
 
-    if (authTokens) {
+    if (authCookies) {
         try {
             const body = await req.json()
 
-            const userTokens: UserTokens = JSON.parse(authTokens.value)
-
-            const password = body.password
+            const authTokens: AuthTokens = JSON.parse(authCookies.value)
 
             const userDeleteData: UserDeleteRequestData = {
-                password: password
+                password: body.password
             }
 
             const res = await fetch(`${apiUrl}/api/customer/delete/`, {
                 method: 'delete',
                 headers: {
                     'Content-Type': 'application/json',
-                    Authorization: `Bearer ${userTokens.access}`
+                    Authorization: `Bearer ${authTokens.access}`
                 },
                 body: JSON.stringify(userDeleteData)
             })

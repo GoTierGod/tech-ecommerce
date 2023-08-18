@@ -1,6 +1,6 @@
 import { apiUrl } from '@/helpers/apiUrl'
 import { LoginRequestData } from '@/types/api-request'
-import { UserTokens } from '@/types/tokens'
+import { AuthTokens } from '@/types/tokens'
 import { cookies } from 'next/dist/client/components/headers'
 import { NextRequest, NextResponse } from 'next/server'
 
@@ -20,9 +20,9 @@ export async function POST(req: NextRequest) {
         })
 
         if (res.ok) {
-            const userTokens: UserTokens = await res.json()
+            const authTokens: AuthTokens = await res.json()
 
-            cookies().set('authTokens', JSON.stringify(userTokens))
+            cookies().set('authTokens', JSON.stringify(authTokens))
 
             return NextResponse.json(
                 { message: 'Successfully logged in' },

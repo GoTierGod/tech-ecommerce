@@ -2,16 +2,16 @@ import { cookies } from 'next/dist/client/components/headers'
 import { NextRequest, NextResponse } from 'next/server'
 import { apiUrl } from '@/helpers/apiUrl'
 import { APIResponse } from '@/types/api-response'
-import { UserTokens } from '@/types/tokens'
+import { AuthTokens } from '@/types/tokens'
 
 export async function PATCH(req: NextRequest) {
-    const authTokens = cookies().get('authTokens')
+    const authCookies = cookies().get('authTokens')
 
-    if (authTokens) {
+    if (authCookies) {
         try {
             const body = await req.json()
 
-            const userTokens: UserTokens = JSON.parse(authTokens.value)
+            const authTokens: AuthTokens = JSON.parse(authCookies.value)
 
             const username = body.username
             const email = body.email
@@ -49,7 +49,7 @@ export async function PATCH(req: NextRequest) {
                 method: 'patch',
                 headers: {
                     'Content-Type': 'application/json',
-                    Authorization: `Bearer ${userTokens.access}`
+                    Authorization: `Bearer ${authTokens.access}`
                 },
                 body: JSON.stringify(updatedFields)
             })

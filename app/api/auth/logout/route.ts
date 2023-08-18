@@ -2,23 +2,23 @@ import { cookies } from 'next/dist/client/components/headers'
 import { NextRequest, NextResponse } from 'next/server'
 import { apiUrl } from '@/helpers/apiUrl'
 import { LogoutRequestData } from '@/types/api-request'
-import { UserTokens } from '@/types/tokens'
+import { AuthTokens } from '@/types/tokens'
 
 export async function POST(req: NextRequest) {
-    const authTokens = cookies().get('authTokens')
-    if (!authTokens) {
+    const authCookies = cookies().get('authTokens')
+    if (!authCookies) {
         cookies().delete('authTokens')
         return NextResponse.json({}, { status: 401 })
     }
 
-    const userTokens: UserTokens = JSON.parse(authTokens.value)
-    if (!userTokens.refresh) {
+    const authTokens: AuthTokens = JSON.parse(authCookies.value)
+    if (!authTokens.refresh) {
         cookies().delete('authTokens')
         return NextResponse.json({}, { status: 401 })
     }
 
-    const refreshToken: LogoutRequestData = {
-        refresh: userTokens.refresh
+    const logoutData: LogoutRequestData = {
+        refresh: authTokens.refresh
     }
 
     const res = await fetch(`${apiUrl}/api/token/blacklist/`, {
@@ -26,7 +26,7 @@ export async function POST(req: NextRequest) {
         headers: {
             'Content-Type': 'application/json'
         },
-        body: JSON.stringify(refreshToken)
+        body: JSON.stringify(logoutData)
     })
 
     if (res.ok) {
