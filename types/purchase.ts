@@ -1,6 +1,6 @@
 import { Order, OrderItem } from './tables'
 
-export interface PurchaseRequest {
+export interface PurchaseRequestData {
     products: { id: number; quantity: number }[]
     payment_method: string
     delivery_term: string
