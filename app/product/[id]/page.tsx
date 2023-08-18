@@ -31,6 +31,7 @@ import dinersClubLogo from '../../../public/images/payments/diners-club-internat
 import { Metadata } from 'next'
 import { priceStringFormatter } from '@/utils/formatting/priceStringFormatter'
 import { API_URL } from '@/constants/api'
+import { getProduct } from '@/utils/data/getProduct'
 
 const paymentLogos = [
     { src: visaLogo, alt: 'Visa' },
@@ -46,9 +47,7 @@ export const metadata: Metadata = {
 export default async function Product({ params }: { params: { id: string } }) {
     const { id } = params
 
-    const product: ComposedProductInfo | false = await getData(
-        `${API_URL}/api/products/${id}`
-    )
+    const product: ComposedProductInfo | null = await getProduct(id)
 
     if (!product) return notFound()
     metadata.title = `${product.details.name} | Tech`
