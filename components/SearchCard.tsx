@@ -6,7 +6,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCartPlus, faHeart } from '@fortawesome/free-solid-svg-icons'
 
 import { ComposedProductInfo } from '@/types/product'
-import { CustomerData } from '@/types/user'
+import { CustomerData } from '@/types/users'
 import { getInstallments } from '@/helpers/getInstallments'
 import { getDiscount } from '@/helpers/getDiscount'
 

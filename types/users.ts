@@ -1,15 +1,3 @@
-export interface Customer {
-    id: number
-    user: User
-    points: number
-    birthdate: string
-    gender: string
-    phone: string
-    country: string
-    city: string
-    address: string
-}
-
 export interface User {
     id: number
     username: string
@@ -26,6 +14,19 @@ export interface User {
     user_permissions: Array<any>
 }
 
+export interface Customer {
+    id: number
+    points: number
+    birthdate: string
+    gender: string
+    phone: string
+    country: string
+    city: string
+    address: string
+
+    user: User
+}
+
 export interface DeliveryMan {
     id: number
     birthdate: unknown
@@ -37,6 +38,7 @@ export interface DeliveryMan {
     vehicle_capacity: string
     license_plate_number: string
     availability: boolean
+
     user: User
 }
 

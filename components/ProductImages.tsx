@@ -5,7 +5,7 @@ import style from '../styles/product-images.module.css'
 import Image from 'next/image'
 import { useState } from 'react'
 
-import { ProductImage } from '@/types/table'
+import { ProductImage } from '@/types/tables'
 
 interface ProductImagesProps {
     images: ProductImage[]

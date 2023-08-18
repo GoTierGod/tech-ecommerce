@@ -2,10 +2,10 @@ import Footer from '@/components/Footer'
 import './globals.css'
 import { Josefin_Sans } from 'next/font/google'
 import Header from '@/components/Header'
-import { Category } from '@/types/table'
+import { Category } from '@/types/tables'
 import { getData } from '@/helpers/getData'
 import { getUser } from '@/helpers/getUser'
-import { CustomerData } from '@/types/user'
+import { CustomerData } from '@/types/users'
 import { Metadata } from 'next'
 
 const josefinSans = Josefin_Sans({ subsets: ['latin'] })

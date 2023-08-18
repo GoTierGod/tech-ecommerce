@@ -1,4 +1,4 @@
-import { Order, OrderItem } from './table'
+import { Order, OrderItem } from './tables'
 
 export interface PurchaseRequest {
     products: { id: number; quantity: number }[]

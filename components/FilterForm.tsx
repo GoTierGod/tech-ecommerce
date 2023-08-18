@@ -2,7 +2,7 @@
 
 import { FormEvent, useCallback, useEffect, useState } from 'react'
 import style from '../styles/filter-form.module.css'
-import { Brand, Category } from '@/types/table'
+import { Brand, Category } from '@/types/tables'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCaretRight } from '@fortawesome/free-solid-svg-icons'
 import { useRouter } from 'next/navigation'

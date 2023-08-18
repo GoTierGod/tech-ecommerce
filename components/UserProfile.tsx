@@ -7,7 +7,7 @@ import { useCallback, useState } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faEdit, faStar } from '@fortawesome/free-solid-svg-icons'
 
-import { Customer } from '@/types/user'
+import { Customer } from '@/types/users'
 import { formatTitleCase } from '@/helpers/formatTitleCase'
 import { getAge } from '@/helpers/getAge'
 import UserUpdate from './UserUpdate'

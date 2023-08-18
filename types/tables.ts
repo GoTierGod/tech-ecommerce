@@ -1,4 +1,4 @@
-import { Customer, DeliveryMan } from './user'
+import { Customer, DeliveryMan } from './users'
 
 export interface Category {
     id: number

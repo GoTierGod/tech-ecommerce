@@ -4,7 +4,7 @@ import { getUser } from '@/helpers/getUser'
 import Link from 'next/link'
 import { redirect } from 'next/navigation'
 import UserLogout from '@/components/UserLogout'
-import { CustomerData } from '@/types/user'
+import { CustomerData } from '@/types/users'
 
 export default async function Logout() {
     const user: CustomerData = await getUser()

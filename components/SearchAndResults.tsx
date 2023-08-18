@@ -3,7 +3,7 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import style from '../styles/search-and-results.module.css'
 
-import { Brand, Category } from '@/types/table'
+import { Brand, Category } from '@/types/tables'
 import {
     faSearch,
     faSortAmountAsc,
@@ -23,7 +23,7 @@ import {
 } from 'react'
 import { useRouter } from 'next/navigation'
 import { formatTitleCase } from '@/helpers/formatTitleCase'
-import { CustomerData } from '@/types/user'
+import { CustomerData } from '@/types/users'
 
 interface SearchProps {
     searchText: string

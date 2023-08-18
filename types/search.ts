@@ -1,5 +1,5 @@
 import { ComposedProductInfo } from './product'
-import { Brand, Category } from './table'
+import { Brand, Category } from './tables'
 
 export interface SearchResponse {
     results: number

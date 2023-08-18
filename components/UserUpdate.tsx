@@ -11,7 +11,7 @@ import {
     faXmarkCircle
 } from '@fortawesome/free-solid-svg-icons'
 import { APIResponse } from '@/app/api/auth/login/route'
-import { Customer } from '@/types/user'
+import { Customer } from '@/types/users'
 import { useRouter } from 'next/navigation'
 
 interface UserUpdateProps {

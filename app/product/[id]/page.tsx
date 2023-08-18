@@ -22,7 +22,7 @@ import { getInstallments } from '@/helpers/getInstallments'
 import { notFound } from 'next/navigation'
 import { respectLineBreaks } from '@/helpers/respectLineBreaks'
 import { getUser } from '@/helpers/getUser'
-import { CustomerData } from '@/types/user'
+import { CustomerData } from '@/types/users'
 
 import visaLogo from '../../../public/images/payments/visa.svg'
 import mastercardLogo from '../../../public/images/payments/mastercard.svg'
