@@ -11,7 +11,17 @@ export async function PATCH(req: NextRequest) {
         try {
             const body = await req.json()
 
-            const authTokens: AuthTokens = JSON.parse(authCookies.value)
+            let authTokens: AuthTokens | null = null
+            try {
+                authTokens = JSON.parse(authCookies.value) as AuthTokens
+            } catch (err) {
+                cookies().delete('authTokens')
+
+                return NextResponse.json(
+                    { message: 'Invalid tokens' },
+                    { status: 401 }
+                )
+            }
 
             const username = body.username
             const email = body.email
