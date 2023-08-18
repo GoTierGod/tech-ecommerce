@@ -10,7 +10,7 @@ export const metadata: Metadata = {
 }
 
 export default async function Profile() {
-    const user: CustomerData = await getUser()
+    const user = await getUser()
 
     if (!user) redirect('/api/auth/refresh?path=/profile&auth=1')
     metadata.title = `${titleCaseFormatter(user.user.username)} | Tech`

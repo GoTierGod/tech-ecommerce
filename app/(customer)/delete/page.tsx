@@ -9,7 +9,7 @@ export const metadata: Metadata = {
 }
 
 export default async function Delete() {
-    const user: CustomerData = await getUser()
+    const user = await getUser()
 
     if (!user) redirect('/api/auth/refresh?path=/delete&auth=1')
 

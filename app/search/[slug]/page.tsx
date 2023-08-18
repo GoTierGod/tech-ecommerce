@@ -62,7 +62,7 @@ export default async function Search({
     const { results, pages, products, categories, brands } =
         searchRes as SearchResponse
 
-    const user: CustomerData = await getUser()
+    const user = await getUser()
 
     return (
         <main>

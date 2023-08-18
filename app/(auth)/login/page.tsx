@@ -6,7 +6,7 @@ import { getUser } from '@/utils/data/getUser'
 import { CustomerData } from '@/types/users'
 
 export default async function Login() {
-    const user: CustomerData = await getUser()
+    const user = await getUser()
 
     if (user) redirect('/api/auth/refresh?path=/login&auth=0')
     else return <UserLogin />

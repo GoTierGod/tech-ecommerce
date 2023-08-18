@@ -1,9 +1,9 @@
 import { cookies } from 'next/dist/client/components/headers'
-import jwtDecode from 'jwt-decode'
 import { AuthTokens } from '@/types/tokens'
 import { API_URL } from '@/constants/api'
+import { CustomerData } from '@/types/users'
 
-export const getUser = async () => {
+export const getUser = async (): Promise<CustomerData> => {
     try {
         const authCookies = cookies().get('authTokens')
 

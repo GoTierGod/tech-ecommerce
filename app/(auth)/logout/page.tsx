@@ -7,7 +7,7 @@ import UserLogout from '@/components/UserLogout'
 import { CustomerData } from '@/types/users'
 
 export default async function Logout() {
-    const user: CustomerData = await getUser()
+    const user = await getUser()
 
     if (!user) redirect('/api/auth/refresh?path=/logout&auth=1')
     else

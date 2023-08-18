@@ -61,7 +61,7 @@ export default async function Product({ params }: { params: { id: string } }) {
 
     if (!brandProducts || !relatedProducts) return notFound()
 
-    const user: CustomerData = await getUser()
+    const user = await getUser()
 
     const content = (
         <div className={style.content}>
