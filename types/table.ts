@@ -25,6 +25,7 @@ export interface Product {
     installments: number
     stock: number
     months_warranty: number
+
     brand: Brand
     category: Category
 }
@@ -33,7 +34,8 @@ export interface ProductSpecification {
     id: number
     key: string
     value: string
-    product: Product | number
+
+    product: string
 }
 
 export interface ProductImage {
@@ -41,7 +43,8 @@ export interface ProductImage {
     url: string
     description: string
     is_default: boolean
-    product: Product | number
+
+    product: string
 }
 
 export interface Review {
@@ -49,25 +52,29 @@ export interface Review {
     rating: string
     title: string
     content: string
-    date: unknown
+    date: string
     likes: number
     dislikes: number
-    useful: boolean
-    customer: Customer | number
-    product: Product | number
+    is_useful: boolean
+
+    customer: string
+    product: string
 }
 
 export interface Order {
     id: number
+    payment_method: string
+    delivery_term: unknown
+    dispatched: boolean
+    on_the_way: boolean
     delivered: boolean
     purchase_date: unknown
-    delivery_term: unknown
-    notes: string
-    payment_method: string
     country: string
     city: string
     address: string
     postal_code: string | null
+    notes: string
+
     delivery_man: string | null
 }
 
@@ -75,19 +82,20 @@ export interface OrderItem {
     id: number
     total_cost: number
     quantity: number
+
+    order: string
     customer: string
     product: Product
-    order: Order
 }
 
 export interface CardItem {
     id: number
-    product: number
-    customer: number
+    product: Product
+    customer: string
 }
 
 export interface FavItem {
     id: number
-    product: number
-    customer: number
+    product: Product
+    customer: string
 }
