@@ -53,10 +53,8 @@ export default async function Search({
     const readableSearch = unescape(search)
     metadata.title = `${titleCaseFormatter(readableSearch)} | Tech`
 
-    const searchRes: SearchResponse | false = await getData(
-        `${API_URL}/api/search/${
-            readableSearch.replace(/\s+/, ',') + getQueryString()
-        }`
+    const searchRes: SearchResponse | null = await getData(
+        `/api/search/${readableSearch.replace(/\s+/, ',') + getQueryString()}`
     )
 
     if (!searchRes) return notFound()

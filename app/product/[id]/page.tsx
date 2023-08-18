@@ -52,11 +52,11 @@ export default async function Product({ params }: { params: { id: string } }) {
     if (!product) return notFound()
     metadata.title = `${product.details.name} | Tech`
 
-    const brandProducts: ComposedProductInfo[] | false = await getData(
-        `${API_URL}/api/products/?brand=${product.details.brand.name}&limit=5`
+    const brandProducts: ComposedProductInfo[] | null = await getData(
+        `/api/products/?brand=${product.details.brand.name}&limit=5`
     )
-    const relatedProducts: ComposedProductInfo[] | false = await getData(
-        `${API_URL}/api/products/?brand=${product.details.brand.name}&limit=6`
+    const relatedProducts: ComposedProductInfo[] | null = await getData(
+        `/api/products/?brand=${product.details.brand.name}&limit=6`
     )
 
     if (!brandProducts || !relatedProducts) return notFound()

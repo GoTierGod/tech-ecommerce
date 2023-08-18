@@ -1,8 +1,11 @@
-// HELPER FUNCTION TO FETCH DATA IN SERVER SIDE
-export const getData = async (url: string) => {
-    const res = await fetch(url, { next: { revalidate: 3600 } })
+import { API_URL } from '@/constants/api'
 
-    if (!res.ok) return false
+export const getData = async (route: string) => {
+    const res = await fetch(`${API_URL + route}`, {
+        next: { revalidate: 3600 }
+    })
+
+    if (!res.ok) return null
 
     return res.json()
 }
