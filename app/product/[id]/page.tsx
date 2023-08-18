@@ -30,6 +30,7 @@ import americanExpressLogo from '../../../public/images/payments/american-expres
 import dinersClubLogo from '../../../public/images/payments/diners-club-international.svg'
 import { Metadata } from 'next'
 import { priceStringFormatter } from '@/utils/formatting/priceStringFormatter'
+import { API_URL } from '@/constants/api'
 
 const paymentLogos = [
     { src: visaLogo, alt: 'Visa' },
@@ -46,17 +47,17 @@ export default async function Product({ params }: { params: { id: string } }) {
     const { id } = params
 
     const product: ComposedProductInfo | false = await getData(
-        `https://ft-drf-api.vercel.app/api/products/${id}`
+        `${API_URL}/products/${id}`
     )
 
     if (!product) return notFound()
     metadata.title = `${product.details.name} | Tech`
 
     const brandProducts: ComposedProductInfo[] | false = await getData(
-        `https://ft-drf-api.vercel.app/api/products?brand=${product.details.brand.name}&limit=5`
+        `${API_URL}/api/products?brand=${product.details.brand.name}&limit=5`
     )
     const relatedProducts: ComposedProductInfo[] | false = await getData(
-        `https://ft-drf-api.vercel.app/api/products?brand=${product.details.brand.name}&limit=6`
+        `${API_URL}/api/products?brand=${product.details.brand.name}&limit=6`
     )
 
     if (!brandProducts || !relatedProducts) return notFound()

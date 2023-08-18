@@ -9,6 +9,7 @@ import { getUser } from '@/utils/data/getUser'
 import { CustomerData } from '@/types/users'
 import { titleCaseFormatter } from '@/utils/formatting/titleCaseFormatter'
 import { Metadata } from 'next'
+import { API_URL } from '@/constants/api'
 
 export const metadata: Metadata = {
     title: 'Search | Tech'
@@ -53,7 +54,7 @@ export default async function Search({
     metadata.title = `${titleCaseFormatter(readableSearch)} | Tech`
 
     const searchRes: SearchResponse | false = await getData(
-        `https://ft-drf-api.vercel.app/api/search/${
+        `${API_URL}/api/search/${
             readableSearch.replace(/\s+/, ',') + getQueryString()
         }`
     )
