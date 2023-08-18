@@ -47,7 +47,7 @@ export default async function Product({ params }: { params: { id: string } }) {
     const { id } = params
 
     const product: ComposedProductInfo | false = await getData(
-        `${API_URL}/products/${id}`
+        `${API_URL}/api/products/${id}`
     )
 
     if (!product) return notFound()
