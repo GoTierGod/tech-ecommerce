@@ -13,4 +13,5 @@ export interface PurchaseRequest {
 export interface Purchase {
     order: Order
     order_item: OrderItem
+    is_reviewed: boolean
 }
