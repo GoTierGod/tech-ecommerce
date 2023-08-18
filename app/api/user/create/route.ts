@@ -1,9 +1,9 @@
-import { apiUrl } from '@/utils/apiUrl'
 import { NextRequest, NextResponse } from 'next/server'
 import { cookies } from 'next/dist/client/components/headers'
 import { APIResponse } from '@/types/api-response'
 import { LoginRequestData, UserCreateRequestData } from '@/types/api-request'
 import { AuthTokens } from '@/types/tokens'
+import { API_URL } from '@/app/constants/api'
 
 export async function POST(req: NextRequest) {
     try {
@@ -16,7 +16,7 @@ export async function POST(req: NextRequest) {
             birthdate: body.birthdate
         }
 
-        const res = await fetch(`${apiUrl}/api/customer/create/`, {
+        const res = await fetch(`${API_URL}/api/customer/create/`, {
             method: 'post',
             headers: {
                 'Content-Type': 'application/json'
@@ -30,7 +30,7 @@ export async function POST(req: NextRequest) {
         }
 
         if (res.status === 201) {
-            const res = await fetch(`${apiUrl}/api/token/`, {
+            const res = await fetch(`${API_URL}/api/token/`, {
                 method: 'post',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(loginData)

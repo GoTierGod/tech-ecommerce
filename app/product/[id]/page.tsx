@@ -29,6 +29,7 @@ import mastercardLogo from '../../../public/images/payments/mastercard.svg'
 import americanExpressLogo from '../../../public/images/payments/american-express.svg'
 import dinersClubLogo from '../../../public/images/payments/diners-club-international.svg'
 import { Metadata } from 'next'
+import { priceStringNormalizer } from '@/utils/priceStringNormalizer'
 
 const paymentLogos = [
     { src: visaLogo, alt: 'Visa' },
@@ -66,8 +67,10 @@ export default async function Product({ params }: { params: { id: string } }) {
         <div className={style.content}>
             {/* ------------------------- OFFER -------------------------  */}
             <div className={style.offer}>
-                <span>$ {product.details.price}</span>
-                <span>$ {product.details.offer_price}</span>
+                <span>{priceStringNormalizer(product.details.price)}</span>
+                <span>
+                    {priceStringNormalizer(product.details.offer_price)}
+                </span>
                 <span>
                     Available in{' '}
                     <span>

@@ -1,9 +1,9 @@
-import { apiUrl } from '@/utils/apiUrl'
 import { cookies } from 'next/dist/client/components/headers'
 import { redirect } from 'next/navigation'
 import { NextRequest } from 'next/server'
 import { RefreshRequestData } from '@/types/api-request'
 import { AuthTokens } from '@/types/tokens'
+import { API_URL } from '@/app/constants/api'
 
 export async function GET(req: NextRequest) {
     const { searchParams } = new URL(req.url)
@@ -21,7 +21,7 @@ export async function GET(req: NextRequest) {
         refresh: authTokens.refresh
     }
 
-    const res = await fetch(`${apiUrl}/api/token/refresh/`, {
+    const res = await fetch(`${API_URL}/api/token/refresh/`, {
         method: 'post',
         cache: 'no-cache',
         headers: {

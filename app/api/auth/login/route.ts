@@ -1,4 +1,4 @@
-import { apiUrl } from '@/utils/apiUrl'
+import { API_URL } from '@/app/constants/api'
 import { LoginRequestData } from '@/types/api-request'
 import { AuthTokens } from '@/types/tokens'
 import { cookies } from 'next/dist/client/components/headers'
@@ -13,7 +13,7 @@ export async function POST(req: NextRequest) {
             password: body.password
         }
 
-        const res = await fetch(`${apiUrl}/api/token/`, {
+        const res = await fetch(`${API_URL}/api/token/`, {
             method: 'post',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(loginData)

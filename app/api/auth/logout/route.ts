@@ -1,8 +1,8 @@
 import { cookies } from 'next/dist/client/components/headers'
 import { NextRequest, NextResponse } from 'next/server'
-import { apiUrl } from '@/utils/apiUrl'
 import { LogoutRequestData } from '@/types/api-request'
 import { AuthTokens } from '@/types/tokens'
+import { API_URL } from '@/app/constants/api'
 
 export async function POST(req: NextRequest) {
     const authCookies = cookies().get('authTokens')
@@ -21,7 +21,7 @@ export async function POST(req: NextRequest) {
         refresh: authTokens.refresh
     }
 
-    const res = await fetch(`${apiUrl}/api/token/blacklist/`, {
+    const res = await fetch(`${API_URL}/api/token/blacklist/`, {
         method: 'post',
         headers: {
             'Content-Type': 'application/json'

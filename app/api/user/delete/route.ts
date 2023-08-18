@@ -1,9 +1,9 @@
 import { cookies } from 'next/dist/client/components/headers'
 import { NextRequest, NextResponse } from 'next/server'
-import { apiUrl } from '@/utils/apiUrl'
 import { APIResponse } from '@/types/api-response'
 import { UserDeleteRequestData } from '@/types/api-request'
 import { AuthTokens } from '@/types/tokens'
+import { API_URL } from '@/app/constants/api'
 
 export async function POST(req: NextRequest) {
     const authCookies = cookies().get('authTokens')
@@ -18,7 +18,7 @@ export async function POST(req: NextRequest) {
                 password: body.password
             }
 
-            const res = await fetch(`${apiUrl}/api/customer/delete/`, {
+            const res = await fetch(`${API_URL}/api/customer/delete/`, {
                 method: 'delete',
                 headers: {
                     'Content-Type': 'application/json',

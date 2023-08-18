@@ -1,8 +1,8 @@
 import { cookies } from 'next/dist/client/components/headers'
 import { NextRequest, NextResponse } from 'next/server'
-import { apiUrl } from '@/utils/apiUrl'
 import { APIResponse } from '@/types/api-response'
 import { AuthTokens } from '@/types/tokens'
+import { API_URL } from '@/app/constants/api'
 
 export async function PATCH(req: NextRequest) {
     const authCookies = cookies().get('authTokens')
@@ -45,7 +45,7 @@ export async function PATCH(req: NextRequest) {
                     .map(entry => [entry.key, entry.value as string])
             )
 
-            const res = await fetch(`${apiUrl}/api/customer/update/`, {
+            const res = await fetch(`${API_URL}/api/customer/update/`, {
                 method: 'patch',
                 headers: {
                     'Content-Type': 'application/json',
