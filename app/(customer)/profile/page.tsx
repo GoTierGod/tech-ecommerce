@@ -1,8 +1,8 @@
-import { getUser } from '@/utils/getUser'
+import { getUser } from '@/utils/data/getUser'
 import { CustomerData } from '@/types/users'
 import UserProfile from '@/components/UserProfile'
 import { redirect } from 'next/navigation'
-import { formatTitleCase } from '@/utils/formatTitleCase'
+import { titleCaseFormatter } from '@/utils/formatting/titleCaseFormatter'
 import { Metadata } from 'next'
 
 export const metadata: Metadata = {
@@ -13,7 +13,7 @@ export default async function Profile() {
     const user: CustomerData = await getUser()
 
     if (!user) redirect('/api/auth/refresh?path=/profile&auth=1')
-    metadata.title = `${formatTitleCase(user.user.username)} | Tech`
+    metadata.title = `${titleCaseFormatter(user.user.username)} | Tech`
 
     return <UserProfile customer={user} />
 }

@@ -22,7 +22,7 @@ import {
     useState
 } from 'react'
 import { useRouter } from 'next/navigation'
-import { formatTitleCase } from '@/utils/formatTitleCase'
+import { titleCaseFormatter } from '@/utils/formatting/titleCaseFormatter'
 import { CustomerData } from '@/types/users'
 
 interface SearchProps {
@@ -157,7 +157,7 @@ const SearchAndResults = ({
                         <span>
                             <span>{results}</span> Results for
                         </span>
-                        <h2>{formatTitleCase(searchText)}</h2>
+                        <h2>{titleCaseFormatter(searchText)}</h2>
                     </div>
                 </div>
                 <div className={style.desktop}>
@@ -169,7 +169,7 @@ const SearchAndResults = ({
                             <span>
                                 <span>{results}</span> Results for
                             </span>
-                            <h2>{formatTitleCase(searchText)}</h2>
+                            <h2>{titleCaseFormatter(searchText)}</h2>
                         </div>
                     </div>
                     <div className={style.filters}>

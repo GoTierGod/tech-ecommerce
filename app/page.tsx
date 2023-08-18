@@ -2,7 +2,7 @@ import style from './page.module.css'
 
 import ProductsSection from '@/components/ProductsSection'
 import { ComposedProductInfo } from '@/types/product'
-import { getData } from '@/utils/getData'
+import { getData } from '@/utils/data/getData'
 import OffersSection from '@/components/OffersSection'
 import HighlightedSection from '@/components/HighlightedSection'
 import { Metadata } from 'next'

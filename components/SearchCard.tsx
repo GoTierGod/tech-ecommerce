@@ -7,9 +7,9 @@ import { faCartPlus, faHeart } from '@fortawesome/free-solid-svg-icons'
 
 import { ComposedProductInfo } from '@/types/product'
 import { CustomerData } from '@/types/users'
-import { getInstallments } from '@/utils/getInstallments'
-import { getDiscount } from '@/utils/getDiscount'
-import { priceStringNormalizer } from '@/utils/priceStringNormalizer'
+import { getProductInstallments } from '@/utils/products/getProductInstallments'
+import { getProductDiscount } from '@/utils/products/getProductDiscount'
+import { priceStringFormatter } from '@/utils/formatting/priceStringFormatter'
 
 interface SearchCardProps {
     product: ComposedProductInfo
@@ -42,24 +42,23 @@ export default function SearchCard({ product, user }: SearchCardProps) {
                             </span>
                         )}
                         <span className={style.discount}>
-                            {getDiscount(
+                            {getProductDiscount(
                                 product.details.price,
                                 product.details.offer_price
                             )}
-                            % OFF
                         </span>
                     </div>
                     <div className={style.offer}>
                         <span>
-                            {priceStringNormalizer(product.details.price)}
+                            {priceStringFormatter(product.details.price)}
                         </span>
                         <span>
-                            {priceStringNormalizer(product.details.offer_price)}
+                            {priceStringFormatter(product.details.offer_price)}
                         </span>
                         <span>
                             Available in{' '}
                             <span>
-                                {getInstallments(
+                                {getProductInstallments(
                                     product.details.installments,
                                     product.details.offer_price
                                 )}

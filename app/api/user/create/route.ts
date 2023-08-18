@@ -3,7 +3,7 @@ import { cookies } from 'next/dist/client/components/headers'
 import { APIResponse } from '@/types/api-response'
 import { LoginRequestData, UserCreateRequestData } from '@/types/api-request'
 import { AuthTokens } from '@/types/tokens'
-import { API_URL } from '@/app/constants/api'
+import { API_URL } from '@/constants/api'
 
 export async function POST(req: NextRequest) {
     try {

@@ -8,8 +8,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faEdit, faStar } from '@fortawesome/free-solid-svg-icons'
 
 import { Customer } from '@/types/users'
-import { formatTitleCase } from '@/utils/formatTitleCase'
-import { getAge } from '@/utils/getAge'
+import { titleCaseFormatter } from '@/utils/formatting/titleCaseFormatter'
+import { getCustomerAge } from '@/utils/customers/getCustomerAge'
 import UserUpdate from './UserUpdate'
 import ErrorDisplay from './ErrorDisplay'
 
@@ -78,7 +78,9 @@ export default function UserProfile({ customer }: UserProfileProps) {
                 <div className={style.wrapper}>
                     <div className={style.top}>
                         <div className={style.topLeft}>
-                            <h1>{formatTitleCase(customer.user.username)}</h1>
+                            <h1>
+                                {titleCaseFormatter(customer.user.username)}
+                            </h1>
                             <div className={style.points}>
                                 <FontAwesomeIcon icon={faStar} />
                                 <span>{customer.points}</span>
@@ -191,7 +193,7 @@ export default function UserProfile({ customer }: UserProfileProps) {
                                 <div>
                                     <h2>
                                         {customerInfoKeys.birthdate} (
-                                        {getAge(customer.birthdate)} yo)
+                                        {getCustomerAge(customer.birthdate)} yo)
                                     </h2>
                                     <p>{customerInfoValues.birthdate}</p>
                                 </div>

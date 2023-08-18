@@ -3,7 +3,7 @@ import { redirect } from 'next/navigation'
 import { NextRequest } from 'next/server'
 import { RefreshRequestData } from '@/types/api-request'
 import { AuthTokens } from '@/types/tokens'
-import { API_URL } from '@/app/constants/api'
+import { API_URL } from '@/constants/api'
 
 export async function GET(req: NextRequest) {
     const { searchParams } = new URL(req.url)

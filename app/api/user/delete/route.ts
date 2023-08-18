@@ -3,7 +3,7 @@ import { NextRequest, NextResponse } from 'next/server'
 import { APIResponse } from '@/types/api-response'
 import { UserDeleteRequestData } from '@/types/api-request'
 import { AuthTokens } from '@/types/tokens'
-import { API_URL } from '@/app/constants/api'
+import { API_URL } from '@/constants/api'
 
 export async function POST(req: NextRequest) {
     const authCookies = cookies().get('authTokens')

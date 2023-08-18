@@ -1,4 +1,4 @@
-import { API_URL } from '@/app/constants/api'
+import { API_URL } from '@/constants/api'
 import { LoginRequestData } from '@/types/api-request'
 import { AuthTokens } from '@/types/tokens'
 import { cookies } from 'next/dist/client/components/headers'

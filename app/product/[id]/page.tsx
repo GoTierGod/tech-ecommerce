@@ -15,13 +15,13 @@ import Link from 'next/link'
 import VerticalCard from '@/components/VerticalCard'
 import ProductRows from '@/components/ProductsSection'
 import ProductImages from '@/components/ProductImages'
-import { getData } from '@/utils/getData'
-import { getStars } from '@/utils/getStars'
-import { getDeliveryDay } from '@/utils/getDeliveryDay'
-import { getInstallments } from '@/utils/getInstallments'
+import { getData } from '@/utils/data/getData'
+import { getProductStars } from '@/utils/products/getProductStars'
+import { getProductDeliveryDay } from '@/utils/products/getProductDeliveryDay'
+import { getProductInstallments } from '@/utils/products/getProductInstallments'
 import { notFound } from 'next/navigation'
-import { respectLineBreaks } from '@/utils/respectLineBreaks'
-import { getUser } from '@/utils/getUser'
+import { respectLineBreaks } from '@/utils/formatting/respectLineBreaks'
+import { getUser } from '@/utils/data/getUser'
 import { CustomerData } from '@/types/users'
 
 import visaLogo from '../../../public/images/payments/visa.svg'
@@ -29,7 +29,7 @@ import mastercardLogo from '../../../public/images/payments/mastercard.svg'
 import americanExpressLogo from '../../../public/images/payments/american-express.svg'
 import dinersClubLogo from '../../../public/images/payments/diners-club-international.svg'
 import { Metadata } from 'next'
-import { priceStringNormalizer } from '@/utils/priceStringNormalizer'
+import { priceStringFormatter } from '@/utils/formatting/priceStringFormatter'
 
 const paymentLogos = [
     { src: visaLogo, alt: 'Visa' },
@@ -67,14 +67,12 @@ export default async function Product({ params }: { params: { id: string } }) {
         <div className={style.content}>
             {/* ------------------------- OFFER -------------------------  */}
             <div className={style.offer}>
-                <span>{priceStringNormalizer(product.details.price)}</span>
-                <span>
-                    {priceStringNormalizer(product.details.offer_price)}
-                </span>
+                <span>{priceStringFormatter(product.details.price)}</span>
+                <span>{priceStringFormatter(product.details.offer_price)}</span>
                 <span>
                     Available in{' '}
                     <span>
-                        {getInstallments(
+                        {getProductInstallments(
                             product.details.installments,
                             product.details.offer_price
                         )}
@@ -96,12 +94,12 @@ export default async function Product({ params }: { params: { id: string } }) {
                 <h3>Delivery</h3>
                 <span>
                     <FontAwesomeIcon icon={faTruck} /> It arrives for free this{' '}
-                    {getDeliveryDay()}
+                    {getProductDeliveryDay()}
                 </span>
                 <span>
                     <FontAwesomeIcon icon={faBox} />
                     Pick up your package for free starting from{' '}
-                    {getDeliveryDay()}
+                    {getProductDeliveryDay()}
                 </span>
             </div>
             {/* ------------------------- BRAND INFO -------------------------  */}
@@ -144,7 +142,7 @@ export default async function Product({ params }: { params: { id: string } }) {
                         <h5>
                             Available in{' '}
                             <span>
-                                {getInstallments(
+                                {getProductInstallments(
                                     product.details.installments,
                                     product.details.offer_price
                                 )}
@@ -178,7 +176,7 @@ export default async function Product({ params }: { params: { id: string } }) {
                             </div>
                             <div className={style.rating}>
                                 <span>
-                                    {getStars(
+                                    {getProductStars(
                                         product.reviews_counter,
                                         product.rating
                                     )}
@@ -243,7 +241,7 @@ export default async function Product({ params }: { params: { id: string } }) {
                                 </div>
                                 <div className={style.rating}>
                                     <span>
-                                        {getStars(
+                                        {getProductStars(
                                             product.reviews_counter,
                                             product.rating
                                         )}

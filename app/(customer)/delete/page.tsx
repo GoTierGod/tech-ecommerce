@@ -1,5 +1,5 @@
 import UserDelete from '@/components/UserDelete'
-import { getUser } from '@/utils/getUser'
+import { getUser } from '@/utils/data/getUser'
 import { CustomerData } from '@/types/users'
 import { Metadata } from 'next'
 import { redirect } from 'next/navigation'

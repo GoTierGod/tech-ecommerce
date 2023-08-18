@@ -19,7 +19,7 @@ import { FormEvent, useCallback, useEffect, useRef, useState } from 'react'
 import Cookies from 'js-cookie'
 
 import { Category } from '@/types/tables'
-import { formatTitleCase } from '@/utils/formatTitleCase'
+import { titleCaseFormatter } from '@/utils/formatting/titleCaseFormatter'
 import { CustomerData } from '@/types/users'
 
 interface HeaderProps {
@@ -126,7 +126,7 @@ export default function Header({ categories, user }: HeaderProps) {
                         </option>
                         {categories.map(category => (
                             <option key={category.id} value={category.title}>
-                                {formatTitleCase(category.title)}
+                                {titleCaseFormatter(category.title)}
                             </option>
                         ))}
                     </select>

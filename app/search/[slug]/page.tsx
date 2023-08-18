@@ -1,13 +1,13 @@
 import style from './page.module.css'
 
-import { getData } from '@/utils/getData'
+import { getData } from '@/utils/data/getData'
 import SearchAndResults from '@/components/SearchAndResults'
 import { notFound } from 'next/navigation'
 import { SearchResponse } from '@/types/search'
 import { unescape } from 'querystring'
-import { getUser } from '@/utils/getUser'
+import { getUser } from '@/utils/data/getUser'
 import { CustomerData } from '@/types/users'
-import { formatTitleCase } from '@/utils/formatTitleCase'
+import { titleCaseFormatter } from '@/utils/formatting/titleCaseFormatter'
 import { Metadata } from 'next'
 
 export const metadata: Metadata = {
@@ -50,7 +50,7 @@ export default async function Search({
     }
 
     const readableSearch = unescape(search)
-    metadata.title = `${formatTitleCase(readableSearch)} | Tech`
+    metadata.title = `${titleCaseFormatter(readableSearch)} | Tech`
 
     const searchRes: SearchResponse | false = await getData(
         `https://ft-drf-api.vercel.app/api/search/${
