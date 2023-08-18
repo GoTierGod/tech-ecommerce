@@ -12,9 +12,9 @@ import {
     faXmarkCircle
 } from '@fortawesome/free-solid-svg-icons'
 import { useRouter } from 'next/navigation'
-import { APIResponse } from '@/app/api/auth/login/route'
 import { useState } from 'react'
 import ErrorDisplay from './ErrorDisplay'
+import { APIResponse } from '@/types/api-response'
 
 const fieldsTouched: string[] = [
     'username',

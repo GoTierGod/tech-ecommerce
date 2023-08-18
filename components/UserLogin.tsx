@@ -10,10 +10,10 @@ import {
     faHandPeace,
     faXmarkCircle
 } from '@fortawesome/free-solid-svg-icons'
-import { APIResponse } from '@/app/api/auth/login/route'
 import { useState } from 'react'
 import ErrorDisplay from './ErrorDisplay'
 import Link from 'next/link'
+import { APIResponse } from '@/types/api-response'
 
 const fieldsTouched: string[] = [
     'username',

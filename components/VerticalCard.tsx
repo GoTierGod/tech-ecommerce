@@ -5,8 +5,8 @@ import Link from 'next/link'
 
 import { ComposedProductInfo } from '@/types/product'
 import { respectLineBreaks } from '@/utils/respectLineBreaks'
-import { priceStringNormalizer } from '@/utils/priceStringNormalizer'
 import { getDiscount } from '@/utils/getDiscount'
+import { priceStringNormalizer } from '@/utils/priceStringNormalizer'
 
 interface VerticalCardProps {
     product: ComposedProductInfo

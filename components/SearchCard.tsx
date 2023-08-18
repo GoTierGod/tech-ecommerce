@@ -9,6 +9,7 @@ import { ComposedProductInfo } from '@/types/product'
 import { CustomerData } from '@/types/users'
 import { getInstallments } from '@/utils/getInstallments'
 import { getDiscount } from '@/utils/getDiscount'
+import { priceStringNormalizer } from '@/utils/priceStringNormalizer'
 
 interface SearchCardProps {
     product: ComposedProductInfo
@@ -49,8 +50,12 @@ export default function SearchCard({ product, user }: SearchCardProps) {
                         </span>
                     </div>
                     <div className={style.offer}>
-                        <span>$ {product.details.price}</span>
-                        <span>$ {product.details.offer_price}</span>
+                        <span>
+                            {priceStringNormalizer(product.details.price)}
+                        </span>
+                        <span>
+                            {priceStringNormalizer(product.details.offer_price)}
+                        </span>
                         <span>
                             Available in{' '}
                             <span>

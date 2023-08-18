@@ -10,9 +10,9 @@ import {
     faUserPen,
     faXmarkCircle
 } from '@fortawesome/free-solid-svg-icons'
-import { APIResponse } from '@/app/api/auth/login/route'
 import { Customer } from '@/types/users'
 import { useRouter } from 'next/navigation'
+import { APIResponse } from '@/types/api-response'
 
 interface UserUpdateProps {
     updating: string
