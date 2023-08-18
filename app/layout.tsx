@@ -21,7 +21,7 @@ export default async function RootLayout({
     children: React.ReactNode
 }) {
     const categories: Category[] = await getData(
-        `https://ft-drf-api.vercel.app/api/categories`
+        `https://ft-drf-api.vercel.app/api/categories/`
     )
 
     const user: CustomerData = await getUser()

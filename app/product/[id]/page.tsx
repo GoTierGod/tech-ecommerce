@@ -54,10 +54,10 @@ export default async function Product({ params }: { params: { id: string } }) {
     metadata.title = `${product.details.name} | Tech`
 
     const brandProducts: ComposedProductInfo[] | false = await getData(
-        `${API_URL}/api/products?brand=${product.details.brand.name}&limit=5`
+        `${API_URL}/api/products/?brand=${product.details.brand.name}&limit=5`
     )
     const relatedProducts: ComposedProductInfo[] | false = await getData(
-        `${API_URL}/api/products?brand=${product.details.brand.name}&limit=6`
+        `${API_URL}/api/products/?brand=${product.details.brand.name}&limit=6`
     )
 
     if (!brandProducts || !relatedProducts) return notFound()

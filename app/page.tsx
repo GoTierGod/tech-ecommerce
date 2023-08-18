@@ -15,28 +15,28 @@ export const metadata: Metadata = {
 
 export default async function Home() {
     const laptops: ComposedProductInfo[] = await getData(
-        `${API_URL}/api/products?category=laptops&limit=6`
+        `${API_URL}/api/products/?category=laptops&limit=6`
     )
     const headphones: ComposedProductInfo[] = await getData(
-        `${API_URL}/api/products?category=headphones&limit=6`
+        `${API_URL}/api/products/?category=headphones&limit=6`
     )
     const smartphones: ComposedProductInfo[] = await getData(
-        `${API_URL}/api/products?category=smartphones&limit=6`
+        `${API_URL}/api/products/?category=smartphones&limit=6`
     )
 
     const offers: ComposedProductInfo[] = await getData(
-        `${API_URL}/api/products?category=monitors&limit=3`
+        `${API_URL}/api/products/?category=monitors&limit=3`
     )
 
     const highlightedOne: ComposedProductInfo[] = await getData(
-        `${API_URL}/api/products?category=smartphones&limit=1`
+        `${API_URL}/api/products/?category=smartphones&limit=1`
     )
     const highlightedTwo: ComposedProductInfo[] = await getData(
-        `${API_URL}/api/products?category=headphones&limit=1`
+        `${API_URL}/api/products/?category=headphones&limit=1`
     )
 
     const gaming: ComposedProductInfo[] = await getData(
-        `${API_URL}/api/products?is_gamer=true&limit=6`
+        `${API_URL}/api/products/?is_gamer=true&limit=6`
     )
 
     return (
