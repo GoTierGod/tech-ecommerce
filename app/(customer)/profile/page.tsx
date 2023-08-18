@@ -1,8 +1,8 @@
-import { getUser } from '@/helpers/getUser'
+import { getUser } from '@/utils/getUser'
 import { CustomerData } from '@/types/users'
 import UserProfile from '@/components/UserProfile'
 import { redirect } from 'next/navigation'
-import { formatTitleCase } from '@/helpers/formatTitleCase'
+import { formatTitleCase } from '@/utils/formatTitleCase'
 import { Metadata } from 'next'
 
 export const metadata: Metadata = {

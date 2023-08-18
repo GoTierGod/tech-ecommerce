@@ -19,7 +19,7 @@ import { FormEvent, useCallback, useEffect, useRef, useState } from 'react'
 import Cookies from 'js-cookie'
 
 import { Category } from '@/types/tables'
-import { formatTitleCase } from '@/helpers/formatTitleCase'
+import { formatTitleCase } from '@/utils/formatTitleCase'
 import { CustomerData } from '@/types/users'
 
 interface HeaderProps {

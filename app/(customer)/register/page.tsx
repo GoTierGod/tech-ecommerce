@@ -1,7 +1,7 @@
 import style from './page.module.css'
 
 import UserRegister from '@/components/UserRegister'
-import { getUser } from '@/helpers/getUser'
+import { getUser } from '@/utils/getUser'
 import { redirect } from 'next/navigation'
 
 export default async function Register() {

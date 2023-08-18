@@ -4,9 +4,9 @@ import Image from 'next/image'
 import Link from 'next/link'
 
 import { ComposedProductInfo } from '@/types/product'
-import { respectLineBreaks } from '@/helpers/respectLineBreaks'
-import { formatPrice } from '@/helpers/formatPrice'
-import { getDiscount } from '@/helpers/getDiscount'
+import { respectLineBreaks } from '@/utils/respectLineBreaks'
+import { formatPrice } from '@/utils/formatPrice'
+import { getDiscount } from '@/utils/getDiscount'
 
 interface VerticalCardProps {
     product: ComposedProductInfo

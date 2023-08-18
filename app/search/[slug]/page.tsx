@@ -1,13 +1,13 @@
 import style from './page.module.css'
 
-import { getData } from '@/helpers/getData'
+import { getData } from '@/utils/getData'
 import SearchAndResults from '@/components/SearchAndResults'
 import { notFound } from 'next/navigation'
 import { SearchResponse } from '@/types/search'
 import { unescape } from 'querystring'
-import { getUser } from '@/helpers/getUser'
+import { getUser } from '@/utils/getUser'
 import { CustomerData } from '@/types/users'
-import { formatTitleCase } from '@/helpers/formatTitleCase'
+import { formatTitleCase } from '@/utils/formatTitleCase'
 import { Metadata } from 'next'
 
 export const metadata: Metadata = {

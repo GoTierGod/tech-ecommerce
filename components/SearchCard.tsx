@@ -7,8 +7,8 @@ import { faCartPlus, faHeart } from '@fortawesome/free-solid-svg-icons'
 
 import { ComposedProductInfo } from '@/types/product'
 import { CustomerData } from '@/types/users'
-import { getInstallments } from '@/helpers/getInstallments'
-import { getDiscount } from '@/helpers/getDiscount'
+import { getInstallments } from '@/utils/getInstallments'
+import { getDiscount } from '@/utils/getDiscount'
 
 interface SearchCardProps {
     product: ComposedProductInfo

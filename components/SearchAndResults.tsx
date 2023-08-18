@@ -22,7 +22,7 @@ import {
     useState
 } from 'react'
 import { useRouter } from 'next/navigation'
-import { formatTitleCase } from '@/helpers/formatTitleCase'
+import { formatTitleCase } from '@/utils/formatTitleCase'
 import { CustomerData } from '@/types/users'
 
 interface SearchProps {

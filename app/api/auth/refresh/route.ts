@@ -1,4 +1,4 @@
-import { apiUrl } from '@/helpers/apiUrl'
+import { apiUrl } from '@/utils/apiUrl'
 import { cookies } from 'next/dist/client/components/headers'
 import { redirect } from 'next/navigation'
 import { NextRequest } from 'next/server'

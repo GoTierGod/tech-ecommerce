@@ -1,6 +1,6 @@
 import style from './page.module.css'
 
-import { getUser } from '@/helpers/getUser'
+import { getUser } from '@/utils/getUser'
 import Link from 'next/link'
 import { redirect } from 'next/navigation'
 import UserLogout from '@/components/UserLogout'

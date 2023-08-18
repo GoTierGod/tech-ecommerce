@@ -8,8 +8,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faEdit, faStar } from '@fortawesome/free-solid-svg-icons'
 
 import { Customer } from '@/types/users'
-import { formatTitleCase } from '@/helpers/formatTitleCase'
-import { getAge } from '@/helpers/getAge'
+import { formatTitleCase } from '@/utils/formatTitleCase'
+import { getAge } from '@/utils/getAge'
 import UserUpdate from './UserUpdate'
 import ErrorDisplay from './ErrorDisplay'
 

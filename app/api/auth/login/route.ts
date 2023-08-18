@@ -1,4 +1,4 @@
-import { apiUrl } from '@/helpers/apiUrl'
+import { apiUrl } from '@/utils/apiUrl'
 import { LoginRequestData } from '@/types/api-request'
 import { AuthTokens } from '@/types/tokens'
 import { cookies } from 'next/dist/client/components/headers'

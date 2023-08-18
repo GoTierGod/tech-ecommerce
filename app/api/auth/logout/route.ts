@@ -1,6 +1,6 @@
 import { cookies } from 'next/dist/client/components/headers'
 import { NextRequest, NextResponse } from 'next/server'
-import { apiUrl } from '@/helpers/apiUrl'
+import { apiUrl } from '@/utils/apiUrl'
 import { LogoutRequestData } from '@/types/api-request'
 import { AuthTokens } from '@/types/tokens'
 
