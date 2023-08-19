@@ -89,7 +89,7 @@ export default function Header({ categories, user }: HeaderProps) {
     return (
         <header className={style.header}>
             <div className={style.wrapper}>
-                <Link href='/' className={style.logo}>
+                <Link href='/' className={style.logo} prefetch={false}>
                     <Image
                         src='/next.svg'
                         alt='All Tech logo'
@@ -141,22 +141,31 @@ export default function Header({ categories, user }: HeaderProps) {
                 <nav className={style.wideNav}>
                     <ul className={style.links}>
                         <li>
-                            <Link href='/'>Offers</Link>
+                            <Link href='/' prefetch={false}>
+                                Offers
+                            </Link>
                         </li>
                         <li>
-                            <Link href='/'>Contact</Link>
+                            <Link href='/' prefetch={false}>
+                                Contact
+                            </Link>
                         </li>
                         <li>
-                            <Link href='/'>About</Link>
+                            <Link href='/' prefetch={false}>
+                                About
+                            </Link>
                         </li>
                         <li>
-                            <Link href='/'>Home</Link>
+                            <Link href='/' prefetch={false}>
+                                Home
+                            </Link>
                         </li>
                     </ul>
                 </nav>
                 <Link
                     href={user ? '/profile' : '/login'}
                     className={style.profile}
+                    prefetch={false}
                 >
                     <FontAwesomeIcon icon={faCircleUser} />
                     <span>{user ? user.user.username : 'Log in'}</span>
@@ -166,11 +175,16 @@ export default function Header({ categories, user }: HeaderProps) {
                         href='/logout'
                         className={style.logout}
                         aria-label='Log Out'
+                        prefetch={false}
                     >
                         <FontAwesomeIcon icon={faSignOut} />
                     </Link>
                 ) : (
-                    <Link href='/register' className={style.logout}>
+                    <Link
+                        href='/register'
+                        className={style.logout}
+                        prefetch={false}
+                    >
                         <FontAwesomeIcon icon={faSignIn} />
                         <span>Sign Up</span>
                     </Link>
@@ -179,28 +193,31 @@ export default function Header({ categories, user }: HeaderProps) {
             <div ref={dropdownMenuRef} className={style.dropdownMenu}>
                 <div className={style.options}>
                     <div>
-                        <Link href={user ? '/profile' : '/login'}>
+                        <Link
+                            href={user ? '/profile' : '/login'}
+                            prefetch={false}
+                        >
                             <FontAwesomeIcon icon={faCircleUser} />
                             <span>{user ? user.user.username : 'Log in'}</span>
                         </Link>
                         {user ? (
-                            <Link href='/logout'>
+                            <Link href='/logout' prefetch={false}>
                                 <FontAwesomeIcon icon={faSignOut} />
                                 <span>Log Out</span>
                             </Link>
                         ) : (
-                            <Link href='/register'>
+                            <Link href='/register' prefetch={false}>
                                 <FontAwesomeIcon icon={faSignIn} />
                                 <span>Sign Up</span>
                             </Link>
                         )}
                     </div>
                     <div>
-                        <Link href='/'>
+                        <Link href='/' prefetch={false}>
                             <FontAwesomeIcon icon={faCartShopping} />
                             <span>Cart</span>
                         </Link>
-                        <Link href='/'>
+                        <Link href='/favorites' prefetch={false}>
                             <FontAwesomeIcon icon={faHeart} />
                             <span>Favorites</span>
                         </Link>
@@ -209,16 +226,24 @@ export default function Header({ categories, user }: HeaderProps) {
                 <nav className={style.smallNav}>
                     <ul className={style.links}>
                         <li>
-                            <Link href='/'>Offers</Link>
+                            <Link href='/' prefetch={false}>
+                                Offers
+                            </Link>
                         </li>
                         <li>
-                            <Link href='/'>Contact</Link>
+                            <Link href='/' prefetch={false}>
+                                Contact
+                            </Link>
                         </li>
                         <li>
-                            <Link href='/'>About</Link>
+                            <Link href='/' prefetch={false}>
+                                About
+                            </Link>
                         </li>
                         <li>
-                            <Link href='/'>Home</Link>
+                            <Link href='/' prefetch={false}>
+                                Home
+                            </Link>
                         </li>
                     </ul>
                 </nav>
