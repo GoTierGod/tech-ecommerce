@@ -7,7 +7,6 @@ import {
     faCheck,
     faEllipsisVertical,
     faHeart,
-    faMoneyBill,
     faPen,
     faTrash
 } from '@fortawesome/free-solid-svg-icons'
@@ -16,6 +15,21 @@ import HorizontalCard from './HoritonzalCard'
 
 interface UserFavoritesProps {
     favorites: ComposedProductInfo[]
+}
+
+interface FavItemProps {
+    product: ComposedProductInfo
+}
+
+function FavItem({ product }: FavItemProps) {
+    return (
+        <div className={style.favItem}>
+            <HorizontalCard product={product} />
+            <div className={style.favItemOptions}>
+                <FontAwesomeIcon icon={faEllipsisVertical} />
+            </div>
+        </div>
+    )
 }
 
 export default function UserFavorites({ favorites }: UserFavoritesProps) {
@@ -65,17 +79,10 @@ export default function UserFavorites({ favorites }: UserFavoritesProps) {
                     </div>
                     <div className={style.grid}>
                         {favorites.map(product => (
-                            <div
+                            <FavItem
                                 key={product.details.id}
-                                className={style.favItem}
-                            >
-                                <HorizontalCard product={product} />
-                                <div className={style.favItemOptions}>
-                                    <FontAwesomeIcon
-                                        icon={faEllipsisVertical}
-                                    />
-                                </div>
-                            </div>
+                                product={product}
+                            />
                         ))}
                     </div>
                 </div>
