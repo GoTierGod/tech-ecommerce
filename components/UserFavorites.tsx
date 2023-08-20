@@ -12,6 +12,7 @@ import {
 } from '@fortawesome/free-solid-svg-icons'
 import { ComposedProductInfo } from '@/types/product'
 import HorizontalCard from './HoritonzalCard'
+import { useState } from 'react'
 
 interface UserFavoritesProps {
     favorites: ComposedProductInfo[]
@@ -22,12 +23,56 @@ interface FavItemProps {
 }
 
 function FavItem({ product }: FavItemProps) {
+    const [optMenu, setOptMenu] = useState(false)
+
+    const toggleMenu = () => setOptMenu(prevOptMenu => !prevOptMenu)
+
+    const deleteItem = () => console.log('Deleted')
+
+    const moveItem = () => console.log('Moved')
+
     return (
         <div className={style.favItem}>
             <HorizontalCard product={product} />
-            <div className={style.favItemOptions}>
+            <button className={style.favItemOptions} onClick={toggleMenu}>
                 <FontAwesomeIcon icon={faEllipsisVertical} />
-            </div>
+            </button>
+            <button
+                onClick={deleteItem}
+                style={
+                    optMenu
+                        ? {
+                              transform: 'scale(1)',
+                              right: '3rem',
+                              top: '1rem'
+                          }
+                        : {
+                              transform: 'scale(0)',
+                              right: '2px',
+                              top: '2px'
+                          }
+                }
+            >
+                <FontAwesomeIcon icon={faTrash} />
+            </button>
+            <button
+                onClick={moveItem}
+                style={
+                    optMenu
+                        ? {
+                              transform: 'scale(1)',
+                              right: '1rem',
+                              top: '3.5rem'
+                          }
+                        : {
+                              transform: 'scale(0)',
+                              right: '2px',
+                              top: '2px'
+                          }
+                }
+            >
+                <FontAwesomeIcon icon={faCartShopping} />
+            </button>
         </div>
     )
 }

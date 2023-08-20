@@ -41,7 +41,7 @@
     font-weight: 400;
 }
 
-:is(.header, .content) svg {
+:is(.header, .content, .favItem) svg {
     height: 1rem;
 }
 
@@ -101,8 +101,41 @@
     aspect-ratio: 1/1;
 
     background: var(--white);
+    color: var(--gray);
 
+    border: 2px solid transparent;
     border-radius: 4px;
 
     cursor: pointer;
+}
+
+.favItem button:not(.favItemOptions) {
+    position: absolute;
+    top: 2px;
+    right: 2px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    width: 48px;
+    height: 48px;
+
+    padding: 1rem;
+    aspect-ratio: 1/1;
+
+    background: var(--gray);
+    color: var(--white);
+
+    border: 2px solid transparent;
+    border-radius: 50%;
+
+    cursor: pointer;
+
+    transform: scale(0);
+    transition: transform 300ms, right 300ms, top 300ms, background-color 300ms;
+}
+
+.favItem button:not(.favItemOptions):hover {
+    background: var(--main);
 }
