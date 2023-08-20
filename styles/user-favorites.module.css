@@ -8,6 +8,7 @@
 }
 
 .wrapperLeft,
+.stickyWrapper,
 .wrapperRight {
     display: flex;
     flex-direction: column;
@@ -182,6 +183,11 @@
 
     .wrapperLeft {
         grid-area: w-left;
+    }
+
+    .stickyWrapper {
+        position: sticky;
+        top: 84px;
     }
 
     .wrapperRight {

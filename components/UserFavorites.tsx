@@ -129,38 +129,40 @@ export default function UserFavorites({ favorites }: UserFavoritesProps) {
         <main>
             <div className={style.wrapper}>
                 <div className={style.wrapperLeft}>
-                    <div className={style.options}>
-                        <div className={style.header}>
-                            <h2>Options</h2>
-                            <FontAwesomeIcon icon={faPen} />
-                        </div>
-                        <div className={style.content}>
-                            <span>
-                                <FontAwesomeIcon icon={faTrash} />
+                    <div className={style.stickyWrapper}>
+                        <div className={style.options}>
+                            <div className={style.header}>
+                                <h2>Options</h2>
+                                <FontAwesomeIcon icon={faPen} />
+                            </div>
+                            <div className={style.content}>
                                 <span>
-                                    Remove the product from your favorites
+                                    <FontAwesomeIcon icon={faTrash} />
+                                    <span>
+                                        Remove the product from your favorites
+                                    </span>
                                 </span>
-                            </span>
-                            <span>
-                                <FontAwesomeIcon icon={faCartShopping} />
-                                <span>Move the product to your cart</span>
-                            </span>
+                                <span>
+                                    <FontAwesomeIcon icon={faCartShopping} />
+                                    <span>Move the product to your cart</span>
+                                </span>
+                            </div>
                         </div>
-                    </div>
-                    <div className={style.markAndDelete}>
-                        <div className={style.header}>
-                            <h2>Mark and Delete</h2>
-                            <FontAwesomeIcon icon={faTrash} />
-                        </div>
-                        <div className={style.content}>
-                            <button>
-                                <FontAwesomeIcon icon={faCheck} />
-                                <span>Mark products</span>
-                            </button>
-                            <button>
+                        <div className={style.markAndDelete}>
+                            <div className={style.header}>
+                                <h2>Mark and Delete</h2>
                                 <FontAwesomeIcon icon={faTrash} />
-                                <span>Delete marked products</span>
-                            </button>
+                            </div>
+                            <div className={style.content}>
+                                <button>
+                                    <FontAwesomeIcon icon={faCheck} />
+                                    <span>Mark products</span>
+                                </button>
+                                <button>
+                                    <FontAwesomeIcon icon={faTrash} />
+                                    <span>Delete marked products</span>
+                                </button>
+                            </div>
                         </div>
                     </div>
                 </div>
