@@ -12,7 +12,8 @@ import {
 } from '@fortawesome/free-solid-svg-icons'
 import { ComposedProductInfo } from '@/types/product'
 import HorizontalCard from './HoritonzalCard'
-import { useRef, useState } from 'react'
+import { useCallback, useRef, useState } from 'react'
+import { useRouter } from 'next/navigation'
 
 interface UserFavoritesProps {
     favorites: ComposedProductInfo[]
@@ -23,38 +24,56 @@ interface FavItemProps {
 }
 
 function FavItem({ product }: FavItemProps) {
+    const router = useRouter()
     const [optMenu, setOptMenu] = useState(false)
     const [waitingRes, setWaitingRes] = useState(false)
     const favItemRef = useRef(null)
 
-    const toggleMenu = () => setOptMenu(prevOptMenu => !prevOptMenu)
+    const toggleMenu = useCallback(
+        () => setOptMenu(prevOptMenu => !prevOptMenu),
+        [setOptMenu]
+    )
 
-    const deleteItem = async () => {
-        toggleMenu()
-
-        if (!waitingRes) {
-            setWaitingRes(true)
-
-            const res = await fetch(
-                `/api/favorites/delete?id=${product.details.id}`,
-                {
-                    method: 'delete'
-                }
-            )
-
-            if (res.ok) {
-                if (favItemRef.current) {
-                    const card: HTMLDivElement = favItemRef.current
-                    card.style.left = '100vw'
-                    setTimeout(() => (card.style.display = 'none'), 600)
-                }
-            }
-
-            setWaitingRes(false)
+    const deleteAnimation = useCallback(() => {
+        if (favItemRef.current) {
+            const card: HTMLDivElement = favItemRef.current
+            card.style.left = '100vw'
+            setTimeout(() => (card.style.display = 'none'), 600)
         }
-    }
+    }, [favItemRef])
 
-    const moveItem = () => console.log('Moved')
+    const favItemAction = useCallback(
+        async (action: 'delete' | 'move') => {
+            toggleMenu()
+
+            if (!waitingRes) {
+                setWaitingRes(true)
+
+                let res
+                if (action === 'delete') {
+                    res = await fetch(
+                        `/api/favorites/delete?id=${product.details.id}`,
+                        {
+                            method: 'DELETE'
+                        }
+                    )
+                } else {
+                    res = await fetch(
+                        `/api/favorites/move?id=${product.details.id}`,
+                        {
+                            method: 'PATCH'
+                        }
+                    )
+                }
+
+                if (res.ok) deleteAnimation()
+                else router.refresh()
+
+                setWaitingRes(false)
+            }
+        },
+        [toggleMenu, waitingRes, product.details.id, deleteAnimation, router]
+    )
 
     return (
         <div className={style.favItem} ref={favItemRef}>
@@ -63,7 +82,7 @@ function FavItem({ product }: FavItemProps) {
                 <FontAwesomeIcon icon={faEllipsisVertical} />
             </button>
             <button
-                onClick={deleteItem}
+                onClick={() => favItemAction('delete')}
                 disabled={waitingRes}
                 style={
                     optMenu
@@ -82,7 +101,7 @@ function FavItem({ product }: FavItemProps) {
                 <FontAwesomeIcon icon={faTrash} />
             </button>
             <button
-                onClick={moveItem}
+                onClick={() => favItemAction('move')}
                 disabled={waitingRes}
                 style={
                     optMenu
