@@ -38,6 +38,7 @@ function FavItem({ product }: FavItemProps) {
         if (favItemRef.current) {
             const card: HTMLDivElement = favItemRef.current
             card.style.left = '100vw'
+            card.style.opacity = '0'
             setTimeout(() => (card.style.display = 'none'), 600)
         }
     }, [favItemRef])

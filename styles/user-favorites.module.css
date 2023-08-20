@@ -14,9 +14,12 @@
     gap: 1rem;
 }
 
+.wrapperRight {
+    gap: 0.5rem;
+}
+
 .options,
-.markAndDelete,
-.grid {
+.markAndDelete {
     display: flex;
     flex-direction: column;
     gap: 0.5rem;
@@ -93,7 +96,8 @@
 
     left: 0;
 
-    transition: left 600ms;
+    opacity: 1;
+    transition: left 600ms, opacity 300ms;
 
     overflow: hidden;
 }
@@ -137,6 +141,8 @@
     border-radius: 50%;
 
     cursor: pointer;
+
+    opacity: 1;
     transform: scale(0);
     transition: transform 300ms, right 300ms, top 300ms, background-color 300ms;
 }
@@ -151,4 +157,54 @@
 
 .favItem button:not(.favItemOptions):hover {
     background: var(--main);
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0.5rem;
+
+    width: 100%;
+}
+
+@media screen and (min-width: 600px) {
+    .grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media screen and (min-width: 768px) {
+    .wrapper {
+        display: grid;
+        grid-template-columns: 3fr 2fr;
+        grid-template-areas: 'w-right w-left';
+    }
+
+    .wrapperLeft {
+        grid-area: w-left;
+    }
+
+    .wrapperRight {
+        grid-area: w-right;
+    }
+
+    .markAndDelete button {
+        gap: 1rem;
+        padding: 0.5rem 0.75rem;
+        width: fit-content;
+    }
+
+    .grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media screen and (min-width: 1024px) {
+    .wrapper {
+        grid-template-columns: 2fr 1fr;
+    }
+
+    .grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
 }
