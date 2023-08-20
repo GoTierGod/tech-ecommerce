@@ -12,7 +12,7 @@ import {
 } from '@fortawesome/free-solid-svg-icons'
 import { ComposedProductInfo } from '@/types/product'
 import HorizontalCard from './HoritonzalCard'
-import { useState } from 'react'
+import { useRef, useState } from 'react'
 
 interface UserFavoritesProps {
     favorites: ComposedProductInfo[]
@@ -24,21 +24,47 @@ interface FavItemProps {
 
 function FavItem({ product }: FavItemProps) {
     const [optMenu, setOptMenu] = useState(false)
+    const [waitingRes, setWaitingRes] = useState(false)
+    const favItemRef = useRef(null)
 
     const toggleMenu = () => setOptMenu(prevOptMenu => !prevOptMenu)
 
-    const deleteItem = () => console.log('Deleted')
+    const deleteItem = async () => {
+        toggleMenu()
+
+        if (!waitingRes) {
+            setWaitingRes(true)
+
+            const res = await fetch(
+                `/api/favorites/delete?id=${product.details.id}`,
+                {
+                    method: 'delete'
+                }
+            )
+
+            if (res.ok) {
+                if (favItemRef.current) {
+                    const card: HTMLDivElement = favItemRef.current
+                    card.style.left = '100vw'
+                    setTimeout(() => (card.style.display = 'none'), 600)
+                }
+            }
+
+            setWaitingRes(false)
+        }
+    }
 
     const moveItem = () => console.log('Moved')
 
     return (
-        <div className={style.favItem}>
+        <div className={style.favItem} ref={favItemRef}>
             <HorizontalCard product={product} />
             <button className={style.favItemOptions} onClick={toggleMenu}>
                 <FontAwesomeIcon icon={faEllipsisVertical} />
             </button>
             <button
                 onClick={deleteItem}
+                disabled={waitingRes}
                 style={
                     optMenu
                         ? {
@@ -57,6 +83,7 @@ function FavItem({ product }: FavItemProps) {
             </button>
             <button
                 onClick={moveItem}
+                disabled={waitingRes}
                 style={
                     optMenu
                         ? {

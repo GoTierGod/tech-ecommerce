@@ -90,6 +90,12 @@
 
     display: flex;
     gap: 0.25rem;
+
+    left: 0;
+
+    transition: left 600ms;
+
+    overflow: hidden;
 }
 
 .favItemOptions {
@@ -131,9 +137,16 @@
     border-radius: 50%;
 
     cursor: pointer;
-
     transform: scale(0);
     transition: transform 300ms, right 300ms, top 300ms, background-color 300ms;
+}
+
+.favItem button:not(.favItemOptions):first-of-type {
+    transition-delay: 0ms;
+}
+
+.favItem button:not(.favItemOptions):last-of-type {
+    transition-delay: 50ms;
 }
 
 .favItem button:not(.favItemOptions):hover {
