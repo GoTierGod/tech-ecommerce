@@ -38,9 +38,10 @@ function CartItem({ product }: CartItemProps) {
     const deleteAnimation = useCallback(() => {
         if (cartItemRef.current) {
             const card: HTMLDivElement = cartItemRef.current
-            card.style.left = '100vw'
+            card.style.height = '0'
+            card.style.width = '0'
             card.style.opacity = '0'
-            setTimeout(() => (card.style.display = 'none'), 600)
+            setTimeout(() => (card.style.display = 'none'), 350)
         }
     }, [cartItemRef])
 
@@ -68,10 +69,15 @@ function CartItem({ product }: CartItemProps) {
                     )
                 }
 
-                if (res.ok) deleteAnimation()
+                if (res.ok)
+                    setTimeout(() => {
+                        deleteAnimation()
+                    }, 600)
                 else router.refresh()
 
-                setWaitingRes(false)
+                setTimeout(() => {
+                    setWaitingRes(false)
+                }, 600)
             }
         },
         [toggleMenu, waitingRes, product.details.id, deleteAnimation, router]
@@ -79,8 +85,42 @@ function CartItem({ product }: CartItemProps) {
 
     return (
         <div className={style.cartItem} ref={cartItemRef}>
+            <div
+                className={style.loadingAction}
+                style={
+                    waitingRes
+                        ? {
+                              width: '100%',
+                              height: '170px'
+                          }
+                        : {
+                              width: '0',
+                              height: '0'
+                          }
+                }
+            >
+                {
+                    <h2
+                        style={
+                            waitingRes
+                                ? {
+                                      color: 'var(--gray)'
+                                  }
+                                : {
+                                      color: 'transparent'
+                                  }
+                        }
+                    >
+                        {waitingRes ? 'Waiting...' : 'Successfull'}
+                    </h2>
+                }
+            </div>
             <HorizontalCard product={product} />
-            <button className={style.cartItemOptions} onClick={toggleMenu}>
+            <button
+                className={style.cartItemOptions}
+                onClick={toggleMenu}
+                disabled={waitingRes}
+            >
                 <FontAwesomeIcon icon={faEllipsisVertical} />
             </button>
             <button

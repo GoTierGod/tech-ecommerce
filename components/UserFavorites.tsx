@@ -37,9 +37,10 @@ function FavItem({ product }: FavItemProps) {
     const deleteAnimation = useCallback(() => {
         if (favItemRef.current) {
             const card: HTMLDivElement = favItemRef.current
-            card.style.left = '100vw'
+            card.style.height = '0'
+            card.style.width = '0'
             card.style.opacity = '0'
-            setTimeout(() => (card.style.display = 'none'), 600)
+            setTimeout(() => (card.style.display = 'none'), 350)
         }
     }, [favItemRef])
 
@@ -67,10 +68,15 @@ function FavItem({ product }: FavItemProps) {
                     )
                 }
 
-                if (res.ok) deleteAnimation()
+                if (res.ok)
+                    setTimeout(() => {
+                        deleteAnimation()
+                    }, 600)
                 else router.refresh()
 
-                setWaitingRes(false)
+                setTimeout(() => {
+                    setWaitingRes(false)
+                }, 600)
             }
         },
         [toggleMenu, waitingRes, product.details.id, deleteAnimation, router]
@@ -78,8 +84,42 @@ function FavItem({ product }: FavItemProps) {
 
     return (
         <div className={style.favItem} ref={favItemRef}>
+            <div
+                className={style.loadingAction}
+                style={
+                    waitingRes
+                        ? {
+                              width: '100%',
+                              height: '170px'
+                          }
+                        : {
+                              width: '0',
+                              height: '0'
+                          }
+                }
+            >
+                {
+                    <h2
+                        style={
+                            waitingRes
+                                ? {
+                                      color: 'var(--gray)'
+                                  }
+                                : {
+                                      color: 'transparent'
+                                  }
+                        }
+                    >
+                        {waitingRes ? 'Waiting...' : 'Successfull'}
+                    </h2>
+                }
+            </div>
             <HorizontalCard product={product} />
-            <button className={style.favItemOptions} onClick={toggleMenu}>
+            <button
+                className={style.favItemOptions}
+                onClick={toggleMenu}
+                disabled={waitingRes}
+            >
                 <FontAwesomeIcon icon={faEllipsisVertical} />
             </button>
             <button
