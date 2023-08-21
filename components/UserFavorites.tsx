@@ -202,7 +202,12 @@ export default function UserFavorites({ favorites }: UserFavoritesProps) {
             method: 'DELETE'
         })
 
-        if (res.ok) router.refresh()
+        if (res.ok) {
+            router.refresh()
+        }
+
+        setSelecting(false)
+        setSelectedItems([])
     }, [selectedItems, router])
 
     return (
