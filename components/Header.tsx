@@ -213,7 +213,7 @@ export default function Header({ categories, user }: HeaderProps) {
                         )}
                     </div>
                     <div>
-                        <Link href='/' prefetch={false}>
+                        <Link href='/cart' prefetch={false}>
                             <FontAwesomeIcon icon={faCartShopping} />
                             <span>Cart</span>
                         </Link>
