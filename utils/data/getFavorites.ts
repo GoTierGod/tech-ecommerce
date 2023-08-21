@@ -5,7 +5,9 @@ import { API_URL } from '@/constants/api'
 import { ComposedProductInfo } from '@/types/product'
 import { AuthTokens } from '@/types/tokens'
 
-export const getFavorites = async (): Promise<ComposedProductInfo[] | null> => {
+export const getFavorites = async (): Promise<
+    ComposedProductInfo[] | [] | null
+> => {
     const authCookies = cookies().get('authTokens')
 
     if (authCookies) {

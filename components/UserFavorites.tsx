@@ -171,14 +171,24 @@ export default function UserFavorites({ favorites }: UserFavoritesProps) {
                         <h2>GoTierGod&apos;s Favorites</h2>
                         <FontAwesomeIcon icon={faHeart} />
                     </div>
-                    <div className={style.grid}>
-                        {favorites.map(product => (
-                            <FavItem
-                                key={product.details.id}
-                                product={product}
-                            />
-                        ))}
-                    </div>
+                    {favorites.length > 0 ? (
+                        <div className={style.grid}>
+                            {favorites.map(product => (
+                                <FavItem
+                                    key={product.details.id}
+                                    product={product}
+                                />
+                            ))}
+                        </div>
+                    ) : (
+                        <div className={style.empty}>
+                            <h3>No favorites!</h3>
+                            <p>
+                                At this moment you do not have products marked
+                                as favorites, check out our offers!
+                            </p>
+                        </div>
+                    )}
                 </div>
             </div>
         </main>
