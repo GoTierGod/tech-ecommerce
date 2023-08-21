@@ -90,7 +90,7 @@ function FavItem({ product }: FavItemProps) {
                     waitingRes
                         ? {
                               width: '100%',
-                              height: '170px'
+                              height: '100%'
                           }
                         : {
                               width: '0',
