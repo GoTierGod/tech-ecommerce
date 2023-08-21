@@ -5,6 +5,7 @@ import style from '../styles/user-favorites.module.css'
 import {
     faCartShopping,
     faCheck,
+    faCheckCircle,
     faEllipsisVertical,
     faHeart,
     faPen,
@@ -165,6 +166,45 @@ function FavItem({ product }: FavItemProps) {
 }
 
 export default function UserFavorites({ favorites }: UserFavoritesProps) {
+    const router = useRouter()
+    const [selecting, setSelecting] = useState(false)
+    const [selectedItems, setSelectedItems] = useState([] as Array<number>)
+
+    const checkItem = useCallback(
+        (id: number) => {
+            setSelectedItems(prevSelectedItems => [id, ...prevSelectedItems])
+        },
+        [setSelectedItems]
+    )
+
+    const uncheckItem = useCallback(
+        (id: number) => {
+            setSelectedItems(prevSelectedItems =>
+                prevSelectedItems.filter(thisId => thisId !== id)
+            )
+        },
+        [setSelectedItems]
+    )
+
+    const handleCheck = useCallback(
+        (id: number) => {
+            if (selectedItems.includes(id)) {
+                uncheckItem(id)
+            } else {
+                checkItem(id)
+            }
+        },
+        [selectedItems, uncheckItem, checkItem]
+    )
+
+    const removeItems = useCallback(async () => {
+        const res = await fetch(`/api/favorites/delete?ids=${selectedItems}`, {
+            method: 'DELETE'
+        })
+
+        if (res.ok) router.refresh()
+    }, [selectedItems, router])
+
     return (
         <main>
             <div className={style.wrapper}>
@@ -188,20 +228,44 @@ export default function UserFavorites({ favorites }: UserFavoritesProps) {
                                 </span>
                             </div>
                         </div>
-                        <div className={style.markAndDelete}>
+                        <div className={style.selectAndRemove}>
                             <div className={style.header}>
-                                <h2>Mark and Delete</h2>
+                                <h2>Select and Remove</h2>
                                 <FontAwesomeIcon icon={faTrash} />
                             </div>
                             <div className={style.content}>
-                                <button>
-                                    <FontAwesomeIcon icon={faCheck} />
-                                    <span>Mark products</span>
-                                </button>
-                                <button>
-                                    <FontAwesomeIcon icon={faTrash} />
-                                    <span>Delete marked products</span>
-                                </button>
+                                {selecting ? (
+                                    <button
+                                        onClick={() => {
+                                            setSelecting(false)
+                                            setSelectedItems([])
+                                        }}
+                                    >
+                                        <FontAwesomeIcon icon={faCheck} />
+                                        <span>Cancel</span>
+                                    </button>
+                                ) : (
+                                    <button onClick={() => setSelecting(true)}>
+                                        <FontAwesomeIcon icon={faCheck} />
+                                        <span>Start to select</span>
+                                    </button>
+                                )}
+                                {selecting ? (
+                                    <button onClick={removeItems}>
+                                        <FontAwesomeIcon icon={faTrash} />
+                                        <span>
+                                            Remove {selectedItems.length}{' '}
+                                            {selectedItems.length > 1
+                                                ? 'products'
+                                                : 'product'}
+                                        </span>
+                                    </button>
+                                ) : (
+                                    <button>
+                                        <FontAwesomeIcon icon={faTrash} />
+                                        <span>No selected items</span>
+                                    </button>
+                                )}
                             </div>
                         </div>
                     </div>
@@ -214,10 +278,31 @@ export default function UserFavorites({ favorites }: UserFavoritesProps) {
                     {favorites.length > 0 ? (
                         <div className={style.grid}>
                             {favorites.map(product => (
-                                <FavItem
+                                <div
+                                    className={style.checkWrapper}
                                     key={product.details.id}
-                                    product={product}
-                                />
+                                >
+                                    <FavItem product={product} />
+                                    {selecting && (
+                                        <button
+                                            className={style.checkButton}
+                                            onClick={() =>
+                                                handleCheck(product.details.id)
+                                            }
+                                        >
+                                            <FontAwesomeIcon
+                                                icon={faCheckCircle}
+                                                color={
+                                                    selectedItems.includes(
+                                                        product.details.id
+                                                    )
+                                                        ? 'var(--main)'
+                                                        : 'var(--gray)'
+                                                }
+                                            />
+                                        </button>
+                                    )}
+                                </div>
                             ))}
                         </div>
                     ) : (
