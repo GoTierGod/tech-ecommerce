@@ -12,5 +12,5 @@ export default async function Page({ params }: { params: { id: string } }) {
 
     if (!product) redirect('/')
 
-    return <Purchase order={product} />
+    return <Purchase order={[product]} />
 }
