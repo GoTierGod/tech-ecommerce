@@ -5,7 +5,7 @@ export const getData = async (route: string) => {
         next: { revalidate: 3600 }
     })
 
-    if (!res.ok) return null
+    if (res.ok) return res.json()
 
-    return res.json()
+    return null
 }
