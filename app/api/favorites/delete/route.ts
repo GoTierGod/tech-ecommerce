@@ -22,11 +22,9 @@ export async function DELETE(req: NextRequest) {
             }
 
             const { searchParams } = new URL(req.url)
-            let id: string | null = null
             let ids: Array<number> | null = null
 
             try {
-                id = Number(searchParams.get('id') as string).toString()
                 ids = (searchParams.get('ids') as string)
                     .split(',')
                     .map(id => Number(id))
@@ -37,20 +35,17 @@ export async function DELETE(req: NextRequest) {
                 )
             }
 
-            if (!id && !ids) {
+            if (!ids || ids.length === 0) {
                 return NextResponse.json(
                     { message: 'Missing "id" or "ids" parameters' },
                     { status: 400 }
                 )
             }
 
-            const res = await fetch(
-                `${API_URL}/api/favorites/delete/${id || ids}`,
-                {
-                    method: 'DELETE',
-                    headers: { authorization: `Bearer ${authTokens.access}` }
-                }
-            )
+            const res = await fetch(`${API_URL}/api/favorites/delete/${ids}`, {
+                method: 'DELETE',
+                headers: { authorization: `Bearer ${authTokens.access}` }
+            })
 
             if (res.ok) {
                 const apiResponse: APIResponse = await res.json()
