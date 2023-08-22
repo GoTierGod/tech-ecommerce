@@ -15,6 +15,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { useRouter } from 'next/navigation'
 import { useCallback, useRef, useState } from 'react'
 import HorizontalCard from './HoritonzalCard'
+import { priceStringFormatter } from '@/utils/formatting/priceStringFormatter'
+import Link from 'next/link'
 
 interface UserCartProps {
     cart: ComposedProductInfo[]
@@ -166,6 +168,19 @@ function CartItem({ product }: CartItemProps) {
 }
 
 export default function UserCart({ cart }: UserCartProps) {
+    const normalTotal =
+        cart.length > 0
+            ? cart.map(p => Number(p.details.price)).reduce((p1, p2) => p1 + p2)
+            : 0
+    const offerTotal =
+        cart.length > 0
+            ? cart
+                  .map(p => Number(p.details.offer_price))
+                  .reduce((p1, p2) => p1 + p2)
+            : 0
+    const cartOfferTotal =
+        cart.length > 0 ? offerTotal - (offerTotal * cart.length) / 100 : 0
+
     return (
         <main>
             <div className={style.wrapper}>
@@ -191,20 +206,55 @@ export default function UserCart({ cart }: UserCartProps) {
                                 </span>
                             </div>
                         </div>
-                        <div className={style.markAndDelete}>
+                        <div className={style.cartDetails}>
                             <div className={style.header}>
-                                <h2>Mark and Delete</h2>
+                                <h2>Details</h2>
                                 <FontAwesomeIcon icon={faTrash} />
                             </div>
                             <div className={style.content}>
-                                <button>
-                                    <FontAwesomeIcon icon={faCheck} />
-                                    <span>Mark products</span>
-                                </button>
-                                <button>
-                                    <FontAwesomeIcon icon={faTrash} />
-                                    <span>Delete marked products</span>
-                                </button>
+                                <div className={style.cartPrices}>
+                                    <div>
+                                        <span>Products</span>
+                                        <span>{cart.length} / 10</span>
+                                    </div>
+                                    <div>
+                                        <span>Normal Total</span>
+                                        <span>
+                                            {priceStringFormatter(normalTotal)}
+                                        </span>
+                                    </div>
+                                    <div>
+                                        <span>Offer Total</span>
+                                        <span>
+                                            {priceStringFormatter(offerTotal)}
+                                        </span>
+                                    </div>
+                                    <div>
+                                        <span>Cart Offer</span>
+                                        <span>-{cart.length}%</span>
+                                    </div>
+                                </div>
+                                <div className={style.cartTotal}>
+                                    <div>
+                                        <span>Total</span>
+                                        <span>
+                                            {priceStringFormatter(
+                                                cartOfferTotal
+                                            )}
+                                        </span>
+                                    </div>
+                                    <div>
+                                        <span>Savings</span>
+                                        <span>
+                                            {priceStringFormatter(
+                                                normalTotal - cartOfferTotal
+                                            )}
+                                        </span>
+                                    </div>
+                                </div>
+                                <Link href='/purchase' prefetch={false}>
+                                    Buy this Cart
+                                </Link>
                             </div>
                         </div>
                     </div>
@@ -225,10 +275,10 @@ export default function UserCart({ cart }: UserCartProps) {
                         </div>
                     ) : (
                         <div className={style.empty}>
-                            <h3>No favorites!</h3>
+                            <h3>Your cart is empty</h3>
                             <p>
-                                At this moment you do not have products marked
-                                as favorites, check out our offers!
+                                At this moment you do not have products added to
+                                your cart, check out our offers!
                             </p>
                         </div>
                     )}

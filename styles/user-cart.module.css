@@ -20,7 +20,7 @@
 }
 
 .options,
-.markAndDelete {
+.cartDetails {
     display: flex;
     flex-direction: column;
     gap: 0.5rem;
@@ -68,14 +68,61 @@
     width: 100%;
 }
 
-.markAndDelete .content {
-    flex-direction: row;
-    flex-wrap: wrap;
+.cartDetails .content {
+    flex-direction: column;
     justify-content: center;
     align-items: center;
+    gap: 1rem;
 }
 
-.markAndDelete button {
+.cartPrices {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    gap: 0.25rem;
+
+    width: 100%;
+
+    font-size: 1rem;
+    font-weight: 350;
+}
+
+.cartPrices > div {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    width: 100%;
+}
+
+.cartTotal {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+
+    width: 100%;
+}
+
+.cartTotal > div {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    width: 100%;
+}
+
+.cartTotal > div:first-of-type {
+    font-size: 1.25rem;
+    font-weight: 400;
+}
+
+.cartTotal > div:last-of-type {
+    font-size: 1rem;
+    font-size: 375;
+}
+
+.cartDetails a {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -91,10 +138,6 @@
 
     border: 2px solid transparent;
     border-radius: 4px;
-}
-
-.markAndDelete button:nth-child(2) {
-    background: var(--gray);
 }
 
 .grid {
@@ -262,7 +305,7 @@
         grid-area: w-right;
     }
 
-    .markAndDelete button {
+    .cartDetails button {
         gap: 1rem;
         padding: 0.5rem 0.75rem;
         width: fit-content;
