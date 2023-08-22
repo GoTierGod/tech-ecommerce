@@ -13,7 +13,14 @@ import {
 } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { useRouter } from 'next/navigation'
-import { useCallback, useRef, useState } from 'react'
+import {
+    Dispatch,
+    SetStateAction,
+    useCallback,
+    useEffect,
+    useRef,
+    useState
+} from 'react'
 import HorizontalCard from './HoritonzalCard'
 import { priceStringFormatter } from '@/utils/formatting/priceStringFormatter'
 import Link from 'next/link'
@@ -24,18 +31,20 @@ interface UserCartProps {
 
 interface CartItemProps {
     product: ComposedProductInfo
+    openedOptions: null | number
+    setOpenedOptions: Dispatch<SetStateAction<number | null>>
 }
 
-function CartItem({ product }: CartItemProps) {
+function CartItem({ product, openedOptions, setOpenedOptions }: CartItemProps) {
     const router = useRouter()
     const [optMenu, setOptMenu] = useState(false)
     const [waitingRes, setWaitingRes] = useState(false)
     const cartItemRef = useRef(null)
 
-    const toggleMenu = useCallback(
-        () => setOptMenu(prevOptMenu => !prevOptMenu),
-        [setOptMenu]
-    )
+    const toggleMenu = useCallback(() => {
+        setOptMenu(prevOptMenu => !prevOptMenu)
+        setOpenedOptions(product.details.id)
+    }, [setOptMenu, setOpenedOptions, product.details.id])
 
     const deleteAnimation = useCallback(() => {
         if (cartItemRef.current) {
@@ -75,15 +84,16 @@ function CartItem({ product }: CartItemProps) {
                     setTimeout(() => {
                         deleteAnimation()
                     }, 600)
-                else router.refresh()
-
-                setTimeout(() => {
-                    setWaitingRes(false)
-                }, 600)
+                router.refresh()
             }
         },
         [toggleMenu, waitingRes, product.details.id, deleteAnimation, router]
     )
+
+    useEffect(() => {
+        if (openedOptions !== product.details.id) setOptMenu(false)
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [openedOptions])
 
     return (
         <div className={style.cartItem} ref={cartItemRef}>
@@ -168,6 +178,8 @@ function CartItem({ product }: CartItemProps) {
 }
 
 export default function UserCart({ cart }: UserCartProps) {
+    const [openedOptions, setOpenedOptions] = useState(null as null | number)
+
     const normalTotal =
         cart.length > 0
             ? cart.map(p => Number(p.details.price)).reduce((p1, p2) => p1 + p2)
@@ -270,6 +282,8 @@ export default function UserCart({ cart }: UserCartProps) {
                                 <CartItem
                                     key={product.details.id}
                                     product={product}
+                                    openedOptions={openedOptions}
+                                    setOpenedOptions={setOpenedOptions}
                                 />
                             ))}
                         </div>

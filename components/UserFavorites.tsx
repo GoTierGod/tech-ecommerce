@@ -13,7 +13,14 @@ import {
 } from '@fortawesome/free-solid-svg-icons'
 import { ComposedProductInfo } from '@/types/product'
 import HorizontalCard from './HoritonzalCard'
-import { useCallback, useRef, useState } from 'react'
+import {
+    Dispatch,
+    SetStateAction,
+    useCallback,
+    useEffect,
+    useRef,
+    useState
+} from 'react'
 import { useRouter } from 'next/navigation'
 
 interface UserFavoritesProps {
@@ -22,18 +29,20 @@ interface UserFavoritesProps {
 
 interface FavItemProps {
     product: ComposedProductInfo
+    openedOptions: null | number
+    setOpenedOptions: Dispatch<SetStateAction<number | null>>
 }
 
-function FavItem({ product }: FavItemProps) {
+function FavItem({ product, openedOptions, setOpenedOptions }: FavItemProps) {
     const router = useRouter()
     const [optMenu, setOptMenu] = useState(false)
     const [waitingRes, setWaitingRes] = useState(false)
     const favItemRef = useRef(null)
 
-    const toggleMenu = useCallback(
-        () => setOptMenu(prevOptMenu => !prevOptMenu),
-        [setOptMenu]
-    )
+    const toggleMenu = useCallback(() => {
+        setOptMenu(prevOptMenu => !prevOptMenu)
+        setOpenedOptions(product.details.id)
+    }, [setOptMenu, setOpenedOptions, product.details.id])
 
     const deleteAnimation = useCallback(() => {
         if (favItemRef.current) {
@@ -73,15 +82,16 @@ function FavItem({ product }: FavItemProps) {
                     setTimeout(() => {
                         deleteAnimation()
                     }, 600)
-                else router.refresh()
-
-                setTimeout(() => {
-                    setWaitingRes(false)
-                }, 600)
+                router.refresh()
             }
         },
         [toggleMenu, waitingRes, product.details.id, deleteAnimation, router]
     )
+
+    useEffect(() => {
+        if (openedOptions !== product.details.id) setOptMenu(false)
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [openedOptions])
 
     return (
         <div className={style.favItem} ref={favItemRef}>
@@ -167,6 +177,7 @@ function FavItem({ product }: FavItemProps) {
 
 export default function UserFavorites({ favorites }: UserFavoritesProps) {
     const router = useRouter()
+    const [openedOptions, setOpenedOptions] = useState(null as null | number)
     const [selecting, setSelecting] = useState(false)
     const [selectedItems, setSelectedItems] = useState([] as Array<number>)
 
@@ -287,7 +298,11 @@ export default function UserFavorites({ favorites }: UserFavoritesProps) {
                                     className={style.checkWrapper}
                                     key={product.details.id}
                                 >
-                                    <FavItem product={product} />
+                                    <FavItem
+                                        product={product}
+                                        openedOptions={openedOptions}
+                                        setOpenedOptions={setOpenedOptions}
+                                    />
                                     {selecting && (
                                         <button
                                             className={style.checkButton}
