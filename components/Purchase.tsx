@@ -6,8 +6,10 @@ import style from '../styles/purchase.module.css'
 import { ComposedProductInfo } from '@/types/product'
 import { useRouter } from 'next/navigation'
 import { priceStringFormatter } from '@/utils/formatting/priceStringFormatter'
+import Image from 'next/image'
+import Link from 'next/link'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faEdit } from '@fortawesome/free-solid-svg-icons'
+import { faRightLong } from '@fortawesome/free-solid-svg-icons'
 
 interface PurchaseProps {
     order: ComposedProductInfo[]
@@ -16,7 +18,7 @@ interface PurchaseProps {
 export default function Purchase({ order }: PurchaseProps) {
     const router = useRouter()
 
-    const [seeProduct, setSeeProduct] = useState(order[0])
+    const [currItem, setCurrItem] = useState(order[0])
     const [orderItems, setOrderItems] = useState(order.map(p => p.details.id))
 
     const normalTotal =
@@ -37,7 +39,63 @@ export default function Purchase({ order }: PurchaseProps) {
     return (
         <main>
             <div className={style.wrapper}>
-                <div className={style.wrapperLeft}></div>
+                <div className={style.wrapperLeft}>
+                    <div className={style.stickyWrapper}>
+                        <div className={style.currItemTop}>
+                            <h2>{currItem.details.name}</h2>
+                            <div className={style.currItemImg}>
+                                <Image
+                                    src={currItem.default_img.url}
+                                    alt={currItem.default_img.description}
+                                    width={250}
+                                    height={250}
+                                    quality='25'
+                                />
+                            </div>
+                        </div>
+                        <div className={style.currItemBottom}>
+                            <div className={style.currItemPrice}>
+                                <span>Price</span>
+                                <div>
+                                    <span>
+                                        {priceStringFormatter(
+                                            currItem.details.price
+                                        )}
+                                    </span>
+                                    <span>
+                                        {priceStringFormatter(
+                                            currItem.details.offer_price
+                                        )}
+                                    </span>
+                                </div>
+                            </div>
+                            <div className={style.currItemSpecs}>
+                                <div>
+                                    <span>Key</span>
+                                    <span>Value</span>
+                                </div>
+                                <div>
+                                    <span>Key</span>
+                                    <span>Value</span>
+                                </div>
+                                <div>
+                                    <span>Key</span>
+                                    <span>Value</span>
+                                </div>
+                                <div>
+                                    <span>Key</span>
+                                    <span>Value</span>
+                                </div>
+                                <Link
+                                    href={`/product/${currItem.details.id}`}
+                                    prefetch={false}
+                                >
+                                    See Product
+                                </Link>
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 <div className={style.wrapperRight}>
                     <div className={style.delivery}>
                         <h2>Delivery</h2>
@@ -54,25 +112,46 @@ export default function Purchase({ order }: PurchaseProps) {
                                 modified.
                             </p>
                         </div>
-                        <div className={style.formField}>
-                            <label htmlFor='address'>Address</label>
-                            <input type='text' id='address' />
+                        <div className={style.location}>
+                            <div className={style.formField}>
+                                <label htmlFor='country'>Country</label>
+                                <input type='text' id='country' />
+                            </div>
+                            <div className={style.formField}>
+                                <label htmlFor='city'>City</label>
+                                <input type='text' id='city' />
+                            </div>
+                            <div className={style.formField}>
+                                <label htmlFor='address'>Address</label>
+                                <input type='text' id='address' />
+                            </div>
                         </div>
                     </div>
                     <div className={style.payment}>
                         <h2>Payment</h2>
-                        <div className={style.formField}>
-                            <label htmlFor='payment'>Payment Method</label>
-                            <select name='payment' id='payment'>
-                                <option value=''>- - -</option>
-                            </select>
-                        </div>
-                        <div className={style.paymentPrice}>
-                            <span>{priceStringFormatter(offerTotal)}</span>
-                            <span>Using this payment method</span>
+                        <div className={style.paymentMethod}>
+                            <div className={style.formField}>
+                                <label htmlFor='payment'>Payment Method</label>
+                                <select name='payment' id='payment'>
+                                    <option value=''>- - -</option>
+                                </select>
+                            </div>
+                            <div className={style.paymentPrice}>
+                                <span>{priceStringFormatter(offerTotal)}</span>
+                                <span>Using this payment method</span>
+                                <span className={style.discount}>
+                                    <span>
+                                        {priceStringFormatter(normalTotal)}
+                                    </span>
+                                    <FontAwesomeIcon icon={faRightLong} />
+                                    <span>
+                                        {priceStringFormatter(offerTotal)}
+                                    </span>
+                                </span>
+                            </div>
                         </div>
                     </div>
-                    <div className={style.coupon}>
+                    <div className={style.couponList}>
                         <h2>Coupon</h2>
                         {order.length > 1 && (
                             <div>
@@ -86,33 +165,54 @@ export default function Purchase({ order }: PurchaseProps) {
                                 <span>Cart Coupon</span>
                             </div>
                         )}
-                        <div className={style.formField}>
-                            <label htmlFor='coupon'>Coupon</label>
-                            <select name='coupon' id='coupon'>
-                                <option value='global'>Global</option>
-                            </select>
-                        </div>
-                        <div className={style.couponDiscount}>
-                            <span>$ 35.00</span>
-                            <span>Using this coupon</span>
+                        <div className={style.coupon}>
+                            <div className={style.formField}>
+                                <label htmlFor='coupon'>Coupon</label>
+                                <select name='coupon' id='coupon'>
+                                    <option value='global'>Global</option>
+                                </select>
+                            </div>
+                            <div className={style.couponDiscount}>
+                                <span>$ 35.00</span>
+                                <span>Using this coupon</span>
+                                <span className={style.discount}>
+                                    <span>
+                                        {priceStringFormatter(offerTotal)}
+                                    </span>
+                                    <FontAwesomeIcon icon={faRightLong} />
+                                    <span>
+                                        {priceStringFormatter(
+                                            offerTotal -
+                                                35 -
+                                                (offerTotal * order.length) /
+                                                    100
+                                        )}
+                                    </span>
+                                </span>
+                            </div>
                         </div>
                     </div>
                     <div className={style.unitsAndPrice}>
                         <h2>Units and Price</h2>
-                        {order.map((p, idx) => (
-                            <div key={p.details.id} className={style.formField}>
-                                <label htmlFor={`units-${idx}`}>
-                                    {p.details.name}
-                                </label>
-                                <input
-                                    type='number'
-                                    name={`units-${idx}`}
-                                    id={`units-${idx}`}
-                                    min={1}
-                                    max={10 - orderItems.length}
-                                />
-                            </div>
-                        ))}
+                        <div className={style.units}>
+                            {order.map((p, idx) => (
+                                <div
+                                    key={p.details.id}
+                                    className={style.formField}
+                                >
+                                    <label htmlFor={`units-${idx}`}>
+                                        {p.details.name}
+                                    </label>
+                                    <input
+                                        type='number'
+                                        name={`units-${idx}`}
+                                        id={`units-${idx}`}
+                                        min={1}
+                                        max={10 - orderItems.length}
+                                    />
+                                </div>
+                            ))}
+                        </div>
                         <div className={style.total}>
                             <h3>Total</h3>
                             <div>

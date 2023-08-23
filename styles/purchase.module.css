@@ -84,16 +84,115 @@
     gap: 1rem;
 }
 
+.currItemTop {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.currItemImg {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    padding: 1rem;
+
+    background: var(--white);
+
+    border-radius: 4px;
+}
+
+.currItemImg img {
+    width: auto;
+    height: 100%;
+    max-height: 200px;
+}
+
+.currItemPrice {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    padding: 1rem;
+
+    background: var(--main);
+    color: var(--white);
+
+    font-size: 1rem;
+    font-weight: 375;
+
+    border-radius: 4px;
+}
+
+.currItemBottom {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.currItemPrice div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.currItemPrice div span:nth-child(1) {
+    font-size: 0.75rem;
+    font-weight: 375;
+
+    text-decoration: line-through;
+}
+
+.currItemPrice div span:last-of-type {
+    font-size: 1.125rem;
+    font-weight: 375;
+}
+
+.currItemSpecs {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+
+    padding: 1rem;
+
+    background: var(--white);
+
+    border-radius: 4px;
+}
+
+.currItemSpecs > div {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    font-size: 1rem;
+    font-weight: 375;
+}
+
+.currItemSpecs a {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    padding: 0.75rem 1rem;
+
+    background: var(--main);
+    color: var(--white);
+
+    border-radius: 4px;
+}
+
 .delivery,
 .payment,
-.coupon,
+.couponList,
 .unitsAndPrice {
     display: flex;
     flex-direction: column;
     gap: 0.5rem;
 }
 
-.delivery > div {
+.delivery > div:first-of-type {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -130,17 +229,17 @@
     border-radius: 4px;
 }
 
-:is(.paymentPrice, .couponDiscount) span:first-of-type {
+:is(.paymentPrice, .couponDiscount) > span:nth-child(1) {
     font-size: 1rem;
     font-weight: 375;
 }
 
-:is(.paymentPrice, .couponDiscount) span:last-of-type {
+:is(.paymentPrice, .couponDiscount) > span:nth-child(2) {
     font-size: 0.75rem;
     font-weight: 400;
 }
 
-.coupon > div:first-of-type {
+.couponList > div:first-of-type {
     display: flex;
     justify-content: space-between;
     gap: 0.25rem;
@@ -153,6 +252,12 @@
     font-weight: 375;
 
     border-radius: 4px;
+}
+
+.units, .coupon, .paymentMethod, .location {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
 }
 
 .total {
@@ -221,4 +326,73 @@
 
 .options button:last-of-type {
     background: var(--gray);
+}
+
+.discount {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+
+    font-size: 1rem;
+}
+
+.discount span:first-of-type {
+    text-decoration: line-through;
+
+    font-weight: 400;
+}
+
+.discount span:last-of-type {
+    color: var(--main);
+
+    font-weight: 425;
+}
+
+@media screen and (min-width: 768px) {
+    .wrapper {
+        display: grid;
+        grid-template-columns: 5fr 3fr;
+        grid-template-areas: 'w-right w-left';
+    }
+
+    .wrapperLeft {
+        grid-area: w-left;
+    }
+
+    .wrapperRight {
+        grid-area: w-right;
+    }
+
+    .stickyWrapper {
+        position: sticky;
+        top: 84px;
+    }
+}
+
+@media screen and (min-width: 1024px) {
+    .wrapper {
+        grid-template-columns: 4fr 2fr;
+    }
+
+    .units, .coupon, .paymentMethod {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    :is(.units, .coupon, .paymentMethod) > div {
+        justify-content: center;
+    }
+
+    .location {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    .units > div {
+        grid-column: span 1
+    }
+
+    .units > div:nth-child(odd):last-child {
+        grid-column: 1 / span 2;
+    }
 }
