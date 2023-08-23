@@ -11,5 +11,5 @@ export default async function Page() {
     if (!cart) redirect('/')
     if (cart.length <= 1) redirect(`/`)
 
-    return <Purchase order={cart} />
+    return <Purchase customer={user} order={cart} />
 }

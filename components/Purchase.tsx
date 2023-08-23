@@ -1,6 +1,6 @@
 'use client'
 
-import { useMemo, useState } from 'react'
+import { useCallback, useEffect, useMemo, useState } from 'react'
 import style from '../styles/purchase.module.css'
 
 import { ComposedProductInfo } from '@/types/product'
@@ -9,15 +9,22 @@ import { priceStringFormatter } from '@/utils/formatting/priceStringFormatter'
 import Image from 'next/image'
 import Link from 'next/link'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faRightLong } from '@fortawesome/free-solid-svg-icons'
+import {
+    faCaretLeft,
+    faCaretRight,
+    faRightLong
+} from '@fortawesome/free-solid-svg-icons'
+import { Customer } from '@/types/users'
 
 interface PurchaseProps {
+    customer: Customer
     order: ComposedProductInfo[]
 }
 
-export default function Purchase({ order }: PurchaseProps) {
+export default function Purchase({ customer, order }: PurchaseProps) {
     const router = useRouter()
 
+    const [currIdx, setCurrIdx] = useState(0)
     const [currItem, setCurrItem] = useState(order[0])
     const [orderItems, setOrderItems] = useState(order.map(p => p.details.id))
 
@@ -36,6 +43,18 @@ export default function Purchase({ order }: PurchaseProps) {
     const orderOfferTotal =
         order.length > 0 ? offerTotal - (offerTotal * order.length) / 100 : 0
 
+    const prevItem = useCallback(() => {
+        if (currIdx > 0) setCurrIdx(prevCurrIdx => prevCurrIdx - 1)
+    }, [currIdx, setCurrIdx])
+
+    const nextItem = useCallback(() => {
+        if (currIdx < order.length - 1)
+            setCurrIdx(prevCurrIdx => prevCurrIdx + 1)
+    }, [currIdx, setCurrIdx, order.length])
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    useEffect(() => setCurrItem(order[currIdx]), [currIdx])
+
     return (
         <main>
             <div className={style.wrapper}>
@@ -44,13 +63,22 @@ export default function Purchase({ order }: PurchaseProps) {
                         <div className={style.currItemTop}>
                             <h2>{currItem.details.name}</h2>
                             <div className={style.currItemImg}>
+                                <button
+                                    onClick={prevItem}
+                                    aria-label='Previous'
+                                >
+                                    <FontAwesomeIcon icon={faCaretLeft} />
+                                </button>
                                 <Image
                                     src={currItem.default_img.url}
                                     alt={currItem.default_img.description}
                                     width={250}
                                     height={250}
-                                    quality='25'
+                                    quality='50'
                                 />
+                                <button onClick={nextItem} aria-label='Next'>
+                                    <FontAwesomeIcon icon={faCaretRight} />
+                                </button>
                             </div>
                         </div>
                         <div className={style.currItemBottom}>
