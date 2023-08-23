@@ -1,7 +1,10 @@
 'use client'
 
-import { useCallback, useEffect, useMemo, useState } from 'react'
 import style from '../styles/purchase.module.css'
+
+import { useCallback, useEffect, useMemo, useState } from 'react'
+import { Formik, useFormik } from 'formik'
+import * as Yup from 'yup'
 
 import { ComposedProductInfo } from '@/types/product'
 import { useRouter } from 'next/navigation'
@@ -19,6 +22,12 @@ import { Customer } from '@/types/users'
 interface PurchaseProps {
     customer: Customer
     order: ComposedProductInfo[]
+}
+
+interface Coupon {
+    id: number
+    title: string
+    amount: number
 }
 
 export default function Purchase({ customer, order }: PurchaseProps) {
@@ -43,6 +52,9 @@ export default function Purchase({ customer, order }: PurchaseProps) {
     const orderOfferTotal =
         order.length > 0 ? offerTotal - (offerTotal * order.length) / 100 : 0
 
+    const paymentMethods = ['MasterCard', 'Visa']
+    const coupons: Array<Coupon> = [{ id: 1, title: 'Global', amount: 25 }]
+
     const prevItem = useCallback(() => {
         if (currIdx > 0) setCurrIdx(prevCurrIdx => prevCurrIdx - 1)
     }, [currIdx, setCurrIdx])
@@ -54,6 +66,52 @@ export default function Purchase({ customer, order }: PurchaseProps) {
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
     useEffect(() => setCurrItem(order[currIdx]), [currIdx])
+
+    const Formik = useFormik({
+        initialValues: {
+            products: orderItems,
+            payment: '',
+            country: '',
+            city: '',
+            address: '',
+            notes: '',
+            coupon: null
+        },
+        onSubmit: async values => {
+            console.log(JSON.stringify(values))
+
+            const res = await fetch('/api/purchase/cart', {
+                method: 'post',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(values)
+            })
+
+            if (res.ok) console.log('Successfull')
+            else console.log('Failed')
+        },
+        validationSchema: Yup.object({
+            payment: Yup.string()
+                .required('A payment method is required')
+                .is(
+                    [...paymentMethods.map(pm => pm.toLowerCase())],
+                    'Select your payment method'
+                ),
+            country: Yup.string()
+                .required('Enter a new country')
+                .max(255, 'Maximum 255 characters'),
+            city: Yup.string()
+                .required('Enter a new city')
+                .max(255, 'Maximum 255 characters'),
+            address: Yup.string()
+                .required('Enter a new address')
+                .max(255, 'Maximum 255 characters'),
+            notes: Yup.string().max(255, 'Maximum 255 characters'),
+            coupon: Yup.object().is(
+                [...coupons.map(c => JSON.stringify(c))],
+                'Choose one of your coupons'
+            )
+        })
+    })
 
     return (
         <main>
@@ -124,7 +182,10 @@ export default function Purchase({ customer, order }: PurchaseProps) {
                         </div>
                     </div>
                 </div>
-                <div className={style.wrapperRight}>
+                <form
+                    className={style.wrapperRight}
+                    onSubmit={Formik.handleSubmit}
+                >
                     <div className={style.delivery}>
                         <h2>Delivery</h2>
                         <div>
@@ -143,15 +204,27 @@ export default function Purchase({ customer, order }: PurchaseProps) {
                         <div className={style.location}>
                             <div className={style.formField}>
                                 <label htmlFor='country'>Country</label>
-                                <input type='text' id='country' />
+                                <input
+                                    type='text'
+                                    id='country'
+                                    {...Formik.getFieldProps('country')}
+                                />
                             </div>
                             <div className={style.formField}>
                                 <label htmlFor='city'>City</label>
-                                <input type='text' id='city' />
+                                <input
+                                    type='text'
+                                    id='city'
+                                    {...Formik.getFieldProps('city')}
+                                />
                             </div>
                             <div className={style.formField}>
                                 <label htmlFor='address'>Address</label>
-                                <input type='text' id='address' />
+                                <input
+                                    type='text'
+                                    id='address'
+                                    {...Formik.getFieldProps('address')}
+                                />
                             </div>
                         </div>
                     </div>
@@ -160,8 +233,19 @@ export default function Purchase({ customer, order }: PurchaseProps) {
                         <div className={style.paymentMethod}>
                             <div className={style.formField}>
                                 <label htmlFor='payment'>Payment Method</label>
-                                <select name='payment' id='payment'>
+                                <select
+                                    id='payment'
+                                    {...Formik.getFieldProps('payment')}
+                                >
                                     <option value=''>- - -</option>
+                                    {paymentMethods.map(pm => (
+                                        <option
+                                            key={pm}
+                                            value={pm.toLowerCase()}
+                                        >
+                                            {pm}
+                                        </option>
+                                    ))}
                                 </select>
                             </div>
                             <div className={style.paymentPrice}>
@@ -196,12 +280,33 @@ export default function Purchase({ customer, order }: PurchaseProps) {
                         <div className={style.coupon}>
                             <div className={style.formField}>
                                 <label htmlFor='coupon'>Coupon</label>
-                                <select name='coupon' id='coupon'>
-                                    <option value='global'>Global</option>
+                                <select
+                                    id='coupon'
+                                    {...Formik.getFieldProps('coupon')}
+                                >
+                                    <option value=''>- - -</option>
+                                    {coupons.map(c => (
+                                        <option
+                                            key={c.id}
+                                            value={JSON.stringify(c)}
+                                        >
+                                            {c.title}
+                                        </option>
+                                    ))}
                                 </select>
                             </div>
                             <div className={style.couponDiscount}>
-                                <span>$ 35.00</span>
+                                <span>
+                                    {Formik.values.coupon
+                                        ? priceStringFormatter(
+                                              (
+                                                  JSON.parse(
+                                                      Formik.values.coupon
+                                                  ) as Coupon
+                                              ).amount
+                                          )
+                                        : '$ 0.00'}
+                                </span>
                                 <span>Using this coupon</span>
                                 <span className={style.discount}>
                                     <span>
@@ -211,7 +316,14 @@ export default function Purchase({ customer, order }: PurchaseProps) {
                                     <span>
                                         {priceStringFormatter(
                                             offerTotal -
-                                                35 -
+                                                (Formik.values.coupon
+                                                    ? (
+                                                          JSON.parse(
+                                                              Formik.values
+                                                                  .coupon
+                                                          ) as Coupon
+                                                      ).amount
+                                                    : 0) -
                                                 (offerTotal * order.length) /
                                                     100
                                         )}
@@ -253,7 +365,7 @@ export default function Purchase({ customer, order }: PurchaseProps) {
                         <button type='submit'>Confirm</button>
                         <button onClick={() => router.back()}>Cancel</button>
                     </div>
-                </div>
+                </form>
             </div>
         </main>
     )
