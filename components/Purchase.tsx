@@ -146,12 +146,14 @@ export default function Purchase({ customer, order }: PurchaseProps) {
                         <div className={style.currItemTop}>
                             <h2>{currItem.details.name}</h2>
                             <div className={style.currItemImg}>
-                                <button
-                                    onClick={prevItem}
-                                    aria-label='Previous'
-                                >
-                                    <FontAwesomeIcon icon={faCaretLeft} />
-                                </button>
+                                {order.length > 1 && (
+                                    <button
+                                        onClick={prevItem}
+                                        aria-label='Previous'
+                                    >
+                                        <FontAwesomeIcon icon={faCaretLeft} />
+                                    </button>
+                                )}
                                 <Image
                                     src={currItem.default_img.url}
                                     alt={currItem.default_img.description}
@@ -159,9 +161,14 @@ export default function Purchase({ customer, order }: PurchaseProps) {
                                     height={250}
                                     quality='50'
                                 />
-                                <button onClick={nextItem} aria-label='Next'>
-                                    <FontAwesomeIcon icon={faCaretRight} />
-                                </button>
+                                {order.length > 1 && (
+                                    <button
+                                        onClick={nextItem}
+                                        aria-label='Next'
+                                    >
+                                        <FontAwesomeIcon icon={faCaretRight} />
+                                    </button>
+                                )}
                             </div>
                         </div>
                         <div className={style.currItemBottom}>
