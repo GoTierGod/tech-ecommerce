@@ -82,7 +82,7 @@ export default async function Product({ params }: { params: { id: string } }) {
             {/* ------------------------- OPTIONS -------------------------  */}
             <div className={style.options}>
                 <span>Stock: {product.details.stock}</span>
-                <Link href='/'>
+                <Link href={`/purchase/product/${product.details.id}`}>
                     <span>Buy Now</span>
                 </Link>
                 <Link href='/'>
