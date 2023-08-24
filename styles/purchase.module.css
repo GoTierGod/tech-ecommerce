@@ -315,7 +315,7 @@
     display: flex;
     justify-content: center;
     align-content: center;
-    gap: 0.5rem;
+    gap: 1rem;
 }
 
 .options button {
@@ -388,20 +388,24 @@
         grid-template-columns: 4fr 2fr;
     }
 
-    .units,
     .coupon,
     .paymentMethod {
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
+        flex-direction: row-reverse;
     }
 
-    :is(.units, .coupon, .paymentMethod) > div {
+    :is(.coupon, .paymentMethod) > div {
         justify-content: center;
+        width: 50%;
     }
 
     .deliveryAddress {
         display: grid;
         grid-template-columns: repeat(3, 1fr);
+    }
+
+    .units {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
     }
 
     .units > div {
@@ -410,5 +414,12 @@
 
     .units > div:nth-child(odd):last-child {
         grid-column: 1 / span 2;
+    }
+
+    .cartCoupon {
+        padding: 1rem;
+
+        border: 2px solid var(--gray);
+        border-radius: 4px;
     }
 }

@@ -303,7 +303,11 @@ export default function Purchase({ customer, order }: PurchaseProps) {
                                                 key={c.id}
                                                 value={JSON.stringify(c)}
                                             >
-                                                {c.title}
+                                                {`${
+                                                    c.title
+                                                } ( ${priceStringFormatter(
+                                                    c.amount
+                                                )} )`}
                                             </option>
                                         ))}
                                     </select>
