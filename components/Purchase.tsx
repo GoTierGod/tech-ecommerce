@@ -188,147 +188,162 @@ export default function Purchase({ customer, order }: PurchaseProps) {
                 >
                     <div className={style.delivery}>
                         <h2>Delivery</h2>
-                        <div>
-                            <p>
-                                This product will be delivered at the given
-                                address in aproximately 3 days, be sure to add
-                                the correct address to avoid further problems.
-                            </p>
-                            <p>
-                                <span>Important:</span> The address can only be
-                                changed before the “dispatch” phase, once the
-                                product is dispatched the address cannot be
-                                modified.
-                            </p>
-                        </div>
-                        <div className={style.location}>
-                            <div className={style.formField}>
-                                <label htmlFor='country'>Country</label>
-                                <input
-                                    type='text'
-                                    id='country'
-                                    {...Formik.getFieldProps('country')}
-                                />
+                        <div className={style.sectionWrapper}>
+                            <div className={style.deliveryInfo}>
+                                <p>
+                                    This product will be delivered at the given
+                                    address in aproximately 3 days, be sure to
+                                    add the correct address to avoid further
+                                    problems.
+                                </p>
+                                <p>
+                                    <span>Important:</span> The address can only
+                                    be changed before the “dispatch” phase, once
+                                    the product is dispatched the address cannot
+                                    be modified.
+                                </p>
                             </div>
-                            <div className={style.formField}>
-                                <label htmlFor='city'>City</label>
-                                <input
-                                    type='text'
-                                    id='city'
-                                    {...Formik.getFieldProps('city')}
-                                />
-                            </div>
-                            <div className={style.formField}>
-                                <label htmlFor='address'>Address</label>
-                                <input
-                                    type='text'
-                                    id='address'
-                                    {...Formik.getFieldProps('address')}
-                                />
+                            <div className={style.deliveryAddress}>
+                                <div className={style.formField}>
+                                    <label htmlFor='country'>Country</label>
+                                    <input
+                                        type='text'
+                                        id='country'
+                                        placeholder='United States'
+                                        {...Formik.getFieldProps('country')}
+                                    />
+                                </div>
+                                <div className={style.formField}>
+                                    <label htmlFor='city'>City</label>
+                                    <input
+                                        type='text'
+                                        id='city'
+                                        placeholder='Willowbrook'
+                                        {...Formik.getFieldProps('city')}
+                                    />
+                                </div>
+                                <div className={style.formField}>
+                                    <label htmlFor='address'>Address</label>
+                                    <input
+                                        type='text'
+                                        id='address'
+                                        placeholder='456 Oak Avenue'
+                                        {...Formik.getFieldProps('address')}
+                                    />
+                                </div>
                             </div>
                         </div>
                     </div>
                     <div className={style.payment}>
                         <h2>Payment</h2>
-                        <div className={style.paymentMethod}>
-                            <div className={style.formField}>
-                                <label htmlFor='payment'>Payment Method</label>
-                                <select
-                                    id='payment'
-                                    {...Formik.getFieldProps('payment')}
-                                >
-                                    <option value=''>- - -</option>
-                                    {paymentMethods.map(pm => (
-                                        <option
-                                            key={pm}
-                                            value={pm.toLowerCase()}
-                                        >
-                                            {pm}
-                                        </option>
-                                    ))}
-                                </select>
-                            </div>
-                            <div className={style.paymentPrice}>
-                                <span>{priceStringFormatter(offerTotal)}</span>
-                                <span>Using this payment method</span>
-                                <span className={style.discount}>
-                                    <span>
-                                        {priceStringFormatter(normalTotal)}
-                                    </span>
-                                    <FontAwesomeIcon icon={faRightLong} />
+                        <div className={style.sectionWrapper}>
+                            <div className={style.paymentMethod}>
+                                <div className={style.formField}>
+                                    <label htmlFor='payment'>
+                                        Payment Method
+                                    </label>
+                                    <select
+                                        id='payment'
+                                        {...Formik.getFieldProps('payment')}
+                                    >
+                                        <option value=''>- - -</option>
+                                        {paymentMethods.map(pm => (
+                                            <option
+                                                key={pm}
+                                                value={pm.toLowerCase()}
+                                            >
+                                                {pm}
+                                            </option>
+                                        ))}
+                                    </select>
+                                </div>
+                                <div className={style.paymentPrice}>
                                     <span>
                                         {priceStringFormatter(offerTotal)}
                                     </span>
-                                </span>
+                                    <span>Using this payment method</span>
+                                    <span className={style.discount}>
+                                        <span>
+                                            {priceStringFormatter(normalTotal)}
+                                        </span>
+                                        <FontAwesomeIcon icon={faRightLong} />
+                                        <span>
+                                            {priceStringFormatter(offerTotal)}
+                                        </span>
+                                    </span>
+                                </div>
                             </div>
                         </div>
                     </div>
                     <div className={style.couponList}>
                         <h2>Coupon</h2>
-                        {order.length > 1 && (
-                            <div>
-                                <span>
-                                    {order.length}% ({' '}
-                                    {priceStringFormatter(
-                                        (offerTotal * order.length) / 100
-                                    )}{' '}
-                                    )
-                                </span>
-                                <span>Cart Coupon</span>
-                            </div>
-                        )}
-                        <div className={style.coupon}>
-                            <div className={style.formField}>
-                                <label htmlFor='coupon'>Coupon</label>
-                                <select
-                                    id='coupon'
-                                    {...Formik.getFieldProps('coupon')}
-                                >
-                                    <option value=''>- - -</option>
-                                    {coupons.map(c => (
-                                        <option
-                                            key={c.id}
-                                            value={JSON.stringify(c)}
-                                        >
-                                            {c.title}
-                                        </option>
-                                    ))}
-                                </select>
-                            </div>
-                            <div className={style.couponDiscount}>
-                                <span>
-                                    {Formik.values.coupon
-                                        ? priceStringFormatter(
-                                              (
-                                                  JSON.parse(
-                                                      Formik.values.coupon
-                                                  ) as Coupon
-                                              ).amount
-                                          )
-                                        : '$ 0.00'}
-                                </span>
-                                <span>Using this coupon</span>
-                                <span className={style.discount}>
+                        <div className={style.sectionWrapper}>
+                            {order.length > 1 && (
+                                <div className={style.cartCoupon}>
                                     <span>
-                                        {priceStringFormatter(offerTotal)}
-                                    </span>
-                                    <FontAwesomeIcon icon={faRightLong} />
-                                    <span>
+                                        {order.length}% ({' '}
                                         {priceStringFormatter(
-                                            offerTotal -
-                                                (Formik.values.coupon
-                                                    ? (
-                                                          JSON.parse(
-                                                              Formik.values
-                                                                  .coupon
-                                                          ) as Coupon
-                                                      ).amount
-                                                    : 0) -
-                                                (offerTotal * order.length) /
-                                                    100
-                                        )}
+                                            (offerTotal * order.length) / 100
+                                        )}{' '}
+                                        )
                                     </span>
-                                </span>
+                                    <span>Cart Coupon</span>
+                                </div>
+                            )}
+                            <div className={style.coupon}>
+                                <div className={style.formField}>
+                                    <label htmlFor='coupon'>Coupon</label>
+                                    <select
+                                        id='coupon'
+                                        {...Formik.getFieldProps('coupon')}
+                                    >
+                                        <option value=''>- - -</option>
+                                        {coupons.map(c => (
+                                            <option
+                                                key={c.id}
+                                                value={JSON.stringify(c)}
+                                            >
+                                                {c.title}
+                                            </option>
+                                        ))}
+                                    </select>
+                                </div>
+                                <div className={style.couponDiscount}>
+                                    <span>
+                                        {Formik.values.coupon
+                                            ? priceStringFormatter(
+                                                  (
+                                                      JSON.parse(
+                                                          Formik.values.coupon
+                                                      ) as Coupon
+                                                  ).amount
+                                              )
+                                            : '$ 0.00'}
+                                    </span>
+                                    <span>Using this coupon</span>
+                                    <span className={style.discount}>
+                                        <span>
+                                            {priceStringFormatter(offerTotal)}
+                                        </span>
+                                        <FontAwesomeIcon icon={faRightLong} />
+                                        <span>
+                                            {priceStringFormatter(
+                                                offerTotal -
+                                                    (Formik.values.coupon
+                                                        ? (
+                                                              JSON.parse(
+                                                                  Formik.values
+                                                                      .coupon
+                                                              ) as Coupon
+                                                          ).amount
+                                                        : 0) -
+                                                    (offerTotal *
+                                                        order.length) /
+                                                        100
+                                            )}
+                                        </span>
+                                    </span>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -347,23 +362,36 @@ export default function Purchase({ customer, order }: PurchaseProps) {
                                         type='number'
                                         name={`units-${idx}`}
                                         id={`units-${idx}`}
+                                        placeholder='1'
+                                        defaultValue={1}
                                         min={1}
                                         max={10 - orderItems.length}
                                     />
                                 </div>
                             ))}
                         </div>
-                        <div className={style.total}>
-                            <h3>Total</h3>
-                            <div>
-                                <span>{priceStringFormatter(normalTotal)}</span>
-                                <span>{priceStringFormatter(offerTotal)}</span>
+                    </div>
+                    <div className={style.totalAndOptions}>
+                        <h2>Confirm your purchase</h2>
+                        <div className={style.sectionWrapper}>
+                            <div className={style.total}>
+                                <h3>Total</h3>
+                                <div>
+                                    <span>
+                                        {priceStringFormatter(normalTotal)}
+                                    </span>
+                                    <span>
+                                        {priceStringFormatter(offerTotal)}
+                                    </span>
+                                </div>
+                            </div>
+                            <div className={style.options}>
+                                <button type='submit'>Confirm</button>
+                                <button onClick={() => router.back()}>
+                                    Cancel
+                                </button>
                             </div>
                         </div>
-                    </div>
-                    <div className={style.options}>
-                        <button type='submit'>Confirm</button>
-                        <button onClick={() => router.back()}>Cancel</button>
                     </div>
                 </form>
             </div>
