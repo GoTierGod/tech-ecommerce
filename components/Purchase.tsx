@@ -13,6 +13,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {
+    faAsterisk,
     faCaretLeft,
     faCaretRight,
     faRightLong
@@ -82,29 +83,21 @@ export default function Purchase({ customer, order }: PurchaseProps) {
         [orderItems, setOrderItems, cartSpace]
     )
 
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    useEffect(() => setCurrItem(order[currIdx]), [currIdx])
-    useEffect(() => setCartSpace(10 - orderItems.length), [orderItems])
-    useEffect(() => {
-        console.log(orderItems)
-        console.log(cartSpace)
-    }, [orderItems, cartSpace])
-
     const Formik = useFormik({
         initialValues: {
             products: orderItems,
             payment: '',
-            country: '',
-            city: '',
-            address: '',
+            country: customer.country,
+            city: customer.city,
+            address: customer.address,
             notes: '',
             coupon: ''
         },
         onSubmit: async values => {
             console.log(JSON.stringify(values))
 
-            const res = await fetch('/api/purchase/cart', {
-                method: 'post',
+            const res = await fetch('/api/purchase/', {
+                method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(values)
             })
@@ -129,13 +122,21 @@ export default function Purchase({ customer, order }: PurchaseProps) {
             address: Yup.string()
                 .required('Enter a new address')
                 .max(255, 'Maximum 255 characters'),
-            notes: Yup.string().max(255, 'Maximum 255 characters'),
-            coupon: Yup.object().is(
-                [...coupons.map(c => JSON.stringify(c))],
-                'Choose one of your coupons'
-            )
+            notes: Yup.string().max(255, 'Maximum 255 characters')
         })
     })
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    useEffect(() => setCurrItem(order[currIdx]), [currIdx])
+    useEffect(() => setCartSpace(10 - orderItems.length), [orderItems])
+    useEffect(() => {
+        Formik.setFieldValue('products', orderItems)
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [orderItems])
+
+    useEffect(() => {
+        if (Formik.errors) console.log(Formik.errors)
+    }, [Formik.errors])
 
     return (
         <main>
@@ -229,7 +230,10 @@ export default function Purchase({ customer, order }: PurchaseProps) {
                             </div>
                             <div className={style.deliveryAddress}>
                                 <div className={style.formField}>
-                                    <label htmlFor='country'>Country</label>
+                                    <label htmlFor='country'>
+                                        <span>Country</span>
+                                        <FontAwesomeIcon icon={faAsterisk} />
+                                    </label>
                                     <input
                                         type='text'
                                         id='country'
@@ -238,7 +242,10 @@ export default function Purchase({ customer, order }: PurchaseProps) {
                                     />
                                 </div>
                                 <div className={style.formField}>
-                                    <label htmlFor='city'>City</label>
+                                    <label htmlFor='city'>
+                                        <span>City</span>
+                                        <FontAwesomeIcon icon={faAsterisk} />
+                                    </label>
                                     <input
                                         type='text'
                                         id='city'
@@ -247,7 +254,10 @@ export default function Purchase({ customer, order }: PurchaseProps) {
                                     />
                                 </div>
                                 <div className={style.formField}>
-                                    <label htmlFor='address'>Address</label>
+                                    <label htmlFor='address'>
+                                        <span>Address</span>
+                                        <FontAwesomeIcon icon={faAsterisk} />
+                                    </label>
                                     <input
                                         type='text'
                                         id='address'
@@ -264,7 +274,8 @@ export default function Purchase({ customer, order }: PurchaseProps) {
                             <div className={style.paymentMethod}>
                                 <div className={style.formField}>
                                     <label htmlFor='payment'>
-                                        Payment Method
+                                        <span>Payment Method</span>
+                                        <FontAwesomeIcon icon={faAsterisk} />
                                     </label>
                                     <select
                                         id='payment'
@@ -317,10 +328,7 @@ export default function Purchase({ customer, order }: PurchaseProps) {
                             <div className={style.coupon}>
                                 <div className={style.formField}>
                                     <label htmlFor='coupon'>Coupon</label>
-                                    <select
-                                        id='coupon'
-                                        {...Formik.getFieldProps('coupon')}
-                                    >
+                                    <select id='coupon' name='coupon'>
                                         <option value=''>- - -</option>
                                         {coupons.map(c => (
                                             <option
@@ -338,15 +346,9 @@ export default function Purchase({ customer, order }: PurchaseProps) {
                                 </div>
                                 <div className={style.couponDiscount}>
                                     <span>
-                                        {Formik.values.coupon
-                                            ? priceStringFormatter(
-                                                  (
-                                                      JSON.parse(
-                                                          Formik.values.coupon
-                                                      ) as Coupon
-                                                  ).amount
-                                              )
-                                            : '$ 0.00'}
+                                        {priceStringFormatter(
+                                            coupons[0].amount
+                                        )}
                                     </span>
                                     <span>Using this coupon</span>
                                     <span className={style.discount}>
@@ -420,11 +422,16 @@ export default function Purchase({ customer, order }: PurchaseProps) {
                         <h2>Confirm your purchase</h2>
                         <div className={style.sectionWrapper}>
                             <div className={style.total}>
-                                <h3>Total</h3>
                                 <div>
+                                    <h3>You will save</h3>
                                     <span>
-                                        {priceStringFormatter(normalTotal)}
+                                        {priceStringFormatter(
+                                            normalTotal - offerTotal
+                                        )}
                                     </span>
+                                </div>
+                                <div>
+                                    <span>You will pay</span>
                                     <span>
                                         {priceStringFormatter(offerTotal)}
                                     </span>
