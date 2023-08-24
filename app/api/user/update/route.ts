@@ -72,8 +72,6 @@ export async function PATCH(req: NextRequest) {
             const errorResponse: APIResponse = await res.json()
             return NextResponse.json(errorResponse, { status: res.status })
         } catch (err) {
-            console.log(err)
-
             return NextResponse.json(
                 { message: 'Something went wrong' },
                 { status: 400 }
