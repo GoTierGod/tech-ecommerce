@@ -2,8 +2,8 @@
 
 import style from '../styles/purchase.module.css'
 
-import { useCallback, useEffect, useMemo, useState } from 'react'
-import { Formik, useFormik } from 'formik'
+import { ChangeEvent, useCallback, useEffect, useState } from 'react'
+import { useFormik } from 'formik'
 import * as Yup from 'yup'
 
 import { ComposedProductInfo } from '@/types/product'
@@ -36,6 +36,10 @@ export default function Purchase({ customer, order }: PurchaseProps) {
     const [currIdx, setCurrIdx] = useState(0)
     const [currItem, setCurrItem] = useState(order[0])
     const [orderItems, setOrderItems] = useState(order.map(p => p.details.id))
+    const [cartSpace, setCartSpace] = useState(10 - order.length)
+
+    const paymentMethods = ['MasterCard', 'Visa']
+    const coupons: Array<Coupon> = [{ id: 1, title: 'Global', amount: 25 }]
 
     const normalTotal =
         order.length > 0
@@ -49,11 +53,6 @@ export default function Purchase({ customer, order }: PurchaseProps) {
                   .map(p => Number(p.details.offer_price))
                   .reduce((p1, p2) => p1 + p2)
             : 0
-    const orderOfferTotal =
-        order.length > 0 ? offerTotal - (offerTotal * order.length) / 100 : 0
-
-    const paymentMethods = ['MasterCard', 'Visa']
-    const coupons: Array<Coupon> = [{ id: 1, title: 'Global', amount: 25 }]
 
     const prevItem = useCallback(() => {
         if (currIdx > 0) setCurrIdx(prevCurrIdx => prevCurrIdx - 1)
@@ -64,8 +63,32 @@ export default function Purchase({ customer, order }: PurchaseProps) {
             setCurrIdx(prevCurrIdx => prevCurrIdx + 1)
     }, [currIdx, setCurrIdx, order.length])
 
+    const addOrderItem = useCallback(
+        (e: ChangeEvent<HTMLSelectElement>, id: number) => {
+            if (!/\d+/.test(e.target.value)) e.target.value = '1'
+            if (Number(e.target.value) < 0) e.target.value = '1'
+            if (
+                Number(e.target.value) >
+                cartSpace + orderItems.filter(itemId => itemId === id).length
+            )
+                e.target.value = '1'
+
+            const insert = new Array(Number(e.target.value)).fill(id)
+
+            setOrderItems(prevOrderItems =>
+                prevOrderItems.filter(itemId => itemId !== id).concat(insert)
+            )
+        },
+        [orderItems, setOrderItems, cartSpace]
+    )
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
     useEffect(() => setCurrItem(order[currIdx]), [currIdx])
+    useEffect(() => setCartSpace(10 - orderItems.length), [orderItems])
+    useEffect(() => {
+        console.log(orderItems)
+        console.log(cartSpace)
+    }, [orderItems, cartSpace])
 
     const Formik = useFormik({
         initialValues: {
@@ -75,7 +98,7 @@ export default function Purchase({ customer, order }: PurchaseProps) {
             city: '',
             address: '',
             notes: '',
-            coupon: null
+            coupon: ''
         },
         onSubmit: async values => {
             console.log(JSON.stringify(values))
@@ -90,6 +113,7 @@ export default function Purchase({ customer, order }: PurchaseProps) {
             else console.log('Failed')
         },
         validationSchema: Yup.object({
+            products: Yup.array().min(1).max(10),
             payment: Yup.string()
                 .required('A payment method is required')
                 .is(
@@ -362,15 +386,32 @@ export default function Purchase({ customer, order }: PurchaseProps) {
                                     <label htmlFor={`units-${idx}`}>
                                         {p.details.name}
                                     </label>
-                                    <input
-                                        type='number'
+                                    <select
                                         name={`units-${idx}`}
                                         id={`units-${idx}`}
                                         placeholder='1'
                                         defaultValue={1}
-                                        min={1}
-                                        max={10 - orderItems.length}
-                                    />
+                                        onChange={e =>
+                                            addOrderItem(e, p.details.id)
+                                        }
+                                    >
+                                        {new Array(
+                                            cartSpace +
+                                                orderItems.filter(
+                                                    itemId =>
+                                                        itemId === p.details.id
+                                                ).length
+                                        )
+                                            .fill(0)
+                                            .map((opt, idx) => (
+                                                <option
+                                                    key={idx + 1}
+                                                    value={idx + 1}
+                                                >
+                                                    {idx + 1}
+                                                </option>
+                                            ))}
+                                    </select>
                                 </div>
                             ))}
                         </div>
