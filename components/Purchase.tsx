@@ -94,15 +94,13 @@ export default function Purchase({ customer, order }: PurchaseProps) {
             coupon: ''
         },
         onSubmit: async values => {
-            console.log(JSON.stringify(values))
-
             const res = await fetch('/api/purchase/', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(values)
             })
 
-            if (res.ok) console.log('Successfull')
+            if (res.ok) router.replace('/purchase/successfull')
             else console.log('Failed')
         },
         validationSchema: Yup.object({
