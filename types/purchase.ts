@@ -7,6 +7,7 @@ export interface PurchaseRequestData {
     city: string
     address: string
     notes: string
+    coupon?: number | null
 }
 
 export interface Purchase {

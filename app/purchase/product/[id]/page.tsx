@@ -1,4 +1,5 @@
 import Purchase from '@/components/Purchase'
+import { getCoupons } from '@/utils/data/getCoupons'
 import { getProduct } from '@/utils/data/getProduct'
 import { getUser } from '@/utils/data/getUser'
 import { redirect } from 'next/navigation'
@@ -13,5 +14,7 @@ export default async function Page({ params }: { params: { id: string } }) {
 
     if (!product) redirect('/')
 
-    return <Purchase customer={user} order={[product]} />
+    const coupons = await getCoupons()
+
+    return <Purchase customer={user} order={[product]} coupons={coupons} />
 }

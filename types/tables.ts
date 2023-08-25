@@ -99,3 +99,10 @@ export interface FavItem {
     product: Product
     customer: string
 }
+
+export interface Coupon {
+    id: number
+    title: string
+    amount: number
+    customer: string
+}

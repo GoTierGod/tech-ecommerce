@@ -50,20 +50,26 @@ export async function POST(req: NextRequest) {
             const city: string = body.city
             const address: string = body.address
             const notes: string = body.notes
-            const coupon: {
-                id: number
-                title: string
-                amount: number
-            } = body.coupon
+            const coupon: string = body.coupon
 
-            const purchaseData: PurchaseRequestData = {
-                products: products,
-                payment_method: payment,
-                country: country,
-                city: city,
-                address: address,
-                notes: notes
-            }
+            const purchaseData: PurchaseRequestData = coupon
+                ? {
+                      products: products,
+                      payment_method: payment,
+                      country: country,
+                      city: city,
+                      address: address,
+                      notes: notes,
+                      coupon: Number(coupon)
+                  }
+                : {
+                      products: products,
+                      payment_method: payment,
+                      country: country,
+                      city: city,
+                      address: address,
+                      notes: notes
+                  }
 
             const res = await fetch(`${API_URL}/api/purchase/`, {
                 method: 'POST',

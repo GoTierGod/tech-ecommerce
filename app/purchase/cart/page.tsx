@@ -1,5 +1,7 @@
 import Purchase from '@/components/Purchase'
+import { Coupon } from '@/types/tables'
 import { getCart } from '@/utils/data/getCart'
+import { getCoupons } from '@/utils/data/getCoupons'
 import { getUser } from '@/utils/data/getUser'
 import { redirect } from 'next/navigation'
 
@@ -11,5 +13,7 @@ export default async function Page() {
     if (!cart) redirect('/')
     if (cart.length <= 1) redirect(`/`)
 
-    return <Purchase customer={user} order={cart} />
+    const coupons = await getCoupons()
+
+    return <Purchase customer={user} order={cart} coupons={coupons} />
 }

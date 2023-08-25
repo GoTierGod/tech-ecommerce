@@ -25,6 +25,7 @@ import { APIResponse } from '@/types/api-response'
 interface PurchaseProps {
     customer: Customer
     order: ComposedProductInfo[]
+    coupons: Coupon[]
 }
 
 interface Coupon {
@@ -33,7 +34,7 @@ interface Coupon {
     amount: number
 }
 
-export default function Purchase({ customer, order }: PurchaseProps) {
+export default function Purchase({ customer, order, coupons }: PurchaseProps) {
     const router = useRouter()
 
     const [currIdx, setCurrIdx] = useState(0)
@@ -46,7 +47,6 @@ export default function Purchase({ customer, order }: PurchaseProps) {
     )
 
     const paymentMethods = ['MasterCard', 'Visa']
-    const coupons: Array<Coupon> = [{ id: 1, title: 'Global', amount: 25 }]
 
     const normalTotal =
         order.length > 0
@@ -120,7 +120,7 @@ export default function Purchase({ customer, order }: PurchaseProps) {
             }
         },
         validationSchema: Yup.object({
-            products: Yup.array().min(1).max(10),
+            products: Yup.array().required().min(1).max(10),
             payment: Yup.string()
                 .required('A payment method is required')
                 .is(
@@ -136,7 +136,8 @@ export default function Purchase({ customer, order }: PurchaseProps) {
             address: Yup.string()
                 .required('Enter a new address')
                 .max(255, 'Maximum 255 characters'),
-            notes: Yup.string().max(255, 'Maximum 255 characters')
+            notes: Yup.string().max(255, 'Maximum 255 characters'),
+            coupon: Yup.number()
         })
     })
 
@@ -383,25 +384,35 @@ export default function Purchase({ customer, order }: PurchaseProps) {
                                         <label htmlFor='coupon'>Coupon</label>
                                         <select id='coupon' name='coupon'>
                                             <option value=''>- - -</option>
-                                            {coupons.map(c => (
-                                                <option
-                                                    key={c.id}
-                                                    value={JSON.stringify(c)}
-                                                >
-                                                    {`${
-                                                        c.title
-                                                    } ( ${priceStringFormatter(
-                                                        c.amount
-                                                    )} )`}
-                                                </option>
-                                            ))}
+                                            {coupons.length > 0 &&
+                                                coupons.map(c => (
+                                                    <option
+                                                        key={c.id}
+                                                        value={c.id}
+                                                    >
+                                                        {`${
+                                                            c.title
+                                                        } ( ${priceStringFormatter(
+                                                            c.amount
+                                                        )} )`}
+                                                    </option>
+                                                ))}
                                         </select>
                                     </div>
                                     <div className={style.couponDiscount}>
                                         <span>
-                                            {priceStringFormatter(
-                                                coupons[0].amount
-                                            )}
+                                            {Formik.values.coupon
+                                                ? priceStringFormatter(
+                                                      coupons.filter(
+                                                          c =>
+                                                              c.id ===
+                                                              Number(
+                                                                  Formik.values
+                                                                      .coupon
+                                                              )
+                                                      )[0].amount
+                                                  )
+                                                : '$ 0.00'}
                                         </span>
                                         <span>Using this coupon</span>
                                         <span className={style.discount}>
