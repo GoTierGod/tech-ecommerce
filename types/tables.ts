@@ -1,3 +1,4 @@
+import { ComposedProductInfo } from './product'
 import { Customer, DeliveryMan } from './users'
 
 export interface Category {
@@ -85,7 +86,7 @@ export interface OrderItem {
 
     order: string
     customer: string
-    product: Product
+    product: string
 }
 
 export interface CardItem {
