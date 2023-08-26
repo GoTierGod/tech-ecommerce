@@ -17,7 +17,7 @@ export const getHistory = async (): Promise<ComposedPurchaseInfo[]> => {
         }
 
         if (authTokens) {
-            const res = await fetch(`${API_URL}/api/cart/`, {
+            const res = await fetch(`${API_URL}/api/purchase/history/`, {
                 method: 'get',
                 headers: {
                     'Content-Type': 'application/json',
