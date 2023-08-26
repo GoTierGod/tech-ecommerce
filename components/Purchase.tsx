@@ -102,6 +102,8 @@ export default function Purchase({ customer, order, coupons }: PurchaseProps) {
             coupon: ''
         },
         onSubmit: async values => {
+            console.log(JSON.stringify(values))
+
             const res = await fetch('/api/purchase/', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
@@ -382,7 +384,10 @@ export default function Purchase({ customer, order, coupons }: PurchaseProps) {
                                 <div className={style.coupon}>
                                     <div className={style.formField}>
                                         <label htmlFor='coupon'>Coupon</label>
-                                        <select id='coupon' name='coupon'>
+                                        <select
+                                            id='coupon'
+                                            {...Formik.getFieldProps('coupon')}
+                                        >
                                             <option value=''>- - -</option>
                                             {coupons.length > 0 &&
                                                 coupons.map(c => (

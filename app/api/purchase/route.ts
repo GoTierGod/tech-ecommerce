@@ -52,6 +52,8 @@ export async function POST(req: NextRequest) {
             const notes: string = body.notes
             const coupon: string = body.coupon
 
+            console.log(coupon)
+
             const purchaseData: PurchaseRequestData = coupon
                 ? {
                       products: products,
