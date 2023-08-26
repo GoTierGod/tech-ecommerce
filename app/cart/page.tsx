@@ -8,7 +8,6 @@ export default async function Cart() {
     if (!user) redirect('/api/auth/refresh?path=/cart&auth=1')
 
     const cart = await getCart()
-    if (!cart) redirect('/')
 
     return <UserCart cart={cart} />
 }

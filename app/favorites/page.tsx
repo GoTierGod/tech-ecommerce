@@ -9,7 +9,6 @@ export default async function Favorites() {
     if (!user) redirect('/api/auth/refresh?path=/favorites&auth=1')
 
     const favorites = await getFavorites()
-    if (!favorites) redirect('/')
 
     return <UserFavorites favorites={favorites} />
 }
