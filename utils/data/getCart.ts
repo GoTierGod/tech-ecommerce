@@ -4,7 +4,7 @@ import { AuthTokens } from '@/types/tokens'
 import { cookies } from 'next/dist/client/components/headers'
 import { redirect } from 'next/navigation'
 
-export const getCart = async (): Promise<ComposedProductInfo[] | [] | null> => {
+export const getCart = async (): Promise<ComposedProductInfo[]> => {
     const authCookies = cookies().get('authTokens')
 
     if (authCookies) {
@@ -28,9 +28,9 @@ export const getCart = async (): Promise<ComposedProductInfo[] | [] | null> => {
                 return await res.json()
             }
 
-            return null
+            return []
         }
     }
 
-    return null
+    return []
 }

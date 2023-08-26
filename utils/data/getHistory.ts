@@ -1,11 +1,11 @@
-import { redirect } from 'next/navigation'
-import { cookies } from 'next/dist/client/components/headers'
-
 import { API_URL } from '@/constants/api'
 import { ComposedProductInfo } from '@/types/product'
+import { ComposedPurchaseInfo } from '@/types/purchase'
 import { AuthTokens } from '@/types/tokens'
+import { cookies } from 'next/dist/client/components/headers'
+import { redirect } from 'next/navigation'
 
-export const getFavorites = async (): Promise<ComposedProductInfo[]> => {
+export const getHistory = async (): Promise<ComposedPurchaseInfo[]> => {
     const authCookies = cookies().get('authTokens')
 
     if (authCookies) {
@@ -17,7 +17,7 @@ export const getFavorites = async (): Promise<ComposedProductInfo[]> => {
         }
 
         if (authTokens) {
-            const res = await fetch(`${API_URL}/api/favorites/`, {
+            const res = await fetch(`${API_URL}/api/cart/`, {
                 method: 'get',
                 headers: {
                     'Content-Type': 'application/json',
