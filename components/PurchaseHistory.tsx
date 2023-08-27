@@ -75,7 +75,11 @@ function HistoryItem({
             </Link>
             <Link
                 className={style.linkOption}
-                href={purchase.order.delivered ? `/` : `/`}
+                href={
+                    purchase.order.delivered
+                        ? `/purchase/history/review`
+                        : `/purchase/history/report`
+                }
                 prefetch={false}
                 style={
                     optMenu
@@ -109,6 +113,7 @@ export default function PurchaseHistory({ history }: PurchaseHistoryProps) {
                     <div className={style.stickyWrapper}>
                         <div className={style.header}>
                             <h2>History actions</h2>
+                            <FontAwesomeIcon icon={faEllipsisVertical} />
                         </div>
                         <div className={style.content}>
                             <span>
