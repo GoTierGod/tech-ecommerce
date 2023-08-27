@@ -35,9 +35,9 @@
     line-clamp: 1;
     -webkit-box-orient: vertical;
 
-    height: 0.975rem;
+    height: 1.075rem;
 
-    font-size: 1rem;
+    font-size: 1.125rem;
     font-weight: 400;
 
     overflow: hidden;
@@ -88,7 +88,15 @@
     max-height: 200px;
 }
 
-.content a {
+.options {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+.options a {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -99,6 +107,10 @@
     color: var(--white);
 
     border-radius: 4px;
+}
+
+.options a:first-of-type {
+    background: var(--gray);
 }
 
 .grid {
@@ -145,7 +157,8 @@
     line-clamp: 3;
     -webkit-box-orient: vertical;
 
-    height: 2.95rem;
+    height: 100%;
+    max-height: 2.95rem;
 
     font-size: 1rem;
 

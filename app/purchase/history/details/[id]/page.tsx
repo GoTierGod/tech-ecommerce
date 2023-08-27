@@ -81,11 +81,16 @@ export default async function Page({ params }: { params: { id: string } }) {
                                     quality='50'
                                 />
                             </div>
-                            <Link
-                                href={`/product/${purchase.product.details.id}`}
-                            >
-                                See Product
-                            </Link>
+                            <div className={style.options}>
+                                <Link href={`/purchase/history`}>
+                                    Back to History
+                                </Link>
+                                <Link
+                                    href={`/product/${purchase.product.details.id}`}
+                                >
+                                    See Product
+                                </Link>
+                            </div>
                         </div>
                     </div>
                 </div>

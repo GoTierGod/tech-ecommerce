@@ -107,7 +107,9 @@ export default function PurchaseHistory({ history }: PurchaseHistoryProps) {
             <div className={style.wrapper}>
                 <div className={style.wrapperLeft}>
                     <div className={style.stickyWrapper}>
-                        <div className={style.header}>History actions</div>
+                        <div className={style.header}>
+                            <h2>History actions</h2>
+                        </div>
                         <div className={style.content}>
                             <span>
                                 <FontAwesomeIcon icon={faListUl} />
