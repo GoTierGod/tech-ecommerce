@@ -48,12 +48,13 @@ function HistoryItem({
     }, [openedOptions])
 
     return (
-        <div>
+        <div className={style.historyItem}>
             <HorizontalCard product={purchase.product} />
-            <button className={style.cartItemOptions} onClick={toggleMenu}>
+            <button className={style.historyItemOptions} onClick={toggleMenu}>
                 <FontAwesomeIcon icon={faEllipsisVertical} />
             </button>
             <Link
+                className={style.linkOption}
                 href={`/`}
                 prefetch={false}
                 style={
@@ -73,6 +74,7 @@ function HistoryItem({
                 <FontAwesomeIcon icon={faListUl} />
             </Link>
             <Link
+                className={style.linkOption}
                 href={purchase.order.delivered ? `/` : `/`}
                 prefetch={false}
                 style={
@@ -104,30 +106,32 @@ export default function PurchaseHistory({ history }: PurchaseHistoryProps) {
         <main>
             <div className={style.wrapper}>
                 <div className={style.wrapperLeft}>
-                    <div className={style.header}>History actions</div>
-                    <div className={style.content}>
-                        <span>
-                            <FontAwesomeIcon icon={faListUl} />
+                    <div className={style.stickyWrapper}>
+                        <div className={style.header}>History actions</div>
+                        <div className={style.content}>
                             <span>
-                                View details about the purchase (e.g. product,
-                                delivery, price, etc...)
+                                <FontAwesomeIcon icon={faListUl} />
+                                <span>
+                                    View details about the purchase (e.g.
+                                    product, delivery, price, etc...)
+                                </span>
                             </span>
-                        </span>
-                        <span>
-                            <FontAwesomeIcon icon={faExclamation} />
                             <span>
-                                Report a problem with the product, delivery,
-                                etc... or cancel your purchase
+                                <FontAwesomeIcon icon={faExclamation} />
+                                <span>
+                                    Report a problem with the product, delivery,
+                                    etc... or cancel your purchase
+                                </span>
                             </span>
-                        </span>
-                        <span>
-                            <FontAwesomeIcon icon={faFile} />
-                            <span>Leave a review for this product</span>
-                        </span>
+                            <span>
+                                <FontAwesomeIcon icon={faFile} />
+                                <span>Leave a review for this product</span>
+                            </span>
+                        </div>
                     </div>
                 </div>
                 <div className={style.wrapperRight}>
-                    <div className={style.header}>
+                    <div className={style.options}>
                         <div className={style.header}>
                             <h2>GoTierGod&apos;s purchase history</h2>
                             <FontAwesomeIcon icon={faBoxOpen} />
