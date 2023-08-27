@@ -9,7 +9,8 @@ import {
     faEllipsisVertical,
     faHeart,
     faPen,
-    faTrash
+    faTrash,
+    faXmark
 } from '@fortawesome/free-solid-svg-icons'
 import { ComposedProductInfo } from '@/types/product'
 import HorizontalCard from './HoritonzalCard'
@@ -257,7 +258,7 @@ export default function UserFavorites({ favorites }: UserFavoritesProps) {
                                             setSelectedItems([])
                                         }}
                                     >
-                                        <FontAwesomeIcon icon={faCheck} />
+                                        <FontAwesomeIcon icon={faXmark} />
                                         <span>Cancel</span>
                                     </button>
                                 ) : (
