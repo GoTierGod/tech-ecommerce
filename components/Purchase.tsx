@@ -174,7 +174,11 @@ export default function Purchase({ customer, order, coupons }: PurchaseProps) {
                     <div className={style.wrapperLeft}>
                         <div className={style.stickyWrapper}>
                             <div className={style.currItemTop}>
-                                <h2>{currItem.details.name}</h2>
+                                <div className={style.header}>
+                                    <h2 className={style.name}>
+                                        {currItem.details.name}
+                                    </h2>
+                                </div>
                                 <div className={style.currItemImg}>
                                     {order.length > 1 && (
                                         <button
@@ -205,45 +209,38 @@ export default function Purchase({ customer, order, coupons }: PurchaseProps) {
                                     )}
                                 </div>
                             </div>
-                            <div className={style.currItemBottom}>
-                                <div className={style.currItemPrice}>
-                                    <span>Price</span>
-                                    <div>
-                                        <span>
-                                            {priceStringFormatter(
-                                                currItem.details.price
-                                            )}
-                                        </span>
-                                        <span>
-                                            {priceStringFormatter(
-                                                currItem.details.offer_price
-                                            )}
-                                        </span>
-                                    </div>
+                            <div className={style.confirmPurchase}>
+                                <div className={style.header}>
+                                    <h2>Confirm Purchase</h2>
                                 </div>
-                                <div className={style.currItemSpecs}>
-                                    <div>
-                                        <span>Key</span>
-                                        <span>Value</span>
+                                <div className={style.content}>
+                                    <div className={style.total}>
+                                        <div className={style.totalPay}>
+                                            <span>You will pay</span>
+                                            <span>
+                                                {priceStringFormatter(
+                                                    offerTotal
+                                                )}
+                                            </span>
+                                        </div>
+                                        <div className={style.totalSaved}>
+                                            <span>You will save</span>
+                                            <span>
+                                                {priceStringFormatter(
+                                                    normalTotal - offerTotal
+                                                )}
+                                            </span>
+                                        </div>
                                     </div>
-                                    <div>
-                                        <span>Key</span>
-                                        <span>Value</span>
+                                    <div className={style.options}>
+                                        <Link
+                                            href={`/product/${currItem.details.id}`}
+                                            prefetch={false}
+                                        >
+                                            See Product
+                                        </Link>
+                                        <button type='submit'>Confirm</button>
                                     </div>
-                                    <div>
-                                        <span>Key</span>
-                                        <span>Value</span>
-                                    </div>
-                                    <div>
-                                        <span>Key</span>
-                                        <span>Value</span>
-                                    </div>
-                                    <Link
-                                        href={`/product/${currItem.details.id}`}
-                                        prefetch={false}
-                                    >
-                                        See Product
-                                    </Link>
                                 </div>
                             </div>
                         </div>
@@ -253,7 +250,9 @@ export default function Purchase({ customer, order, coupons }: PurchaseProps) {
                         onSubmit={Formik.handleSubmit}
                     >
                         <div className={style.delivery}>
-                            <h2>Delivery</h2>
+                            <div className={style.header}>
+                                <h2>Delivery</h2>
+                            </div>
                             <div className={style.sectionWrapper}>
                                 <div className={style.deliveryInfo}>
                                     <p>
@@ -316,7 +315,9 @@ export default function Purchase({ customer, order, coupons }: PurchaseProps) {
                             </div>
                         </div>
                         <div className={style.payment}>
-                            <h2>Payment</h2>
+                            <div className={style.header}>
+                                <h2>Payment</h2>
+                            </div>
                             <div className={style.sectionWrapper}>
                                 <div className={style.paymentMethod}>
                                     <div className={style.formField}>
@@ -366,7 +367,9 @@ export default function Purchase({ customer, order, coupons }: PurchaseProps) {
                             </div>
                         </div>
                         <div className={style.couponList}>
-                            <h2>Coupon</h2>
+                            <div className={style.header}>
+                                <h2>Coupon</h2>
+                            </div>
                             <div className={style.sectionWrapper}>
                                 {order.length > 1 && (
                                     <div className={style.cartCoupon}>
@@ -452,7 +455,9 @@ export default function Purchase({ customer, order, coupons }: PurchaseProps) {
                             </div>
                         </div>
                         <div className={style.unitsAndPrice}>
-                            <h2>Units and Price</h2>
+                            <div className={style.header}>
+                                <h2>Units and Price</h2>
+                            </div>
                             <div className={style.units}>
                                 {order.map((p, idx) => (
                                     <div
@@ -491,33 +496,6 @@ export default function Purchase({ customer, order, coupons }: PurchaseProps) {
                                         </select>
                                     </div>
                                 ))}
-                            </div>
-                        </div>
-                        <div className={style.totalAndOptions}>
-                            <h2>Confirm your purchase</h2>
-                            <div className={style.sectionWrapper}>
-                                <div className={style.total}>
-                                    <div>
-                                        <h3>You will save</h3>
-                                        <span>
-                                            {priceStringFormatter(
-                                                normalTotal - offerTotal
-                                            )}
-                                        </span>
-                                    </div>
-                                    <div>
-                                        <span>You will pay</span>
-                                        <span>
-                                            {priceStringFormatter(offerTotal)}
-                                        </span>
-                                    </div>
-                                </div>
-                                <div className={style.options}>
-                                    <button type='submit'>Confirm</button>
-                                    <button onClick={() => router.back()}>
-                                        Cancel
-                                    </button>
-                                </div>
                             </div>
                         </div>
                     </form>

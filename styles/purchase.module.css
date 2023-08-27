@@ -7,7 +7,7 @@
     max-width: 1200px;
 }
 
-.wrapper h2 {
+.header {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -17,10 +17,21 @@
     background: var(--main);
     color: var(--white);
 
+    border-radius: 4px;
+}
+
+.header h2 {
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    line-clamp: 1;
+    -webkit-box-orient: vertical;
+
+    height: 1.075rem;
+
     font-size: 1.125rem;
     font-weight: 400;
 
-    border-radius: 4px;
+    overflow: hidden;
 }
 
 .formField {
@@ -102,7 +113,6 @@
     justify-content: space-around;
     align-items: center;
 
-    padding: 1.5rem;
     height: 225px;
     aspect-ratio: 4/3;
 
@@ -135,9 +145,9 @@
 
 .currItemImg img {
     width: 100%;
-    max-width: 175px;
+    max-width: 200px;
     height: auto;
-    max-height: 175px;
+    max-height: 200px;
 }
 
 .currItemPrice {
@@ -156,10 +166,22 @@
     border-radius: 4px;
 }
 
-.currItemBottom {
+.confirmPurchase {
     display: flex;
     flex-direction: column;
     gap: 0.5rem;
+}
+
+.content {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+
+    padding: 1.5rem;
+
+    background: var(--white);
+
+    border-radius: 4px;
 }
 
 .currItemPrice div {
@@ -167,6 +189,11 @@
     justify-content: center;
     align-items: center;
     gap: 0.5rem;
+}
+
+.currItemPrice h2 {
+    font-size: 1.125rem;
+    font-weight: 400;
 }
 
 .currItemPrice div span:nth-child(1) {
@@ -184,6 +211,8 @@
 .currItemSpecs {
     display: flex;
     flex-direction: column;
+    justify-content: center;
+    align-items: center;
     gap: 1.5rem;
 
     padding: 1.5rem;
@@ -193,26 +222,37 @@
     border-radius: 4px;
 }
 
-.currItemSpecs > div {
+.options {
     display: flex;
-    justify-content: space-between;
-    align-items: center;
+    justify-content: center;
+    align-content: center;
+    gap: 1rem;
 
-    font-size: 1rem;
-    font-weight: 375;
+    width: 100%;
 }
 
-.currItemSpecs a {
+.options :where(button, a) {
     display: flex;
     justify-content: center;
     align-items: center;
 
-    padding: 0.75rem 1rem;
+    padding: 0.5rem 0.75rem;
+    width: 100%;
 
     background: var(--main);
     color: var(--white);
 
+    font-size: 1rem;
+    font-weight: 400;
+
+    border: 2px solid transparent;
     border-radius: 4px;
+
+    cursor: pointer;
+}
+
+.options a:last-of-type {
+    background: var(--gray);
 }
 
 .delivery,
@@ -297,18 +337,13 @@
     gap: 1.5rem;
 }
 
-.total h3 {
-    font-size: 1rem;
-    font-weight: 400;
-}
-
 .total div {
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
-.total > div:first-of-type h3 {
+.totalSaved span:first-of-type {
     padding: 0.75rem 1rem;
 
     background: var(--main);
@@ -319,8 +354,10 @@
     border-radius: 4px;
 }
 
-.total > div:first-of-type span:first-of-type {
+.totalSaved span:last-of-type {
     padding: 0.5rem 0.75rem;
+
+    background: var(--white);
 
     font-size: 1rem;
     font-weight: 400;
@@ -330,8 +367,10 @@
     border-radius: 0 4px 4px 0;
 }
 
-.total > div:last-of-type span:first-of-type {
+.totalPay span:first-of-type {
     padding: 0.5rem 0.75rem;
+
+    background: var(--white);
 
     font-size: 1rem;
     font-weight: 400;
@@ -341,7 +380,7 @@
     border-radius: 4px 0 0 4px;
 }
 
-.total > div:last-of-type span:last-of-type {
+.totalPay span:last-of-type {
     padding: 0.75rem 1rem;
 
     background: var(--main);
@@ -351,37 +390,6 @@
     font-weight: 375;
 
     border-radius: 4px;
-}
-
-.options {
-    display: flex;
-    justify-content: center;
-    align-content: center;
-    gap: 1rem;
-}
-
-.options button {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-    padding: 0.75rem 1rem;
-    width: 100%;
-
-    background: var(--main);
-    color: var(--white);
-
-    font-size: 1rem;
-    font-weight: 400;
-
-    border: 2px solid transparent;
-    border-radius: 4px;
-
-    cursor: pointer;
-}
-
-.options button:last-of-type {
-    background: var(--gray);
 }
 
 .discount {
@@ -463,9 +471,5 @@
 
         border: 2px solid var(--gray);
         border-radius: 4px;
-    }
-
-    .total {
-        justify-content: space-between;
     }
 }
