@@ -8,6 +8,8 @@ import Link from 'next/link'
 import { titleCaseFormatter } from '@/utils/formatting/titleCaseFormatter'
 import { Order } from '@/types/tables'
 import { ReactNode } from 'react'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faListUl, faMicrochip } from '@fortawesome/free-solid-svg-icons'
 
 export default async function Page({ params }: { params: { id: string } }) {
     const { id } = params
@@ -68,6 +70,7 @@ export default async function Page({ params }: { params: { id: string } }) {
                     <div className={style.stickyWrapper}>
                         <div className={style.header}>
                             <h2>{purchase.product.details.name}</h2>
+                            <FontAwesomeIcon icon={faMicrochip} />
                         </div>
                         <div className={style.content}>
                             <div className={style.image}>
@@ -97,6 +100,7 @@ export default async function Page({ params }: { params: { id: string } }) {
                 <div className={style.wrapperRight}>
                     <div className={style.header}>
                         <h2>Details</h2>
+                        <FontAwesomeIcon icon={faListUl} />
                     </div>
                     <div className={style.grid}>
                         <div className={style.detail}>
