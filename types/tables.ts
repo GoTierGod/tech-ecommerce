@@ -64,16 +64,16 @@ export interface Review {
 
 export interface Order {
     id: number
+    paid: number
     payment_method: string
-    delivery_term: unknown
+    delivery_term: string
     dispatched: boolean
     on_the_way: boolean
     delivered: boolean
-    purchase_date: unknown
+    purchase_date: string
     country: string
     city: string
     address: string
-    postal_code: string | null
     notes: string
 
     delivery_man: string | null

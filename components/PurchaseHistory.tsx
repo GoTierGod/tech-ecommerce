@@ -55,7 +55,7 @@ function HistoryItem({
             </button>
             <Link
                 className={style.linkOption}
-                href={`/`}
+                href={`/purchase/history/details/${purchase.order_item.id}`}
                 prefetch={false}
                 style={
                     optMenu
