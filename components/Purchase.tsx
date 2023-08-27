@@ -14,9 +14,15 @@ import Link from 'next/link'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {
     faAsterisk,
+    faBoxesStacked,
     faCaretLeft,
     faCaretRight,
-    faRightLong
+    faCheck,
+    faCreditCard,
+    faMapLocationDot,
+    faMicrochip,
+    faRightLong,
+    faTag
 } from '@fortawesome/free-solid-svg-icons'
 import { Customer } from '@/types/users'
 import ErrorDisplay from './ErrorDisplay'
@@ -178,6 +184,7 @@ export default function Purchase({ customer, order, coupons }: PurchaseProps) {
                                     <h2 className={style.name}>
                                         {currItem.details.name}
                                     </h2>
+                                    <FontAwesomeIcon icon={faMicrochip} />
                                 </div>
                                 <div className={style.currItemImg}>
                                     {order.length > 1 && (
@@ -212,6 +219,7 @@ export default function Purchase({ customer, order, coupons }: PurchaseProps) {
                             <div className={style.confirmPurchase}>
                                 <div className={style.header}>
                                     <h2>Confirm Purchase</h2>
+                                    <FontAwesomeIcon icon={faCheck} />
                                 </div>
                                 <div className={style.content}>
                                     <div className={style.total}>
@@ -252,6 +260,7 @@ export default function Purchase({ customer, order, coupons }: PurchaseProps) {
                         <div className={style.delivery}>
                             <div className={style.header}>
                                 <h2>Delivery</h2>
+                                <FontAwesomeIcon icon={faMapLocationDot} />
                             </div>
                             <div className={style.sectionWrapper}>
                                 <div className={style.deliveryInfo}>
@@ -317,6 +326,7 @@ export default function Purchase({ customer, order, coupons }: PurchaseProps) {
                         <div className={style.payment}>
                             <div className={style.header}>
                                 <h2>Payment</h2>
+                                <FontAwesomeIcon icon={faCreditCard} />
                             </div>
                             <div className={style.sectionWrapper}>
                                 <div className={style.paymentMethod}>
@@ -369,6 +379,7 @@ export default function Purchase({ customer, order, coupons }: PurchaseProps) {
                         <div className={style.couponList}>
                             <div className={style.header}>
                                 <h2>Coupon</h2>
+                                <FontAwesomeIcon icon={faTag} />
                             </div>
                             <div className={style.sectionWrapper}>
                                 {order.length > 1 && (
@@ -454,11 +465,12 @@ export default function Purchase({ customer, order, coupons }: PurchaseProps) {
                                 </div>
                             </div>
                         </div>
-                        <div className={style.unitsAndPrice}>
+                        <div className={style.units}>
                             <div className={style.header}>
-                                <h2>Units and Price</h2>
+                                <h2>Units</h2>
+                                <FontAwesomeIcon icon={faBoxesStacked} />
                             </div>
-                            <div className={style.units}>
+                            <div className={style.unitsSelection}>
                                 {order.map((p, idx) => (
                                     <div
                                         key={p.details.id}

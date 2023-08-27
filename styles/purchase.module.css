@@ -11,6 +11,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    gap: 1rem;
 
     padding: 1rem;
 
@@ -258,14 +259,14 @@
 .delivery,
 .payment,
 .couponList,
-.unitsAndPrice {
+.units {
     display: flex;
     flex-direction: column;
     gap: 0.5rem;
 }
 
 .sectionWrapper,
-.units {
+.unitsSelection {
     display: flex;
     flex-direction: column;
     gap: 1.5rem;
@@ -309,7 +310,7 @@
     font-weight: 400;
 }
 
-.units,
+.unitsSelection,
 .coupon,
 .paymentMethod,
 .deliveryAddress {
@@ -453,16 +454,16 @@
         grid-template-columns: repeat(3, 1fr);
     }
 
-    .units {
+    .unitsSelection {
         display: grid;
         grid-template-columns: repeat(2, 1fr);
     }
 
-    .units > div {
+    .unitsSelection > div {
         grid-column: span 1;
     }
 
-    .units > div:nth-child(odd):last-child {
+    .unitsSelection > div:nth-child(odd):last-child {
         grid-column: 1 / span 2;
     }
 
