@@ -18,16 +18,16 @@ export default function OffersSection({ products }: OffersProps) {
                 {products.slice(0, 3).map(product => (
                     <Link
                         key={product.details.id}
-                        href={`/product/${product.details.id}`}
                         className={style.product}
+                        href={`/product/${product.details.id}`}
                         prefetch={false}
                     >
                         <Image
                             src={product.default_img.url}
                             alt={product.default_img.description}
-                            width={150}
-                            height={150}
-                            quality='25'
+                            width={250}
+                            height={250}
+                            quality='50'
                         />
                     </Link>
                 ))}
@@ -37,7 +37,11 @@ export default function OffersSection({ products }: OffersProps) {
                     <span>Only for a few hours</span>
                     <h4>Take Advantage Of This Offers</h4>
                 </div>
-                <Link href='/' className={style.link}>
+                <Link
+                    className={style.link}
+                    href='/search/a,b,c,d,e'
+                    prefetch={false}
+                >
                     <span>More Offers</span>
                     <FontAwesomeIcon icon={faRightLong} />
                 </Link>

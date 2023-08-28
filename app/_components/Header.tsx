@@ -32,7 +32,7 @@ export default function Header({ categories, user }: HeaderProps) {
     const path = usePathname()
     const [searchStr, setSearchStr] = useState('')
     const [category, setCategory] = useState('')
-    const dropdownMenuRef = useRef(null)
+    const [dropdownMenu, setDropdownMenu] = useState(false)
 
     const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault()
@@ -40,18 +40,8 @@ export default function Header({ categories, user }: HeaderProps) {
     }
 
     const toggleDropdownMenu = useCallback(() => {
-        if (dropdownMenuRef.current) {
-            const element: HTMLDivElement = dropdownMenuRef.current
-
-            if (element.offsetHeight.toString() === '0') {
-                element.style.height = 'auto'
-                element.style.paddingTop = '1rem'
-            } else {
-                element.style.height = '0'
-                element.style.padding = '0'
-            }
-        }
-    }, [dropdownMenuRef])
+        setDropdownMenu(prevDropdownMenu => !prevDropdownMenu)
+    }, [setDropdownMenu])
 
     useEffect(() => {
         if (path !== `/search/${category}`) setCategory('')
@@ -61,19 +51,16 @@ export default function Header({ categories, user }: HeaderProps) {
 
     useEffect(() => {
         if (category) {
-            router.push(`/search/${category}`)
             setSearchStr('')
+            router.push(`/search/${category}`)
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [category])
 
     useEffect(() => {
-        if (dropdownMenuRef.current) {
-            const element: HTMLDivElement = dropdownMenuRef.current
-
-            if (element.offsetHeight > 0) toggleDropdownMenu()
-        }
-    }, [path, dropdownMenuRef, toggleDropdownMenu])
+        setDropdownMenu(false)
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [path])
 
     useEffect(() => {
         if (user && !Cookies.get('authTokens')) router.refresh()
@@ -92,7 +79,7 @@ export default function Header({ categories, user }: HeaderProps) {
                 <Link href='/' className={style.logo} prefetch={false}>
                     <Image
                         src='/next.svg'
-                        alt='All Tech logo'
+                        alt='Website logo'
                         height={48}
                         width={48}
                         quality='100'
@@ -134,17 +121,12 @@ export default function Header({ categories, user }: HeaderProps) {
                 <button
                     onClick={toggleDropdownMenu}
                     className={style.dropdownBtn}
-                    aria-label='Dropdown menu'
+                    aria-label='Toggle dropdown menu'
                 >
-                    <FontAwesomeIcon icon={faBars} height='1rem' />
+                    <FontAwesomeIcon icon={faBars} />
                 </button>
                 <nav className={style.wideNav}>
                     <ul className={style.links}>
-                        <li>
-                            <Link href='/' prefetch={false}>
-                                Offers
-                            </Link>
-                        </li>
                         <li>
                             <Link href='/' prefetch={false}>
                                 Contact
@@ -163,8 +145,8 @@ export default function Header({ categories, user }: HeaderProps) {
                     </ul>
                 </nav>
                 <Link
-                    href={user ? '/profile' : '/login'}
                     className={style.profile}
+                    href={user ? '/profile' : '/login'}
                     prefetch={false}
                 >
                     <FontAwesomeIcon icon={faCircleUser} />
@@ -172,8 +154,8 @@ export default function Header({ categories, user }: HeaderProps) {
                 </Link>
                 {user ? (
                     <Link
-                        href='/logout'
                         className={style.logout}
+                        href='/logout'
                         aria-label='Log Out'
                         prefetch={false}
                     >
@@ -181,8 +163,8 @@ export default function Header({ categories, user }: HeaderProps) {
                     </Link>
                 ) : (
                     <Link
-                        href='/register'
                         className={style.logout}
+                        href='/register'
                         prefetch={false}
                     >
                         <FontAwesomeIcon icon={faSignIn} />
@@ -190,7 +172,20 @@ export default function Header({ categories, user }: HeaderProps) {
                     </Link>
                 )}
             </div>
-            <div ref={dropdownMenuRef} className={style.dropdownMenu}>
+            <div
+                className={style.dropdownMenu}
+                style={
+                    dropdownMenu
+                        ? {
+                              maxHeight: '160px',
+                              paddingTop: '1rem'
+                          }
+                        : {
+                              maxHeight: '0',
+                              paddingTop: '0'
+                          }
+                }
+            >
                 <div className={style.options}>
                     <div>
                         <Link
@@ -208,7 +203,7 @@ export default function Header({ categories, user }: HeaderProps) {
                         ) : (
                             <Link href='/register' prefetch={false}>
                                 <FontAwesomeIcon icon={faSignIn} />
-                                <span>Sign Up</span>
+                                <span>Register</span>
                             </Link>
                         )}
                     </div>
@@ -225,11 +220,6 @@ export default function Header({ categories, user }: HeaderProps) {
                 </div>
                 <nav className={style.smallNav}>
                     <ul className={style.links}>
-                        <li>
-                            <Link href='/' prefetch={false}>
-                                Offers
-                            </Link>
-                        </li>
                         <li>
                             <Link href='/' prefetch={false}>
                                 Contact

@@ -19,13 +19,17 @@ export default function HighlightedSection({ products }: HighlightedProps) {
                             <span>The best offers in</span>
                             <h4>{product.details.category.title}</h4>
                         </div>
-                        <Link href='/' className={style.link}>
+                        <Link
+                            className={style.link}
+                            href={`/search/${product.details.category.title}`}
+                            prefetch={false}
+                        >
                             <span>{product.details.category.title}</span>
                         </Link>
                     </div>
                     <Link
-                        href={`/product/${product.details.id}`}
                         className={style.image}
+                        href={`/product/${product.details.id}`}
                         prefetch={false}
                     >
                         <Image
@@ -33,7 +37,7 @@ export default function HighlightedSection({ products }: HighlightedProps) {
                             alt={product.default_img.description}
                             width={250}
                             height={250}
-                            quality='25'
+                            quality='50'
                         />
                     </Link>
                 </article>

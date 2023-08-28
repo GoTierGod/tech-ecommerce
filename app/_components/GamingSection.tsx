@@ -23,10 +23,14 @@ export default function GamingSection({ products }: GamingProps) {
                     alt='Gaming products'
                     height={500}
                     width={500}
-                    quality='100'
+                    quality='50'
                     priority
                 />
-                <Link href='/' className={style.link}>
+                <Link
+                    className={style.link}
+                    href='/search/a,e,i,o,u?is_gamer=1'
+                    prefetch={false}
+                >
                     <span>Gaming Offers</span>
                 </Link>
             </div>
@@ -34,8 +38,8 @@ export default function GamingSection({ products }: GamingProps) {
                 {products.slice(0, 6).map(product => (
                     <Link
                         key={product.details.id}
-                        href={`/product/${product.details.id}`}
                         className={style.product}
+                        href={`/product/${product.details.id}`}
                         prefetch={false}
                     >
                         <Image
@@ -43,7 +47,7 @@ export default function GamingSection({ products }: GamingProps) {
                             alt={product.default_img.description}
                             width={250}
                             height={250}
-                            quality='25'
+                            quality='50'
                         />
                     </Link>
                 ))}

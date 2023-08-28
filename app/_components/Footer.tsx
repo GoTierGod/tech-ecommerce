@@ -54,7 +54,7 @@ export default function Footer() {
                     </div>
                     <div>
                         <FontAwesomeIcon icon={faBoxOpen} />
-                        <h2>Fast & Cheap Shipping</h2>
+                        <h2>Fast Shipping</h2>
                         <p>
                             Lorem Ipsum is simply dummy text of the printing and
                             typesetting industry. Lorem Ipsum is simply dummy
