@@ -110,7 +110,7 @@ export default function Purchase({ customer, order, coupons }: PurchaseProps) {
         onSubmit: async values => {
             console.log(JSON.stringify(values))
 
-            const res = await fetch('/api/purchase/', {
+            const res = await fetch('/api/purchase/create/', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(values)
