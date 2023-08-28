@@ -28,10 +28,10 @@ export default function PurchaseReview({ product }: PurchaseReviewProps) {
         onSubmit: async values => {
             setWaitingRes(true)
 
-            const res = await fetch(`/api/purchase/review/create/`, {
+            const res = await fetch(`/api/purchase/review/create`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(values)
+                body: JSON.stringify({ id: product.details.id, ...values })
             })
 
             if (res.ok) {
