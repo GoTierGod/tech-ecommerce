@@ -10,6 +10,8 @@ import * as Yup from 'yup'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { useState } from 'react'
+import ErrorDisplay from './ErrorDisplay'
+import { APIResponse } from '@/types/api-response'
 
 interface PurchaseReviewProps {
     product: ComposedProductInfo
@@ -18,6 +20,9 @@ interface PurchaseReviewProps {
 export default function PurchaseReview({ product }: PurchaseReviewProps) {
     const router = useRouter()
     const [waitingRes, setWaitingRes] = useState(false)
+    const [err, setErr] = useState(
+        null as null | { message: string; status: number; statusText: string }
+    )
 
     const Formik = useFormik({
         initialValues: {
@@ -37,6 +42,14 @@ export default function PurchaseReview({ product }: PurchaseReviewProps) {
             if (res.ok) {
                 Formik.resetForm()
                 router.replace(`/product/reviews/${product.details.id}`)
+            } else {
+                const errorResponse: APIResponse = await res.json()
+
+                setErr({
+                    message: errorResponse.message,
+                    status: res.status,
+                    statusText: res.statusText
+                })
             }
 
             setWaitingRes(false)
@@ -59,96 +72,118 @@ export default function PurchaseReview({ product }: PurchaseReviewProps) {
         })
     })
 
+    const ResetError = () => setErr(null)
+
     return (
-        <main>
-            <div className={style.wrapper}>
-                <div className={style.wrapperLeft}>
-                    <div className={style.stickyWrapper}>
-                        <div className={style.header}>
-                            <h2>{product.details.name}</h2>
-                            <FontAwesomeIcon icon={faMicrochip} />
-                        </div>
-                        <div className={style.content}>
-                            <div className={style.image}>
-                                <Image
-                                    src={product.default_img.url}
-                                    alt={product.default_img.description}
-                                    width={250}
-                                    height={250}
-                                    quality='50'
-                                    priority
-                                />
+        <main
+            style={
+                err
+                    ? {
+                          background: 'var(--gray)',
+                          padding: '2rem',
+                          paddingTop: '99px',
+                          minHeight: '100vh',
+                          minWidth: '100%'
+                      }
+                    : {}
+            }
+        >
+            {!err ? (
+                <div className={style.wrapper}>
+                    <div className={style.wrapperLeft}>
+                        <div className={style.stickyWrapper}>
+                            <div className={style.header}>
+                                <h2>{product.details.name}</h2>
+                                <FontAwesomeIcon icon={faMicrochip} />
                             </div>
-                            <Link
-                                href={`/product/${product.details.id}`}
-                                prefetch={false}
-                            >
-                                See Product
-                            </Link>
-                        </div>
-                    </div>
-                </div>
-                <div className={style.wrapperRight}>
-                    <div className={style.header}>
-                        <h2>Review</h2>
-                        <FontAwesomeIcon icon={faFilePen} />
-                    </div>
-                    <form
-                        className={style.review}
-                        onSubmit={Formik.handleSubmit}
-                    >
-                        <div className={style.topForm}>
-                            <div className={style.formField}>
-                                <label htmlFor='rating'>Rating</label>
-                                <select
-                                    id='rating'
-                                    {...Formik.getFieldProps('rating')}
+                            <div className={style.content}>
+                                <div className={style.image}>
+                                    <Image
+                                        src={product.default_img.url}
+                                        alt={product.default_img.description}
+                                        width={250}
+                                        height={250}
+                                        quality='50'
+                                        priority
+                                    />
+                                </div>
+                                <Link
+                                    href={`/product/${product.details.id}`}
+                                    prefetch={false}
                                 >
-                                    <option value=''>- - -</option>
-                                    <option value='5'>5.0</option>
-                                    <option value='4.5'>4.5</option>
-                                    <option value='4'>4.0</option>
-                                    <option value='3.5'>3.5</option>
-                                    <option value='3'>3.0</option>
-                                    <option value='2.5'>2.5</option>
-                                    <option value='2'>2.0</option>
-                                    <option value='1.5'>1.5</option>
-                                    <option value='1'>1.0</option>
-                                </select>
+                                    See Product
+                                </Link>
+                            </div>
+                        </div>
+                    </div>
+                    <div className={style.wrapperRight}>
+                        <div className={style.header}>
+                            <h2>Review</h2>
+                            <FontAwesomeIcon icon={faFilePen} />
+                        </div>
+                        <form
+                            className={style.review}
+                            onSubmit={Formik.handleSubmit}
+                        >
+                            <div className={style.topForm}>
+                                <div className={style.formField}>
+                                    <label htmlFor='rating'>Rating</label>
+                                    <select
+                                        id='rating'
+                                        {...Formik.getFieldProps('rating')}
+                                    >
+                                        <option value=''>- - -</option>
+                                        <option value='5'>5.0</option>
+                                        <option value='4.5'>4.5</option>
+                                        <option value='4'>4.0</option>
+                                        <option value='3.5'>3.5</option>
+                                        <option value='3'>3.0</option>
+                                        <option value='2.5'>2.5</option>
+                                        <option value='2'>2.0</option>
+                                        <option value='1.5'>1.5</option>
+                                        <option value='1'>1.0</option>
+                                    </select>
+                                </div>
+                                <div className={style.formField}>
+                                    <label htmlFor='title'>Title</label>
+                                    <input
+                                        type='text'
+                                        id='title'
+                                        placeholder='Nice!'
+                                        {...Formik.getFieldProps('title')}
+                                    />
+                                </div>
                             </div>
                             <div className={style.formField}>
-                                <label htmlFor='title'>Title</label>
-                                <input
-                                    type='text'
-                                    id='title'
-                                    placeholder='Nice!'
-                                    {...Formik.getFieldProps('title')}
+                                <label htmlFor='content'>Content</label>
+                                <textarea
+                                    id='content'
+                                    placeholder='Very good product...'
+                                    {...Formik.getFieldProps('content')}
                                 />
                             </div>
-                        </div>
-                        <div className={style.formField}>
-                            <label htmlFor='content'>Content</label>
-                            <textarea
-                                id='content'
-                                placeholder='Very good product...'
-                                {...Formik.getFieldProps('content')}
-                            />
-                        </div>
-                        {!waitingRes ? (
-                            <div className={style.options}>
-                                <button onClick={() => router.back()}>
-                                    Back
-                                </button>
-                                <button type='submit'>Submit Review</button>
-                            </div>
-                        ) : (
-                            <div className={style.waitingMsg}>
-                                Publishing review...
-                            </div>
-                        )}
-                    </form>
+                            {!waitingRes ? (
+                                <div className={style.options}>
+                                    <button onClick={() => router.back()}>
+                                        Back
+                                    </button>
+                                    <button type='submit'>Submit Review</button>
+                                </div>
+                            ) : (
+                                <div className={style.waitingMsg}>
+                                    Publishing review...
+                                </div>
+                            )}
+                        </form>
+                    </div>
                 </div>
-            </div>
+            ) : (
+                <ErrorDisplay
+                    {...err}
+                    action={ResetError}
+                    actionText='Try again'
+                />
+            )}
         </main>
     )
 }

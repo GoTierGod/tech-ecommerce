@@ -157,10 +157,6 @@ export default function Purchase({ customer, order, coupons }: PurchaseProps) {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [orderItems])
 
-    useEffect(() => {
-        if (Formik.errors) console.log(Formik.errors)
-    }, [Formik.errors])
-
     return (
         <main
             style={
