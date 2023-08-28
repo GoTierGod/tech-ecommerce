@@ -10,9 +10,16 @@ import { Order } from '@/types/tables'
 import { ReactNode } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faListUl, faMicrochip } from '@fortawesome/free-solid-svg-icons'
+import { getUser } from '@/utils/data/getUser'
 
 export default async function Page({ params }: { params: { id: string } }) {
     const { id } = params
+
+    const user = await getUser()
+    if (!user)
+        redirect(
+            `/api/auth/refresh?path=/purchase/history/details/${id}&auth=1`
+        )
 
     const purchase = await getPurchase(id)
     if (!purchase) redirect('')
