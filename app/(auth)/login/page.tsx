@@ -1,7 +1,7 @@
 import style from './page.module.css'
 
 import { redirect } from 'next/navigation'
-import UserLogin from '@/components/UserLogin'
+import UserLogin from '@/app/(auth)/login/_components/UserLogin'
 import { getUser } from '@/utils/data/getUser'
 import { CustomerData } from '@/types/users'
 

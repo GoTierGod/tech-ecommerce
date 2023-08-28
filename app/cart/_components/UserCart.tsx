@@ -1,19 +1,17 @@
 'use client'
 
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import style from '../styles/user-favorites.module.css'
+import style from './user-cart.module.css'
+
+import { ComposedProductInfo } from '@/types/product'
 import {
     faCartShopping,
-    faCheck,
-    faCheckCircle,
     faEllipsisVertical,
     faHeart,
     faPen,
-    faTrash,
-    faXmark
+    faTrash
 } from '@fortawesome/free-solid-svg-icons'
-import { ComposedProductInfo } from '@/types/product'
-import HorizontalCard from './HoritonzalCard'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { useRouter } from 'next/navigation'
 import {
     Dispatch,
     SetStateAction,
@@ -22,23 +20,26 @@ import {
     useRef,
     useState
 } from 'react'
-import { useRouter } from 'next/navigation'
+import Link from 'next/link'
 
-interface UserFavoritesProps {
-    favorites: ComposedProductInfo[]
+import HorizontalCard from '../../../components/HoritonzalCard'
+import { priceStringFormatter } from '@/utils/formatting/priceStringFormatter'
+
+interface UserCartProps {
+    cart: ComposedProductInfo[]
 }
 
-interface FavItemProps {
+interface CartItemProps {
     product: ComposedProductInfo
     openedOptions: null | number
     setOpenedOptions: Dispatch<SetStateAction<number | null>>
 }
 
-function FavItem({ product, openedOptions, setOpenedOptions }: FavItemProps) {
+function CartItem({ product, openedOptions, setOpenedOptions }: CartItemProps) {
     const router = useRouter()
     const [optMenu, setOptMenu] = useState(false)
     const [waitingRes, setWaitingRes] = useState(false)
-    const favItemRef = useRef(null)
+    const cartItemRef = useRef(null)
 
     const toggleMenu = useCallback(() => {
         setOptMenu(prevOptMenu => !prevOptMenu)
@@ -46,16 +47,16 @@ function FavItem({ product, openedOptions, setOpenedOptions }: FavItemProps) {
     }, [setOptMenu, setOpenedOptions, product.details.id])
 
     const deleteAnimation = useCallback(() => {
-        if (favItemRef.current) {
-            const card: HTMLDivElement = favItemRef.current
+        if (cartItemRef.current) {
+            const card: HTMLDivElement = cartItemRef.current
             card.style.height = '0'
             card.style.width = '0'
             card.style.opacity = '0'
             setTimeout(() => (card.style.display = 'none'), 350)
         }
-    }, [favItemRef])
+    }, [cartItemRef])
 
-    const favItemAction = useCallback(
+    const cartItemAction = useCallback(
         async (action: 'delete' | 'move') => {
             toggleMenu()
 
@@ -65,14 +66,14 @@ function FavItem({ product, openedOptions, setOpenedOptions }: FavItemProps) {
                 let res
                 if (action === 'delete') {
                     res = await fetch(
-                        `/api/favorites/delete?ids=${product.details.id}`,
+                        `/api/cart/delete?id=${product.details.id}`,
                         {
                             method: 'DELETE'
                         }
                     )
                 } else {
                     res = await fetch(
-                        `/api/favorites/move?id=${product.details.id}`,
+                        `/api/cart/move?id=${product.details.id}`,
                         {
                             method: 'PATCH'
                         }
@@ -95,7 +96,7 @@ function FavItem({ product, openedOptions, setOpenedOptions }: FavItemProps) {
     }, [openedOptions])
 
     return (
-        <div className={style.favItem} ref={favItemRef}>
+        <div className={style.cartItem} ref={cartItemRef}>
             <div
                 className={style.loadingAction}
                 style={
@@ -128,14 +129,14 @@ function FavItem({ product, openedOptions, setOpenedOptions }: FavItemProps) {
             </div>
             <HorizontalCard product={product} />
             <button
-                className={style.favItemOptions}
+                className={style.cartItemOptions}
                 onClick={toggleMenu}
                 disabled={waitingRes}
             >
                 <FontAwesomeIcon icon={faEllipsisVertical} />
             </button>
             <button
-                onClick={() => favItemAction('delete')}
+                onClick={() => cartItemAction('delete')}
                 disabled={waitingRes}
                 style={
                     optMenu
@@ -154,7 +155,7 @@ function FavItem({ product, openedOptions, setOpenedOptions }: FavItemProps) {
                 <FontAwesomeIcon icon={faTrash} />
             </button>
             <button
-                onClick={() => favItemAction('move')}
+                onClick={() => cartItemAction('move')}
                 disabled={waitingRes}
                 style={
                     optMenu
@@ -176,51 +177,21 @@ function FavItem({ product, openedOptions, setOpenedOptions }: FavItemProps) {
     )
 }
 
-export default function UserFavorites({ favorites }: UserFavoritesProps) {
-    const router = useRouter()
+export default function UserCart({ cart }: UserCartProps) {
     const [openedOptions, setOpenedOptions] = useState(null as null | number)
-    const [selecting, setSelecting] = useState(false)
-    const [selectedItems, setSelectedItems] = useState([] as Array<number>)
 
-    const checkItem = useCallback(
-        (id: number) => {
-            setSelectedItems(prevSelectedItems => [id, ...prevSelectedItems])
-        },
-        [setSelectedItems]
-    )
-
-    const uncheckItem = useCallback(
-        (id: number) => {
-            setSelectedItems(prevSelectedItems =>
-                prevSelectedItems.filter(thisId => thisId !== id)
-            )
-        },
-        [setSelectedItems]
-    )
-
-    const handleCheck = useCallback(
-        (id: number) => {
-            if (selectedItems.includes(id)) {
-                uncheckItem(id)
-            } else {
-                checkItem(id)
-            }
-        },
-        [selectedItems, uncheckItem, checkItem]
-    )
-
-    const removeItems = useCallback(async () => {
-        const res = await fetch(`/api/favorites/delete?ids=${selectedItems}`, {
-            method: 'DELETE'
-        })
-
-        if (res.ok) {
-            router.refresh()
-        }
-
-        setSelecting(false)
-        setSelectedItems([])
-    }, [selectedItems, router])
+    const normalTotal =
+        cart.length > 0
+            ? cart.map(p => Number(p.details.price)).reduce((p1, p2) => p1 + p2)
+            : 0
+    const offerTotal =
+        cart.length > 0
+            ? cart
+                  .map(p => Number(p.details.offer_price))
+                  .reduce((p1, p2) => p1 + p2)
+            : 0
+    const cartOfferTotal =
+        cart.length > 0 ? offerTotal - (offerTotal * cart.length) / 100 : 0
 
     return (
         <main>
@@ -236,102 +207,92 @@ export default function UserFavorites({ favorites }: UserFavoritesProps) {
                                 <span>
                                     <FontAwesomeIcon icon={faTrash} />
                                     <span>
-                                        Remove the product from your favorites
+                                        Remove the product from your cart
                                     </span>
                                 </span>
                                 <span>
                                     <FontAwesomeIcon icon={faCartShopping} />
-                                    <span>Move the product to your cart</span>
+                                    <span>
+                                        Move the product to your favorites
+                                    </span>
                                 </span>
                             </div>
                         </div>
-                        <div className={style.selectAndRemove}>
+                        <div className={style.cartDetails}>
                             <div className={style.header}>
-                                <h2>Select and Remove</h2>
+                                <h2>Details</h2>
                                 <FontAwesomeIcon icon={faTrash} />
                             </div>
                             <div className={style.content}>
-                                {selecting ? (
-                                    <button
-                                        onClick={() => {
-                                            setSelecting(false)
-                                            setSelectedItems([])
-                                        }}
-                                    >
-                                        <FontAwesomeIcon icon={faXmark} />
-                                        <span>Cancel</span>
-                                    </button>
-                                ) : (
-                                    <button onClick={() => setSelecting(true)}>
-                                        <FontAwesomeIcon icon={faCheck} />
-                                        <span>Start to select</span>
-                                    </button>
-                                )}
-                                {selecting ? (
-                                    <button onClick={removeItems}>
-                                        <FontAwesomeIcon icon={faTrash} />
+                                <div className={style.cartPrices}>
+                                    <div>
+                                        <span>Products</span>
+                                        <span>{cart.length} / 10</span>
+                                    </div>
+                                    <div>
+                                        <span>Normal Total</span>
                                         <span>
-                                            Remove {selectedItems.length}{' '}
-                                            {selectedItems.length > 1
-                                                ? 'products'
-                                                : 'product'}
+                                            {priceStringFormatter(normalTotal)}
                                         </span>
-                                    </button>
-                                ) : (
-                                    <button>
-                                        <FontAwesomeIcon icon={faTrash} />
-                                        <span>No selected items</span>
-                                    </button>
-                                )}
+                                    </div>
+                                    <div>
+                                        <span>Offer Total</span>
+                                        <span>
+                                            {priceStringFormatter(offerTotal)}
+                                        </span>
+                                    </div>
+                                    <div>
+                                        <span>Cart Offer</span>
+                                        <span>-{cart.length}%</span>
+                                    </div>
+                                </div>
+                                <div className={style.cartTotal}>
+                                    <div>
+                                        <span>Total</span>
+                                        <span>
+                                            {priceStringFormatter(
+                                                cartOfferTotal
+                                            )}
+                                        </span>
+                                    </div>
+                                    <div>
+                                        <span>Savings</span>
+                                        <span>
+                                            {priceStringFormatter(
+                                                normalTotal - cartOfferTotal
+                                            )}
+                                        </span>
+                                    </div>
+                                </div>
+                                <Link href='/purchase/cart' prefetch={false}>
+                                    Buy this Cart
+                                </Link>
                             </div>
                         </div>
                     </div>
                 </div>
                 <div className={style.wrapperRight}>
                     <div className={style.header}>
-                        <h2>GoTierGod&apos;s Favorites</h2>
+                        <h2>GoTierGod&apos;s Cart</h2>
                         <FontAwesomeIcon icon={faHeart} />
                     </div>
-                    {favorites.length > 0 ? (
+                    {cart.length > 0 ? (
                         <div className={style.grid}>
-                            {favorites.map(product => (
-                                <div
-                                    className={style.checkWrapper}
+                            {cart.map(product => (
+                                <CartItem
                                     key={product.details.id}
-                                >
-                                    <FavItem
-                                        product={product}
-                                        openedOptions={openedOptions}
-                                        setOpenedOptions={setOpenedOptions}
-                                    />
-                                    {selecting && (
-                                        <button
-                                            className={style.checkButton}
-                                            onClick={() =>
-                                                handleCheck(product.details.id)
-                                            }
-                                        >
-                                            <FontAwesomeIcon
-                                                icon={faCheckCircle}
-                                                color={
-                                                    selectedItems.includes(
-                                                        product.details.id
-                                                    )
-                                                        ? 'var(--main)'
-                                                        : 'var(--gray)'
-                                                }
-                                            />
-                                        </button>
-                                    )}
-                                </div>
+                                    product={product}
+                                    openedOptions={openedOptions}
+                                    setOpenedOptions={setOpenedOptions}
+                                />
                             ))}
                         </div>
                     ) : (
                         <div className={style.empty}>
-                            <h3>No favorites!</h3>
+                            <h3>Your cart is empty</h3>
                             <p>
-                                At this moment you do not have products marked
-                                as favorites, check out our offers!
+                                At this moment you do not have products added to
+                                your cart, check out our offers!
                             </p>
                         </div>
                     )}

@@ -1,10 +1,11 @@
-import { priceStringFormatter } from '@/utils/formatting/priceStringFormatter'
-import style from '../styles/horizontal-card.module.css'
+import style from './horizontal-card.module.css'
+
+import Link from 'next/link'
+import Image from 'next/image'
 
 import { ComposedProductInfo } from '@/types/product'
+import { priceStringFormatter } from '@/utils/formatting/priceStringFormatter'
 import { getProductDiscount } from '@/utils/products/getProductDiscount'
-import Image from 'next/image'
-import Link from 'next/link'
 import { getProductInstallments } from '@/utils/products/getProductInstallments'
 
 interface HorizontalCardProps {

@@ -1,4 +1,4 @@
-import style from '../styles/gaming-section.module.css'
+import style from './gaming-section.module.css'
 
 import Link from 'next/link'
 import Image from 'next/image'

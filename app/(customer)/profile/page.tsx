@@ -1,5 +1,5 @@
 import { getUser } from '@/utils/data/getUser'
-import UserProfile from '@/components/UserProfile'
+import UserProfile from '@/app/(customer)/profile/_components/UserProfile'
 import { redirect } from 'next/navigation'
 import { titleCaseFormatter } from '@/utils/formatting/titleCaseFormatter'
 import { Metadata } from 'next'

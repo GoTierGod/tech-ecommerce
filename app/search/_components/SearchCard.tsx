@@ -1,4 +1,4 @@
-import style from '../styles/search-card.module.css'
+import style from './search-card.module.css'
 
 import Link from 'next/link'
 import Image from 'next/image'

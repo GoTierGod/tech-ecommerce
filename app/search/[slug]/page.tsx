@@ -1,7 +1,7 @@
 import style from './page.module.css'
 
 import { getData } from '@/utils/data/getData'
-import SearchAndResults from '@/components/SearchAndResults'
+import SearchAndResults from '@/app/search/_components/SearchAndResults'
 import { notFound } from 'next/navigation'
 import { SearchResponse } from '@/types/search'
 import { unescape } from 'querystring'

@@ -1,4 +1,4 @@
-import PurchaseHistory from '@/components/PurchaseHistory'
+import PurchaseHistory from '@/app/purchase/history/_components/PurchaseHistory'
 import { getHistory } from '@/utils/data/getHistory'
 import { getUser } from '@/utils/data/getUser'
 import { redirect } from 'next/navigation'

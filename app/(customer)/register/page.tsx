@@ -1,6 +1,6 @@
 import style from './page.module.css'
 
-import UserRegister from '@/components/UserRegister'
+import UserRegister from '@/app/(customer)/register/_components/UserRegister'
 import { getUser } from '@/utils/data/getUser'
 import { redirect } from 'next/navigation'
 

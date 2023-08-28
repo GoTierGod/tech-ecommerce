@@ -1,4 +1,4 @@
-import PurchaseReview from '@/components/PurchaseReview'
+import PurchaseReview from '@/app/purchase/history/review/_components/PurchaseReview'
 import { getPurchase } from '@/utils/data/getPurchase'
 import { getUser } from '@/utils/data/getUser'
 import { redirect } from 'next/navigation'

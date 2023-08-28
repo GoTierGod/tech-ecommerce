@@ -1,6 +1,6 @@
 'use client'
 
-import style from '../styles/user-profile.module.css'
+import style from './user-profile.module.css'
 
 import Link from 'next/link'
 import { useCallback, useState } from 'react'
@@ -11,7 +11,7 @@ import { Customer } from '@/types/users'
 import { titleCaseFormatter } from '@/utils/formatting/titleCaseFormatter'
 import { getCustomerAge } from '@/utils/customers/getCustomerAge'
 import UserUpdate from './UserUpdate'
-import ErrorDisplay from './ErrorDisplay'
+import ErrorDisplay from '../../../../components/ErrorDisplay'
 
 interface UserProfileProps {
     customer: Customer

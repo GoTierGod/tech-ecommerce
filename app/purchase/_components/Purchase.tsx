@@ -1,14 +1,11 @@
 'use client'
 
-import style from '../styles/purchase.module.css'
+import style from './purchase.module.css'
 
 import { ChangeEvent, useCallback, useEffect, useState } from 'react'
 import { useFormik } from 'formik'
 import * as Yup from 'yup'
-
-import { ComposedProductInfo } from '@/types/product'
 import { useRouter } from 'next/navigation'
-import { priceStringFormatter } from '@/utils/formatting/priceStringFormatter'
 import Image from 'next/image'
 import Link from 'next/link'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -24,9 +21,12 @@ import {
     faRightLong,
     faTag
 } from '@fortawesome/free-solid-svg-icons'
+
+import { ComposedProductInfo } from '@/types/product'
 import { Customer } from '@/types/users'
-import ErrorDisplay from './ErrorDisplay'
 import { APIResponse } from '@/types/api-response'
+import ErrorDisplay from '../../../components/ErrorDisplay'
+import { priceStringFormatter } from '@/utils/formatting/priceStringFormatter'
 
 interface PurchaseProps {
     customer: Customer

@@ -1,8 +1,7 @@
-import style from '../styles/user-update.module.css'
+import style from './user-update.module.css'
 
 import { useFormik } from 'formik'
 import * as Yup from 'yup'
-
 import { ReactElement } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {
@@ -10,8 +9,9 @@ import {
     faUserPen,
     faXmarkCircle
 } from '@fortawesome/free-solid-svg-icons'
-import { Customer } from '@/types/users'
 import { useRouter } from 'next/navigation'
+
+import { Customer } from '@/types/users'
 import { APIResponse } from '@/types/api-response'
 
 interface UserUpdateProps {

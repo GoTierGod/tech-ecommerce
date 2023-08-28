@@ -1,4 +1,4 @@
-import style from '../styles/highlighted-section.module.css'
+import style from './highlighted-section.module.css'
 
 import Image from 'next/image'
 import Link from 'next/link'

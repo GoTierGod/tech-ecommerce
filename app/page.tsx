@@ -3,10 +3,10 @@ import style from './page.module.css'
 import ProductsSection from '@/components/ProductsSection'
 import { ComposedProductInfo } from '@/types/product'
 import { getData } from '@/utils/data/getData'
-import OffersSection from '@/components/OffersSection'
-import HighlightedSection from '@/components/HighlightedSection'
+import OffersSection from '@/app/_components/OffersSection'
+import HighlightedSection from '@/app/_components/HighlightedSection'
 import { Metadata } from 'next'
-import GamingSection from '@/components/GamingSection'
+import GamingSection from '@/app/_components/GamingSection'
 import { getUser } from '@/utils/data/getUser'
 
 export const metadata: Metadata = {

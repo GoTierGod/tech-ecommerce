@@ -1,17 +1,19 @@
 'use client'
 
-import { ComposedProductInfo } from '@/types/product'
-import style from '../styles/purchase-review.module.css'
+import style from './purchase-review.module.css'
+
+import { useFormik } from 'formik'
+import * as Yup from 'yup'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faFilePen, faMicrochip } from '@fortawesome/free-solid-svg-icons'
 import Image from 'next/image'
-import { useFormik } from 'formik'
-import * as Yup from 'yup'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { useState } from 'react'
-import ErrorDisplay from './ErrorDisplay'
+
+import { ComposedProductInfo } from '@/types/product'
 import { APIResponse } from '@/types/api-response'
+import ErrorDisplay from '../../../../../components/ErrorDisplay'
 
 interface PurchaseReviewProps {
     product: ComposedProductInfo

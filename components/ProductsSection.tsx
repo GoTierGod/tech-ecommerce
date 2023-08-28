@@ -1,4 +1,4 @@
-import style from '../styles/products-section.module.css'
+import style from './products-section.module.css'
 
 import Link from 'next/link'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -7,7 +7,7 @@ import { faRightLong } from '@fortawesome/free-solid-svg-icons'
 import { ComposedProductInfo } from '@/types/product'
 import VerticalCard from './VerticalCard'
 
-interface ProductRowsProps {
+interface ProductsSectionProps {
     title: string
     products: ComposedProductInfo[]
     url: string
@@ -17,7 +17,7 @@ export default function ProductsSection({
     title,
     products,
     url
-}: ProductRowsProps) {
+}: ProductsSectionProps) {
     return (
         <section className={style.section}>
             <div className={style.header}>

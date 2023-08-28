@@ -1,18 +1,14 @@
 'use client'
 
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import style from '../styles/search-and-results.module.css'
+import style from './search-and-results.module.css'
 
-import { Brand, Category } from '@/types/tables'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {
     faSearch,
     faSortAmountAsc,
     faSortAmountDesc,
     faTasks
 } from '@fortawesome/free-solid-svg-icons'
-import FilterForm from './FilterForm'
-import { ComposedProductInfo } from '@/types/product'
-import SearchCard from './SearchCard'
 import {
     MutableRefObject,
     useCallback,
@@ -22,8 +18,13 @@ import {
     useState
 } from 'react'
 import { useRouter } from 'next/navigation'
-import { titleCaseFormatter } from '@/utils/formatting/titleCaseFormatter'
+
+import { ComposedProductInfo } from '@/types/product'
+import { Brand, Category } from '@/types/tables'
 import { CustomerData } from '@/types/users'
+import FilterForm from './FilterForm'
+import SearchCard from './SearchCard'
+import { titleCaseFormatter } from '@/utils/formatting/titleCaseFormatter'
 
 interface SearchProps {
     searchText: string

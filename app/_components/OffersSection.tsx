@@ -1,4 +1,4 @@
-import style from '../styles/offers-section.module.css'
+import style from './offers-section.module.css'
 
 import Link from 'next/link'
 import Image from 'next/image'

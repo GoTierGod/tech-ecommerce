@@ -1,7 +1,8 @@
 'use client'
 
+import style from './purchase-history.module.css'
+
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import style from '../styles/purchase-history.module.css'
 import {
     faBoxOpen,
     faEllipsisVertical,
@@ -9,7 +10,6 @@ import {
     faFile,
     faListUl
 } from '@fortawesome/free-solid-svg-icons'
-import { ComposedPurchaseInfo } from '@/types/purchase'
 import {
     Dispatch,
     SetStateAction,
@@ -17,8 +17,10 @@ import {
     useEffect,
     useState
 } from 'react'
-import HorizontalCard from './HoritonzalCard'
 import Link from 'next/link'
+
+import { ComposedPurchaseInfo } from '@/types/purchase'
+import HorizontalCard from '../../../../components/HoritonzalCard'
 
 interface PurchaseHistoryProps {
     history: ComposedPurchaseInfo[]

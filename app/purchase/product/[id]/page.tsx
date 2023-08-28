@@ -1,4 +1,4 @@
-import Purchase from '@/components/Purchase'
+import Purchase from '@/app/purchase/_components/Purchase'
 import { getCoupons } from '@/utils/data/getCoupons'
 import { getProduct } from '@/utils/data/getProduct'
 import { getUser } from '@/utils/data/getUser'

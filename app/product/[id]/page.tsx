@@ -13,8 +13,8 @@ import Image from 'next/image'
 import Link from 'next/link'
 
 import VerticalCard from '@/components/VerticalCard'
-import ProductRows from '@/components/ProductsSection'
-import ProductImages from '@/components/ProductImages'
+import ProductsSection from '@/components/ProductsSection'
+import ProductImages from '@/app/product/_components/ProductImages'
 import { getData } from '@/utils/data/getData'
 import { getProductStars } from '@/utils/products/getProductStars'
 import { getProductDeliveryDay } from '@/utils/products/getProductDeliveryDay'
@@ -257,7 +257,7 @@ export default async function Product({ params }: { params: { id: string } }) {
                         </div>
                     </div>
                 </div>
-                <ProductRows
+                <ProductsSection
                     title='Related Products'
                     products={relatedProducts.filter(
                         product => product.details.id.toString() !== id

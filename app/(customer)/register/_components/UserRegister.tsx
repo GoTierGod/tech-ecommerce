@@ -1,11 +1,11 @@
 'use client'
 
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import style from '../styles/user-register.module.css'
+import style from './user-register.module.css'
 
 import { useFormik } from 'formik'
-import Link from 'next/link'
 import * as Yup from 'yup'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import Link from 'next/link'
 import {
     faCheckCircle,
     faHandPeace,
@@ -13,8 +13,9 @@ import {
 } from '@fortawesome/free-solid-svg-icons'
 import { useRouter } from 'next/navigation'
 import { useState } from 'react'
-import ErrorDisplay from './ErrorDisplay'
+
 import { APIResponse } from '@/types/api-response'
+import ErrorDisplay from '../../../../components/ErrorDisplay'
 
 const fieldsTouched: string[] = [
     'username',

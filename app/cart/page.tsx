@@ -1,4 +1,4 @@
-import UserCart from '@/components/UserCart'
+import UserCart from '@/app/cart/_components/UserCart'
 import { getCart } from '@/utils/data/getCart'
 import { getUser } from '@/utils/data/getUser'
 import { redirect } from 'next/navigation'

@@ -1,4 +1,4 @@
-import UserDelete from '@/components/UserDelete'
+import UserDelete from '@/app/(customer)/delete/_components/UserDelete'
 import { getUser } from '@/utils/data/getUser'
 import { CustomerData } from '@/types/users'
 import { Metadata } from 'next'

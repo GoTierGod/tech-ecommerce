@@ -1,4 +1,4 @@
-import style from '../styles/vertical-card.module.css'
+import style from './vertical-card.module.css'
 
 import Image from 'next/image'
 import Link from 'next/link'

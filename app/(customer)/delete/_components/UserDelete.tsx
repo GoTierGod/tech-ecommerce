@@ -1,29 +1,26 @@
 'use client'
 
-import style from '../styles/user-login.module.css'
-import { useRouter } from 'next/navigation'
+import style from './user-delete.module.css'
+
 import { useFormik } from 'formik'
 import * as Yup from 'yup'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import {
-    faCheckCircle,
-    faHandPeace,
-    faXmarkCircle
-} from '@fortawesome/free-solid-svg-icons'
-import { useState } from 'react'
-import ErrorDisplay from './ErrorDisplay'
 import Link from 'next/link'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faCheckCircle, faXmarkCircle } from '@fortawesome/free-solid-svg-icons'
+import { useRouter } from 'next/navigation'
+import { useState } from 'react'
+
+import { Customer } from '@/types/users'
 import { APIResponse } from '@/types/api-response'
+import ErrorDisplay from '../../../../components/ErrorDisplay'
 
-const fieldsTouched: string[] = [
-    'username',
-    'password',
-    'confirmPassword',
-    'email',
-    'birthdate'
-]
+const fieldsTouched: string[] = ['password', 'username']
 
-export default function UserLogin() {
+interface UserDeleteProps {
+    customer: Customer
+}
+
+export default function UserDelete({ customer }: UserDeleteProps) {
     const router = useRouter()
     const [err, setErr] = useState(
         null as null | { message: string; status: number; statusText: string }
@@ -31,19 +28,20 @@ export default function UserLogin() {
 
     const Formik = useFormik({
         initialValues: {
-            username: '',
-            password: ''
+            password: '',
+            consent: ''
         },
         onSubmit: async values => {
-            const res = await fetch(`/api/auth/login`, {
+            const res = await fetch('/api/user/delete', {
                 method: 'post',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(values)
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ password: values.password })
             })
 
             if (res.ok) {
-                router.refresh()
-                router.push('/')
+                router.replace('/')
             } else {
                 const errorResponse: APIResponse = await res.json()
 
@@ -56,14 +54,16 @@ export default function UserLogin() {
             }
         },
         validationSchema: Yup.object({
-            username: Yup.string()
-                .required('Enter your username')
-                .min(8, 'At least 8 characters')
-                .max(16, 'Maximum 16 characters'),
             password: Yup.string()
-                .required('Enter your password')
+                .required('Password is a required field')
                 .min(10, 'At least 10 characters')
-                .max(32, 'Maximum 32 characters')
+                .max(32, 'Maximum 32 characters'),
+            consent: Yup.string()
+                .required('Confirm account deletion')
+                .equals(
+                    [`Delete ${customer.user.username}`],
+                    `The entered text does not match`
+                )
         })
     })
 
@@ -86,38 +86,33 @@ export default function UserLogin() {
             {!err ? (
                 <div className={style.wrapper}>
                     <div>
-                        <h1>Log In</h1>
+                        <h1>{customer.user.username}</h1>
+                        <div className={style.feedback}>
+                            <h2>
+                                Are you sure you want to delete your account?
+                            </h2>
+                            <p>
+                                Deleting your account on our website is a
+                                significant step, and we want to remind you that
+                                it is irreversible. By confirming the deletion,
+                                all your account information, including order
+                                history, saved addresses, and payment details,
+                                will be permanently removed from our system.
+                            </p>
+                            <p>
+                                Once your account is deleted, you will no longer
+                                have access to your purchase history, and any
+                                existing rewards, points, or ongoing promotions
+                                linked to your account will be lost. Moreover,
+                                you will need to create a new account if you
+                                wish to shop with us again in the future.
+                            </p>
+                        </div>
                         <form
                             className={style.form}
                             onSubmit={Formik.handleSubmit}
                         >
-                            <div className={style.formField}>
-                                <label
-                                    htmlFor='username'
-                                    style={{
-                                        color:
-                                            Object.keys(Formik.errors)[0] ===
-                                            'username'
-                                                ? 'var(--danger)'
-                                                : 'var(--gray)'
-                                    }}
-                                >
-                                    Username
-                                </label>
-                                <input
-                                    type='text'
-                                    id='username'
-                                    {...Formik.getFieldProps('username')}
-                                    style={{
-                                        borderColor:
-                                            Object.keys(Formik.errors)[0] ===
-                                            'username'
-                                                ? 'var(--danger)'
-                                                : 'var(--gray)'
-                                    }}
-                                />
-                            </div>
-                            <div className={style.formField}>
+                            <div className={style.inputField}>
                                 <label
                                     htmlFor='password'
                                     style={{
@@ -128,7 +123,7 @@ export default function UserLogin() {
                                                 : 'var(--gray)'
                                     }}
                                 >
-                                    Password
+                                    Enter your password
                                 </label>
                                 <input
                                     type='password'
@@ -138,6 +133,36 @@ export default function UserLogin() {
                                         borderColor:
                                             Object.keys(Formik.errors)[0] ===
                                             'password'
+                                                ? 'var(--danger)'
+                                                : 'var(--gray)'
+                                    }}
+                                />
+                            </div>
+                            <div className={style.inputField}>
+                                <label
+                                    htmlFor='consent'
+                                    style={{
+                                        color:
+                                            Object.keys(Formik.errors)[0] ===
+                                            'consent'
+                                                ? 'var(--danger)'
+                                                : 'var(--gray)'
+                                    }}
+                                >
+                                    Enter &quot;
+                                    <span>
+                                        {`Delete ${customer.user.username}`}
+                                    </span>
+                                    &quot;
+                                </label>
+                                <input
+                                    type='text'
+                                    id='consent'
+                                    {...Formik.getFieldProps('consent')}
+                                    style={{
+                                        borderColor:
+                                            Object.keys(Formik.errors)[0] ===
+                                            'consent'
                                                 ? 'var(--danger)'
                                                 : 'var(--gray)'
                                     }}
@@ -174,15 +199,17 @@ export default function UserLogin() {
                                         </>
                                     )
                                 ) : (
-                                    <>
-                                        <FontAwesomeIcon icon={faHandPeace} />
-                                        <span>Welcome back!</span>
-                                    </>
+                                    ''
                                 )}
                             </div>
                             <div className={style.options}>
-                                <button type='submit'>Log In</button>
-                                <Link href='/'>Back to Home</Link>
+                                <button
+                                    className={style.deleteBtn}
+                                    type='submit'
+                                >
+                                    Delete Account
+                                </button>
+                                <Link href='/profile'>Cancel</Link>
                             </div>
                         </form>
                     </div>

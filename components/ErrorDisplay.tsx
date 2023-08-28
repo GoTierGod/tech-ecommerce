@@ -1,6 +1,6 @@
 'use client'
 
-import style from '../styles/error-display.module.css'
+import style from './error-display.module.css'
 
 interface ErrorDisplayProps {
     status: number

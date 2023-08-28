@@ -2,7 +2,7 @@ import { redirect } from 'next/navigation'
 
 import { getUser } from '@/utils/data/getUser'
 import { getFavorites } from '@/utils/data/getFavorites'
-import UserFavorites from '@/components/UserFavorites'
+import UserFavorites from '@/app/favorites/_components/UserFavorites'
 
 export default async function Favorites() {
     const user = await getUser()
