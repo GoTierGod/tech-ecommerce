@@ -77,8 +77,8 @@ function HistoryItem({
                 className={style.linkOption}
                 href={
                     purchase.order.delivered
-                        ? `/purchase/history/review`
-                        : `/purchase/history/report`
+                        ? `/purchase/history/review/${purchase.order_item.id}`
+                        : `/purchase/history/report/${purchase.order_item.id}`
                 }
                 prefetch={false}
                 style={
