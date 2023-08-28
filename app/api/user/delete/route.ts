@@ -29,7 +29,7 @@ export async function POST(req: NextRequest) {
             }
 
             const res = await fetch(`${API_URL}/api/customer/delete/`, {
-                method: 'delete',
+                method: 'DELETE',
                 headers: {
                     'Content-Type': 'application/json',
                     Authorization: `Bearer ${authTokens.access}`

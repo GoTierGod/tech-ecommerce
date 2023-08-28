@@ -37,7 +37,7 @@ export async function GET(req: NextRequest) {
     }
 
     const res = await fetch(`${API_URL}/api/token/refresh/`, {
-        method: 'post',
+        method: 'POST',
         headers: {
             'Content-Type': 'application/json'
         },

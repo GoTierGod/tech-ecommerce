@@ -14,7 +14,7 @@ export async function POST(req: NextRequest) {
         }
 
         const res = await fetch(`${API_URL}/api/token/`, {
-            method: 'post',
+            method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(loginData)
         })

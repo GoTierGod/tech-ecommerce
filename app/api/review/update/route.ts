@@ -4,7 +4,7 @@ import { AuthTokens } from '@/types/tokens'
 import { cookies } from 'next/dist/client/components/headers'
 import { NextRequest, NextResponse } from 'next/server'
 
-export async function POST(req: NextRequest) {
+export async function PATCH(req: NextRequest) {
     try {
         const authCookies = cookies().get('authTokens')
 

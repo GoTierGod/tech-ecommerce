@@ -17,7 +17,7 @@ export async function POST(req: NextRequest) {
         }
 
         const res = await fetch(`${API_URL}/api/customer/create/`, {
-            method: 'post',
+            method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
             },
