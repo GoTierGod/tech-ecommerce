@@ -33,7 +33,7 @@ export default function Footer() {
                         </a>
                     </div>
                 </div>
-                <div className={style.usefulInfo}>
+                <div className={style.info}>
                     <div>
                         <FontAwesomeIcon icon={faMoneyBill} />
                         <h2>Free Shipping</h2>

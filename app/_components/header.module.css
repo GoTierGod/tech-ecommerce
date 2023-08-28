@@ -89,54 +89,6 @@
     height: 1rem;
 }
 
-.dropdownBtn {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-    padding: 0.5rem 0.75rem;
-
-    background: var(--gray);
-
-    font-size: 1rem;
-    font-family: inherit;
-
-    border: none;
-    border-radius: 4px;
-
-    cursor: pointer;
-}
-
-.wideNav {
-    display: none;
-}
-
-.wideNav .links {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.wideNav .links li {
-    list-style: none;
-}
-
-.wideNav .links li a {
-    padding: 0.5rem 0.75rem;
-
-    font-size: 1rem;
-    font-weight: 375;
-
-    border-radius: 4px;
-
-    transition: all 300ms;
-}
-
-.wideNav .links li a:hover {
-    background: var(--white);
-    color: var(--gray);
-}
-
 .categoriesSelect {
     display: none;
     justify-content: center;
@@ -164,54 +116,52 @@
     outline: none;
 }
 
-.profile {
-    display: none;
+.dropdownBtn {
+    display: flex;
     justify-content: center;
     align-items: center;
-    gap: 1rem;
 
     padding: 0.5rem 0.75rem;
 
     background: var(--gray);
 
-    border-radius: 4px;
-}
-
-.profile span {
     font-size: 1rem;
-    font-weight: 375;
+    font-family: inherit;
 
-    white-space: nowrap;
+    border: none;
+    border-radius: 4px;
+
+    cursor: pointer;
 }
 
-.profile svg {
-    height: 1rem;
-}
-
-.logout,
-.cart {
+.wideScreenNav {
     display: none;
+}
+
+.wideScreenNav .links {
+    display: flex;
     justify-content: center;
     align-items: center;
-    gap: 1rem;
+}
 
+.wideScreenNav .links li {
+    list-style: none;
+}
+
+.wideScreenNav .links li a {
     padding: 0.5rem 0.75rem;
 
-    background: var(--gray);
-
-    border-radius: 4px;
-}
-
-.logout svg,
-.cart svg {
-    height: 1rem;
-}
-
-:where(.logout, .cart) span {
     font-size: 1rem;
     font-weight: 375;
 
-    white-space: nowrap;
+    border-radius: 4px;
+
+    transition: all 300ms;
+}
+
+.wideScreenNav .links li a:hover {
+    background: var(--white);
+    color: var(--gray);
 }
 
 .dropdownMenu {
@@ -238,6 +188,31 @@
     gap: 1rem;
 
     width: 100%;
+}
+
+.profileOrLogin,
+.logoutOrRegister {
+    display: none;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+
+    padding: 0.5rem 0.75rem;
+
+    background: var(--gray);
+
+    border-radius: 4px;
+}
+
+:where(.profileOrLogin, .logoutOrRegister) span {
+    font-size: 1rem;
+    font-weight: 375;
+
+    white-space: nowrap;
+}
+
+:where(.profileOrLogin, .logoutOrRegister) svg {
+    height: 1rem;
 }
 
 .options > div {
@@ -268,13 +243,13 @@
     white-space: nowrap;
 }
 
-.smallNav {
+.smallScreenNav {
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
-.smallNav .links {
+.smallScreenNav .links {
     display: flex;
     flex-direction: row;
     justify-content: center;
@@ -284,7 +259,7 @@
     list-style: none;
 }
 
-.smallNav .links a {
+.smallScreenNav .links a {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -303,16 +278,12 @@
     transition: background-color 300ms, color 300ms;
 }
 
-.smallNav .links a:hover {
+.smallScreenNav .links a:hover {
     background-color: var(--white);
     color: var(--main);
 }
 
 @media screen and (min-width: 425px) {
-    .cart {
-        display: flex;
-    }
-
     .dropdownMenu :where(.options, .links) {
         justify-content: center;
         align-items: center;
@@ -324,7 +295,7 @@
         display: flex;
     }
 
-    .smallNav .links {
+    .smallScreenNav .links {
         gap: 0.5rem;
     }
 
@@ -339,8 +310,8 @@
 }
 
 @media screen and (min-width: 768px) {
-    .logout,
-    .profile {
+    .logoutOrRegister,
+    .profileOrLogin {
         display: flex;
     }
 
@@ -363,7 +334,7 @@
         display: none;
     }
 
-    .wideNav {
+    .wideScreenNav {
         display: flex;
     }
 }

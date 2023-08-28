@@ -86,8 +86,8 @@ export default function Header({ categories, user }: HeaderProps) {
                     />
                 </Link>
                 <form
-                    onSubmit={e => handleSubmit(e)}
                     className={style.searchBar}
+                    onSubmit={e => handleSubmit(e)}
                 >
                     <input
                         type='search'
@@ -125,7 +125,7 @@ export default function Header({ categories, user }: HeaderProps) {
                 >
                     <FontAwesomeIcon icon={faBars} />
                 </button>
-                <nav className={style.wideNav}>
+                <nav className={style.wideScreenNav}>
                     <ul className={style.links}>
                         <li>
                             <Link href='/' prefetch={false}>
@@ -145,7 +145,7 @@ export default function Header({ categories, user }: HeaderProps) {
                     </ul>
                 </nav>
                 <Link
-                    className={style.profile}
+                    className={style.profileOrLogin}
                     href={user ? '/profile' : '/login'}
                     prefetch={false}
                 >
@@ -154,21 +154,22 @@ export default function Header({ categories, user }: HeaderProps) {
                 </Link>
                 {user ? (
                     <Link
-                        className={style.logout}
+                        className={style.logoutOrRegister}
                         href='/logout'
                         aria-label='Log Out'
                         prefetch={false}
                     >
                         <FontAwesomeIcon icon={faSignOut} />
+                        <span>Log Out</span>
                     </Link>
                 ) : (
                     <Link
-                        className={style.logout}
+                        className={style.logoutOrRegister}
                         href='/register'
                         prefetch={false}
                     >
                         <FontAwesomeIcon icon={faSignIn} />
-                        <span>Sign Up</span>
+                        <span>Register</span>
                     </Link>
                 )}
             </div>
@@ -218,7 +219,7 @@ export default function Header({ categories, user }: HeaderProps) {
                         </Link>
                     </div>
                 </div>
-                <nav className={style.smallNav}>
+                <nav className={style.smallScreenNav}>
                     <ul className={style.links}>
                         <li>
                             <Link href='/' prefetch={false}>

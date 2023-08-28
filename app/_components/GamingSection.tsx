@@ -18,7 +18,6 @@ export default function GamingSection({ products }: GamingProps) {
                     <h4>The Best Gaming Offers</h4>
                 </div>
                 <Image
-                    className={style.gamingImg}
                     src={'/gaming.webp'}
                     alt='Gaming products'
                     height={500}
