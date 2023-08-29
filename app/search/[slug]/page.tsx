@@ -1,21 +1,18 @@
-import style from './page.module.css'
-
-import { getData } from '@/utils/data/getData'
-import SearchAndResults from '@/app/search/_components/SearchAndResults'
 import { notFound } from 'next/navigation'
-import { SearchResponse } from '@/types/search'
 import { unescape } from 'querystring'
-import { getUser } from '@/utils/data/getUser'
-import { CustomerData } from '@/types/users'
-import { titleCaseFormatter } from '@/utils/formatting/titleCaseFormatter'
 import { Metadata } from 'next'
-import { API_URL } from '@/constants/api'
+
+import { SearchResponse } from '@/types/search'
+import Search from '../_components/Search'
+import { getData } from '@/utils/data/getData'
+import { titleCaseFormatter } from '@/utils/formatting/titleCaseFormatter'
+import { getUser } from '@/utils/data/getUser'
 
 export const metadata: Metadata = {
     title: 'Search | Tech'
 }
 
-export default async function Search({
+export default async function Page({
     params,
     searchParams
 }: {
@@ -35,7 +32,7 @@ export default async function Search({
         page
     } = searchParams ?? {}
 
-    const getQueryString = () => {
+    const composeQueryParams = () => {
         const filters = []
 
         min_price && filters.push(`min_price=${min_price}`)
@@ -45,38 +42,29 @@ export default async function Search({
         brand && filters.push(`brand=${brand}`)
         installments && filters.push(`installments=${installments}`)
         order_by && filters.push(`order_by=${order_by}`)
-        page ? filters.push(`page=${page}`) : filters.push(`page=1`)
+        page && filters.push(`page=${page}`)
 
         return filters.length > 0 ? '?' + filters.join('&') : ''
     }
 
-    const readableSearch = unescape(search)
-    metadata.title = `${titleCaseFormatter(readableSearch)} | Tech`
+    const unescapedSearchStr = unescape(search)
+    metadata.title = `${titleCaseFormatter(unescapedSearchStr)} | Tech`
 
     const searchRes: SearchResponse | null = await getData(
-        `/api/search/${readableSearch.replace(/\s+/, ',') + getQueryString()}`
+        `/api/search/${
+            unescapedSearchStr.replace(/\s+/, ',') + composeQueryParams()
+        }`
     )
 
     if (!searchRes) return notFound()
 
-    const { results, pages, products, categories, brands } =
-        searchRes as SearchResponse
-
     const user = await getUser()
 
     return (
-        <main>
-            <SearchAndResults
-                searchText={readableSearch}
-                queryObject={searchParams}
-                queryString={getQueryString()}
-                results={results}
-                pages={pages}
-                products={products}
-                categories={categories}
-                brands={brands}
-                user={user}
-            />
-        </main>
+        <Search
+            searchStr={unescapedSearchStr}
+            searchParams={searchParams}
+            searchRes={searchRes}
+        />
     )
 }

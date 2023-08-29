@@ -1,0 +1,317 @@
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+
+    width: 100%;
+    max-width: 1200px;
+}
+
+.wrapperLeft,
+.stickyWrapper,
+.wrapperRight {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.wrapperRight {
+    gap: 0.5rem;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+
+    padding: 1rem;
+    width: 100%;
+
+    background: var(--main);
+    color: var(--white);
+
+    text-align: center;
+
+    border-radius: 4px;
+}
+
+.header h2 {
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    line-clamp: 1;
+    -webkit-box-orient: vertical;
+
+    height: 1.075rem;
+
+    font-size: 1.125rem;
+    font-weight: 400;
+
+    overflow: hidden;
+}
+
+:is(.header, .content) svg {
+    height: 1rem;
+}
+
+.content {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+
+    padding: 1.5rem;
+
+    background: var(--white);
+
+    border-radius: 4px;
+}
+
+.content > span {
+    display: flex;
+    gap: 1rem;
+
+    width: 100%;
+}
+
+.searched,
+.filter {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.searched .content {
+    gap: 0.25rem;
+}
+
+.searched span {
+    font-size: 0.75rem;
+    font-weight: 400;
+}
+
+.searched p {
+    font-size: 1rem;
+    font-weight: 375;
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+
+    padding: 1.5rem;
+
+    background: var(--white);
+
+    border-radius: 4px;
+}
+
+.form h3 {
+    font-size: 1rem;
+    font-weight: 400;
+}
+
+.formField {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+
+    width: 100%;
+}
+
+.formField label {
+    font-size: 1rem;
+    font-weight: 400;
+}
+
+.formField :where(input, select) {
+    padding: 0.5rem 0.75rem;
+
+    background: var(--gray);
+    color: var(--white);
+
+    font-size: 1rem;
+    font-weight: 375;
+    font-family: inherit;
+
+    border: 2px solid transparent;
+    border-radius: 4px;
+}
+
+.formField select {
+    border-right: 0.75rem solid var(--gray);
+}
+
+.priceField,
+.gamerField {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+:where(.priceField, .gamerField) > div {
+    display: flex;
+    align-items: flex-end;
+    gap: 1rem;
+}
+
+.priceField button {
+    padding: 0.5rem 0.75rem;
+    height: fit-content;
+
+    background: var(--main);
+    color: var(--white);
+
+    border: 2px solid transparent;
+    border-radius: 4px;
+
+    cursor: pointer;
+}
+
+.priceField button svg {
+    height: 1rem;
+}
+
+.gamerField label {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.gamerField input[type='checkbox'] {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+
+    width: 24px;
+    height: 24px;
+
+    background: var(--gray);
+    fill: var(--gray);
+    color: var(--white);
+
+    border-radius: 4px;
+
+    cursor: pointer;
+}
+
+.gamerField input[type='checkbox']:checked {
+    background: var(--main);
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0.5rem;
+
+    width: 100%;
+
+    transition: height 300ms, width 300ms;
+}
+
+.pagination {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+
+    padding: 1.5rem;
+
+    width: 100%;
+
+    background: var(--white);
+
+    border-radius: 4px;
+}
+
+.pagination h2 {
+    font-size: 1.25rem;
+    font-weight: 400;
+}
+
+.pagination > div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+}
+
+.pagination span {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    padding: 0.5rem 0.75rem;
+
+    background: var(--gray);
+    color: var(--white);
+
+    border-radius: 4px;
+}
+
+.pagination > div > div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    height: 1rem;
+    width: 1rem;
+
+    background: var(--gray);
+    color: transparent;
+
+    border: none;
+    border-radius: 4px;
+}
+
+.pagination button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    padding: 0.5rem 0.75rem;
+
+    background: var(--main);
+    color: var(--white);
+
+    font-size: 1rem;
+    font-family: inherit;
+
+    border: none;
+
+    border-radius: 4px;
+
+    cursor: pointer;
+}
+
+@media screen and (min-width: 768px) {
+    .wrapper {
+        display: grid;
+        grid-template-columns: 2fr 3fr;
+    }
+
+    .stickyWrapper {
+        position: sticky;
+        top: 84px;
+    }
+
+    .grid {
+        grid-template-columns: 1fr;
+    }
+
+    .pagination {
+        grid-column: 1 / span 2;
+    }
+}
+
+@media screen and (min-width: 1024px) {
+    .wrapper {
+        grid-template-columns: 1fr 2fr;
+    }
+
+    .grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}

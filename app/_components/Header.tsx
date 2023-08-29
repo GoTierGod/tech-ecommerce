@@ -36,7 +36,8 @@ export default function Header({ categories, user }: HeaderProps) {
 
     const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault()
-        ;/.*[a-z].*/i.test(searchStr) && router.push(`/search/${searchStr}`)
+        ;/.*[a-z].*/i.test(searchStr) &&
+            router.push(`/search/${searchStr}?page=1`)
     }
 
     const toggleDropdownMenu = useCallback(() => {
@@ -44,7 +45,7 @@ export default function Header({ categories, user }: HeaderProps) {
     }, [setDropdownMenu])
 
     useEffect(() => {
-        if (path !== `/search/${category}`) setCategory('')
+        if (path !== `/search/${category}?page=1`) setCategory('')
         if (!path.includes('/search/')) setSearchStr('')
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [path])
@@ -52,7 +53,7 @@ export default function Header({ categories, user }: HeaderProps) {
     useEffect(() => {
         if (category) {
             setSearchStr('')
-            router.push(`/search/${category}`)
+            router.push(`/search/${category}?page=1`)
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [category])
