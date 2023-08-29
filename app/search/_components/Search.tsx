@@ -4,6 +4,7 @@ import { SearchResponse } from '@/types/search'
 import style from './search.module.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {
+    faArrowDownWideShort,
     faCaretRight,
     faGripHorizontal,
     faListCheck,
@@ -40,14 +41,16 @@ export default function Search({
         page
     } = searchParams ?? {}
 
-    const [gamer, setGamer] = useState(is_gamer || '')
+    const [sortMenu, setSortMenu] = useState(false)
+    const [isGamer, setIsGamer] = useState(is_gamer || '')
     const [currentPage, setCurrentPage] = useState(page || '1')
+    const [orderBy, setOrderBy] = useState(order_by || '')
 
     const Formik = useFormik({
         initialValues: {
             min_price: min_price || '',
             max_price: max_price || '',
-            is_gamer: gamer,
+            is_gamer: isGamer,
             category: category || '',
             brand: brand || '',
             installments: installments || '',
@@ -118,9 +121,9 @@ export default function Search({
     )
 
     useEffect(() => {
-        Formik.setFieldValue('is_gamer', gamer, true)
+        Formik.setFieldValue('is_gamer', isGamer, true)
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [gamer])
+    }, [isGamer])
 
     useEffect(() => {
         Formik.setFieldValue('page', currentPage, true)
@@ -128,11 +131,17 @@ export default function Search({
     }, [currentPage])
 
     useEffect(() => {
+        Formik.setFieldValue('order_by', orderBy, true)
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [orderBy])
+
+    useEffect(() => {
         Formik.submitForm()
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [
-        Formik.values.page,
         Formik.values.is_gamer,
+        Formik.values.page,
+        Formik.values.order_by,
         Formik.values.brand,
         Formik.values.category,
         Formik.values.installments
@@ -211,8 +220,8 @@ export default function Search({
                                                 id='any'
                                                 name='gamer'
                                                 value=''
-                                                checked={gamer === ''}
-                                                onChange={() => setGamer('')}
+                                                checked={isGamer === ''}
+                                                onChange={() => setIsGamer('')}
                                             />
                                             Any
                                         </label>
@@ -222,8 +231,8 @@ export default function Search({
                                                 id='yes'
                                                 name='gamer'
                                                 value='1'
-                                                checked={gamer === '1'}
-                                                onChange={() => setGamer('1')}
+                                                checked={isGamer === '1'}
+                                                onChange={() => setIsGamer('1')}
                                             />
                                             Yes
                                         </label>
@@ -233,8 +242,8 @@ export default function Search({
                                                 id='no'
                                                 name='gamer'
                                                 value='0'
-                                                checked={gamer === '0'}
-                                                onChange={() => setGamer('0')}
+                                                checked={isGamer === '0'}
+                                                onChange={() => setIsGamer('0')}
                                             />
                                             No
                                         </label>
@@ -295,7 +304,76 @@ export default function Search({
                 <div className={style.wrapperRight}>
                     <div className={style.header}>
                         <h2>Results</h2>
-                        <FontAwesomeIcon icon={faGripHorizontal} />
+                        <div className={style.sort}>
+                            <button
+                                onClick={() =>
+                                    setSortMenu(prevSortMenu => !prevSortMenu)
+                                }
+                                style={
+                                    sortMenu
+                                        ? {
+                                              backgroundColor: 'var(--white)',
+                                              color: 'var(--gray)'
+                                          }
+                                        : {
+                                              backgroundColor: 'var(--gray)',
+                                              color: 'var(--white)'
+                                          }
+                                }
+                            >
+                                <FontAwesomeIcon icon={faArrowDownWideShort} />
+                            </button>
+                            <div
+                                style={
+                                    sortMenu
+                                        ? {
+                                              maxHeight: '114px',
+                                              padding: '0.5rem'
+                                          }
+                                        : {
+                                              maxHeight: '0',
+                                              padding: '0'
+                                          }
+                                }
+                            >
+                                <button
+                                    onClick={() => setOrderBy('offer_price')}
+                                    style={
+                                        orderBy === 'offer_price'
+                                            ? {
+                                                  backgroundColor:
+                                                      'var(--white)',
+                                                  color: 'var(--gray)'
+                                              }
+                                            : {
+                                                  backgroundColor:
+                                                      'var(--gray)',
+                                                  color: 'var(--white)'
+                                              }
+                                    }
+                                >
+                                    Lowest Price
+                                </button>
+                                <button
+                                    onClick={() => setOrderBy('-offer_price')}
+                                    style={
+                                        orderBy === '-offer_price'
+                                            ? {
+                                                  backgroundColor:
+                                                      'var(--white)',
+                                                  color: 'var(--gray)'
+                                              }
+                                            : {
+                                                  backgroundColor:
+                                                      'var(--gray)',
+                                                  color: 'var(--white)'
+                                              }
+                                    }
+                                >
+                                    Highest Price
+                                </button>
+                            </div>
+                        </div>
                     </div>
                     <div className={style.grid}>
                         {searchRes.products.map(product => (

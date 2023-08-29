@@ -200,6 +200,64 @@
     background: var(--main);
 }
 
+.sort {
+    position: relative;
+}
+
+.sort > button {
+    padding: 0.5rem 0.75rem;
+
+    background: var(--gray);
+    color: var(--white);
+
+    border: 2px solid transparent;
+    border-radius: 4px;
+
+    cursor: pointer;
+    transition: background-color 300ms, color 300ms, transform 300ms;
+}
+
+.sort > button:hover {
+    transform: scale(1.05);
+}
+
+.sort > div {
+    position: absolute;
+    right: 0;
+    top: 2.5rem;
+
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+
+    padding: 0.5rem;
+
+    background: var(--main);
+
+    border-radius: 4px;
+
+    overflow: hidden;
+    transition: max-height 300ms, padding 300ms;
+}
+
+.sort div button {
+    padding: 0.5rem 0.75rem;
+
+    background: var(--gray);
+    color: var(--white);
+
+    border: 2px solid transparent;
+    border-radius: 4px;
+
+    cursor: pointer;
+
+    transition: transform 300ms;
+}
+
+.sort div button:hover {
+    transform: scale(1.05);
+}
+
 .grid {
     display: grid;
     grid-template-columns: 1fr;
