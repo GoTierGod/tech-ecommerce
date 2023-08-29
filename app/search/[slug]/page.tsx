@@ -50,13 +50,11 @@ export default async function Page({
     const unescapedSearchStr = unescape(search)
     metadata.title = `${titleCaseFormatter(unescapedSearchStr)} | Tech`
 
-    const searchRes: SearchResponse | null = await getData(
+    const searchRes: SearchResponse = await getData(
         `/api/search/${
             unescapedSearchStr.replace(/\s+/, ',') + composeQueryParams()
         }`
     )
-
-    if (!searchRes) return notFound()
 
     const user = await getUser()
 
