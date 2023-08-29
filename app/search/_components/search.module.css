@@ -94,6 +94,31 @@
     font-weight: 375;
 }
 
+.filter .header > svg {
+    display: none;
+}
+
+.filter .header > button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+
+    padding: 0.5rem 0.75rem;
+
+    background: var(--gray);
+    color: var(--white);
+
+    font-size: 1rem;
+    font-weight: 375;
+    font-family: inherit;
+
+    border: 2px solid transparent;
+    border-radius: 4px;
+
+    transition: background-color 300ms, color 300ms;
+}
+
 .form {
     display: flex;
     flex-direction: column;
@@ -104,6 +129,17 @@
     background: var(--white);
 
     border-radius: 4px;
+
+    overflow: hidden;
+    transition: max-height 300ms, padding 300ms;
+}
+
+.smallScreenForm .form {
+    max-height: 0;
+}
+
+.wideScreenForm .form {
+    display: none;
 }
 
 .form h3 {
@@ -366,6 +402,22 @@
     .stickyWrapper {
         position: sticky;
         top: 84px;
+    }
+
+    .smallScreenForm .form {
+        display: none;
+    }
+
+    .wideScreenForm .form {
+        display: flex;
+    }
+
+    .filter .header > svg {
+        display: flex;
+    }
+
+    .filter .header > button {
+        display: none;
     }
 
     .grid {

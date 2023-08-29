@@ -5,7 +5,9 @@ import style from './search.module.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {
     faArrowDownWideShort,
+    faCaretDown,
     faCaretRight,
+    faCaretUp,
     faGripHorizontal,
     faListCheck,
     faSearch
@@ -45,6 +47,7 @@ export default function Search({
     const [isGamer, setIsGamer] = useState(is_gamer || '')
     const [currentPage, setCurrentPage] = useState(page || '1')
     const [orderBy, setOrderBy] = useState(order_by || '')
+    const [showFilter, setShowFilter] = useState(false)
 
     const Formik = useFormik({
         initialValues: {
@@ -147,6 +150,126 @@ export default function Search({
         Formik.values.installments
     ])
 
+    const filterForm = (screen: 'small' | 'wide') => (
+        <form
+            className={style.form}
+            onSubmit={Formik.handleSubmit}
+            style={
+                screen === 'small'
+                    ? showFilter
+                        ? {
+                              maxHeight: '442px',
+                              padding: '1.5rem'
+                          }
+                        : {
+                              maxHeight: '0',
+                              padding: '0 1.5rem'
+                          }
+                    : {}
+            }
+        >
+            <div className={style.priceField}>
+                <h3>Price</h3>
+                <div>
+                    <div className={style.formField}>
+                        <label htmlFor='min-price'>Min.</label>
+                        <input
+                            type='number'
+                            id='min-price'
+                            placeholder='0'
+                            min={0}
+                            max={10000}
+                            {...Formik.getFieldProps('min_price')}
+                        />
+                    </div>
+                    <div className={style.formField}>
+                        <label htmlFor='max-price'>Max.</label>
+                        <input
+                            type='number'
+                            id='max-price'
+                            placeholder='1'
+                            min={1}
+                            max={10000}
+                            {...Formik.getFieldProps('max_price')}
+                        />
+                    </div>
+                    <button type='submit'>
+                        <FontAwesomeIcon icon={faCaretRight} />
+                    </button>
+                </div>
+            </div>
+            <div className={style.gamerField}>
+                <h3>Gamer</h3>
+                <div>
+                    <label htmlFor='any'>
+                        <input
+                            type='checkbox'
+                            id='any'
+                            name='gamer'
+                            value=''
+                            checked={isGamer === ''}
+                            onChange={() => setIsGamer('')}
+                        />
+                        Any
+                    </label>
+                    <label htmlFor='yes'>
+                        <input
+                            type='checkbox'
+                            id='yes'
+                            name='gamer'
+                            value='1'
+                            checked={isGamer === '1'}
+                            onChange={() => setIsGamer('1')}
+                        />
+                        Yes
+                    </label>
+                    <label htmlFor='no'>
+                        <input
+                            type='checkbox'
+                            id='no'
+                            name='gamer'
+                            value='0'
+                            checked={isGamer === '0'}
+                            onChange={() => setIsGamer('0')}
+                        />
+                        No
+                    </label>
+                </div>
+            </div>
+            <div className={style.formField}>
+                <label htmlFor='brand'>Brand</label>
+                <select id='brand' {...Formik.getFieldProps('brand')}>
+                    <option value=''>Any</option>
+                    {searchRes.brands.map(brand => (
+                        <option key={brand.id} value={brand.name}>
+                            {brand.name}
+                        </option>
+                    ))}
+                </select>
+            </div>
+            <div className={style.formField}>
+                <label htmlFor='category'>Category</label>
+                <select id='category' {...Formik.getFieldProps('category')}>
+                    <option value=''>Any</option>
+                    {searchRes.categories.map(category => (
+                        <option key={category.id} value={category.title}>
+                            {category.title}
+                        </option>
+                    ))}
+                </select>
+            </div>
+            <div className={style.formField}>
+                <label htmlFor='installments'>Installments</label>
+                <select id='installments' {...Formik.getFieldProps('brand')}>
+                    <option value=''>Any</option>
+                    <option value='6'>6</option>
+                    <option value='12'>12</option>
+                    <option value='24'>24</option>
+                </select>
+            </div>
+        </form>
+    )
+
     return (
         <main>
             <div className={style.wrapper}>
@@ -166,138 +289,36 @@ export default function Search({
                             <div className={style.header}>
                                 <h2>Filter</h2>
                                 <FontAwesomeIcon icon={faListCheck} />
+                                <button
+                                    onClick={() =>
+                                        setShowFilter(
+                                            prevShowFilter => !prevShowFilter
+                                        )
+                                    }
+                                    style={
+                                        showFilter
+                                            ? {
+                                                  backgroundColor:
+                                                      'var(--white)',
+                                                  color: 'var(--gray)'
+                                              }
+                                            : {
+                                                  backgroundColor:
+                                                      'var(--gray)',
+                                                  color: 'var(--white)'
+                                              }
+                                    }
+                                >
+                                    Filter
+                                    <FontAwesomeIcon icon={faListCheck} />
+                                </button>
                             </div>
-                            <form
-                                className={style.form}
-                                onSubmit={Formik.handleSubmit}
-                            >
-                                <div className={style.priceField}>
-                                    <h3>Price</h3>
-                                    <div>
-                                        <div className={style.formField}>
-                                            <label htmlFor='min-price'>
-                                                Min.
-                                            </label>
-                                            <input
-                                                type='number'
-                                                id='min-price'
-                                                placeholder='0'
-                                                min={0}
-                                                max={10000}
-                                                {...Formik.getFieldProps(
-                                                    'min_price'
-                                                )}
-                                            />
-                                        </div>
-                                        <div className={style.formField}>
-                                            <label htmlFor='max-price'>
-                                                Max.
-                                            </label>
-                                            <input
-                                                type='number'
-                                                id='max-price'
-                                                placeholder='1'
-                                                min={1}
-                                                max={10000}
-                                                {...Formik.getFieldProps(
-                                                    'max_price'
-                                                )}
-                                            />
-                                        </div>
-                                        <button type='submit'>
-                                            <FontAwesomeIcon
-                                                icon={faCaretRight}
-                                            />
-                                        </button>
-                                    </div>
-                                </div>
-                                <div className={style.gamerField}>
-                                    <h3>Gamer</h3>
-                                    <div>
-                                        <label htmlFor='any'>
-                                            <input
-                                                type='checkbox'
-                                                id='any'
-                                                name='gamer'
-                                                value=''
-                                                checked={isGamer === ''}
-                                                onChange={() => setIsGamer('')}
-                                            />
-                                            Any
-                                        </label>
-                                        <label htmlFor='yes'>
-                                            <input
-                                                type='checkbox'
-                                                id='yes'
-                                                name='gamer'
-                                                value='1'
-                                                checked={isGamer === '1'}
-                                                onChange={() => setIsGamer('1')}
-                                            />
-                                            Yes
-                                        </label>
-                                        <label htmlFor='no'>
-                                            <input
-                                                type='checkbox'
-                                                id='no'
-                                                name='gamer'
-                                                value='0'
-                                                checked={isGamer === '0'}
-                                                onChange={() => setIsGamer('0')}
-                                            />
-                                            No
-                                        </label>
-                                    </div>
-                                </div>
-                                <div className={style.formField}>
-                                    <label htmlFor='brand'>Brand</label>
-                                    <select
-                                        id='brand'
-                                        {...Formik.getFieldProps('brand')}
-                                    >
-                                        <option value=''>Any</option>
-                                        {searchRes.brands.map(brand => (
-                                            <option
-                                                key={brand.id}
-                                                value={brand.name}
-                                            >
-                                                {brand.name}
-                                            </option>
-                                        ))}
-                                    </select>
-                                </div>
-                                <div className={style.formField}>
-                                    <label htmlFor='category'>Category</label>
-                                    <select
-                                        id='category'
-                                        {...Formik.getFieldProps('category')}
-                                    >
-                                        <option value=''>Any</option>
-                                        {searchRes.categories.map(category => (
-                                            <option
-                                                key={category.id}
-                                                value={category.title}
-                                            >
-                                                {category.title}
-                                            </option>
-                                        ))}
-                                    </select>
-                                </div>
-                                <div className={style.formField}>
-                                    <label htmlFor='installments'>
-                                        Installments
-                                    </label>
-                                    <select
-                                        id='installments'
-                                        {...Formik.getFieldProps('brand')}
-                                    >
-                                        <option value=''>Any</option>
-                                        <option value='6'>6</option>
-                                        <option value='12'>12</option>
-                                        <option value='24'>24</option>
-                                    </select>
-                                </div>
-                            </form>
+                            <div className={style.smallScreenForm}>
+                                {filterForm('small')}
+                            </div>
+                            <div className={style.wideScreenForm}>
+                                {filterForm('wide')}
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -333,7 +354,7 @@ export default function Search({
                                           }
                                         : {
                                               maxHeight: '0',
-                                              padding: '0'
+                                              padding: '0 0.5rem'
                                           }
                                 }
                             >
