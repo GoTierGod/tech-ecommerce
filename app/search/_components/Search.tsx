@@ -110,7 +110,7 @@ export default function Search({
         (toPage: string) => {
             if (toPage === 'next' && Number(currentPage) < searchRes.pages) {
                 setCurrentPage(prevPage => (Number(prevPage) + 1).toString())
-            } else if (toPage === 'prev' && Number(currentPage) > 0) {
+            } else if (toPage === 'prev' && Number(currentPage) > 1) {
                 setCurrentPage(prevPage => (Number(prevPage) - 1).toString())
             }
         },
@@ -123,9 +123,15 @@ export default function Search({
     }, [gamer])
 
     useEffect(() => {
+        Formik.setFieldValue('page', currentPage, true)
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [currentPage])
+
+    useEffect(() => {
         Formik.submitForm()
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [
+        Formik.values.page,
         Formik.values.is_gamer,
         Formik.values.brand,
         Formik.values.category,
