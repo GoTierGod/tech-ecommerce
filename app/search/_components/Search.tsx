@@ -321,13 +321,14 @@ export default function Search({
                                           }
                                 }
                             >
+                                <span>Sort By</span>
                                 <FontAwesomeIcon icon={faArrowDownWideShort} />
                             </button>
                             <div
                                 style={
                                     sortMenu
                                         ? {
-                                              maxHeight: '114px',
+                                              maxHeight: '127px',
                                               padding: '0.5rem'
                                           }
                                         : {

@@ -205,10 +205,19 @@
 }
 
 .sort > button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+
     padding: 0.5rem 0.75rem;
 
     background: var(--gray);
     color: var(--white);
+
+    font-size: 1rem;
+    font-weight: 375;
+    font-family: inherit;
 
     border: 2px solid transparent;
     border-radius: 4px;
@@ -248,6 +257,10 @@
 
     border: 2px solid transparent;
     border-radius: 4px;
+
+    font-size: 1rem;
+    font-weight: 375;
+    font-family: inherit;
 
     cursor: pointer;
 
