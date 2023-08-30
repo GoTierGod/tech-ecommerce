@@ -25,7 +25,7 @@ const fieldsTouched: string[] = [
     'birthdate'
 ]
 
-export default function UserLogin() {
+export default function Login() {
     const router = useRouter()
     const [err, setErr] = useState(
         null as null | { message: string; status: number; statusText: string }

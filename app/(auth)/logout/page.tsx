@@ -1,12 +1,12 @@
 import style from './page.module.css'
 
-import { getUser } from '@/utils/data/getUser'
 import Link from 'next/link'
 import { redirect } from 'next/navigation'
-import UserLogout from '@/app/(auth)/logout/_components/UserLogout'
-import { CustomerData } from '@/types/users'
 
-export default async function Logout() {
+import Logout from '@/app/(auth)/logout/_components/Logout'
+import { getUser } from '@/utils/data/getUser'
+
+export default async function Page() {
     const user = await getUser()
 
     if (!user) redirect('/api/auth/refresh?path=/logout&auth=1')
@@ -14,7 +14,7 @@ export default async function Logout() {
         return (
             <main className={style.logout}>
                 <div className={style.wrapper}>
-                    <UserLogout />
+                    <Logout />
                     <Link href='/'>Back to Home</Link>
                 </div>
             </main>
