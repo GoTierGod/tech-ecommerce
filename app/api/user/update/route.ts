@@ -24,17 +24,19 @@ export async function PATCH(req: NextRequest) {
                 )
             }
 
-            const username = body.username
-            const email = body.email
-            const password = body.password
-            const phone = body.phone
-            const country = body.country
-            const city = body.city
-            const address = body.address
-            const firstname = body.firstname
-            const lastname = body.lastname
-            const birthdate = body.birthdate
-            const gender = body.gender
+            const {
+                username,
+                email,
+                password,
+                phone,
+                country,
+                city,
+                address,
+                firstname,
+                lastname,
+                birthdate,
+                gender
+            } = body
 
             const updatedFields: {
                 username?: string
@@ -49,17 +51,17 @@ export async function PATCH(req: NextRequest) {
                 birthdate?: string
                 gender?: string
             } = {
-                ...(username && { username: username }),
-                ...(email && { email: email }),
-                ...(password && { password: password }),
-                ...(phone && { phone: phone }),
-                ...(country && { country: country }),
-                ...(city && { city: city }),
-                ...(address && { address: address }),
-                ...(firstname && { firstname: firstname }),
-                ...(lastname && { lastname: lastname }),
-                ...(birthdate && { birthdate: birthdate }),
-                ...(gender && { gender: gender })
+                ...(username && { username }),
+                ...(email && { email }),
+                ...(password && { password }),
+                ...(phone && { phone }),
+                ...(country && { country }),
+                ...(city && { city }),
+                ...(address && { address }),
+                ...(firstname && { firstname }),
+                ...(lastname && { lastname }),
+                ...(birthdate && { birthdate }),
+                ...(gender && { gender })
             }
 
             if (Object.keys(updatedFields).length >= 1) {

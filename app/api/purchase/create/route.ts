@@ -45,12 +45,7 @@ export async function POST(req: NextRequest) {
                 products.push({ id: Number(id), quantity: quantityMap[id] })
             }
 
-            const payment: string = body.payment
-            const country: string = body.country
-            const city: string = body.city
-            const address: string = body.address
-            const notes: string = body.notes
-            const coupon: string = body.coupon
+            const { payment, country, city, address, notes, coupon } = body
 
             const purchaseData: {
                 products: { id: number; quantity: number }[]
@@ -60,24 +55,15 @@ export async function POST(req: NextRequest) {
                 address: string
                 notes: string
                 coupon?: number
-            } = coupon
-                ? {
-                      products: products,
-                      payment_method: payment,
-                      country: country,
-                      city: city,
-                      address: address,
-                      notes: notes,
-                      coupon: Number(coupon)
-                  }
-                : {
-                      products: products,
-                      payment_method: payment,
-                      country: country,
-                      city: city,
-                      address: address,
-                      notes: notes
-                  }
+            } = {
+                products: products,
+                payment_method: payment,
+                country: country,
+                city: city,
+                address: address,
+                notes: notes,
+                ...(coupon && { coupon })
+            }
 
             const res = await fetch(`${API_URL}/api/purchase/`, {
                 method: 'POST',

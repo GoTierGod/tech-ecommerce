@@ -24,11 +24,7 @@ export async function PATCH(req: NextRequest) {
 
             const body = await req.json()
 
-            const id = body.id
-            const country = body.country
-            const city = body.city
-            const address = body.address
-            const notes = body.notes
+            const { id, country, city, address, notes } = body
 
             const updatePurchaseData: {
                 country?: string
@@ -36,10 +32,10 @@ export async function PATCH(req: NextRequest) {
                 address?: string
                 notes?: string
             } = {
-                ...(country && { country: body }),
-                ...(city && { city: city }),
-                ...(address && { address: body }),
-                ...(notes && { notes: body })
+                ...(country && { country }),
+                ...(city && { city }),
+                ...(address && { address }),
+                ...(notes && { notes })
             }
 
             if (Object.keys(updatePurchaseData).length >= 1) {

@@ -24,34 +24,41 @@ export async function PATCH(req: NextRequest) {
 
             const body = await req.json()
 
-            const id = body.id
+            const { id, rating, title, content } = body
 
             const reviewData: {
-                rating: number
-                title: string
-                content: string
+                rating?: number
+                title?: string
+                content?: string
             } = {
-                rating: body.rating,
-                title: body.title,
-                content: body.content
+                ...(rating && { rating }),
+                ...(title && { title }),
+                ...(content && { content })
             }
 
-            const res = await fetch(`${API_URL}/api/reviews/update/${id}`, {
-                method: 'PATCH',
-                headers: {
-                    'Content-Type': 'application/json',
-                    authorization: `Bearer ${authTokens.access}`
-                },
-                body: JSON.stringify(reviewData)
-            })
+            if (Object.keys(reviewData).length >= 1) {
+                const res = await fetch(`${API_URL}/api/reviews/update/${id}`, {
+                    method: 'PATCH',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        authorization: `Bearer ${authTokens.access}`
+                    },
+                    body: JSON.stringify(reviewData)
+                })
 
-            if (res.ok) {
-                const apiResponse: APIResponse = await res.json()
-                return NextResponse.json(apiResponse, { status: 200 })
+                if (res.ok) {
+                    const apiResponse: APIResponse = await res.json()
+                    return NextResponse.json(apiResponse, { status: 200 })
+                }
+
+                const errorResponse: APIResponse = await res.json()
+                return NextResponse.json(errorResponse, { status: res.status })
             }
 
-            const errorResponse: APIResponse = await res.json()
-            return NextResponse.json(errorResponse, { status: res.status })
+            return NextResponse.json(
+                { message: 'Something went wrong' },
+                { status: 400 }
+            )
         }
     } catch (err) {
         return NextResponse.json(
