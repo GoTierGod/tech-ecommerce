@@ -8,7 +8,7 @@ export const metadata: Metadata = {
     title: 'Profile | Tech'
 }
 
-export default async function Profile() {
+export default async function Page() {
     const user = await getUser()
 
     if (!user) redirect('/api/auth/refresh?path=/profile&auth=1')
