@@ -1,6 +1,3 @@
-import { ComposedProductInfo } from './product'
-import { Customer, DeliveryMan } from './users'
-
 export interface Category {
     id: number
     title: string

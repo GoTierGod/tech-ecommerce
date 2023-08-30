@@ -1,8 +1,9 @@
-import { API_URL } from '@/constants/api'
-import { Coupon } from '@/types/tables'
-import { AuthTokens } from '@/types/tokens'
 import { cookies } from 'next/dist/client/components/headers'
 import { redirect } from 'next/navigation'
+
+import { API_URL } from '@/constants/back-end'
+import { Coupon } from '@/types/tables'
+import { AuthTokens } from '@/types/tokens'
 
 export const getCoupons = async (): Promise<Coupon[]> => {
     const authCookies = cookies().get('authTokens')

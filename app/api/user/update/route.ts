@@ -1,8 +1,9 @@
 import { cookies } from 'next/dist/client/components/headers'
 import { NextRequest, NextResponse } from 'next/server'
-import { APIResponse } from '@/types/api-response'
+
+import { API_URL } from '@/constants/back-end'
 import { AuthTokens } from '@/types/tokens'
-import { API_URL } from '@/constants/api'
+import { APIResponse } from '@/types/response'
 
 export async function PATCH(req: NextRequest) {
     const authCookies = cookies().get('authTokens')
@@ -35,42 +36,55 @@ export async function PATCH(req: NextRequest) {
             const birthdate = body.birthdate
             const gender = body.gender
 
-            const fields: { key: string; value: string | undefined }[] = [
-                { key: 'username', value: username },
-                { key: 'email', value: email },
-                { key: 'password', value: password },
-                { key: 'phone', value: phone },
-                { key: 'country', value: country },
-                { key: 'city', value: city },
-                { key: 'address', value: address },
-                { key: 'firstname', value: firstname },
-                { key: 'lastname', value: lastname },
-                { key: 'birthdate', value: birthdate },
-                { key: 'gender', value: gender }
-            ]
-
-            const updatedFields: { [key: string]: string } = Object.fromEntries(
-                fields
-                    .filter(entry => entry.value !== undefined)
-                    .map(entry => [entry.key, entry.value as string])
-            )
-
-            const res = await fetch(`${API_URL}/api/customer/update/`, {
-                method: 'PATCH',
-                headers: {
-                    'Content-Type': 'application/json',
-                    Authorization: `Bearer ${authTokens.access}`
-                },
-                body: JSON.stringify(updatedFields)
-            })
-
-            if (res.ok) {
-                const apiResponse: APIResponse = await res.json()
-                return NextResponse.json(apiResponse, { status: 200 })
+            const updatedFields: {
+                username?: string
+                email?: string
+                password?: string
+                phone?: string
+                country?: string
+                city?: string
+                address?: string
+                firstname?: string
+                lastname?: string
+                birthdate?: string
+                gender?: string
+            } = {
+                ...(username && { username: username }),
+                ...(email && { email: email }),
+                ...(password && { password: password }),
+                ...(phone && { phone: phone }),
+                ...(country && { country: country }),
+                ...(city && { city: city }),
+                ...(address && { address: address }),
+                ...(firstname && { firstname: firstname }),
+                ...(lastname && { lastname: lastname }),
+                ...(birthdate && { birthdate: birthdate }),
+                ...(gender && { gender: gender })
             }
 
-            const errorResponse: APIResponse = await res.json()
-            return NextResponse.json(errorResponse, { status: res.status })
+            if (Object.keys(updatedFields).length >= 1) {
+                const res = await fetch(`${API_URL}/api/customer/update/`, {
+                    method: 'PATCH',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        Authorization: `Bearer ${authTokens.access}`
+                    },
+                    body: JSON.stringify(updatedFields)
+                })
+
+                if (res.ok) {
+                    const apiResponse: APIResponse = await res.json()
+                    return NextResponse.json(apiResponse, { status: 200 })
+                }
+
+                const errorResponse: APIResponse = await res.json()
+                return NextResponse.json(errorResponse, { status: res.status })
+            }
+
+            return NextResponse.json(
+                { message: 'Something went wrong' },
+                { status: 400 }
+            )
         } catch (err) {
             return NextResponse.json(
                 { message: 'Something went wrong' },

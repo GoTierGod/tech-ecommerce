@@ -1,4 +1,4 @@
-import { API_URL } from '@/constants/api'
+import { API_URL } from '@/constants/back-end'
 
 export const getData = async (route: string) => {
     const res = await fetch(`${API_URL + route}`, {

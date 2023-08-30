@@ -1,9 +1,9 @@
-import { API_URL } from '@/constants/api'
-import { APIResponse } from '@/types/api-response'
-import { PurchaseRequestData } from '@/types/purchase'
-import { AuthTokens } from '@/types/tokens'
 import { cookies } from 'next/dist/client/components/headers'
 import { NextRequest, NextResponse } from 'next/server'
+
+import { API_URL } from '@/constants/back-end'
+import { APIResponse } from '@/types/response'
+import { AuthTokens } from '@/types/tokens'
 
 export async function POST(req: NextRequest) {
     try {
@@ -52,9 +52,15 @@ export async function POST(req: NextRequest) {
             const notes: string = body.notes
             const coupon: string = body.coupon
 
-            console.log(coupon)
-
-            const purchaseData: PurchaseRequestData = coupon
+            const purchaseData: {
+                products: { id: number; quantity: number }[]
+                payment_method: string
+                country: string
+                city: string
+                address: string
+                notes: string
+                coupon?: number
+            } = coupon
                 ? {
                       products: products,
                       payment_method: payment,

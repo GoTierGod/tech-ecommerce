@@ -1,8 +1,9 @@
-import { API_URL } from '@/constants/api'
-import { APIResponse } from '@/types/api-response'
-import { AuthTokens } from '@/types/tokens'
+import { API_URL } from '@/constants/back-end'
 import { cookies } from 'next/dist/client/components/headers'
 import { NextRequest, NextResponse } from 'next/server'
+
+import { APIResponse } from '@/types/response'
+import { AuthTokens } from '@/types/tokens'
 
 export async function PATCH(req: NextRequest) {
     try {

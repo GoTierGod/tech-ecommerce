@@ -1,7 +1,8 @@
-import { API_URL } from '@/constants/api'
+import { cookies } from 'next/dist/client/components/headers'
+
+import { API_URL } from '@/constants/back-end'
 import { ComposedPurchaseInfo } from '@/types/purchase'
 import { AuthTokens } from '@/types/tokens'
-import { cookies } from 'next/dist/client/components/headers'
 
 export const getPurchase = async (
     id: string

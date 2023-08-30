@@ -1,4 +1,3 @@
-// NUMBER OF INSTALLMENTS AND COST OF EACH ONE
 export const getProductInstallments = (
     installments: number,
     offerPrice: string

@@ -1,8 +1,8 @@
 import { cookies } from 'next/dist/client/components/headers'
 import { NextRequest, NextResponse } from 'next/server'
-import { LogoutRequestData } from '@/types/api-request'
+
+import { API_URL } from '@/constants/back-end'
 import { AuthTokens } from '@/types/tokens'
-import { API_URL } from '@/constants/api'
 
 export async function POST(req: NextRequest) {
     try {
@@ -25,7 +25,7 @@ export async function POST(req: NextRequest) {
             return NextResponse.json({}, { status: 401 })
         }
 
-        const logoutData: LogoutRequestData = {
+        const logoutData: { refresh: string } = {
             refresh: authTokens.refresh
         }
 

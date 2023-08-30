@@ -1,8 +1,9 @@
-import { API_URL } from '@/constants/api'
-import { ComposedProductInfo } from '@/types/product'
-import { AuthTokens } from '@/types/tokens'
-import { cookies } from 'next/dist/client/components/headers'
 import { redirect } from 'next/navigation'
+import { cookies } from 'next/dist/client/components/headers'
+
+import { API_URL } from '@/constants/back-end'
+import { AuthTokens } from '@/types/tokens'
+import { ComposedProductInfo } from '@/types/product'
 
 export const getCart = async (): Promise<ComposedProductInfo[]> => {
     const authCookies = cookies().get('authTokens')

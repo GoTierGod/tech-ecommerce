@@ -1,6 +1,7 @@
 import { cookies } from 'next/dist/client/components/headers'
+
+import { API_URL } from '@/constants/back-end'
 import { AuthTokens } from '@/types/tokens'
-import { API_URL } from '@/constants/api'
 import { CustomerData } from '@/types/users'
 
 export const getUser = async (): Promise<CustomerData> => {

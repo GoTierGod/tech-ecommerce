@@ -1,14 +1,14 @@
-import { API_URL } from '@/constants/api'
-import { LoginRequestData } from '@/types/api-request'
-import { AuthTokens } from '@/types/tokens'
 import { cookies } from 'next/dist/client/components/headers'
 import { NextRequest, NextResponse } from 'next/server'
+
+import { API_URL } from '@/constants/back-end'
+import { AuthTokens } from '@/types/tokens'
 
 export async function POST(req: NextRequest) {
     try {
         const body = await req.json()
 
-        const loginData: LoginRequestData = {
+        const loginData: { username: string; password: string } = {
             username: body.username,
             password: body.password
         }

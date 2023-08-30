@@ -1,9 +1,9 @@
 import { cookies } from 'next/dist/client/components/headers'
 import { redirect } from 'next/navigation'
 import { NextRequest } from 'next/server'
-import { RefreshRequestData } from '@/types/api-request'
+
+import { API_URL } from '@/constants/back-end'
 import { AuthTokens } from '@/types/tokens'
-import { API_URL } from '@/constants/api'
 
 export async function GET(req: NextRequest) {
     // Get search params
@@ -32,7 +32,7 @@ export async function GET(req: NextRequest) {
     if (!authTokens?.refresh) redirect('/')
 
     // Try to refresh the user auth tokens
-    const refreshData: RefreshRequestData = {
+    const refreshData: { refresh: string } = {
         refresh: authTokens.refresh
     }
 

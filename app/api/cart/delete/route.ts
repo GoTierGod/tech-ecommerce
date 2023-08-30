@@ -1,8 +1,9 @@
-import { API_URL } from '@/constants/api'
-import { APIResponse } from '@/types/api-response'
-import { AuthTokens } from '@/types/tokens'
 import { cookies } from 'next/dist/client/components/headers'
 import { NextRequest, NextResponse } from 'next/server'
+
+import { API_URL } from '@/constants/back-end'
+import { AuthTokens } from '@/types/tokens'
+import { APIResponse } from '@/types/response'
 
 export async function DELETE(req: NextRequest) {
     try {

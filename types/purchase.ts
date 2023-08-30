@@ -7,16 +7,6 @@ export interface Purchase {
     is_reviewed: boolean
 }
 
-export interface PurchaseRequestData {
-    products: { id: number; quantity: number }[]
-    payment_method: string
-    country: string
-    city: string
-    address: string
-    notes: string
-    coupon?: number | null
-}
-
 export interface ComposedPurchaseInfo {
     order: Order
     order_item: OrderItem

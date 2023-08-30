@@ -1,8 +1,9 @@
-import { API_URL } from '@/constants/api'
-import { APIResponse } from '@/types/api-response'
-import { AuthTokens } from '@/types/tokens'
 import { cookies } from 'next/dist/client/components/headers'
 import { NextRequest, NextResponse } from 'next/server'
+
+import { API_URL } from '@/constants/back-end'
+import { APIResponse } from '@/types/response'
+import { AuthTokens } from '@/types/tokens'
 
 export async function POST(req: NextRequest) {
     try {
@@ -25,7 +26,11 @@ export async function POST(req: NextRequest) {
 
             const id = body.id
 
-            const reviewData = {
+            const reviewData: {
+                rating: number
+                title: string
+                content: string
+            } = {
                 rating: body.rating,
                 title: body.title,
                 content: body.content

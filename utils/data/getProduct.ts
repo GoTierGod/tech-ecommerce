@@ -1,4 +1,4 @@
-import { API_URL } from '@/constants/api'
+import { API_URL } from '@/constants/back-end'
 import { ComposedProductInfo } from '@/types/product'
 
 export const getProduct = async (

@@ -1,9 +1,9 @@
 import { cookies } from 'next/dist/client/components/headers'
 import { NextRequest, NextResponse } from 'next/server'
-import { APIResponse } from '@/types/api-response'
-import { UserDeleteRequestData } from '@/types/api-request'
+
+import { API_URL } from '@/constants/back-end'
 import { AuthTokens } from '@/types/tokens'
-import { API_URL } from '@/constants/api'
+import { APIResponse } from '@/types/response'
 
 export async function POST(req: NextRequest) {
     const authCookies = cookies().get('authTokens')
@@ -24,7 +24,7 @@ export async function POST(req: NextRequest) {
                 )
             }
 
-            const userDeleteData: UserDeleteRequestData = {
+            const userDeleteData: { password: string } = {
                 password: body.password
             }
 

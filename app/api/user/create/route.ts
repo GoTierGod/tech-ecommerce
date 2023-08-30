@@ -1,15 +1,20 @@
-import { NextRequest, NextResponse } from 'next/server'
 import { cookies } from 'next/dist/client/components/headers'
-import { APIResponse } from '@/types/api-response'
-import { LoginRequestData, UserCreateRequestData } from '@/types/api-request'
+import { NextRequest, NextResponse } from 'next/server'
+
+import { API_URL } from '@/constants/back-end'
 import { AuthTokens } from '@/types/tokens'
-import { API_URL } from '@/constants/api'
+import { APIResponse } from '@/types/response'
 
 export async function POST(req: NextRequest) {
     try {
         const body = await req.json()
 
-        const userCreateData: UserCreateRequestData = {
+        const userCreateData: {
+            username: string
+            email: string
+            password: string
+            birthdate: string
+        } = {
             username: body.username,
             email: body.email,
             password: body.password,
@@ -24,7 +29,10 @@ export async function POST(req: NextRequest) {
             body: JSON.stringify(userCreateData)
         })
 
-        const loginData: LoginRequestData = {
+        const loginData: {
+            username: string
+            password: string
+        } = {
             username: body.username,
             password: body.password
         }
