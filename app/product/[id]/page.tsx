@@ -15,14 +15,12 @@ import Link from 'next/link'
 import VerticalCard from '@/components/VerticalCard'
 import ProductsSection from '@/components/ProductsSection'
 import ProductImages from '@/app/product/_components/ProductImages'
-import { getData } from '@/utils/data/getData'
 import { getProductStars } from '@/utils/products/getProductStars'
 import { getProductDeliveryDay } from '@/utils/products/getProductDeliveryDay'
 import { getProductInstallments } from '@/utils/products/getProductInstallments'
 import { notFound } from 'next/navigation'
 import { respectLineBreaks } from '@/utils/formatting/respectLineBreaks'
 import { getUser } from '@/utils/data/getUser'
-import { CustomerData } from '@/types/users'
 
 import visaLogo from '../../../public/images/payments/visa.svg'
 import mastercardLogo from '../../../public/images/payments/mastercard.svg'
@@ -30,8 +28,8 @@ import americanExpressLogo from '../../../public/images/payments/american-expres
 import dinersClubLogo from '../../../public/images/payments/diners-club-international.svg'
 import { Metadata } from 'next'
 import { priceStringFormatter } from '@/utils/formatting/priceStringFormatter'
-import { API_URL } from '@/constants/api'
 import { getProduct } from '@/utils/data/getProduct'
+import { getProducts } from '@/utils/data/getProducts'
 
 const paymentLogos = [
     { src: visaLogo, alt: 'Visa' },
@@ -52,20 +50,17 @@ export default async function Product({ params }: { params: { id: string } }) {
     if (!product) return notFound()
     metadata.title = `${product.details.name} | Tech`
 
-    const brandProducts: ComposedProductInfo[] | null = await getData(
-        `/api/products/?brand=${product.details.brand.name}&limit=5`
+    const brandProducts: ComposedProductInfo[] = await getProducts(
+        `?brand=${product.details.brand.name}&limit=4`
     )
-    const relatedProducts: ComposedProductInfo[] | null = await getData(
-        `/api/products/?brand=${product.details.brand.name}&limit=6`
+    const relatedProducts: ComposedProductInfo[] = await getProducts(
+        `?category=${product.details.category.title}&limit=6`
     )
-
-    if (!brandProducts || !relatedProducts) return notFound()
 
     const user = await getUser()
 
-    const content = (
+    const productContent = (
         <div className={style.content}>
-            {/* ------------------------- OFFER -------------------------  */}
             <div className={style.offer}>
                 <span>{priceStringFormatter(product.details.price)}</span>
                 <span>{priceStringFormatter(product.details.offer_price)}</span>
@@ -79,17 +74,15 @@ export default async function Product({ params }: { params: { id: string } }) {
                     </span>
                 </span>
             </div>
-            {/* ------------------------- OPTIONS -------------------------  */}
             <div className={style.options}>
                 <span>Stock: {product.details.stock}</span>
                 <Link href={`/purchase/product/${product.details.id}`}>
                     <span>Buy Now</span>
                 </Link>
-                <Link href='/'>
+                <Link href='/' prefetch={false}>
                     <span>Add to Cart</span>
                 </Link>
             </div>
-            {/* ------------------------- DELIVERY -------------------------  */}
             <div className={style.delivery}>
                 <h3>Delivery</h3>
                 <span>
@@ -102,23 +95,26 @@ export default async function Product({ params }: { params: { id: string } }) {
                     {getProductDeliveryDay()}
                 </span>
             </div>
-            {/* ------------------------- BRAND INFO -------------------------  */}
             <div className={style.brand}>
                 <h3>
                     Offered by <span>{product.details.brand.name}</span>
                 </h3>
                 <p>{product.details.brand.description}</p>
-                <Link href={'/'}>See more of this brand</Link>
+                <Link
+                    href={`/search/${product.details.brand.name}?page=1`}
+                    prefetch={false}
+                >
+                    See more of this brand
+                </Link>
             </div>
-            {/* ------------------------- WARRANTY AND POINTS -------------------------  */}
-            <div className={style.wp}>
+            <div className={style.warrantyAndPoints}>
                 <div>
                     <h3>Warranty</h3>
                     <span>
                         <FontAwesomeIcon icon={faShieldAlt} />{' '}
                         {product.details.months_warranty} Months
                     </span>
-                    <Link href='/'>
+                    <Link href='/' prefetch={false}>
                         <span>Read More</span>
                     </Link>
                 </div>
@@ -128,12 +124,11 @@ export default async function Product({ params }: { params: { id: string } }) {
                         <FontAwesomeIcon icon={faStar} />{' '}
                         {Number(product.details.price)} Points
                     </span>
-                    <Link href='/'>
+                    <Link href='/' prefetch={false}>
                         <span>Log In</span>
                     </Link>
                 </div>
             </div>
-            {/* ------------------------- PAYMENT -------------------------  */}
             <div className={style.payment}>
                 <h3>Payment Methods</h3>
                 <div>
@@ -159,65 +154,53 @@ export default async function Product({ params }: { params: { id: string } }) {
         </div>
     )
 
+    const productHeader = (
+        <div className={style.header}>
+            <div>
+                <h2>{product.details.name}</h2>
+                {product.best_seller && (
+                    <span className={style.bestSeller}>Best Seller</span>
+                )}
+            </div>
+            <div
+                className={style.rating}
+                aria-label={`Rating: ${product.rating || 5.0}`}
+            >
+                {getProductStars(product.reviews_counter, product.rating)}
+            </div>
+        </div>
+    )
+
     return (
         <main>
             <div className={style.wrapper}>
                 <div className={style.product}>
-                    <div className={style.leftContent}>
-                        {/* ------------------------- HEADER -------------------------  */}
-                        <div className={style.header}>
-                            <div>
-                                <h2>{product.details.name}</h2>
-                                {product.best_seller && (
-                                    <span className={style.bestSeller}>
-                                        Best Seller
-                                    </span>
-                                )}
-                            </div>
-                            <div className={style.rating}>
-                                <span>
-                                    {getProductStars(
-                                        product.reviews_counter,
-                                        product.rating
-                                    )}
-                                </span>
-                                <span>
-                                    {product.rating || '5.0'}{' '}
-                                    <FontAwesomeIcon icon={faStar} />
-                                </span>
-                            </div>
-                        </div>
-                        {/* ------------------------- IMAGES -------------------------  */}
+                    <div className={style.wrapperLeft}>
+                        {productHeader}
                         <ProductImages images={product.images} />
-                        {/* ------------------------- MORE BRAND PRODUCTS -------------------------  */}
                         <div className={style.brandProducts}>
                             <div>
                                 <h3>More of {product.details.brand.name}</h3>
                             </div>
                             <div>
-                                {brandProducts
-                                    .filter(
-                                        product =>
-                                            product.details.id.toString() !== id
-                                    )
-                                    .map(product => (
-                                        <VerticalCard
-                                            key={product.details.id}
-                                            product={product}
-                                        />
-                                    ))}
+                                {brandProducts.map(product => (
+                                    <VerticalCard
+                                        key={product.details.id}
+                                        product={product}
+                                    />
+                                ))}
                             </div>
                         </div>
-                        {/* ------------------------- CATEGORY -------------------------  */}
                         <div className={style.category}>
                             <h3>See more in this category</h3>
-                            <Link href='/'>
+                            <Link
+                                href={`/search/${product.details.category.title}?page=1`}
+                                prefetch={false}
+                            >
                                 <span>{product.details.category.title}</span>
                             </Link>
                         </div>
-                        {/* ------------------------- FOR SMALL SCREENS -------------------------  */}
-                        {content}
-                        {/* ------------------------- DESCRIPTION -------------------------  */}
+                        {productContent}
                         <div className={style.description}>
                             <h3>Description</h3>
                             <p>
@@ -225,35 +208,10 @@ export default async function Product({ params }: { params: { id: string } }) {
                             </p>
                         </div>
                     </div>
-                    {/* ------------------------- FOR WIDE SCREENS -------------------------  */}
-                    <div className={style.rightContent}>
-                        {/* ------------------------- WRAPPER FOR STICKY POSITION -------------------------  */}
+                    <div className={style.wrapperRight}>
                         <div className={style.stickyWrapper}>
-                            {/* ------------------------- HEADER -------------------------  */}
-                            <div className={style.header}>
-                                <div>
-                                    <h2>{product.details.name}</h2>
-                                    {product.best_seller && (
-                                        <span className={style.bestSeller}>
-                                            Best Seller
-                                        </span>
-                                    )}
-                                </div>
-                                <div className={style.rating}>
-                                    <span>
-                                        {getProductStars(
-                                            product.reviews_counter,
-                                            product.rating
-                                        )}
-                                    </span>
-                                    <span>
-                                        {product.rating || '5.0'}{' '}
-                                        <FontAwesomeIcon icon={faStar} />
-                                    </span>
-                                </div>
-                            </div>
-                            {/* ------------------------- FOR WIDE SCREENS -------------------------  */}
-                            {content}
+                            {productHeader}
+                            {productContent}
                         </div>
                     </div>
                 </div>

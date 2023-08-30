@@ -1,4 +1,3 @@
-import { notFound } from 'next/navigation'
 import { unescape } from 'querystring'
 import { Metadata } from 'next'
 

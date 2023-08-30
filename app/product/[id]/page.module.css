@@ -1,4 +1,3 @@
-/* ------------------------- WRAPPER -------------------------  */
 .wrapper {
     display: flex;
     flex-direction: column;
@@ -8,19 +7,17 @@
     max-width: 1200px;
 }
 
-/* ------------------------- CONTAINERS -------------------------  */
-.leftContent,
-.rightContent {
+.wrapperLeft,
+.wrapperRight {
     display: flex;
     flex-direction: column;
     gap: 0.5rem;
 }
 
-.rightContent {
+.wrapperRight {
     display: none;
 }
 
-/* ------------------------- STICKY WRAPPER -------------------------  */
 .stickyWrapper {
     position: sticky;
     top: 84px;
@@ -30,14 +27,12 @@
     gap: 0.5rem;
 }
 
-/* ------------------------- INTERCHANGEABLE CONTENT -------------------------  */
 .content {
     display: flex;
     flex-direction: column;
     gap: 0.5rem;
 }
 
-/* ------------------------- PRODUCT -------------------------  */
 .product {
     display: grid;
     grid-template-columns: 1fr;
@@ -46,7 +41,6 @@
     width: 100%;
 }
 
-/* ------------------------- HEADER -------------------------  */
 .header {
     display: flex;
     flex-wrap: wrap;
@@ -97,16 +91,7 @@
     color: var(--main);
 }
 
-/* ------------------------- RATING -------------------------  */
 .rating {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: 0.5rem;
-}
-
-.rating > span:last-of-type {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -123,7 +108,6 @@
     border-radius: 4px;
 }
 
-/* ------------------------- MORE BRAND PRODUCTS -------------------------  */
 .brandProducts {
     display: flex;
     flex-direction: column;
@@ -167,7 +151,6 @@
     display: flex;
 }
 
-/* ------------------------- CATEGORY -------------------------  */
 .category {
     display: flex;
     justify-content: space-between;
@@ -220,7 +203,6 @@
     text-shadow: 1px 1px var(--light-pink);
 }
 
-/* ------------------------- OFFER -------------------------  */
 .offer {
     display: flex;
     flex-direction: column;
@@ -260,7 +242,6 @@
     font-weight: 425;
 }
 
-/* ------------------------- OPTIONS -------------------------  */
 .options {
     display: flex;
     flex-direction: column;
@@ -317,7 +298,6 @@
     text-shadow: 1px 1px var(--light-pink);
 }
 
-/* ------------------------- DELIVERY -------------------------  */
 .delivery {
     display: flex;
     flex-direction: column;
@@ -347,7 +327,6 @@
     font-weight: 375;
 }
 
-/* ------------------------- BRAND INFO -------------------------  */
 .brand {
     display: flex;
     flex-direction: column;
@@ -388,19 +367,18 @@
     border-radius: 4px;
 }
 
-/* ------------------------- WARRANTY AND POINTS -------------------------  */
-.wp {
+.warrantyAndPoints {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 0.5rem;
 }
 
-.wp h3 {
+.warrantyAndPoints h3 {
     font-size: 1.25rem;
     font-weight: 400;
 }
 
-.wp > div {
+.warrantyAndPoints > div {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -417,7 +395,7 @@
     border-radius: 4px;
 }
 
-.wp div > span {
+.warrantyAndPoints div > span {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -427,11 +405,11 @@
     font-weight: 375;
 }
 
-.wp svg {
+.warrantyAndPoints svg {
     height: 1rem;
 }
 
-.wp a {
+.warrantyAndPoints a {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -447,7 +425,7 @@
     transition: all 300ms;
 }
 
-.wp a span {
+.warrantyAndPoints a span {
     font-size: 1rem;
     font-weight: 500;
 
@@ -456,15 +434,14 @@
     transition: all 300ms;
 }
 
-.wp a:hover {
+.warrantyAndPoints a:hover {
     border-color: var(--light-pink);
 }
 
-.wp a:hover span {
+.warrantyAndPoints a:hover span {
     text-shadow: 1px 1px var(--light-pink);
 }
 
-/* ------------------------- PAYMENT -------------------------  */
 .payment {
     display: flex;
     flex-direction: column;
@@ -515,7 +492,6 @@
     width: auto;
 }
 
-/* ------------------------- DESCRIPTION -------------------------  */
 .description {
     display: flex;
     flex-direction: column;
@@ -540,9 +516,8 @@
     line-height: 1.5rem;
 }
 
-/* ------------------------- MEDIA QUERIES -------------------------  */
 @media screen and (min-width: 425px) {
-    .wp > div {
+    .warrantyAndPoints > div {
         padding: 1.5rem;
     }
 }
@@ -562,11 +537,11 @@
 }
 
 @media screen and (min-width: 768px) {
-    .leftContent :where(.content, .header) {
+    .wrapperLeft :where(.content, .header) {
         display: none;
     }
 
-    .rightContent {
+    .wrapperRight {
         display: flex;
     }
 
@@ -575,7 +550,7 @@
         grid-template-columns: 2fr 1fr;
     }
 
-    .wp {
+    .warrantyAndPoints {
         grid-template-columns: 1fr;
     }
 }
@@ -593,7 +568,7 @@
         display: flex;
     }
 
-    .wp {
+    .warrantyAndPoints {
         grid-template-columns: repeat(2, 1fr);
     }
 }
