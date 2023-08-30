@@ -13,11 +13,6 @@
     --danger: #b4093c;
 }
 
-/* @media (prefers-color-scheme: dark) {
-    :root {
-    }
-} */
-
 * {
     box-sizing: border-box;
     padding: 0;
@@ -47,17 +42,24 @@ main {
 
 a {
     color: inherit;
+
+    font-size: 1rem;
+    font-weight: 400;
+    font-family: inherit;
+
     text-decoration: none;
 }
 
 button {
-    font-family: inherit;
-}
+    background: var(--gray);
+    color: var(--white);
 
-@media (prefers-color-scheme: dark) {
-    html {
-        color-scheme: dark;
-    }
+    font-size: 1rem;
+    font-weight: 400;
+    font-family: inherit;
+
+    border: 2px solid transparent;
+    cursor: pointer;
 }
 
 @media screen and (min-width: 768px) {
