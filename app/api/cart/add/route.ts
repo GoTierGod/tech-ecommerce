@@ -38,6 +38,11 @@ export async function POST(req: NextRequest) {
             const errorResponse: APIResponse = await res.json()
             return NextResponse.json(errorResponse, { status: res.status })
         }
+
+        return NextResponse.json(
+            { message: 'Something went wrong' },
+            { status: 400 }
+        )
     } catch (err) {
         return NextResponse.json(
             { message: 'Something went wrong' },
