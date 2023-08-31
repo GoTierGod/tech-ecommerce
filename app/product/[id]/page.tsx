@@ -30,6 +30,9 @@ import { Metadata } from 'next'
 import { priceStringFormatter } from '@/utils/formatting/priceStringFormatter'
 import { getProduct } from '@/utils/data/getProduct'
 import { getProducts } from '@/utils/data/getProducts'
+import ProductFavsCart from '../_components/ProductFavsCart'
+import { getCart } from '@/utils/data/getCart'
+import { getFavorites } from '@/utils/data/getFavorites'
 
 const paymentLogos = [
     { src: visaLogo, alt: 'Visa' },
@@ -42,7 +45,7 @@ export const metadata: Metadata = {
     title: 'Product | Tech'
 }
 
-export default async function Product({ params }: { params: { id: string } }) {
+export default async function Page({ params }: { params: { id: string } }) {
     const { id } = params
 
     const product: ComposedProductInfo | null = await getProduct(id)
@@ -58,6 +61,9 @@ export default async function Product({ params }: { params: { id: string } }) {
     )
 
     const user = await getUser()
+
+    const cart = await getCart()
+    const favorites = await getFavorites()
 
     const productContent = (
         <div className={style.content}>
@@ -79,9 +85,11 @@ export default async function Product({ params }: { params: { id: string } }) {
                 <Link href={`/purchase/product/${product.details.id}`}>
                     <span>Buy Now</span>
                 </Link>
-                <Link href='/' prefetch={false}>
-                    <span>Add to Cart</span>
-                </Link>
+                <ProductFavsCart
+                    product={product}
+                    cart={cart}
+                    favorites={favorites}
+                />
             </div>
             <div className={style.delivery}>
                 <h3>Delivery</h3>

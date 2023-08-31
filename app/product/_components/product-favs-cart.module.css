@@ -1,0 +1,26 @@
+.wrapper {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.5rem;
+
+    width: 100%;
+}
+
+.wrapper button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+
+    padding: 0.75rem 1rem;
+
+    background: var(--white);
+    color: var(--gray);
+
+    border: 2px solid transparent;
+    border-radius: 4px;
+}
+
+.wrapper svg {
+    height: 1rem;
+}
