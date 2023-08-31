@@ -4,6 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import style from './product-favs-cart.module.css'
 import {
     faCartShopping,
+    faCheckToSlot,
     faHeart,
     faHeartPulse
 } from '@fortawesome/free-solid-svg-icons'
@@ -80,7 +81,9 @@ export default function ProductFavsCart({
         <div className={style.wrapper}>
             <button onClick={cartAction}>
                 <span>{!isInCart ? 'Add to Cart' : 'In Cart'}</span>
-                <FontAwesomeIcon icon={faCartShopping} />
+                <FontAwesomeIcon
+                    icon={!isInCart ? faCartShopping : faCheckToSlot}
+                />
             </button>
             <button onClick={favsAction}>
                 <span>{!isInFavs ? 'Add to Favs' : 'In Favorites'}</span>
