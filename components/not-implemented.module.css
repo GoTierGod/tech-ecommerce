@@ -41,13 +41,31 @@
 
 .content {
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
-    gap: 1rem;
+    gap: 1.5rem;
 
     padding: 1.5rem;
 
     background: var(--white);
 
+    font-size: 1rem;
+    font-weight: 375;
+    text-align: center;
+
     border-radius: 4px;
+}
+
+.content > div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.content a {
+    font-weight: 425;
+
+    color: var(--main);
 }
