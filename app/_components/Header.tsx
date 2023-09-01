@@ -129,12 +129,12 @@ export default function Header({ categories, user }: HeaderProps) {
                 <nav className={style.wideScreenNav}>
                     <ul className={style.links}>
                         <li>
-                            <Link href='/' prefetch={false}>
+                            <Link href='/contact' prefetch={false}>
                                 Contact
                             </Link>
                         </li>
                         <li>
-                            <Link href='/' prefetch={false}>
+                            <Link href='/about' prefetch={false}>
                                 About
                             </Link>
                         </li>
@@ -223,12 +223,12 @@ export default function Header({ categories, user }: HeaderProps) {
                 <nav className={style.smallScreenNav}>
                     <ul className={style.links}>
                         <li>
-                            <Link href='/' prefetch={false}>
+                            <Link href='/contact' prefetch={false}>
                                 Contact
                             </Link>
                         </li>
                         <li>
-                            <Link href='/' prefetch={false}>
+                            <Link href='/about' prefetch={false}>
                                 About
                             </Link>
                         </li>

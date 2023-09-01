@@ -1,0 +1,21 @@
+.email {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+
+    padding: 0.5rem 0.75rem;
+
+    background: var(--white);
+    color: var(--main);
+
+    font-size: 1rem;
+    font-weight: 425;
+
+    border: 2px solid var(--main);
+    border-radius: 4px;
+}
+
+.email svg {
+    height: 0.75rem;
+}

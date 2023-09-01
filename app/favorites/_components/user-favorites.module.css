@@ -41,8 +41,17 @@
 }
 
 .header h2 {
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    line-clamp: 1;
+    -webkit-box-orient: vertical;
+
+    height: 1.075rem;
+
     font-size: 1.125rem;
     font-weight: 400;
+
+    overflow: hidden;
 }
 
 :is(.header, .content, .favItem) svg {
