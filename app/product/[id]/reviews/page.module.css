@@ -1,0 +1,142 @@
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+
+    width: 100%;
+    max-width: 1200px;
+}
+
+.wrapperLeft,
+.wrapperRight {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+
+    padding: 1rem;
+
+    background: var(--main);
+    color: var(--white);
+
+    border-radius: 4px;
+}
+
+.header h2 {
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    line-clamp: 1;
+    -webkit-box-orient: vertical;
+
+    height: 1.075rem;
+
+    font-size: 1.125rem;
+    font-weight: 400;
+
+    overflow: hidden;
+}
+
+:is(.header, .content) > svg {
+    height: 1rem;
+}
+
+.content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1.5rem;
+
+    padding: 1.5rem;
+
+    background: var(--white);
+
+    font-size: 1rem;
+    font-weight: 375;
+
+    border-radius: 4px;
+}
+
+.wrapperLeft .content > span {
+    display: flex;
+    gap: 1rem;
+
+    width: 100%;
+}
+
+.grid {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.empty {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5rem;
+
+    padding: 1.5rem;
+    width: 100%;
+    height: 100%;
+
+    background: var(--white);
+
+    text-align: center;
+
+    border-radius: 4px;
+}
+
+.empty h3 {
+    font-size: 1.25rem;
+    font-weight: 400;
+}
+
+.empty p {
+    max-width: 300px;
+
+    font-weight: 375;
+}
+
+@media screen and (min-width: 768px) {
+    .wrapper {
+        display: grid;
+        grid-template-columns: 3fr 2fr;
+        grid-template-areas: 'w-right w-left';
+    }
+
+    .wrapperLeft {
+        grid-area: w-left;
+    }
+
+    .stickyWrapper {
+        position: sticky;
+        top: 84px;
+    }
+
+    .wrapperRight {
+        grid-area: w-right;
+    }
+
+    .grid {
+        display: grid;
+        grid-template-columns: 1fr;
+    }
+}
+
+@media screen and (min-width: 1024px) {
+    .wrapper {
+        grid-template-columns: 2fr 1fr;
+    }
+
+    .grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}

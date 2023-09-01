@@ -1,0 +1,87 @@
+.card {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+
+    padding: 1rem;
+
+    background: var(--white);
+
+    border-radius: 4px;
+}
+
+.card svg {
+    height: 1rem;
+}
+
+.header {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+}
+
+.header h3 {
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    line-clamp: 1;
+    -webkit-box-orient: vertical;
+
+    height: 0.95rem;
+
+    font-size: 1rem;
+    font-weight: 425;
+
+    overflow: hidden;
+}
+
+.header > div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5rem;
+
+    padding: 0.5rem 0.75rem;
+
+    background: var(--main);
+    color: var(--white);
+
+    border-radius: 4px;
+}
+
+.content {
+    display: flex;
+    flex-direction: column;
+
+    font-size: 1rem;
+    font-weight: 375;
+
+    border-radius: 4px;
+}
+
+.footer {
+    display: flex;
+    justify-content: space-between;
+    gap: 1.5rem;
+}
+
+.footer > div {
+    display: flex;
+    gap: 1.5rem;
+}
+
+.footer button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5rem;
+
+    padding: 0.5rem 0.75rem;
+
+    background: var(--gray);
+    color: var(--white);
+
+    border: 2px solid transparent;
+    border-radius: 4px;
+}
