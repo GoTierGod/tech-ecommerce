@@ -14,11 +14,16 @@ export default async function Page() {
         <main>
             <div className={style.wrapper}>
                 <div className={style.wrapperLeft}>
-                    <div className={style.header}>Contact Me</div>
+                    <div className={style.header}>
+                        <h2>Contact Me</h2>
+                    </div>
                     <div className={style.content}>
-                        In the future you will be able to find more information
-                        about me, my skills, knowledge and more on my portfolio
-                        website, thanks for trying my project.
+                        <p>
+                            In the future you will be able to find more
+                            information about me, my skills, knowledge and more
+                            on my portfolio website, thanks for trying my
+                            project.
+                        </p>
                     </div>
                 </div>
                 <div className={style.wrapperRight}>
