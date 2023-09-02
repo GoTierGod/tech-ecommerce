@@ -7,58 +7,44 @@ import { AuthTokens } from '@/types/tokens'
 export async function POST(req: NextRequest) {
     try {
         const authCookies = cookies().get('authTokens')
-        if (!authCookies) {
-            return NextResponse.json(
-                { message: 'Missing authentication credentials' },
-                { status: 401 }
-            )
-        }
+        if (authCookies) {
+            let authTokens: AuthTokens | null = null
+            try {
+                authTokens = JSON.parse(authCookies.value) as AuthTokens
+            } catch (err) {
+                cookies().delete('authTokens')
 
-        let authTokens: AuthTokens | null = null
-        try {
-            authTokens = JSON.parse(authCookies.value)
-        } catch (err) {
-            cookies().delete('authTokens')
+                return NextResponse.json(
+                    { message: 'Invalid authentication credentials' },
+                    { status: 401 }
+                )
+            }
 
-            return NextResponse.json(
-                { message: 'Invalid authentication credentials' },
-                { status: 401 }
-            )
-        }
+            const logoutData: { refresh: string } = {
+                refresh: authTokens.refresh
+            }
 
-        if (!authTokens?.refresh) {
-            cookies().delete('authTokens')
+            const res = await fetch(`${API_URL}/api/token/blacklist/`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(logoutData)
+            })
 
-            return NextResponse.json(
-                { message: 'Invalid authentication credentials' },
-                { status: 401 }
-            )
-        }
-
-        const logoutData: { refresh: string } = {
-            refresh: authTokens.refresh
-        }
-
-        const res = await fetch(`${API_URL}/api/token/blacklist/`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(logoutData)
-        })
-
-        if (res.ok) {
-            cookies().delete('authTokens')
-            return NextResponse.json(
-                { message: 'Successfully logged out' },
-                { status: 200 }
-            )
+            if (res.ok) {
+                cookies().delete('authTokens')
+                return NextResponse.json(
+                    { message: 'Successfully logged out' },
+                    { status: 200 }
+                )
+            }
         }
 
         cookies().delete('authTokens')
         return NextResponse.json(
-            { message: 'Something went wrong' },
-            { status: 400 }
+            { message: 'Missing authentication credentials' },
+            { status: 401 }
         )
     } catch (err) {
         cookies().delete('authTokens')

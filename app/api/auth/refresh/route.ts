@@ -32,14 +32,11 @@ export async function GET(req: NextRequest) {
     // Check if auth cookies are valid JSON
     let authTokens: AuthTokens | null = null
     try {
-        authTokens = JSON.parse(authCookies.value)
+        authTokens = JSON.parse(authCookies.value) as AuthTokens
     } catch (err) {
         cookies().delete('authTokens')
-    }
-    // Check if there's a refresh token in cookies
-    if (!authTokens?.refresh) {
-        if (!auth || !validateAuthStr(auth)) redirect(path)
 
+        if (!auth || !validateAuthStr(auth)) redirect(path)
         redirect(strToBoolean(auth) ? '/' : path)
     }
 
