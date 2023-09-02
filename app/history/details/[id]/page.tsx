@@ -1,25 +1,23 @@
-import Image from 'next/image'
 import style from './page.module.css'
 
-import { getPurchase } from '@/utils/data/getPurchase'
+import Image from 'next/image'
 import { redirect } from 'next/navigation'
-import { priceStringFormatter } from '@/utils/formatting/priceStringFormatter'
 import Link from 'next/link'
-import { titleCaseFormatter } from '@/utils/formatting/titleCaseFormatter'
-import { Order } from '@/types/tables'
 import { ReactNode } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faListUl, faMicrochip } from '@fortawesome/free-solid-svg-icons'
+
+import { Order } from '@/types/tables'
+import { priceStringFormatter } from '@/utils/formatting/priceStringFormatter'
+import { titleCaseFormatter } from '@/utils/formatting/titleCaseFormatter'
+import { getPurchase } from '@/utils/data/getPurchase'
 import { getUser } from '@/utils/data/getUser'
 
 export default async function Page({ params }: { params: { id: string } }) {
     const { id } = params
 
     const user = await getUser()
-    if (!user)
-        redirect(
-            `/api/auth/refresh?path=/purchase/history/details/${id}&auth=1`
-        )
+    if (!user) redirect(`/api/auth/refresh?path=/history/details/${id}&auth=1`)
 
     const purchase = await getPurchase(id)
     if (!purchase) redirect('')

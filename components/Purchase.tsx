@@ -24,9 +24,9 @@ import {
 
 import { ComposedProductInfo } from '@/types/product'
 import { Customer } from '@/types/users'
-import { APIResponse } from '@/types/api-response'
-import ErrorDisplay from '../../../components/ErrorDisplay'
 import { priceStringFormatter } from '@/utils/formatting/priceStringFormatter'
+import { APIResponse } from '@/types/response'
+import ErrorDisplay from './ErrorDisplay'
 
 interface PurchaseProps {
     customer: Customer

@@ -12,8 +12,8 @@ import { useRouter } from 'next/navigation'
 import { useState } from 'react'
 
 import { ComposedProductInfo } from '@/types/product'
-import { APIResponse } from '@/types/api-response'
-import ErrorDisplay from '../../../../../components/ErrorDisplay'
+import { APIResponse } from '@/types/response'
+import ErrorDisplay from '@/components/ErrorDisplay'
 
 interface PurchaseReviewProps {
     product: ComposedProductInfo

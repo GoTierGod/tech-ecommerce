@@ -20,7 +20,7 @@ import {
 import Link from 'next/link'
 
 import { ComposedPurchaseInfo } from '@/types/purchase'
-import HorizontalCard from '../../../../components/HoritonzalCard'
+import HorizontalCard from '@/components/HoritonzalCard'
 
 interface PurchaseHistoryProps {
     history: ComposedPurchaseInfo[]

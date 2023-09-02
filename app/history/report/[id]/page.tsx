@@ -8,8 +8,7 @@ export default async function Page({ params }: { params: { id: string } }) {
     const { id } = params
 
     const user = await getUser()
-    if (!user)
-        redirect(`/api/auth/refresh?path=/purchase/history/report/${id}&auth=1`)
+    if (!user) redirect(`/api/auth/refresh?path=/history/report/${id}&auth=1`)
 
     const purchase = await getPurchase(id)
     if (!purchase) redirect('')
