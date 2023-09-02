@@ -18,6 +18,7 @@ import * as Yup from 'yup'
 import { useCallback, useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation'
 import HorizontalCard from '@/components/HoritonzalCard'
+import { faLightbulb } from '@fortawesome/free-regular-svg-icons'
 
 interface SearchProps {
     searchStr: string
@@ -162,11 +163,11 @@ export default function Search({
                     ? filterMenu
                         ? {
                               maxHeight: '442px',
-                              padding: '1.5rem'
+                              opacity: 1
                           }
                         : {
                               maxHeight: '0',
-                              padding: '0 1.5rem'
+                              opacity: 0
                           }
                     : {}
             }
@@ -317,6 +318,26 @@ export default function Search({
                                 </button>
                             </div>
                             <div className={style.smallScreenForm}>
+                                <span
+                                    className={style.filterMenuMsg}
+                                    style={
+                                        !filterMenu
+                                            ? {
+                                                  maxHeight: '80px',
+                                                  opacity: 1
+                                              }
+                                            : {
+                                                  maxHeight: 0,
+                                                  opacity: 0
+                                              }
+                                    }
+                                >
+                                    <FontAwesomeIcon icon={faLightbulb} />
+                                    <span>
+                                        Click the &quot;Filter&quot; button to
+                                        reveal filtering options right here!
+                                    </span>
+                                </span>
                                 {filterForm('small')}
                             </div>
                             <div className={style.wideScreenForm}>

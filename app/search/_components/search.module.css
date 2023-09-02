@@ -125,20 +125,52 @@
     gap: 1.5rem;
 
     padding: 1.5rem;
+    width: 100%;
 
     background: var(--white);
 
     border-radius: 4px;
 
     overflow: hidden;
-    transition: max-height 300ms, padding 300ms;
+    transition: opacity 300ms, max-height 300ms;
+}
+
+.smallScreenForm {
+    padding: 1.5rem;
+
+    background: var(--white);
+
+    border-radius: 4px;
 }
 
 .smallScreenForm .form {
     max-height: 0;
+    padding: 0;
+
+    background: transparent;
+
+    border-radius: none;
 }
 
-.wideScreenForm .form {
+.filterMenuMsg {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1.5rem;
+
+    font-size: 1rem;
+    font-weight: 375;
+    text-align: center;
+
+    transition: max-height 300ms, opacity 300ms;
+    overflow: hidden;
+}
+
+.filterMenuMsg svg {
+    height: 1rem;
+}
+
+.wideScreenForm {
     display: none;
 }
 
@@ -404,11 +436,11 @@
         top: 84px;
     }
 
-    .smallScreenForm .form {
+    .smallScreenForm {
         display: none;
     }
 
-    .wideScreenForm .form {
+    .wideScreenForm {
         display: flex;
     }
 
