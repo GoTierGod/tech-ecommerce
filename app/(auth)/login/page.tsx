@@ -1,5 +1,3 @@
-import style from './page.module.css'
-
 import { redirect } from 'next/navigation'
 
 import { getUser } from '@/utils/data/getUser'

@@ -15,7 +15,7 @@ import { useState } from 'react'
 import Link from 'next/link'
 
 import ErrorDisplay from '../../../../components/ErrorDisplay'
-import { APIResponse } from '@/types/api-response'
+import { APIResponse } from '@/types/response'
 
 const fieldsTouched: string[] = [
     'username',

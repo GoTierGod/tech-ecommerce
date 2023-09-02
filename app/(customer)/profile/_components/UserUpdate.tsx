@@ -12,7 +12,7 @@ import {
 import { useRouter } from 'next/navigation'
 
 import { Customer } from '@/types/users'
-import { APIResponse } from '@/types/api-response'
+import { APIResponse } from '@/types/response'
 
 interface UserUpdateProps {
     updating: string

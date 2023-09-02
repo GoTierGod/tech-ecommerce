@@ -11,8 +11,8 @@ import { useRouter } from 'next/navigation'
 import { useState } from 'react'
 
 import { Customer } from '@/types/users'
-import { APIResponse } from '@/types/api-response'
 import ErrorDisplay from '../../../../components/ErrorDisplay'
+import { APIResponse } from '@/types/response'
 
 const fieldsTouched: string[] = ['password', 'username']
 
