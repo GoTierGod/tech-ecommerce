@@ -60,6 +60,11 @@ export async function PATCH(req: NextRequest) {
                 { status: 400 }
             )
         }
+
+        return NextResponse.json(
+            { message: 'Something went wrong' },
+            { status: 400 }
+        )
     } catch (err) {
         return NextResponse.json(
             { message: 'Something went wrong' },

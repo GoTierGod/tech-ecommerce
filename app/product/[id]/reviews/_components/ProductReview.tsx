@@ -13,12 +13,17 @@ import {
 import { useCallback } from 'react'
 import { ComposedReviewInfo } from '@/types/review'
 import { useRouter } from 'next/navigation'
+import { CustomerData } from '@/types/users'
 
 interface ProductReviewProps {
     review: ComposedReviewInfo
+    customer: CustomerData
 }
 
-export default function ProductReview({ review }: ProductReviewProps) {
+export default function ProductReview({
+    review,
+    customer
+}: ProductReviewProps) {
     const router = useRouter()
 
     const likeAction = useCallback(async () => {
@@ -59,30 +64,32 @@ export default function ProductReview({ review }: ProductReviewProps) {
             <div className={style.content}>
                 <p>{review.review.content}</p>
             </div>
-            <div className={style.footer}>
-                <div>
-                    <button
-                        className={style.likes}
-                        onClick={likeAction}
-                        aria-label='Like'
-                    >
-                        <FontAwesomeIcon icon={faThumbsUp} />
-                        <span>{review.likes}</span>
-                    </button>
-                    <button
-                        className={style.dislikes}
-                        onClick={dislikeAction}
-                        aria-label='Dislike'
-                    >
-                        <FontAwesomeIcon icon={faThumbsDown} />
-                        <span>{review.dislikes}</span>
+            {customer && (
+                <div className={style.footer}>
+                    <div>
+                        <button
+                            className={style.likes}
+                            onClick={likeAction}
+                            aria-label='Like'
+                        >
+                            <FontAwesomeIcon icon={faThumbsUp} />
+                            <span>{review.likes}</span>
+                        </button>
+                        <button
+                            className={style.dislikes}
+                            onClick={dislikeAction}
+                            aria-label='Dislike'
+                        >
+                            <FontAwesomeIcon icon={faThumbsDown} />
+                            <span>{review.dislikes}</span>
+                        </button>
+                    </div>
+                    <button onClick={reportAction}>
+                        <span>Report</span>
+                        <FontAwesomeIcon icon={faExclamation} />
                     </button>
                 </div>
-                <button onClick={reportAction}>
-                    <span>Report</span>
-                    <FontAwesomeIcon icon={faExclamation} />
-                </button>
-            </div>
+            )}
         </div>
     )
 }

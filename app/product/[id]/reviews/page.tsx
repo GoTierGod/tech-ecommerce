@@ -54,6 +54,7 @@ export default async function Page({ params }: { params: { id: string } }) {
                                 <ProductReview
                                     key={review.review.id}
                                     review={review}
+                                    customer={user}
                                 />
                             ))}
                         </div>
