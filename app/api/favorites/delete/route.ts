@@ -17,36 +17,45 @@ export async function DELETE(req: NextRequest) {
                 cookies().delete('authTokens')
 
                 return NextResponse.json(
-                    { message: 'Invalid tokens' },
+                    { message: 'Invalid authentication credentials' },
                     { status: 401 }
                 )
             }
 
             const { searchParams } = new URL(req.url)
-            let ids: Array<number> | null = null
+            const ids = searchParams.get('ids')
+            if (!ids)
+                return NextResponse.json(
+                    { message: 'Missing "ids" parameter' },
+                    { status: 400 }
+                )
 
+            let ids_array: Array<number> | null = null
             try {
-                ids = (searchParams.get('ids') as string)
+                ids_array = ids
                     .split(',')
-                    .map(id => Number(id))
+                    .map(id => Number(id)) as Array<number>
             } catch (err) {
                 return NextResponse.json(
-                    { message: 'Missing "id" or "ids" parameters' },
+                    { message: 'Invalid "ids" parameter' },
                     { status: 400 }
                 )
+            } finally {
+                if (!ids_array || ids_array?.length === 0) {
+                    return NextResponse.json(
+                        { message: 'Invalid "ids" parameter' },
+                        { status: 400 }
+                    )
+                }
             }
 
-            if (!ids || ids.length === 0) {
-                return NextResponse.json(
-                    { message: 'Missing "id" or "ids" parameters' },
-                    { status: 400 }
-                )
-            }
-
-            const res = await fetch(`${API_URL}/api/favorites/delete/${ids}`, {
-                method: 'DELETE',
-                headers: { authorization: `Bearer ${authTokens.access}` }
-            })
+            const res = await fetch(
+                `${API_URL}/api/favorites/delete/${ids_array}`,
+                {
+                    method: 'DELETE',
+                    headers: { authorization: `Bearer ${authTokens.access}` }
+                }
+            )
 
             if (res.ok) {
                 const apiResponse: APIResponse = await res.json()
@@ -58,7 +67,7 @@ export async function DELETE(req: NextRequest) {
         }
 
         return NextResponse.json(
-            { message: 'Something went wrong' },
+            { message: 'Missing authentication credentials' },
             { status: 400 }
         )
     } catch (err) {
