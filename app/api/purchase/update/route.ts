@@ -17,7 +17,7 @@ export async function PATCH(req: NextRequest) {
                 cookies().delete('authTokens')
 
                 return NextResponse.json(
-                    { message: 'Invalid tokens' },
+                    { message: 'Invalid authentication credentials' },
                     { status: 401 }
                 )
             }
@@ -66,7 +66,7 @@ export async function PATCH(req: NextRequest) {
         }
 
         return NextResponse.json(
-            { message: 'Missing authentication credientals' },
+            { message: 'Missing authentication credentials' },
             { status: 401 }
         )
     } catch (err) {
