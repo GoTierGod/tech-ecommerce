@@ -39,18 +39,17 @@ export async function POST(req: NextRequest) {
 
         if (res.status === 201) {
             const res = await fetch(`${API_URL}/api/token/`, {
-                method: 'post',
+                method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(loginData)
             })
 
             if (res.ok) {
                 const authTokens: AuthTokens = await res.json()
-
                 cookies().set('authTokens', JSON.stringify(authTokens))
 
                 return NextResponse.json(
-                    { message: 'Registered and logged in' },
+                    { message: 'Successfully registered and logged in' },
                     { status: 200 }
                 )
             }

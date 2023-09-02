@@ -6,10 +6,10 @@ import { AuthTokens } from '@/types/tokens'
 import { APIResponse } from '@/types/response'
 
 export async function POST(req: NextRequest) {
-    const authCookies = cookies().get('authTokens')
+    try {
+        const authCookies = cookies().get('authTokens')
 
-    if (authCookies) {
-        try {
+        if (authCookies) {
             const body = await req.json()
 
             let authTokens: AuthTokens | null = null
@@ -19,7 +19,7 @@ export async function POST(req: NextRequest) {
                 cookies().delete('authTokens')
 
                 return NextResponse.json(
-                    { message: 'Invalid tokens' },
+                    { message: 'Invalid authentication credientals' },
                     { status: 401 }
                 )
             }
@@ -46,18 +46,16 @@ export async function POST(req: NextRequest) {
 
             const errorResponse: APIResponse = await res.json()
             return NextResponse.json(errorResponse, { status: res.status })
-        } catch (err) {
-            console.log(err)
-
-            return NextResponse.json(
-                { message: 'Something went wrong' },
-                { status: 400 }
-            )
         }
-    }
 
-    return NextResponse.json(
-        { message: 'Something went wrong' },
-        { status: 400 }
-    )
+        return NextResponse.json(
+            { message: 'Missing authentication credientals' },
+            { status: 401 }
+        )
+    } catch (err) {
+        return NextResponse.json(
+            { message: 'Something went wrong' },
+            { status: 400 }
+        )
+    }
 }

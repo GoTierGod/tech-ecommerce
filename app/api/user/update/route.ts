@@ -6,10 +6,10 @@ import { AuthTokens } from '@/types/tokens'
 import { APIResponse } from '@/types/response'
 
 export async function PATCH(req: NextRequest) {
-    const authCookies = cookies().get('authTokens')
+    try {
+        const authCookies = cookies().get('authTokens')
 
-    if (authCookies) {
-        try {
+        if (authCookies) {
             const body = await req.json()
 
             let authTokens: AuthTokens | null = null
@@ -19,7 +19,7 @@ export async function PATCH(req: NextRequest) {
                 cookies().delete('authTokens')
 
                 return NextResponse.json(
-                    { message: 'Invalid tokens' },
+                    { message: 'Invalid authentication credientals' },
                     { status: 401 }
                 )
             }
@@ -84,16 +84,19 @@ export async function PATCH(req: NextRequest) {
             }
 
             return NextResponse.json(
-                { message: 'Something went wrong' },
-                { status: 400 }
-            )
-        } catch (err) {
-            return NextResponse.json(
-                { message: 'Something went wrong' },
-                { status: 400 }
+                { message: 'There is no data to be updated' },
+                { status: 401 }
             )
         }
-    }
 
-    return NextResponse.json({ message: 'Unauthorized' }, { status: 401 })
+        return NextResponse.json(
+            { message: 'Missing authentication credientals' },
+            { status: 401 }
+        )
+    } catch (err) {
+        return NextResponse.json(
+            { message: 'Something went wrong' },
+            { status: 400 }
+        )
+    }
 }
