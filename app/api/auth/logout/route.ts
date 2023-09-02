@@ -8,8 +8,10 @@ export async function POST(req: NextRequest) {
     try {
         const authCookies = cookies().get('authTokens')
         if (!authCookies) {
-            cookies().delete('authTokens')
-            return NextResponse.json({}, { status: 401 })
+            return NextResponse.json(
+                { message: 'Missing authentication credentials' },
+                { status: 401 }
+            )
         }
 
         let authTokens: AuthTokens | null = null
@@ -17,12 +19,20 @@ export async function POST(req: NextRequest) {
             authTokens = JSON.parse(authCookies.value)
         } catch (err) {
             cookies().delete('authTokens')
-            return NextResponse.json({}, { status: 401 })
+
+            return NextResponse.json(
+                { message: 'Invalid authentication credentials' },
+                { status: 401 }
+            )
         }
 
         if (!authTokens?.refresh) {
             cookies().delete('authTokens')
-            return NextResponse.json({}, { status: 401 })
+
+            return NextResponse.json(
+                { message: 'Invalid authentication credentials' },
+                { status: 401 }
+            )
         }
 
         const logoutData: { refresh: string } = {
@@ -39,12 +49,20 @@ export async function POST(req: NextRequest) {
 
         if (res.ok) {
             cookies().delete('authTokens')
-            return NextResponse.json({}, { status: 200 })
+            return NextResponse.json(
+                { message: 'Successfully logged out' },
+                { status: 200 }
+            )
         }
 
         cookies().delete('authTokens')
-        return NextResponse.json({}, { status: 401 })
+        return NextResponse.json(
+            { message: 'Something went wrong' },
+            { status: 400 }
+        )
     } catch (err) {
+        cookies().delete('authTokens')
+
         return NextResponse.json(
             { message: 'Something went wrong' },
             { status: 400 }

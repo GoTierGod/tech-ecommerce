@@ -5,15 +5,15 @@ import { NextRequest } from 'next/server'
 import { API_URL } from '@/constants/back-end'
 import { AuthTokens } from '@/types/tokens'
 
+const validateAuthStr = (str: string): boolean => ['0', '1'].includes(str)
+const strToBoolean = (str: string): boolean => Boolean(Number(str))
+
 export async function GET(req: NextRequest) {
-    // Get search params
+    // path = path to be redirected to
+    // auth = string '1' or '0' indicating if authentication is required or not
     const { searchParams } = new URL(req.url)
     const path = searchParams.get('path')
     const auth = searchParams.get('auth')
-
-    // Check for auth cookies
-    const authCookies = cookies().get('authTokens')
-    if (!authCookies) redirect('/')
 
     // Check for path
     if (!path) {
@@ -21,7 +21,15 @@ export async function GET(req: NextRequest) {
         redirect('/')
     }
 
-    // Check if auth cookies is valid JSON
+    // Check for auth cookies
+    const authCookies = cookies().get('authTokens')
+    if (!authCookies) {
+        if (!auth || !validateAuthStr(auth)) redirect(path)
+
+        redirect(strToBoolean(auth) ? '/' : path)
+    }
+
+    // Check if auth cookies are valid JSON
     let authTokens: AuthTokens | null = null
     try {
         authTokens = JSON.parse(authCookies.value)
@@ -29,25 +37,24 @@ export async function GET(req: NextRequest) {
         cookies().delete('authTokens')
     }
     // Check if there's a refresh token in cookies
-    if (!authTokens?.refresh) redirect('/')
+    if (!authTokens?.refresh) {
+        if (!auth || !validateAuthStr(auth)) redirect(path)
 
-    // Try to refresh the user auth tokens
-    const refreshData: { refresh: string } = {
-        refresh: authTokens.refresh
+        redirect(strToBoolean(auth) ? '/' : path)
     }
 
+    // Try to refresh the user auth tokens
     const res = await fetch(`${API_URL}/api/token/refresh/`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
         },
-        body: JSON.stringify(refreshData)
+        body: JSON.stringify({ refresh: authTokens.refresh })
     })
 
     // If authentication matters
     if (auth) {
-        // If the auth parameter is not 0 or 1, delete the cookies and redirect
-        if (!['0', '1'].includes(auth)) {
+        if (!validateAuthStr(auth)) {
             cookies().delete('authTokens')
             redirect('/')
         }
@@ -59,19 +66,19 @@ export async function GET(req: NextRequest) {
             const data = await res.json()
             cookies().set('authTokens', JSON.stringify(data))
 
-            if (Boolean(Number(auth))) redirect(`${path}`)
-            else redirect('/')
+            redirect(strToBoolean(auth) ? path : '/')
         }
+
         // Otherwise delete invalid cookies and
         //     if this route needs authentication, redirect to /login
         //     otherwise redirect to the route which call this route handler
         else {
             cookies().delete('authTokens')
 
-            if (Boolean(Number(auth))) redirect(`/login`)
-            else redirect(`${path}`)
+            redirect(strToBoolean(auth) ? '/login' : path)
         }
     }
+
     // If authentication does not matter
     else {
         // If the request was successfull, set the new auth tokens
@@ -84,6 +91,6 @@ export async function GET(req: NextRequest) {
 
         // Finally as authentication does not matter
         //     redirect to the route which call this route handler
-        redirect(`${path}`)
+        redirect(path)
     }
 }
