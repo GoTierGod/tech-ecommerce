@@ -39,7 +39,7 @@ export default function OffersSection({ products }: OffersProps) {
                 </div>
                 <Link
                     className={style.link}
-                    href='/search/a,b,c,d,e'
+                    href='/search/a,b,c,d,e?page=1'
                     prefetch={false}
                 >
                     <span>More Offers</span>

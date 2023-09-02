@@ -21,7 +21,7 @@ export default function HighlightedSection({ products }: HighlightedProps) {
                         </div>
                         <Link
                             className={style.link}
-                            href={`/search/${product.details.category.title}`}
+                            href={`/search/${product.details.category.title}?page=1`}
                             prefetch={false}
                         >
                             <span>{product.details.category.title}</span>
