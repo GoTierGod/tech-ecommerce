@@ -42,7 +42,7 @@
     overflow: hidden;
 }
 
-:is(.header, .content) > svg {
+.wrapper svg {
     height: 1rem;
 }
 

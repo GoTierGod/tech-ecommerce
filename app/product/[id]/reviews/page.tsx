@@ -1,5 +1,6 @@
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import style from './page.module.css'
+
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {
     faExclamation,
     faFileEdit,
@@ -7,6 +8,7 @@ import {
     faThumbsDown,
     faThumbsUp
 } from '@fortawesome/free-solid-svg-icons'
+
 import ProductReview from './_components/ProductReview'
 import { getReviews } from '@/utils/data/getReviews'
 import { getUser } from '@/utils/data/getUser'
@@ -59,8 +61,9 @@ export default async function Page({ params }: { params: { id: string } }) {
                         <div className={style.empty}>
                             <h3>No reviews!</h3>
                             <p>
-                                At this moment you do not have products marked
-                                as reviews, check out our offers!
+                                At this moment this product has no reviews, you
+                                can write a review after buying a product, check
+                                out our offers
                             </p>
                         </div>
                     )}

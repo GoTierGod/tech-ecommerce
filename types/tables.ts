@@ -1,3 +1,5 @@
+import { Customer } from './users'
+
 export interface Category {
     id: number
     title: string
@@ -55,7 +57,7 @@ export interface Review {
     dislikes: number
     is_useful: boolean
 
-    customer: string
+    customer: Customer
     product: string
 }
 

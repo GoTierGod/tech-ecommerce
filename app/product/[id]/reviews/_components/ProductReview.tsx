@@ -1,12 +1,13 @@
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import style from './product-review.module.css'
+
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {
-    faClock,
     faExclamation,
     faStar,
     faThumbsDown,
     faThumbsUp
 } from '@fortawesome/free-solid-svg-icons'
+
 import { Review } from '@/types/tables'
 
 interface ProductReviewProps {
@@ -18,7 +19,7 @@ export default function ProductReview({ review }: ProductReviewProps) {
         <div className={style.card}>
             <div className={style.header}>
                 <div>
-                    <h3>@verylongusernametest</h3>
+                    <h3>@{review.customer.user.username}</h3>
                 </div>
                 <div>
                     <h3>{review.rating}</h3>
