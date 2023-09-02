@@ -43,11 +43,11 @@ export default function Search({
         page
     } = searchParams ?? {}
 
-    const [sortMenu, setSortMenu] = useState(false)
     const [isGamer, setIsGamer] = useState(is_gamer || '')
     const [currentPage, setCurrentPage] = useState(page || '1')
     const [orderBy, setOrderBy] = useState(order_by || '')
-    const [showFilter, setShowFilter] = useState(false)
+    const [sortMenu, setSortMenu] = useState(false)
+    const [filterMenu, setFilterMenu] = useState(false)
 
     const Formik = useFormik({
         initialValues: {
@@ -61,6 +61,9 @@ export default function Search({
             page: page || '1'
         },
         onSubmit: async values => {
+            setFilterMenu(false)
+            setSortMenu(false)
+
             const composeQueryParams = () => {
                 const filters = []
 
@@ -156,7 +159,7 @@ export default function Search({
             onSubmit={Formik.handleSubmit}
             style={
                 screen === 'small'
-                    ? showFilter
+                    ? filterMenu
                         ? {
                               maxHeight: '442px',
                               padding: '1.5rem'
@@ -291,12 +294,12 @@ export default function Search({
                                 <FontAwesomeIcon icon={faListCheck} />
                                 <button
                                     onClick={() =>
-                                        setShowFilter(
+                                        setFilterMenu(
                                             prevShowFilter => !prevShowFilter
                                         )
                                     }
                                     style={
-                                        showFilter
+                                        filterMenu
                                             ? {
                                                   backgroundColor:
                                                       'var(--white)',
