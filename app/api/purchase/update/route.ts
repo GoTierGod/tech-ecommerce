@@ -23,7 +23,6 @@ export async function PATCH(req: NextRequest) {
             }
 
             const body = await req.json()
-
             const { id, country, city, address, notes } = body
 
             const updatePurchaseData: {
@@ -61,10 +60,15 @@ export async function PATCH(req: NextRequest) {
             }
 
             return NextResponse.json(
-                { message: 'Something went wrong' },
+                { message: 'There is no data to be updated' },
                 { status: 400 }
             )
         }
+
+        return NextResponse.json(
+            { message: 'Missing authentication credientals' },
+            { status: 401 }
+        )
     } catch (err) {
         return NextResponse.json(
             { message: 'Something went wrong' },

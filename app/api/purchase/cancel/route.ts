@@ -17,7 +17,7 @@ export async function DELETE(req: NextRequest) {
                 cookies().delete('authTokens')
 
                 return NextResponse.json(
-                    { message: 'Invalid tokens' },
+                    { message: 'Invalid authentication credientals' },
                     { status: 401 }
                 )
             }
@@ -41,6 +41,11 @@ export async function DELETE(req: NextRequest) {
             const errorResponse: APIResponse = await res.json()
             return NextResponse.json(errorResponse, { status: res.status })
         }
+
+        return NextResponse.json(
+            { message: 'Missing authentication credientals' },
+            { status: 401 }
+        )
     } catch (err) {
         return NextResponse.json(
             { message: 'Something went wrong' },
