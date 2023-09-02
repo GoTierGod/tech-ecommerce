@@ -52,7 +52,7 @@ export default async function Page({ params }: { params: { id: string } }) {
                         <div className={style.grid}>
                             {reviews.map(review => (
                                 <ProductReview
-                                    key={review.id}
+                                    key={review.review.id}
                                     review={review}
                                 />
                             ))}
