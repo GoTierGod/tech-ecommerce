@@ -17,13 +17,12 @@ export async function POST(req: NextRequest) {
                 cookies().delete('authTokens')
 
                 return NextResponse.json(
-                    { message: 'Invalid tokens' },
+                    { message: 'Invalid authentication credentials' },
                     { status: 401 }
                 )
             }
 
             const body = await req.json()
-
             const id = body.id
 
             const reviewData: {
@@ -55,8 +54,8 @@ export async function POST(req: NextRequest) {
         }
 
         return NextResponse.json(
-            { message: 'Something went wrong' },
-            { status: 400 }
+            { message: 'Missing authentication credentials' },
+            { status: 401 }
         )
     } catch (err) {
         return NextResponse.json(

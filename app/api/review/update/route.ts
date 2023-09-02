@@ -17,13 +17,12 @@ export async function PATCH(req: NextRequest) {
                 cookies().delete('authTokens')
 
                 return NextResponse.json(
-                    { message: 'Invalid tokens' },
+                    { message: 'Invalid authentication credentials' },
                     { status: 401 }
                 )
             }
 
             const body = await req.json()
-
             const { id, rating, title, content } = body
 
             const reviewData: {
@@ -56,14 +55,14 @@ export async function PATCH(req: NextRequest) {
             }
 
             return NextResponse.json(
-                { message: 'Something went wrong' },
+                { message: 'There is no data to be updated' },
                 { status: 400 }
             )
         }
 
         return NextResponse.json(
-            { message: 'Something went wrong' },
-            { status: 400 }
+            { message: 'Missing authentication credentials' },
+            { status: 401 }
         )
     } catch (err) {
         return NextResponse.json(
