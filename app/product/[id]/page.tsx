@@ -82,24 +82,25 @@ export default async function Page({ params }: { params: { id: string } }) {
             </div>
             <div className={style.options}>
                 <span>Stock: {product.details.stock}</span>
-                <Link href={`/purchase/product/${product.details.id}`}>
+                <Link href={`/product/${product.details.id}/purchase`}>
                     <span>Buy Now</span>
                 </Link>
-                <ProductFavsCart
-                    product={product}
-                    cart={cart}
-                    favorites={favorites}
-                />
+                {user ? (
+                    <ProductFavsCart
+                        product={product}
+                        cart={cart}
+                        favorites={favorites}
+                    />
+                ) : (
+                    <Link href='/login' prefetch={false}>
+                        <span>Log in</span>
+                    </Link>
+                )}
             </div>
             <div className={style.delivery}>
                 <h3>Delivery</h3>
                 <span>
                     <FontAwesomeIcon icon={faTruck} /> It arrives for free this{' '}
-                    {getProductDeliveryDay()}
-                </span>
-                <span>
-                    <FontAwesomeIcon icon={faBox} />
-                    Pick up your package for free starting from{' '}
                     {getProductDeliveryDay()}
                 </span>
             </div>
@@ -122,17 +123,17 @@ export default async function Page({ params }: { params: { id: string } }) {
                         <FontAwesomeIcon icon={faShieldAlt} />{' '}
                         {product.details.months_warranty} Months
                     </span>
-                    <Link href='/' prefetch={false}>
+                    <Link href='/warranty' prefetch={false}>
                         <span>Read More</span>
                     </Link>
                 </div>
                 <div>
-                    <h3>FT Points</h3>
+                    <h3>T-Points</h3>
                     <span>
                         <FontAwesomeIcon icon={faStar} />{' '}
                         {Number(product.details.price)} Points
                     </span>
-                    <Link href='/' prefetch={false}>
+                    <Link href='/points' prefetch={false}>
                         <span>Log In</span>
                     </Link>
                 </div>
