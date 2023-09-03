@@ -17,14 +17,6 @@ export default function GamingSection({ products }: GamingProps) {
                     <span>Desktops - Laptops - Graphic Cards and more..</span>
                     <h4>The Best Gaming Offers</h4>
                 </div>
-                <Image
-                    src={'/gaming.webp'}
-                    alt='Gaming products'
-                    height={500}
-                    width={500}
-                    quality='50'
-                    priority
-                />
                 <Link
                     className={style.link}
                     href='/search/a,e,i,o,u?is_gamer=1&page=1'

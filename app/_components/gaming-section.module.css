@@ -9,9 +9,9 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    gap: 1rem;
+    gap: 1.5rem;
 
-    padding: 1rem;
+    padding: 1.5rem;
 
     background: var(--main);
     color: var(--white);
@@ -24,30 +24,27 @@
 .title {
     display: flex;
     flex-direction: column;
+    justify-content: center;
+    align-items: center;
     gap: 0.5rem;
+
+    width: 100%;
+    max-width: 300px;
 }
 
 .title span {
-    font-size: 1rem;
     font-weight: 375;
 }
 
 .title h4 {
-    font-size: 1.25rem;
-    font-weight: 400;
-}
-
-.header img {
-    height: auto;
-    width: 75%;
-
-    object-fit: contain;
+    font-size: 1.5rem;
 }
 
 .link {
     display: flex;
     justify-content: center;
     align-items: center;
+    gap: 1rem;
 
     padding: 0.5rem 0.75rem;
 
@@ -57,24 +54,13 @@
     border: 2px solid transparent;
     border-radius: 4px;
 
-    transition: border-color 300ms;
-}
-
-.link span {
-    font-size: 1rem;
-    font-weight: 450;
-
-    text-shadow: 1px 1px transparent;
-
-    transition: text-shadow 300ms;
+    transition: transform 300ms, border-color 600ms;
 }
 
 .link:hover {
     border-color: var(--light-pink);
-}
 
-.link:hover span {
-    text-shadow: 1px 1px var(--light-pink);
+    transform: scale(1.05);
 }
 
 .grid {
@@ -85,6 +71,10 @@
 
 .product {
     display: flex;
+    justify-content: center;
+    align-items: center;
+
+    padding: 1rem;
 
     background: var(--white);
 
@@ -95,8 +85,6 @@
 }
 
 .product img {
-    padding: 1rem;
-
     height: auto;
     width: 100%;
 
@@ -107,18 +95,6 @@
 
 .product:hover {
     border-color: var(--main);
-}
-
-@media screen and (min-width: 375px) {
-    .header {
-        padding: 2rem;
-    }
-}
-
-@media screen and (min-width: 425px) {
-    .title h4 {
-        font-size: 1.5rem;
-    }
 }
 
 @media screen and (min-width: 768px) {
