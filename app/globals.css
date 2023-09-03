@@ -77,6 +77,10 @@ span {
     font-weight: 375;
 }
 
+svg {
+    height: 1rem;
+}
+
 @media screen and (min-width: 768px) {
     body {
         overflow-x: visible;
