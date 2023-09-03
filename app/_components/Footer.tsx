@@ -21,15 +21,15 @@ export default function Footer() {
                     <div className={style.links}>
                         <a href='https://www.facebook.com/' target='_blank'>
                             <FontAwesomeIcon icon={faFacebook} />
-                            <span>Facebook</span>
+                            Facebook
                         </a>
                         <a href='https://twitter.com/' target='_blank'>
                             <FontAwesomeIcon icon={faTwitter} />
-                            <span>Twitter</span>
+                            Twitter
                         </a>
                         <a href='https://www.instagram.com/' target='_blank'>
                             <FontAwesomeIcon icon={faInstagram} />
-                            <span>Instagram</span>
+                            Instagram
                         </a>
                     </div>
                 </div>

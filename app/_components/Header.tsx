@@ -151,7 +151,7 @@ export default function Header({ categories, user }: HeaderProps) {
                     prefetch={false}
                 >
                     <FontAwesomeIcon icon={faCircleUser} />
-                    <span>{user ? user.user.username : 'Log in'}</span>
+                    {user ? user.user.username : 'Log in'}
                 </Link>
                 {user ? (
                     <Link
@@ -161,7 +161,7 @@ export default function Header({ categories, user }: HeaderProps) {
                         prefetch={false}
                     >
                         <FontAwesomeIcon icon={faSignOut} />
-                        <span>Log Out</span>
+                        Log Out
                     </Link>
                 ) : (
                     <Link
@@ -170,7 +170,7 @@ export default function Header({ categories, user }: HeaderProps) {
                         prefetch={false}
                     >
                         <FontAwesomeIcon icon={faSignIn} />
-                        <span>Register</span>
+                        Register
                     </Link>
                 )}
             </div>
@@ -195,28 +195,28 @@ export default function Header({ categories, user }: HeaderProps) {
                             prefetch={false}
                         >
                             <FontAwesomeIcon icon={faCircleUser} />
-                            <span>{user ? user.user.username : 'Log in'}</span>
+                            {user ? user.user.username : 'Log in'}
                         </Link>
                         {user ? (
                             <Link href='/logout' prefetch={false}>
                                 <FontAwesomeIcon icon={faSignOut} />
-                                <span>Log Out</span>
+                                Log Out
                             </Link>
                         ) : (
                             <Link href='/register' prefetch={false}>
                                 <FontAwesomeIcon icon={faSignIn} />
-                                <span>Register</span>
+                                Register
                             </Link>
                         )}
                     </div>
                     <div>
                         <Link href='/cart' prefetch={false}>
                             <FontAwesomeIcon icon={faCartShopping} />
-                            <span>Cart</span>
+                            Cart
                         </Link>
                         <Link href='/favorites' prefetch={false}>
                             <FontAwesomeIcon icon={faHeart} />
-                            <span>Favorites</span>
+                            Favorites
                         </Link>
                     </div>
                 </div>

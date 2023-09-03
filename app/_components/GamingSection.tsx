@@ -22,7 +22,7 @@ export default function GamingSection({ products }: GamingProps) {
                     href='/search/a,e,i,o,u?is_gamer=1&page=1'
                     prefetch={false}
                 >
-                    <span>Gaming Offers</span>
+                    Gaming Offers
                 </Link>
             </div>
             <div className={style.grid}>

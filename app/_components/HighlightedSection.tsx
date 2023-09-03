@@ -24,7 +24,7 @@ export default function HighlightedSection({ products }: HighlightedProps) {
                             href={`/search/${product.details.category.title}?page=1`}
                             prefetch={false}
                         >
-                            <span>{product.details.category.title}</span>
+                            {product.details.category.title}
                         </Link>
                     </div>
                     <Link
