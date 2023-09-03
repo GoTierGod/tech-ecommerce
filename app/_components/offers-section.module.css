@@ -11,9 +11,9 @@
     flex-wrap: wrap;
     justify-content: space-between;
     align-items: center;
-    gap: 1rem;
+    gap: 1.5rem;
 
-    padding: 1rem;
+    padding: 1.5rem;
 
     height: 100%;
     width: 100%;
@@ -31,20 +31,18 @@
 }
 
 .title span {
-    font-size: 1rem;
     font-weight: 375;
 }
 
 .title h4 {
     font-size: 1.5rem;
-    font-weight: 400;
 
     width: 200px;
 }
 
 .link {
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
     gap: 1rem;
 
@@ -56,36 +54,13 @@
     border: 2px solid transparent;
     border-radius: 4px;
 
-    transition: border-color 300ms;
-}
-
-.link span {
-    font-size: 1rem;
-    font-weight: 450;
-
-    text-shadow: 1px 1px transparent;
-
-    transition: text-shadow 300ms;
-}
-
-.link svg {
-    height: 1rem;
-
-    filter: drop-shadow(1px 1px transparent);
-
-    transition: filter 300ms;
+    transition: transform 300ms, border-color 600ms;
 }
 
 .link:hover {
     border-color: var(--light-pink);
-}
 
-.link:hover span {
-    text-shadow: 1px 1px var(--light-pink);
-}
-
-.link:hover svg {
-    filter: drop-shadow(1px 1px var(--light-pink));
+    transform: scale(1.05);
 }
 
 .grid {
@@ -97,6 +72,10 @@
 .product {
     display: flex;
     flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    padding: 1rem;
 
     background: var(--white);
 
@@ -111,8 +90,6 @@
 }
 
 .product img {
-    padding: 1rem;
-
     height: auto;
     width: 100%;
 
@@ -128,10 +105,10 @@
     }
 
     .header {
+        flex-wrap: nowrap;
         flex-direction: column;
         justify-content: center;
         align-items: center;
-        gap: 1rem;
 
         text-align: center;
     }
@@ -140,9 +117,5 @@
 @media screen and (min-width: 1024px) {
     .section {
         grid-template-columns: 6fr 5fr;
-    }
-
-    .header {
-        gap: 2rem;
     }
 }
