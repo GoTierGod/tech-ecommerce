@@ -45,20 +45,24 @@ export default async function Home() {
         <main>
             <div className={style.home}>
                 <OffersSection products={offers} />
-                <ProductsSection title='Laptops' products={laptops} url='/' />
+                <ProductsSection
+                    title='Laptops'
+                    products={laptops}
+                    url={`/search/laptops?page=1`}
+                />
                 <HighlightedSection
                     products={[highlightedOne[0], highlightedTwo[0]]}
                 />
                 <ProductsSection
                     title='Headphones'
                     products={headphones}
-                    url='/'
+                    url='/search/headphones?page=1'
                 />
                 <GamingSection products={gaming} />
                 <ProductsSection
                     title='Smartphones'
                     products={smartphones}
-                    url='/'
+                    url='/search/smartphones?page=1'
                 />
             </div>
         </main>

@@ -107,9 +107,3 @@
 .checking span span {
     font-weight: 400;
 }
-
-@media screen and (min-width: 768px) {
-    .wrapper {
-        aspect-ratio: 3/1;
-    }
-}
