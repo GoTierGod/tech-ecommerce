@@ -46,8 +46,12 @@ export default function VerticalCard({ product }: VerticalCardProps) {
                     </span>
                 </div>
                 <h4 className={style.name}>{product.details.name}</h4>
-                {product.best_seller && (
+                {product.best_seller ? (
                     <span className={style.bestSeller}>Best Seller</span>
+                ) : (
+                    <span className={style.sold}>
+                        {Math.round(Math.random() * 100)} Sold
+                    </span>
                 )}
                 <p className={style.description}>
                     {respectLineBreaks(product.details.description)}

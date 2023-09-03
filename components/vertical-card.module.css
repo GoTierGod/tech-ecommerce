@@ -32,7 +32,7 @@
     justify-content: center;
     align-items: center;
 
-    padding: 0.5rem 0;
+    padding: 1rem;
 
     height: 100%;
     width: 100%;
@@ -82,18 +82,22 @@
     font-weight: 400;
 }
 
-.discount {
+.discount,
+.bestSeller,
+.sold {
     display: flex;
     justify-content: center;
     align-items: center;
 
     padding: 0.25rem 0.5rem;
+    width: fit-content;
 
     background: var(--main);
     color: var(--white);
 
     font-size: 0.75rem;
 
+    border: 2px solid transparent;
     border-radius: 4px;
 }
 
@@ -115,21 +119,14 @@
 }
 
 .bestSeller {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-    padding: 0.25rem 0.5rem;
-
-    width: fit-content;
-
     background: var(--best-seller);
-    color: var(--white);
+}
 
-    font-size: 0.75rem;
-    white-space: nowrap;
+.sold {
+    background: var(--white);
+    color: var(--best-seller);
 
-    border-radius: 4px;
+    border-color: var(--best-seller);
 }
 
 .description {
@@ -143,7 +140,6 @@
     color: var(--light-gray);
 
     font-size: 0.75rem;
-    font-weight: 375;
 
     overflow: hidden;
 }
@@ -151,11 +147,5 @@
 @media screen and (min-width: 375px) {
     .image img {
         max-width: 125px;
-    }
-}
-
-@media screen and (min-width: 425px) {
-    .image {
-        padding: 1rem 0.5rem;
     }
 }
