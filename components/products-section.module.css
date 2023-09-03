@@ -19,11 +19,10 @@
 
 .header h4 {
     font-size: 1.5rem;
-    font-weight: 500;
 }
 
-.topLink {
-    display: none;
+.link {
+    display: flex;
     justify-content: center;
     align-items: center;
     gap: 1rem;
@@ -36,36 +35,13 @@
     border: 2px solid transparent;
     border-radius: 4px;
 
-    transition: border-color 300ms;
+    transition: transform 300ms, border-color 600ms;
 }
 
-.topLink span {
-    font-size: 1rem;
-    font-weight: 450;
-
-    text-shadow: 1px 1px transparent;
-
-    transition: text-shadow 300ms;
-}
-
-.topLink svg {
-    height: 1rem;
-
-    filter: drop-shadow(1px 1px transparent);
-
-    transition: filter 300ms;
-}
-
-.topLink:hover {
+.link:hover {
     border-color: var(--light-pink);
-}
 
-.topLink:hover span {
-    text-shadow: 1px 1px var(--light-pink);
-}
-
-.topLink:hover svg {
-    filter: drop-shadow(1px 1px var(--light-pink));
+    transform: scale(1.05);
 }
 
 .grid {
@@ -80,51 +56,6 @@
 
 .grid > a:nth-child(-n + 4) {
     display: flex;
-}
-
-.bottomLink {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 1rem;
-
-    padding: 1rem;
-
-    background: var(--white);
-    color: var(--main);
-
-    border: 2px solid transparent;
-    border-radius: 4px;
-
-    transition: border-color 300ms;
-}
-
-.bottomLink span {
-    font-size: 1rem;
-    font-weight: 450;
-
-    text-shadow: 1px 1px transparent;
-
-    transition: text-shadow 300ms;
-}
-
-.bottomLink svg {
-    height: 1rem;
-    filter: drop-shadow(1px 1px transparent);
-
-    transition: filter 300ms;
-}
-
-.bottomLink:hover {
-    border-color: var(--main);
-}
-
-.bottomLink:hover span {
-    text-shadow: 1px 1px var(--light-pink);
-}
-
-.bottomLink:hover svg {
-    filter: drop-shadow(1px 1px var(--light-pink));
 }
 
 @media screen and (min-width: 600px) {

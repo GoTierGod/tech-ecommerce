@@ -22,7 +22,7 @@ export default function ProductsSection({
         <section className={style.section}>
             <div className={style.header}>
                 <h4>{title}</h4>
-                <Link href={url} className={style.topLink}>
+                <Link href={url} className={style.link}>
                     <span>See More</span>
                     <FontAwesomeIcon icon={faRightLong} />
                 </Link>
@@ -32,10 +32,6 @@ export default function ProductsSection({
                     <VerticalCard key={product.details.id} product={product} />
                 ))}
             </div>
-            <Link href={url} className={style.bottomLink}>
-                <span>See More</span>
-                <FontAwesomeIcon icon={faRightLong} />
-            </Link>
         </section>
     )
 }
