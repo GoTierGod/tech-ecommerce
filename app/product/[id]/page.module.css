@@ -63,8 +63,27 @@
     line-height: 1.625rem;
 }
 
-.header svg {
-    height: 1rem;
+.link {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+
+    padding: 0.5rem 0.75rem;
+
+    background: var(--white);
+    color: var(--main);
+
+    border: 2px solid transparent;
+    border-radius: 4px;
+
+    transition: transform 300ms, border-color 600ms;
+}
+
+.link:hover {
+    border-color: var(--light-pink);
+
+    transform: scale(1.05);
 }
 
 .rating {
@@ -109,23 +128,6 @@
     border-radius: 4px;
 }
 
-:is(.brandProducts, .category) a {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 1rem;
-
-    padding: 0.5rem 0.75rem;
-
-    background: var(--white);
-    color: var(--main);
-
-    border: 2px solid transparent;
-    border-radius: 4px;
-
-    transition: all 300ms;
-}
-
 .brandProducts > div > h3 {
     font-size: 1.25rem;
     font-weight: 500;
@@ -148,23 +150,6 @@
 .category h3 {
     font-size: 1.25rem;
     font-weight: 500;
-}
-
-.category a span {
-    font-size: 1rem;
-    font-weight: 500;
-
-    text-shadow: 1px 1px transparent;
-
-    transition: all 300ms;
-}
-
-.category a:hover {
-    border-color: var(--light-pink);
-}
-
-.category a:hover span {
-    text-shadow: 1px 1px var(--light-pink);
 }
 
 .offer {
@@ -221,45 +206,8 @@
     border-radius: 4px;
 }
 
-.options > span {
-    font-size: 1.125rem;
-    font-weight: 375;
-
-    padding-bottom: 0.5rem;
-}
-
 .options a {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-    padding: 0.5rem 0.75rem;
-
     width: 100%;
-
-    background: var(--white);
-    color: var(--main);
-
-    border: 2px solid transparent;
-    border-radius: 4px;
-
-    transition: all 300ms;
-}
-
-.options a span {
-    font-size: 1rem;
-    font-weight: 500;
-    text-shadow: 1px 1px transparent;
-
-    transition: all 300ms;
-}
-
-.options a:hover {
-    border-color: var(--light-pink);
-}
-
-.options a:hover span {
-    text-shadow: 1px 1px var(--light-pink);
 }
 
 .delivery {
@@ -354,43 +302,6 @@
 
     font-size: 1rem;
     font-weight: 375;
-}
-
-.warrantyAndPoints svg {
-    height: 1rem;
-}
-
-.warrantyAndPoints a {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-    padding: 0.5rem 0.75rem;
-
-    background: var(--white);
-    color: var(--main);
-
-    border: 2px solid transparent;
-    border-radius: 4px;
-
-    transition: all 300ms;
-}
-
-.warrantyAndPoints a span {
-    font-size: 1rem;
-    font-weight: 500;
-
-    text-shadow: 1px 1px transparent;
-
-    transition: all 300ms;
-}
-
-.warrantyAndPoints a:hover {
-    border-color: var(--light-pink);
-}
-
-.warrantyAndPoints a:hover span {
-    text-shadow: 1px 1px var(--light-pink);
 }
 
 .payment {

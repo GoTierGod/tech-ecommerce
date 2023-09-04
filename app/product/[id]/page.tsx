@@ -94,7 +94,10 @@ export default async function Page({ params }: { params: { id: string } }) {
             </div>
             <div className={style.options}>
                 <span>Stock: {product.details.stock}</span>
-                <Link href={`/product/${product.details.id}/purchase`}>
+                <Link
+                    className={style.link}
+                    href={`/product/${product.details.id}/purchase`}
+                >
                     <span>Buy Now</span>
                 </Link>
                 {user ? (
@@ -104,7 +107,7 @@ export default async function Page({ params }: { params: { id: string } }) {
                         favorites={favorites}
                     />
                 ) : (
-                    <Link href='/login' prefetch={false}>
+                    <Link className={style.link} href='/login' prefetch={false}>
                         <span>Log in</span>
                     </Link>
                 )}
@@ -129,7 +132,11 @@ export default async function Page({ params }: { params: { id: string } }) {
                         <FontAwesomeIcon icon={faShieldAlt} />{' '}
                         {product.details.months_warranty} Months
                     </span>
-                    <Link href='/warranty' prefetch={false}>
+                    <Link
+                        className={style.link}
+                        href='/warranty'
+                        prefetch={false}
+                    >
                         <span>About Warranty</span>
                     </Link>
                 </div>
@@ -139,7 +146,11 @@ export default async function Page({ params }: { params: { id: string } }) {
                         <FontAwesomeIcon icon={faStar} />{' '}
                         {Number(product.details.price)} Points
                     </span>
-                    <Link href='/points' prefetch={false}>
+                    <Link
+                        className={style.link}
+                        href='/points'
+                        prefetch={false}
+                    >
                         <span>About Points</span>
                     </Link>
                 </div>
@@ -180,6 +191,7 @@ export default async function Page({ params }: { params: { id: string } }) {
                             <div>
                                 <h3>More of {product.details.brand.name}</h3>
                                 <Link
+                                    className={style.link}
                                     href={`/search/${product.details.brand.name}?page=1`}
                                     prefetch={false}
                                 >
@@ -199,6 +211,7 @@ export default async function Page({ params }: { params: { id: string } }) {
                         <div className={style.category}>
                             <h3>See more in this category</h3>
                             <Link
+                                className={style.link}
                                 href={`/search/${product.details.category.title}?page=1`}
                                 prefetch={false}
                             >

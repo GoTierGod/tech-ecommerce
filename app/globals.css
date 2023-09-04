@@ -78,10 +78,11 @@ span {
     font-weight: 375;
 }
 
-span {
+main {
     font-weight: inherit;
 }
 
+.svg-inline--fa,
 svg {
     height: 1rem;
 }
