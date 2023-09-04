@@ -18,7 +18,7 @@
 }
 
 .header h4 {
-    font-size: 1.5rem;
+    font-size: 1.25rem;
 }
 
 .link {
@@ -56,6 +56,12 @@
 
 .grid > a:nth-child(-n + 4) {
     display: flex;
+}
+
+@media screen and (min-width: 375px) {
+    .header h4 {
+        font-size: 1.5rem;
+    }
 }
 
 @media screen and (min-width: 600px) {
