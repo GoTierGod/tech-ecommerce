@@ -198,6 +198,8 @@
 
     background: var(--gray);
 
+    white-space: nowrap;
+
     border-radius: 4px;
 }
 
