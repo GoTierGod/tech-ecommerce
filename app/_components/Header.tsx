@@ -209,16 +209,18 @@ export default function Header({ categories, user }: HeaderProps) {
                             </Link>
                         )}
                     </div>
-                    <div>
-                        <Link href='/cart' prefetch={false}>
-                            <FontAwesomeIcon icon={faCartShopping} />
-                            Cart
-                        </Link>
-                        <Link href='/favorites' prefetch={false}>
-                            <FontAwesomeIcon icon={faHeart} />
-                            Favorites
-                        </Link>
-                    </div>
+                    {user && (
+                        <div>
+                            <Link href='/cart' prefetch={false}>
+                                <FontAwesomeIcon icon={faCartShopping} />
+                                Cart
+                            </Link>
+                            <Link href='/favorites' prefetch={false}>
+                                <FontAwesomeIcon icon={faHeart} />
+                                Favorites
+                            </Link>
+                        </div>
+                    )}
                 </div>
                 <nav className={style.smallScreenNav}>
                     <ul className={style.links}>
