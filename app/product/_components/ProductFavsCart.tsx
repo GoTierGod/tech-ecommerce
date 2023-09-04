@@ -67,7 +67,7 @@ export default function ProductFavsCart({
             if (res.ok) router.refresh()
         } else {
             const res = await fetch(
-                `/api/favorites/delete?id=${product.details.id}`,
+                `/api/favorites/delete?ids=${product.details.id}`,
                 {
                     method: 'DELETE'
                 }

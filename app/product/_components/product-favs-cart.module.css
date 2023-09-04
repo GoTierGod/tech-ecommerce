@@ -14,13 +14,15 @@
 
     padding: 0.5rem 0.75rem;
 
-    background: var(--white);
-    color: var(--gray);
+    background: var(--gray);
+    color: var(--white);
 
     border: 2px solid transparent;
     border-radius: 4px;
+
+    transition: transform 300ms;
 }
 
-.wrapper svg {
-    height: 1rem;
+.wrapper button:hover {
+    transform: scale(1.05);
 }
