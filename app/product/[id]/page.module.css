@@ -108,10 +108,11 @@
     align-items: center;
     gap: 0.5rem;
 
-    padding: 0.5rem 0.75rem;
+    padding: 0;
+    height: fit-content;
+    width: fit-content;
 
-    background: var(--main);
-    color: var(--white);
+    color: var(--gray);
 
     font-size: 1.5rem;
     font-weight: 400;

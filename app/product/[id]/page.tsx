@@ -3,12 +3,7 @@ import style from './page.module.css'
 import { ComposedProductInfo } from '@/types/product'
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import {
-    faBox,
-    faShieldAlt,
-    faStar,
-    faTruck
-} from '@fortawesome/free-solid-svg-icons'
+import { faShieldAlt, faStar, faTruck } from '@fortawesome/free-solid-svg-icons'
 import Image from 'next/image'
 import Link from 'next/link'
 
