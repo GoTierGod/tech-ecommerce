@@ -62,16 +62,7 @@ export default async function Page({ params }: { params: { id: string } }) {
 
     const productHeader = (
         <div className={style.header}>
-            <div>
-                <h2>{product.details.name}</h2>
-                {product.best_seller ? (
-                    <span className={style.bestSeller}>Best Seller</span>
-                ) : (
-                    <span className={style.stock}>
-                        {Math.round(Math.random() * 100)} In Stock
-                    </span>
-                )}
-            </div>
+            <h2>{product.details.name}</h2>
             <div
                 className={style.rating}
                 aria-label={`Rating: ${product.rating || 5.0}`}
