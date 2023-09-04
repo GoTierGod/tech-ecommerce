@@ -226,7 +226,7 @@ export default async function Page({ params }: { params: { id: string } }) {
                     products={relatedProducts.filter(
                         product => product.details.id.toString() !== id
                     )}
-                    url='/'
+                    url={`/search/${product.details.category}?page=1`}
                 />
             </div>
         </main>

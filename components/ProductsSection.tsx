@@ -22,7 +22,7 @@ export default function ProductsSection({
         <section className={style.section}>
             <div className={style.header}>
                 <h4>{title}</h4>
-                <Link href={url} className={style.link}>
+                <Link href={url} className={style.link} prefetch={false}>
                     {title}
                     <FontAwesomeIcon icon={faRightLong} />
                 </Link>
