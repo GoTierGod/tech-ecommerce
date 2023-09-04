@@ -4,6 +4,8 @@ import Image from 'next/image'
 import Link from 'next/link'
 
 import { ComposedProductInfo } from '@/types/product'
+import { faRightLong } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 interface HighlightedProps {
     products: ComposedProductInfo[]
@@ -25,6 +27,7 @@ export default function HighlightedSection({ products }: HighlightedProps) {
                             prefetch={false}
                         >
                             {product.details.category.title}
+                            <FontAwesomeIcon icon={faRightLong} />
                         </Link>
                     </div>
                     <Link

@@ -3,7 +3,12 @@ import style from './page.module.css'
 import { ComposedProductInfo } from '@/types/product'
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faShieldAlt, faStar, faTruck } from '@fortawesome/free-solid-svg-icons'
+import {
+    faRightLong,
+    faShieldAlt,
+    faStar,
+    faTruck
+} from '@fortawesome/free-solid-svg-icons'
 import Image from 'next/image'
 import Link from 'next/link'
 
@@ -125,7 +130,7 @@ export default async function Page({ params }: { params: { id: string } }) {
                         {product.details.months_warranty} Months
                     </span>
                     <Link href='/warranty' prefetch={false}>
-                        <span>Read More</span>
+                        <span>About Warranty</span>
                     </Link>
                 </div>
                 <div>
@@ -135,7 +140,7 @@ export default async function Page({ params }: { params: { id: string } }) {
                         {Number(product.details.price)} Points
                     </span>
                     <Link href='/points' prefetch={false}>
-                        <span>Log In</span>
+                        <span>About Points</span>
                     </Link>
                 </div>
             </div>
@@ -178,9 +183,8 @@ export default async function Page({ params }: { params: { id: string } }) {
                                     href={`/search/${product.details.brand.name}?page=1`}
                                     prefetch={false}
                                 >
-                                    <span>
-                                        {product.details.brand.name} Products
-                                    </span>
+                                    {product.details.brand.name}
+                                    <FontAwesomeIcon icon={faRightLong} />
                                 </Link>
                             </div>
                             <div>
@@ -198,7 +202,8 @@ export default async function Page({ params }: { params: { id: string } }) {
                                 href={`/search/${product.details.category.title}?page=1`}
                                 prefetch={false}
                             >
-                                <span>{product.details.category.title}</span>
+                                {product.details.category.title}
+                                <FontAwesomeIcon icon={faRightLong} />
                             </Link>
                         </div>
                         {productContent}

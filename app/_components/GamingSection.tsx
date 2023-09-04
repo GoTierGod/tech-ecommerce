@@ -4,6 +4,8 @@ import Link from 'next/link'
 import Image from 'next/image'
 
 import { ComposedProductInfo } from '@/types/product'
+import { faRightLong } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 interface GamingProps {
     products: ComposedProductInfo[]
@@ -23,6 +25,7 @@ export default function GamingSection({ products }: GamingProps) {
                     prefetch={false}
                 >
                     Gaming Offers
+                    <FontAwesomeIcon icon={faRightLong} />
                 </Link>
             </div>
             <div className={style.grid}>

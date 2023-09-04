@@ -42,7 +42,7 @@ export default function OffersSection({ products }: OffersProps) {
                     href='/search/a,b,c,d,e?page=1'
                     prefetch={false}
                 >
-                    More Offers
+                    See Offers
                     <FontAwesomeIcon icon={faRightLong} />
                 </Link>
             </div>

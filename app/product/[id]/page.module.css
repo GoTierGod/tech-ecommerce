@@ -91,8 +91,10 @@
     gap: 0.5rem;
 }
 
-.brandProducts > div:nth-child(1) {
+.brandProducts > div:nth-child(1),
+.category {
     display: flex;
+    flex-wrap: wrap;
     justify-content: space-between;
     align-items: center;
     gap: 1rem;
@@ -111,6 +113,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    gap: 1rem;
 
     padding: 0.5rem 0.75rem;
 
@@ -140,20 +143,6 @@
 
 .brandProducts > div:nth-child(2) > a:nth-child(-n + 2) {
     display: flex;
-}
-
-.category {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 1rem;
-
-    padding: 1rem;
-
-    background: var(--main);
-    color: var(--white);
-
-    border-radius: 4px;
 }
 
 .category h3 {
