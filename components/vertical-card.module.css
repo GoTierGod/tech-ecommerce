@@ -84,7 +84,7 @@
 
 .discount,
 .bestSeller,
-.sold {
+.stock {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -122,7 +122,7 @@
     background: var(--best-seller);
 }
 
-.sold {
+.stock {
     background: var(--white);
     color: var(--best-seller);
 

@@ -31,8 +31,12 @@ export default function HorizontalCard({ product }: HorizontalCardProps) {
             <div className={style.details}>
                 <h4 className={style.name}>{product.details.name}</h4>
                 <div className={style.badges}>
-                    {product.best_seller && (
+                    {product.best_seller ? (
                         <span className={style.bestSeller}>Best Seller</span>
+                    ) : (
+                        <span className={style.stock}>
+                            {Math.round(Math.random() * 100)} In Stock
+                        </span>
                     )}
                     <span className={style.discount}>
                         {getProductDiscount(

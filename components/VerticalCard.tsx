@@ -49,8 +49,8 @@ export default function VerticalCard({ product }: VerticalCardProps) {
                 {product.best_seller ? (
                     <span className={style.bestSeller}>Best Seller</span>
                 ) : (
-                    <span className={style.sold}>
-                        {Math.round(Math.random() * 100)} Sold
+                    <span className={style.stock}>
+                        {Math.round(Math.random() * 100)} In Stock
                     </span>
                 )}
                 <p className={style.description}>

@@ -71,21 +71,22 @@
     gap: 0.5rem;
 }
 
+.discount,
 .bestSeller,
-.discount {
+.stock {
     display: flex;
     justify-content: center;
     align-items: center;
 
     padding: 0.25rem 0.5rem;
-
     width: fit-content;
 
+    background: var(--main);
     color: var(--white);
 
     font-size: 0.75rem;
-    white-space: nowrap;
 
+    border: 2px solid transparent;
     border-radius: 4px;
 }
 
@@ -93,8 +94,11 @@
     background: var(--best-seller);
 }
 
-.discount {
-    background: var(--main);
+.stock {
+    background: var(--white);
+    color: var(--best-seller);
+
+    border-color: var(--best-seller);
 }
 
 .offer {
