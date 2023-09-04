@@ -65,6 +65,27 @@ export default async function Page({ params }: { params: { id: string } }) {
     const cart = await getCart()
     const favorites = await getFavorites()
 
+    const productHeader = (
+        <div className={style.header}>
+            <div>
+                <h2>{product.details.name}</h2>
+                {product.best_seller ? (
+                    <span className={style.bestSeller}>Best Seller</span>
+                ) : (
+                    <span className={style.stock}>
+                        {Math.round(Math.random() * 100)} In Stock
+                    </span>
+                )}
+            </div>
+            <div
+                className={style.rating}
+                aria-label={`Rating: ${product.rating || 5.0}`}
+            >
+                {getProductStars(product.reviews_counter, product.rating)}
+            </div>
+        </div>
+    )
+
     const productContent = (
         <div className={style.content}>
             <div className={style.offer}>
@@ -159,23 +180,6 @@ export default async function Page({ params }: { params: { id: string } }) {
                         ))}
                     </div>
                 </div>
-            </div>
-        </div>
-    )
-
-    const productHeader = (
-        <div className={style.header}>
-            <div>
-                <h2>{product.details.name}</h2>
-                {product.best_seller && (
-                    <span className={style.bestSeller}>Best Seller</span>
-                )}
-            </div>
-            <div
-                className={style.rating}
-                aria-label={`Rating: ${product.rating || 5.0}`}
-            >
-                {getProductStars(product.reviews_counter, product.rating)}
             </div>
         </div>
     )
