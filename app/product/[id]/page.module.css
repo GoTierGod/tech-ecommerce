@@ -107,6 +107,22 @@
     border-radius: 4px;
 }
 
+:is(.brandProducts, .category) a {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    padding: 0.5rem 0.75rem;
+
+    background: var(--white);
+    color: var(--main);
+
+    border: 2px solid transparent;
+    border-radius: 4px;
+
+    transition: all 300ms;
+}
+
 .brandProducts > div > h3 {
     font-size: 1.25rem;
     font-weight: 500;
@@ -143,22 +159,6 @@
 .category h3 {
     font-size: 1.25rem;
     font-weight: 500;
-}
-
-.category a {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-    padding: 0.5rem 0.75rem;
-
-    background: var(--white);
-    color: var(--main);
-
-    border: 2px solid transparent;
-    border-radius: 4px;
-
-    transition: all 300ms;
 }
 
 .category a span {
@@ -327,19 +327,6 @@
 .brand p {
     font-size: 1rem;
     font-weight: 375;
-}
-
-.brand a {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-    padding: 0.5rem 0.75rem;
-
-    background: var(--main);
-    color: var(--white);
-
-    border-radius: 4px;
 }
 
 .warrantyAndPoints {

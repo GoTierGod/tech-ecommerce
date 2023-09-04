@@ -116,12 +116,6 @@ export default async function Page({ params }: { params: { id: string } }) {
                     Offered by <span>{product.details.brand.name}</span>
                 </h3>
                 <p>{product.details.brand.description}</p>
-                <Link
-                    href={`/search/${product.details.brand.name}?page=1`}
-                    prefetch={false}
-                >
-                    See more of this brand
-                </Link>
             </div>
             <div className={style.warrantyAndPoints}>
                 <div>
@@ -180,6 +174,14 @@ export default async function Page({ params }: { params: { id: string } }) {
                         <div className={style.brandProducts}>
                             <div>
                                 <h3>More of {product.details.brand.name}</h3>
+                                <Link
+                                    href={`/search/${product.details.brand.name}?page=1`}
+                                    prefetch={false}
+                                >
+                                    <span>
+                                        {product.details.brand.name} Products
+                                    </span>
+                                </Link>
                             </div>
                             <div>
                                 {brandProducts.map(product => (
