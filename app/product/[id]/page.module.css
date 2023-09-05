@@ -206,6 +206,10 @@
     border-radius: 4px;
 }
 
+.options > span {
+    margin-bottom: 0.5rem;
+}
+
 .options a {
     width: 100%;
 }

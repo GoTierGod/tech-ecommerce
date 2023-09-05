@@ -6,6 +6,7 @@ import { ComposedProductInfo } from '@/types/product'
 import {
     faCartShopping,
     faEllipsisVertical,
+    faGift,
     faHeart,
     faPen,
     faTrash
@@ -310,6 +311,7 @@ export default function UserCart({ cart }: UserCartProps) {
                                 </div>
                                 <Link href='/cart/purchase' prefetch={false}>
                                     Buy this Cart
+                                    <FontAwesomeIcon icon={faGift} />
                                 </Link>
                             </div>
                         </div>

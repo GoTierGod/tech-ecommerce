@@ -313,8 +313,8 @@ export default function Search({
                                               }
                                     }
                                 >
-                                    Filter
                                     <FontAwesomeIcon icon={faListCheck} />
+                                    Filter
                                 </button>
                             </div>
                             <div className={style.smallScreenForm}>
@@ -366,8 +366,8 @@ export default function Search({
                                           }
                                 }
                             >
-                                <span>Sort By</span>
                                 <FontAwesomeIcon icon={faArrowDownWideShort} />
+                                Sort By
                             </button>
                             <div
                                 style={

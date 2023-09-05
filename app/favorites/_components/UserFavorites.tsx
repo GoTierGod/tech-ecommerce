@@ -7,6 +7,7 @@ import {
     faCartShopping,
     faCheck,
     faCheckCircle,
+    faCheckSquare,
     faEllipsisVertical,
     faHeart,
     faPen,
@@ -305,29 +306,27 @@ export default function UserFavorites({ favorites }: UserFavoritesProps) {
                                         }}
                                     >
                                         <FontAwesomeIcon icon={faXmark} />
-                                        <span>Cancel</span>
+                                        Cancel
                                     </button>
                                 ) : (
                                     <button onClick={() => setSelecting(true)}>
                                         <FontAwesomeIcon icon={faCheck} />
-                                        <span>Start to select</span>
+                                        Start to select
                                     </button>
                                 )}
                                 {selecting ? (
                                     <button onClick={removeItems}>
                                         <FontAwesomeIcon icon={faTrash} />
-                                        <span>
-                                            Remove {selectedItems.length}{' '}
-                                            {selectedItems.length > 1
-                                                ? 'products'
-                                                : 'product'}
-                                        </span>
+                                        Remove {selectedItems.length}{' '}
+                                        {selectedItems.length > 1
+                                            ? 'products'
+                                            : 'product'}
                                     </button>
                                 ) : (
-                                    <button>
-                                        <FontAwesomeIcon icon={faXmark} />
-                                        <span>No selected items</span>
-                                    </button>
+                                    <span>
+                                        No selected items
+                                        <FontAwesomeIcon icon={faTrash} />
+                                    </span>
                                 )}
                             </div>
                         </div>
@@ -358,7 +357,7 @@ export default function UserFavorites({ favorites }: UserFavoritesProps) {
                                             }
                                         >
                                             <FontAwesomeIcon
-                                                icon={faCheckCircle}
+                                                icon={faCheckSquare}
                                                 color={
                                                     selectedItems.includes(
                                                         product.details.id

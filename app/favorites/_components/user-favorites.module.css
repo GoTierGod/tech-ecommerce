@@ -84,19 +84,32 @@
     align-items: center;
 }
 
+.selectAndRemove .content > span {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    width: fit-content;
+
+    padding: 0.5rem 0.75rem;
+
+    font-weight: 400;
+
+    border: 2px solid var(--gray);
+    border-radius: 4px;
+}
+
 .selectAndRemove button {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    gap: 1.5rem;
+    gap: 1rem;
 
     padding: 0.5rem 0.75rem;
     width: fit-content;
 
     background: var(--main);
     color: var(--white);
-
-    font-size: 1rem;
 
     border: 2px solid transparent;
     border-radius: 4px;

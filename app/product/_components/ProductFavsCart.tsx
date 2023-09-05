@@ -80,14 +80,14 @@ export default function ProductFavsCart({
     return (
         <div className={style.wrapper}>
             <button onClick={cartAction}>
-                <span>{!isInCart ? 'Add to Cart' : 'In Cart'}</span>
                 <FontAwesomeIcon
                     icon={!isInCart ? faCartShopping : faCheckToSlot}
                 />
+                {!isInCart ? 'Add to Cart' : 'In Cart'}
             </button>
             <button onClick={favsAction}>
-                <span>{!isInFavs ? 'Add to Favs' : 'In Favorites'}</span>
                 <FontAwesomeIcon icon={!isInFavs ? faHeart : faHeartPulse} />
+                {!isInFavs ? 'Add to Favs' : 'In Favorites'}
             </button>
         </div>
     )
