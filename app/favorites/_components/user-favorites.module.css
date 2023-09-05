@@ -177,8 +177,6 @@
 
     opacity: 1;
     transition: height 300ms, width 300ms, opacity 300ms, top 300ms, left 300ms;
-
-    overflow: hidden;
 }
 
 .checkWrapper {
