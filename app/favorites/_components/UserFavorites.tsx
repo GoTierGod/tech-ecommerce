@@ -138,18 +138,34 @@ function FavItem({ product, openedOptions, setOpenedOptions }: FavItemProps) {
             </button>
             <button
                 onClick={() => favItemAction('delete')}
+                onMouseOver={e =>
+                    e.currentTarget.firstElementChild?.classList.add(
+                        'fa-bounce'
+                    )
+                }
+                onMouseOut={e =>
+                    e.currentTarget.firstElementChild?.classList.remove(
+                        'fa-bounce'
+                    )
+                }
                 disabled={waitingRes}
                 style={
                     optMenu
                         ? {
-                              transform: 'scale(1)',
+                              padding: '1rem',
+                              width: '48px',
+                              height: '48px',
                               right: '3rem',
-                              top: '1rem'
+                              top: '1rem',
+                              borderWidth: '2px'
                           }
                         : {
-                              transform: 'scale(0)',
-                              right: '2px',
-                              top: '2px'
+                              padding: 0,
+                              width: 0,
+                              height: 0,
+                              right: '1rem',
+                              top: '1rem',
+                              borderWidth: 0
                           }
                 }
             >
@@ -157,18 +173,32 @@ function FavItem({ product, openedOptions, setOpenedOptions }: FavItemProps) {
             </button>
             <button
                 onClick={() => favItemAction('move')}
+                onMouseOver={e =>
+                    e.currentTarget.firstElementChild?.classList.add('fa-shake')
+                }
+                onMouseOut={e =>
+                    e.currentTarget.firstElementChild?.classList.remove(
+                        'fa-shake'
+                    )
+                }
                 disabled={waitingRes}
                 style={
                     optMenu
                         ? {
-                              transform: 'scale(1)',
+                              padding: '1rem',
+                              width: '48px',
+                              height: '48px',
                               right: '1rem',
-                              top: '3.5rem'
+                              top: '3.5rem',
+                              borderWidth: '2px'
                           }
                         : {
-                              transform: 'scale(0)',
-                              right: '2px',
-                              top: '2px'
+                              padding: 0,
+                              width: 0,
+                              height: 0,
+                              right: '1rem',
+                              top: '1rem',
+                              borderWidth: 0
                           }
                 }
             >
