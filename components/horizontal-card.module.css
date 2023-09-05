@@ -54,7 +54,8 @@
     line-clamp: 1;
     -webkit-box-orient: vertical;
 
-    height: 0.95rem;
+    height: 1.075rem;
+    width: 85%;
 
     font-size: 1.125rem;
     font-weight: 375;
