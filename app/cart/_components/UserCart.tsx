@@ -241,7 +241,7 @@ export default function UserCart({ cart }: UserCartProps) {
                                     </span>
                                 </span>
                                 <span>
-                                    <FontAwesomeIcon icon={faCartShopping} />
+                                    <FontAwesomeIcon icon={faHeart} />
                                     <span>
                                         Move the product to your favorites
                                     </span>

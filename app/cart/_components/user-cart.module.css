@@ -287,6 +287,10 @@
         transform 300ms, right 300ms, top 300ms, background-color 300ms;
 }
 
+.cartItem button:not(.cartItemOptions) svg {
+    filter: drop-shadow(2px 4px 6px var(--gray));
+}
+
 .cartItem button:not(.cartItemOptions):first-of-type {
     transition-delay: 0ms;
 }

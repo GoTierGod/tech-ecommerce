@@ -283,6 +283,10 @@
         transform 300ms, right 300ms, top 300ms, background-color 300ms;
 }
 
+.favItem button:not(.favItemOptions) svg {
+    filter: drop-shadow(2px 4px 6px var(--gray));
+}
+
 .favItem button:not(.favItemOptions):first-of-type {
     transition-delay: 0ms;
 }
