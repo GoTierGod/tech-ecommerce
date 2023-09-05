@@ -102,6 +102,12 @@
     border-radius: 4px;
 
     cursor: pointer;
+
+    transition: transform 300ms;
+}
+
+.selectAndRemove button:hover {
+    transform: scale(1.05);
 }
 
 .selectAndRemove button:nth-child(2) {
@@ -198,11 +204,7 @@
 .checkWrapper > button svg {
     height: 1.25rem;
 
-    transition: color 300ms, transform 150ms;
-}
-
-.checkWrapper > button:active svg {
-    transform: scale(1.25);
+    transition: color 300ms;
 }
 
 .loadingAction {
@@ -286,6 +288,8 @@
 
 .favItem button:not(.favItemOptions):hover {
     background: var(--main);
+
+    transform: scale(1.05);
 }
 
 @media screen and (min-width: 600px) {
@@ -312,6 +316,11 @@
 
     .wrapperRight {
         grid-area: w-right;
+    }
+
+    .selectAndRemove .content {
+        flex-wrap: nowrap;
+        flex-direction: column;
     }
 
     .grid {

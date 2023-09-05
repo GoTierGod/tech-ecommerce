@@ -142,6 +142,12 @@
 
 .currItemImg svg {
     height: 1.5rem;
+
+    transition: transform 300ms;
+}
+
+.currItemImg button:hover svg {
+    transform: scale(1.25);
 }
 
 .currItemImg img {
@@ -252,6 +258,12 @@
     border-radius: 4px;
 
     cursor: pointer;
+
+    transition: transform 300ms;
+}
+
+.options :where(button, a):hover {
+    transform: scale(1.05);
 }
 
 .options a:last-of-type {

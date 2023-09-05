@@ -264,7 +264,7 @@ export default function UserCart({ cart }: UserCartProps) {
                                         </span>
                                     </div>
                                 </div>
-                                <Link href='/purchase/cart' prefetch={false}>
+                                <Link href='/cart/purchase' prefetch={false}>
                                     Buy this Cart
                                 </Link>
                             </div>

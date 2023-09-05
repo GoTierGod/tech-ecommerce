@@ -281,7 +281,7 @@ export default function UserFavorites({ favorites }: UserFavoritesProps) {
                                     </button>
                                 ) : (
                                     <button>
-                                        <FontAwesomeIcon icon={faTrash} />
+                                        <FontAwesomeIcon icon={faCheckCircle} />
                                         <span>No selected items</span>
                                     </button>
                                 )}

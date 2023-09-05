@@ -147,6 +147,12 @@
 
     border: 2px solid transparent;
     border-radius: 4px;
+
+    transition: transform 300ms;
+}
+
+.cartDetails a:hover {
+    transform: scale(1.05);
 }
 
 .grid {
