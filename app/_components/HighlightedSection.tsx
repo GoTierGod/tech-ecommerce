@@ -6,6 +6,8 @@ import Link from 'next/link'
 import { ComposedProductInfo } from '@/types/product'
 import { faRightLong } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { priceStringFormatter } from '@/utils/formatting/priceStringFormatter'
+import { getProductDiscount } from '@/utils/products/getProductDiscount'
 
 interface HighlightedProps {
     products: ComposedProductInfo[]
@@ -31,7 +33,7 @@ export default function HighlightedSection({ products }: HighlightedProps) {
                         </Link>
                     </div>
                     <Link
-                        className={style.image}
+                        className={style.product}
                         href={`/product/${product.details.id}`}
                         prefetch={false}
                     >
@@ -42,6 +44,15 @@ export default function HighlightedSection({ products }: HighlightedProps) {
                             height={250}
                             quality='50'
                         />
+                        <span>
+                            {priceStringFormatter(product.details.offer_price)}
+                            <span>
+                                {getProductDiscount(
+                                    product.details.price,
+                                    product.details.offer_price
+                                )}
+                            </span>
+                        </span>
                     </Link>
                 </article>
             ))}
