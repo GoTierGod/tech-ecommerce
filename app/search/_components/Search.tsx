@@ -264,7 +264,10 @@ export default function Search({
             </div>
             <div className={style.formField}>
                 <label htmlFor='installments'>Installments</label>
-                <select id='installments' {...Formik.getFieldProps('brand')}>
+                <select
+                    id='installments'
+                    {...Formik.getFieldProps('installments')}
+                >
                     <option value=''>Any</option>
                     <option value='6'>6</option>
                     <option value='12'>12</option>
