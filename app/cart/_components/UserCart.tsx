@@ -4,7 +4,6 @@ import style from './user-cart.module.css'
 
 import { ComposedProductInfo } from '@/types/product'
 import {
-    faCartShopping,
     faEllipsisVertical,
     faGift,
     faHeart,

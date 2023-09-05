@@ -156,6 +156,7 @@
 
 @media screen and (min-width: 600px) {
     .product > span {
+        gap: 0.5rem;
         padding: 0 1rem;
     }
 
