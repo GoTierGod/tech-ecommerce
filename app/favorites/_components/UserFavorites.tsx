@@ -169,7 +169,14 @@ function FavItem({ product, openedOptions, setOpenedOptions }: FavItemProps) {
                           }
                 }
             >
-                <FontAwesomeIcon icon={faTrash} />
+                <FontAwesomeIcon
+                    icon={faTrash}
+                    style={{
+                        animationIterationCount: 1,
+                        animationDelay: '150ms',
+                        animationDuration: '900ms'
+                    }}
+                />
             </button>
             <button
                 onClick={() => favItemAction('move')}
@@ -202,7 +209,14 @@ function FavItem({ product, openedOptions, setOpenedOptions }: FavItemProps) {
                           }
                 }
             >
-                <FontAwesomeIcon icon={faCartShopping} />
+                <FontAwesomeIcon
+                    icon={faCartShopping}
+                    style={{
+                        animationIterationCount: 1,
+                        animationDelay: '150ms',
+                        animationDuration: '900ms'
+                    }}
+                />
             </button>
         </div>
     )
@@ -311,7 +325,7 @@ export default function UserFavorites({ favorites }: UserFavoritesProps) {
                                     </button>
                                 ) : (
                                     <button>
-                                        <FontAwesomeIcon icon={faCheckCircle} />
+                                        <FontAwesomeIcon icon={faXmark} />
                                         <span>No selected items</span>
                                     </button>
                                 )}

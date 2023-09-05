@@ -168,7 +168,14 @@ function CartItem({ product, openedOptions, setOpenedOptions }: CartItemProps) {
                           }
                 }
             >
-                <FontAwesomeIcon icon={faTrash} />
+                <FontAwesomeIcon
+                    icon={faTrash}
+                    style={{
+                        animationIterationCount: 1,
+                        animationDelay: '150ms',
+                        animationDuration: '900ms'
+                    }}
+                />
             </button>
             <button
                 onClick={() => cartItemAction('move')}
@@ -201,7 +208,14 @@ function CartItem({ product, openedOptions, setOpenedOptions }: CartItemProps) {
                           }
                 }
             >
-                <FontAwesomeIcon icon={faHeart} />
+                <FontAwesomeIcon
+                    icon={faHeart}
+                    style={{
+                        animationIterationCount: 1,
+                        animationDelay: '150ms',
+                        animationDuration: '900ms'
+                    }}
+                />
             </button>
         </div>
     )
