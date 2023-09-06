@@ -30,6 +30,7 @@
 
     background: var(--white);
 
+    border: 2px solid transparent;
     border-radius: 4px;
 }
 
@@ -55,7 +56,7 @@
     background: var(--gray);
     color: var(--white);
 
-    border: none;
+    border: 2px solid transparent;
     border-radius: 4px;
 }
 
@@ -69,26 +70,17 @@
     background: var(--gray);
     color: var(--white);
 
-    font-size: 1rem;
-    font-family: inherit;
-
-    border: none;
+    border: 2px solid transparent;
     border-radius: 4px;
-
-    cursor: pointer;
 }
 
-.searchBar svg {
-    height: 1rem;
-}
-
-.categoriesSelect {
+.categories {
     display: none;
     justify-content: center;
     align-items: center;
 }
 
-.categoriesSelect select {
+.categories select {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -99,11 +91,7 @@
     background: var(--gray);
     color: var(--white);
 
-    font-size: 1rem;
-    font-weight: 375;
-    font-family: inherit;
-
-    border: none;
+    border: 2px solid transparent;
     border-right: 0.75rem solid var(--gray);
     border-radius: 4px;
     outline: none;
@@ -118,42 +106,43 @@
 
     background: var(--gray);
 
-    font-size: 1rem;
-    font-family: inherit;
-
-    border: none;
+    border: 2px solid transparent;
     border-radius: 4px;
-
-    cursor: pointer;
 }
 
 .wideScreenNav {
     display: none;
 }
 
-.wideScreenNav .links {
+.wideScreenNav ul {
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
-.wideScreenNav .links li {
+.wideScreenNav li {
     list-style: none;
 }
 
-.wideScreenNav .links li a {
+.wideScreenNav a {
     padding: 0.5rem 0.75rem;
 
     font-weight: 400;
 
+    border: 2px solid transparent;
     border-radius: 4px;
 
     transition: background-color 300ms, color 300ms;
 }
 
-.wideScreenNav .links li a:hover {
+.wideScreenNav a:hover {
     background: var(--white);
     color: var(--main);
+}
+
+.wideScreenUserLinks {
+    display: flex;
+    gap: 0.5rem;
 }
 
 .dropdownMenu {
@@ -172,7 +161,7 @@
     transition: max-height 300ms, padding 300ms;
 }
 
-.dropdownMenu :where(.options, .links) {
+.smallScreenUserLinks {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -182,8 +171,7 @@
     width: 100%;
 }
 
-.profileOrLogin,
-.logoutOrRegister {
+.wideScreenLink {
     display: none;
     justify-content: center;
     align-items: center;
@@ -195,16 +183,17 @@
 
     white-space: nowrap;
 
+    border: 2px solid transparent;
     border-radius: 4px;
 
     transition: transform 300ms;
 }
 
-:is(.profileOrLogin, .logoutOrRegister):hover {
+.wideScreenLink:hover {
     transform: scale(1.05);
 }
 
-.options > div {
+.smallScreenUserLinks > div {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -213,7 +202,7 @@
     width: 100%;
 }
 
-.options a {
+.smallScreenUserLinks a {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -225,10 +214,11 @@
     background-color: var(--gray);
     color: var(--white);
 
+    border: 2px solid transparent;
     border-radius: 4px;
 }
 
-.options a span {
+.smallScreenUserLinks a {
     white-space: nowrap;
 }
 
@@ -238,7 +228,7 @@
     align-items: center;
 }
 
-.smallScreenNav .links {
+.smallScreenNav ul {
     display: flex;
     flex-direction: row;
     justify-content: center;
@@ -248,7 +238,7 @@
     list-style: none;
 }
 
-.smallScreenNav .links a {
+.smallScreenNav a {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -263,44 +253,43 @@
     transition: background-color 300ms, color 300ms;
 }
 
-.smallScreenNav .links a:hover {
+.smallScreenNav a:hover {
     background-color: var(--white);
     color: var(--main);
 }
 
 @media screen and (min-width: 425px) {
-    .dropdownMenu :where(.options, .links) {
+    .dropdownMenu :where(.smallScreenUserLinks, ul) {
         justify-content: center;
         align-items: center;
     }
 }
 
 @media screen and (min-width: 600px) {
-    .categoriesSelect {
+    .categories {
         display: flex;
     }
 
-    .smallScreenNav .links {
+    .smallScreenNav ul {
         gap: 0.5rem;
     }
 
-    .dropdownMenu :where(.options, .links) {
+    .dropdownMenu :where(.smallScreenUserLinks, ul) {
         width: fit-content;
     }
 
-    .options div {
+    .smallScreenUserLinks div {
         display: grid;
         grid-template-columns: repeat(2, 1fr);
     }
 }
 
 @media screen and (min-width: 768px) {
-    .logoutOrRegister,
-    .profileOrLogin {
+    .wideScreenLink {
         display: flex;
     }
 
-    .options div:nth-child(1) {
+    .smallScreenUserLinks {
         display: none;
     }
 }

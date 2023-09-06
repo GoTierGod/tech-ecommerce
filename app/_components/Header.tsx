@@ -106,7 +106,7 @@ export default function Header({ categories, user }: HeaderProps) {
                         <FontAwesomeIcon icon={faSearch} />
                     </button>
                 </form>
-                <div className={style.categoriesSelect}>
+                <div className={style.categories}>
                     <select
                         name='categories'
                         id='categories'
@@ -131,7 +131,7 @@ export default function Header({ categories, user }: HeaderProps) {
                     <FontAwesomeIcon icon={faBars} />
                 </button>
                 <nav className={style.wideScreenNav}>
-                    <ul className={style.links}>
+                    <ul>
                         <li>
                             <Link href='/contact' prefetch={false}>
                                 Contact
@@ -149,34 +149,53 @@ export default function Header({ categories, user }: HeaderProps) {
                         </li>
                     </ul>
                 </nav>
+                <div className={style.wideScreenUserLinks}>
+                    <Link
+                        className={style.wideScreenLink}
+                        href={user ? '/profile' : '/login'}
+                        prefetch={false}
+                    >
+                        <FontAwesomeIcon icon={faCircleUser} />
+                        {user ? user.user.username : 'Log in'}
+                    </Link>
+                    {user ? (
+                        <>
+                            <Link
+                                className={style.wideScreenLink}
+                                href='/cart'
+                                prefetch={false}
+                                aria-label='Cart'
+                            >
+                                <FontAwesomeIcon icon={faCartShopping} />
+                            </Link>
+                            <Link
+                                className={style.wideScreenLink}
+                                href='/favorites'
+                                prefetch={false}
+                                aria-label='Favorites'
+                            >
+                                <FontAwesomeIcon icon={faHeart} />
+                            </Link>
+                        </>
+                    ) : (
+                        <Link
+                            className={style.wideScreenLink}
+                            href='/register'
+                            prefetch={false}
+                        >
+                            <FontAwesomeIcon icon={faSignIn} />
+                            Register
+                        </Link>
+                    )}
+                </div>
                 <Link
-                    className={style.profileOrLogin}
-                    href={user ? '/profile' : '/login'}
+                    className={style.wideScreenLink}
+                    href='/logout'
                     prefetch={false}
+                    aria-label='Log Out'
                 >
-                    <FontAwesomeIcon icon={faCircleUser} />
-                    {user ? user.user.username : 'Log in'}
+                    <FontAwesomeIcon icon={faSignOut} />
                 </Link>
-                {user ? (
-                    <Link
-                        className={style.logoutOrRegister}
-                        href='/logout'
-                        aria-label='Log Out'
-                        prefetch={false}
-                    >
-                        <FontAwesomeIcon icon={faSignOut} />
-                        Log Out
-                    </Link>
-                ) : (
-                    <Link
-                        className={style.logoutOrRegister}
-                        href='/register'
-                        prefetch={false}
-                    >
-                        <FontAwesomeIcon icon={faSignIn} />
-                        Register
-                    </Link>
-                )}
             </div>
             <div
                 className={style.dropdownMenu}
@@ -192,7 +211,7 @@ export default function Header({ categories, user }: HeaderProps) {
                           }
                 }
             >
-                <div className={style.options}>
+                <div className={style.smallScreenUserLinks}>
                     <div>
                         <Link
                             href={user ? '/profile' : '/login'}
@@ -227,7 +246,7 @@ export default function Header({ categories, user }: HeaderProps) {
                     )}
                 </div>
                 <nav className={style.smallScreenNav}>
-                    <ul className={style.links}>
+                    <ul>
                         <li>
                             <Link href='/contact' prefetch={false}>
                                 Contact
