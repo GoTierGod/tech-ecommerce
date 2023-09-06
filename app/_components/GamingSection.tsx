@@ -16,7 +16,7 @@ interface GamingProps {
 export default function GamingSection({ products }: GamingProps) {
     return (
         <section className={style.section}>
-            <div className={style.header}>
+            <header className={style.header}>
                 <div className={style.title}>
                     <span>Desktops - Laptops - Graphic Cards and more..</span>
                     <h4>The Best Gaming Offers</h4>
@@ -29,7 +29,7 @@ export default function GamingSection({ products }: GamingProps) {
                     Gaming Offers
                     <FontAwesomeIcon icon={faRightLong} />
                 </Link>
-            </div>
+            </header>
             <div className={style.grid}>
                 {products.slice(0, 6).map(product => (
                     <Link
@@ -45,7 +45,7 @@ export default function GamingSection({ products }: GamingProps) {
                             height={250}
                             quality='50'
                         />
-                        <span>
+                        <p>
                             {priceStringFormatter(product.details.offer_price)}
                             <span>
                                 {getProductDiscount(
@@ -53,7 +53,7 @@ export default function GamingSection({ products }: GamingProps) {
                                     product.details.offer_price
                                 )}
                             </span>
-                        </span>
+                        </p>
                     </Link>
                 ))}
             </div>
