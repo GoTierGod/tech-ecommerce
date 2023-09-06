@@ -106,23 +106,22 @@ export default function Header({ categories, user }: HeaderProps) {
                         <FontAwesomeIcon icon={faSearch} />
                     </button>
                 </form>
-                <div className={style.categories}>
-                    <select
-                        name='categories'
-                        id='categories'
-                        onChange={e => setCategory(e.target.value)}
-                        value={category}
-                    >
-                        <option value='' hidden>
-                            Categories
+                <select
+                    className={style.categories}
+                    name='categories'
+                    id='categories'
+                    onChange={e => setCategory(e.target.value)}
+                    value={category}
+                >
+                    <option value='' hidden>
+                        Categories
+                    </option>
+                    {categories.map(category => (
+                        <option key={category.id} value={category.title}>
+                            {titleCaseFormatter(category.title)}
                         </option>
-                        {categories.map(category => (
-                            <option key={category.id} value={category.title}>
-                                {titleCaseFormatter(category.title)}
-                            </option>
-                        ))}
-                    </select>
-                </div>
+                    ))}
+                </select>
                 <button
                     onClick={toggleDropdownMenu}
                     className={style.dropdownBtn}
