@@ -15,7 +15,7 @@ import {
     faSignOut,
     faSignIn
 } from '@fortawesome/free-solid-svg-icons'
-import { FormEvent, useCallback, useEffect, useRef, useState } from 'react'
+import { FormEvent, useCallback, useEffect, useState } from 'react'
 import Cookies from 'js-cookie'
 
 import { Category } from '@/types/tables'
@@ -66,11 +66,15 @@ export default function Header({ categories, user }: HeaderProps) {
     useEffect(() => {
         if (user && !Cookies.get('authTokens')) router.refresh()
 
-        if (!user && Cookies.get('authTokens')) {
+        if (
+            (!user && Cookies.get('authTokens')) ||
+            (!user && !Cookies.get('authTokens'))
+        ) {
             ;(async () => {
                 router.push(`/api/auth/refresh?path=${path}`)
             })()
         }
+
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [path])
 
