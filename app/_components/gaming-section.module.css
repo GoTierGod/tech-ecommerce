@@ -77,19 +77,18 @@
     justify-content: center;
     align-items: center;
 
-    padding: 1rem;
-
     background: var(--white);
 
     border: 2px solid transparent;
     border-radius: 4px;
 
-    transition: border-color 300ms, filter 300ms;
+    transition: border-color 300ms, filter 300ms, background-color 300ms;
 
     filter: drop-shadow(1px 2px 3px transparent);
 }
 
 .product img {
+    padding: 1rem;
     height: auto;
     width: 100%;
 
@@ -99,9 +98,10 @@
 
     background: var(--white);
 
+    border: 2px solid transparent;
     border-radius: 4px;
 
-    transition: transform 300ms;
+    transition: transform 300ms, border-color 300ms;
 }
 
 .product:hover {
@@ -122,8 +122,8 @@
     height: 0;
     width: 100%;
 
-    background: var(--main);
-    color: var(--white);
+    background: var(--white);
+    color: var(--main);
 
     font-size: 1rem;
     font-weight: 400;
@@ -137,8 +137,8 @@
 .product span {
     padding: 0.25rem 0.5rem;
 
-    background: var(--white);
-    color: var(--main);
+    background: var(--main);
+    color: var(--white);
 
     font-size: 0.75rem;
     font-weight: 400;
@@ -147,13 +147,16 @@
 }
 
 .product:hover {
+    background: var(--main);
+
     border-color: var(--main);
 
     filter: drop-shadow(1px 2px 3px var(--main));
 }
 
 .product:hover img {
-    transform: scale(0.5) translateY(-58px);
+    border: 2px solid var(--main);
+    transform: scale(0.75) translateY(-74px);
 }
 
 .product:hover p {
@@ -162,14 +165,13 @@
     height: 58px;
 }
 
-@media screen and (min-width: 600px) {
+@media screen and (min-width: 375px) {
     .product p {
-        gap: 0.5rem;
         padding: 0 1rem;
     }
 
     .product:hover img {
-        transform: scale(0.5) translateY(-76px);
+        transform: scale(0.75) translateY(-92px);
     }
 
     .product:hover p {
