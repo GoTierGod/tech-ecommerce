@@ -22,7 +22,7 @@
     text-align: center;
 }
 
-.footer h2 {
+.footer :where(h1, h2) {
     font-size: 1.25rem;
     font-weight: 400;
 }
@@ -67,7 +67,7 @@
     gap: 3rem;
 }
 
-.info > div {
+.info article {
     display: flex;
     flex-direction: column;
     justify-content: center;

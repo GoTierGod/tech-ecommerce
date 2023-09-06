@@ -6,18 +6,14 @@ import {
     faTwitter,
     faInstagram
 } from '@fortawesome/free-brands-svg-icons'
-import {
-    faMoneyBill,
-    faShieldAlt,
-    faBoxOpen
-} from '@fortawesome/free-solid-svg-icons'
+import { faShieldAlt, faTag, faTruck } from '@fortawesome/free-solid-svg-icons'
 
 export default function Footer() {
     return (
         <footer className={style.footer}>
             <div className={style.wrapper}>
-                <div className={style.socials}>
-                    <h2>Follow Us</h2>
+                <section className={style.socials}>
+                    <h1>Follow Us</h1>
                     <div className={style.links}>
                         <a href='https://www.facebook.com/' target='_blank'>
                             <FontAwesomeIcon icon={faFacebook} />
@@ -32,18 +28,18 @@ export default function Footer() {
                             Instagram
                         </a>
                     </div>
-                </div>
-                <div className={style.info}>
-                    <div>
-                        <FontAwesomeIcon icon={faMoneyBill} />
-                        <h2>Free Shipping</h2>
+                </section>
+                <section className={style.info}>
+                    <article>
+                        <FontAwesomeIcon icon={faTag} />
+                        <h2>Amazing Offers</h2>
                         <p>
                             Lorem Ipsum is simply dummy text of the printing and
                             typesetting industry. Lorem Ipsum is simply dummy
                             text of the printing and typesetting industry.
                         </p>
-                    </div>
-                    <div>
+                    </article>
+                    <article>
                         <FontAwesomeIcon icon={faShieldAlt} />
                         <h2>Protected Purchases</h2>
                         <p>
@@ -51,17 +47,17 @@ export default function Footer() {
                             typesetting industry. Lorem Ipsum is simply dummy
                             text of the printing and typesetting industry.
                         </p>
-                    </div>
-                    <div>
-                        <FontAwesomeIcon icon={faBoxOpen} />
+                    </article>
+                    <article>
+                        <FontAwesomeIcon icon={faTruck} />
                         <h2>Fast Shipping</h2>
                         <p>
                             Lorem Ipsum is simply dummy text of the printing and
                             typesetting industry. Lorem Ipsum is simply dummy
                             text of the printing and typesetting industry.
                         </p>
-                    </div>
-                </div>
+                    </article>
+                </section>
             </div>
         </footer>
     )
