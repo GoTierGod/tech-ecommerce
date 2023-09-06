@@ -19,7 +19,7 @@ export default function VerticalCard({ product }: VerticalCardProps) {
             className={style.card}
             prefetch={false}
         >
-            <div className={style.image}>
+            <header className={style.image}>
                 <Image
                     src={product.default_img.url}
                     alt={product.default_img.description}
@@ -27,17 +27,17 @@ export default function VerticalCard({ product }: VerticalCardProps) {
                     width={250}
                     quality='25'
                 />
-            </div>
+            </header>
             <div className={style.details}>
                 <div className={style.offer}>
-                    <div className={style.price}>
+                    <p className={style.price}>
                         <span>
                             {priceStringFormatter(product.details.price)}
                         </span>
                         <span>
                             {priceStringFormatter(product.details.offer_price)}
                         </span>
-                    </div>
+                    </p>
                     <span className={style.discount}>
                         {getProductDiscount(
                             product.details.price,
@@ -45,7 +45,7 @@ export default function VerticalCard({ product }: VerticalCardProps) {
                         )}
                     </span>
                 </div>
-                <h4 className={style.name}>{product.details.name}</h4>
+                <h3 className={style.name}>{product.details.name}</h3>
                 {product.best_seller ? (
                     <span className={style.bestSeller}>Best Seller</span>
                 ) : (

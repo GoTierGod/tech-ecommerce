@@ -20,13 +20,13 @@ export default function ProductsSection({
 }: ProductsSectionProps) {
     return (
         <section className={style.section}>
-            <div className={style.header}>
-                <h4>{title}</h4>
+            <header className={style.header}>
+                <h2>{title}</h2>
                 <Link href={url} className={style.link} prefetch={false}>
                     {title}
                     <FontAwesomeIcon icon={faRightLong} />
                 </Link>
-            </div>
+            </header>
             <div className={style.grid}>
                 {products.map(product => (
                     <VerticalCard key={product.details.id} product={product} />
