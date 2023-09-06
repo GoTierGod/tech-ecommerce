@@ -31,7 +31,7 @@ export default function OffersSection({ products }: OffersProps) {
                             height={250}
                             quality='50'
                         />
-                        <span>
+                        <p>
                             {priceStringFormatter(product.details.offer_price)}
                             <span>
                                 {getProductDiscount(
@@ -39,11 +39,11 @@ export default function OffersSection({ products }: OffersProps) {
                                     product.details.offer_price
                                 )}
                             </span>
-                        </span>
+                        </p>
                     </Link>
                 ))}
             </div>
-            <div className={style.header}>
+            <header className={style.header}>
                 <div className={style.title}>
                     <span>Only for a few hours</span>
                     <h4>Take Advantage Of This Offers</h4>
@@ -56,7 +56,7 @@ export default function OffersSection({ products }: OffersProps) {
                     See Offers
                     <FontAwesomeIcon icon={faRightLong} />
                 </Link>
-            </div>
+            </header>
         </section>
     )
 }

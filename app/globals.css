@@ -38,7 +38,7 @@ main {
     align-items: center;
 
     padding: 3rem 1rem;
-    padding-top: calc(67px + 2rem);
+    padding-top: calc(67px + 3rem);
 }
 
 a {
