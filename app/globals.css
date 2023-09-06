@@ -85,6 +85,7 @@ main {
 .svg-inline--fa,
 svg {
     height: 1rem;
+    width: 1rem;
 }
 
 input,

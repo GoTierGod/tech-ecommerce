@@ -37,13 +37,7 @@ export default function ProductFavsCart({
     )
 
     const cartAction = useCallback(async () => {
-        if (!isInCart) {
-            const res = await fetch(`/api/cart/add?id=${product.details.id}`, {
-                method: 'POST'
-            })
-
-            if (res.ok) router.refresh()
-        } else {
+        if (isInCart) {
             const res = await fetch(
                 `/api/cart/delete?id=${product.details.id}`,
                 {
@@ -52,20 +46,22 @@ export default function ProductFavsCart({
             )
 
             if (res.ok) router.refresh()
-        }
-    }, [product.details.id, router, isInCart])
-
-    const favsAction = useCallback(async () => {
-        if (!isInFavs) {
+        } else {
             const res = await fetch(
-                `/api/favorites/add?id=${product.details.id}`,
+                `/api/${isInFavs ? 'favorites/move' : 'cart/add'}?id=${
+                    product.details.id
+                }`,
                 {
-                    method: 'POST'
+                    method: isInFavs ? 'PATCH' : 'POST'
                 }
             )
 
             if (res.ok) router.refresh()
-        } else {
+        }
+    }, [product.details.id, router, isInCart, isInFavs])
+
+    const favsAction = useCallback(async () => {
+        if (isInFavs) {
             const res = await fetch(
                 `/api/favorites/delete?ids=${product.details.id}`,
                 {
@@ -74,20 +70,75 @@ export default function ProductFavsCart({
             )
 
             if (res.ok) router.refresh()
+        } else {
+            const res = await fetch(
+                `/api/${isInCart ? 'cart/move' : 'favorites/add'}?id=${
+                    product.details.id
+                }`,
+                {
+                    method: isInCart ? 'PATCH' : 'POST'
+                }
+            )
+
+            if (res.ok) router.refresh()
         }
-    }, [product.details.id, router, isInFavs])
+    }, [product.details.id, router, isInFavs, isInCart])
 
     return (
         <div className={style.wrapper}>
-            <button onClick={cartAction}>
+            <button
+                onClick={cartAction}
+                onMouseOver={e =>
+                    e.currentTarget.firstElementChild?.classList.add(
+                        'fa-bounce'
+                    )
+                }
+                onMouseOut={e =>
+                    e.currentTarget.firstElementChild?.classList.remove(
+                        'fa-bounce'
+                    )
+                }
+            >
                 <FontAwesomeIcon
                     icon={!isInCart ? faCartShopping : faCheckToSlot}
+                    style={{
+                        animationIterationCount: 1,
+                        animationDelay: '150ms',
+                        animationDuration: '900ms'
+                    }}
                 />
-                {!isInCart ? 'Add to Cart' : 'In Cart'}
+                {isInFavs
+                    ? 'Move to Cart'
+                    : isInCart
+                    ? 'Remove Item'
+                    : 'Add to Cart'}
             </button>
-            <button onClick={favsAction}>
-                <FontAwesomeIcon icon={!isInFavs ? faHeart : faHeartPulse} />
-                {!isInFavs ? 'Add to Favs' : 'In Favorites'}
+            <button
+                onClick={favsAction}
+                onMouseOver={e =>
+                    e.currentTarget.firstElementChild?.classList.add(
+                        'fa-bounce'
+                    )
+                }
+                onMouseOut={e =>
+                    e.currentTarget.firstElementChild?.classList.remove(
+                        'fa-bounce'
+                    )
+                }
+            >
+                <FontAwesomeIcon
+                    icon={!isInFavs ? faHeart : faHeartPulse}
+                    style={{
+                        animationIterationCount: 1,
+                        animationDelay: '150ms',
+                        animationDuration: '900ms'
+                    }}
+                />
+                {isInCart
+                    ? 'Move to Favs'
+                    : isInFavs
+                    ? 'Remove Item'
+                    : 'Add to Favs'}
             </button>
         </div>
     )
