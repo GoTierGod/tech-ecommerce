@@ -18,7 +18,7 @@ export default function HighlightedSection({ products }: HighlightedProps) {
         <section className={style.section}>
             {products.map(product => (
                 <article key={product.details.id} className={style.card}>
-                    <div className={style.header}>
+                    <header className={style.header}>
                         <div className={style.title}>
                             <span>The best offers in</span>
                             <h4>{product.details.category.title}</h4>
@@ -31,7 +31,7 @@ export default function HighlightedSection({ products }: HighlightedProps) {
                             {product.details.category.title}
                             <FontAwesomeIcon icon={faRightLong} />
                         </Link>
-                    </div>
+                    </header>
                     <Link
                         className={style.product}
                         href={`/product/${product.details.id}`}
@@ -44,7 +44,7 @@ export default function HighlightedSection({ products }: HighlightedProps) {
                             height={250}
                             quality='50'
                         />
-                        <span>
+                        <p>
                             {priceStringFormatter(product.details.offer_price)}
                             <span>
                                 {getProductDiscount(
@@ -52,7 +52,7 @@ export default function HighlightedSection({ products }: HighlightedProps) {
                                     product.details.offer_price
                                 )}
                             </span>
-                        </span>
+                        </p>
                     </Link>
                 </article>
             ))}

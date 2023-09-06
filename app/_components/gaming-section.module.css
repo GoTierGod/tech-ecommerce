@@ -104,10 +104,6 @@
     transition: transform 300ms, border-color 300ms;
 }
 
-.product:hover {
-    border-color: var(--main);
-}
-
 .product p {
     position: absolute;
     bottom: 0;
@@ -116,7 +112,7 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    gap: 0.25rem;
+    gap: 0.5rem;
 
     padding: 0 0.5rem;
     height: 0;
