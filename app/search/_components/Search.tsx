@@ -173,10 +173,10 @@ export default function Search({
                 <h3>Price</h3>
                 <div>
                     <div className={style.formField}>
-                        <label htmlFor='min-price'>Min.</label>
+                        <label htmlFor={`${screen} min-price`}>Min.</label>
                         <input
                             type='number'
-                            id='min-price'
+                            id={`${screen} min-price`}
                             placeholder='0'
                             min={0}
                             max={10000}
@@ -184,17 +184,17 @@ export default function Search({
                         />
                     </div>
                     <div className={style.formField}>
-                        <label htmlFor='max-price'>Max.</label>
+                        <label htmlFor={`${screen} max-price`}>Max.</label>
                         <input
                             type='number'
-                            id='max-price'
+                            id={`${screen} max-price`}
                             placeholder='1'
                             min={1}
                             max={10000}
                             {...Formik.getFieldProps('max_price')}
                         />
                     </div>
-                    <button type='submit'>
+                    <button type='submit' aria-label='Filter results'>
                         <FontAwesomeIcon icon={faCaretRight} />
                     </button>
                 </div>
@@ -202,10 +202,10 @@ export default function Search({
             <div className={style.gamerField}>
                 <h3>Gamer</h3>
                 <div>
-                    <label htmlFor='any'>
+                    <label htmlFor={`${screen} any`}>
                         <input
                             type='checkbox'
-                            id='any'
+                            id={`${screen} any`}
                             name='gamer'
                             value=''
                             checked={isGamer === ''}
@@ -213,10 +213,10 @@ export default function Search({
                         />
                         Any
                     </label>
-                    <label htmlFor='yes'>
+                    <label htmlFor={`${screen} yes`}>
                         <input
                             type='checkbox'
-                            id='yes'
+                            id={`${screen} yes`}
                             name='gamer'
                             value='1'
                             checked={isGamer === '1'}
@@ -224,10 +224,10 @@ export default function Search({
                         />
                         Yes
                     </label>
-                    <label htmlFor='no'>
+                    <label htmlFor={`${screen} no`}>
                         <input
                             type='checkbox'
-                            id='no'
+                            id={`${screen} no`}
                             name='gamer'
                             value='0'
                             checked={isGamer === '0'}
@@ -238,8 +238,11 @@ export default function Search({
                 </div>
             </div>
             <div className={style.formField}>
-                <label htmlFor='brand'>Brand</label>
-                <select id='brand' {...Formik.getFieldProps('brand')}>
+                <label htmlFor={`${screen} brand`}>Brand</label>
+                <select
+                    id={`${screen} brand`}
+                    {...Formik.getFieldProps('brand')}
+                >
                     <option value=''>Any</option>
                     {searchRes.brands.map(brand => (
                         <option key={brand.id} value={brand.name}>
@@ -249,8 +252,11 @@ export default function Search({
                 </select>
             </div>
             <div className={style.formField}>
-                <label htmlFor='category'>Category</label>
-                <select id='category' {...Formik.getFieldProps('category')}>
+                <label htmlFor={`${screen} category`}>Category</label>
+                <select
+                    id={`${screen} category`}
+                    {...Formik.getFieldProps('category')}
+                >
                     <option value=''>Any</option>
                     {searchRes.categories.map(category => (
                         <option key={category.id} value={category.title}>
@@ -260,9 +266,9 @@ export default function Search({
                 </select>
             </div>
             <div className={style.formField}>
-                <label htmlFor='installments'>Installments</label>
+                <label htmlFor={`${screen} installments`}>Installments</label>
                 <select
-                    id='installments'
+                    id={`${screen} installments`}
                     {...Formik.getFieldProps('installments')}
                 >
                     <option value=''>Any</option>
