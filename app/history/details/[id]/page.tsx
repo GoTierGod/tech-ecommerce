@@ -71,12 +71,12 @@ export default async function Page({ params }: { params: { id: string } }) {
     return (
         <main>
             <div className={style.wrapper}>
-                <div className={style.wrapperLeft}>
+                <section className={style.wrapperLeft}>
                     <div className={style.stickyWrapper}>
-                        <div className={style.header}>
+                        <header className={style.header}>
                             <h2>{purchase.product.details.name}</h2>
                             <FontAwesomeIcon icon={faMicrochip} />
-                        </div>
+                        </header>
                         <div className={style.content}>
                             <div className={style.image}>
                                 <Image
@@ -90,9 +90,7 @@ export default async function Page({ params }: { params: { id: string } }) {
                                 />
                             </div>
                             <div className={style.options}>
-                                <Link href={`/purchase/history`}>
-                                    Back to History
-                                </Link>
+                                <Link href={`/history`}>Back to History</Link>
                                 <Link
                                     href={`/product/${purchase.product.details.id}`}
                                 >
@@ -101,12 +99,12 @@ export default async function Page({ params }: { params: { id: string } }) {
                             </div>
                         </div>
                     </div>
-                </div>
-                <div className={style.wrapperRight}>
-                    <div className={style.header}>
+                </section>
+                <section className={style.wrapperRight}>
+                    <header className={style.header}>
                         <h2>Details</h2>
                         <FontAwesomeIcon icon={faListUl} />
-                    </div>
+                    </header>
                     <div className={style.grid}>
                         <div className={style.detail}>
                             <h3>Address</h3>
@@ -150,7 +148,7 @@ export default async function Page({ params }: { params: { id: string } }) {
                             <p>{purchase.order.purchase_date}</p>
                         </div>
                     </div>
-                </div>
+                </section>
             </div>
         </main>
     )
