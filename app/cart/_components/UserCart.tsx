@@ -46,16 +46,6 @@ function CartItem({ product, openedOptions, setOpenedOptions }: CartItemProps) {
         setOpenedOptions(product.details.id)
     }, [setOptMenu, setOpenedOptions, product.details.id])
 
-    const deleteAnimation = useCallback(() => {
-        if (cartItemRef.current) {
-            const card: HTMLDivElement = cartItemRef.current
-            card.style.height = '0'
-            card.style.width = '0'
-            card.style.opacity = '0'
-            setTimeout(() => (card.style.display = 'none'), 350)
-        }
-    }, [cartItemRef])
-
     const cartItemAction = useCallback(
         async (action: 'delete' | 'move') => {
             toggleMenu()
@@ -80,14 +70,12 @@ function CartItem({ product, openedOptions, setOpenedOptions }: CartItemProps) {
                     )
                 }
 
-                if (res.ok)
-                    setTimeout(() => {
-                        deleteAnimation()
-                    }, 600)
-                router.refresh()
+                if (res.ok) router.refresh()
+
+                setWaitingRes(false)
             }
         },
-        [toggleMenu, waitingRes, product.details.id, deleteAnimation, router]
+        [toggleMenu, waitingRes, product.details.id, router]
     )
 
     useEffect(() => {
@@ -96,37 +84,7 @@ function CartItem({ product, openedOptions, setOpenedOptions }: CartItemProps) {
     }, [openedOptions])
 
     return (
-        <div className={style.cartItem} ref={cartItemRef}>
-            <div
-                className={style.loadingAction}
-                style={
-                    waitingRes
-                        ? {
-                              width: '100%',
-                              height: '100%'
-                          }
-                        : {
-                              width: '0',
-                              height: '0'
-                          }
-                }
-            >
-                {
-                    <h2
-                        style={
-                            waitingRes
-                                ? {
-                                      color: 'var(--gray)'
-                                  }
-                                : {
-                                      color: 'transparent'
-                                  }
-                        }
-                    >
-                        {waitingRes ? 'Waiting...' : 'Successfull'}
-                    </h2>
-                }
-            </div>
+        <article className={style.cartItem} ref={cartItemRef}>
             <HorizontalCard product={product} />
             <button
                 className={style.cartItemOptions}
@@ -217,7 +175,7 @@ function CartItem({ product, openedOptions, setOpenedOptions }: CartItemProps) {
                     }}
                 />
             </button>
-        </div>
+        </article>
     )
 }
 
@@ -240,87 +198,116 @@ export default function UserCart({ cart }: UserCartProps) {
     return (
         <main>
             <div className={style.wrapper}>
-                <div className={style.wrapperLeft}>
+                <section className={style.wrapperLeft}>
                     <div className={style.stickyWrapper}>
-                        <div className={style.options}>
-                            <div className={style.header}>
+                        <article className={style.options}>
+                            <header className={style.header}>
                                 <h2>Options</h2>
                                 <FontAwesomeIcon icon={faPen} />
-                            </div>
+                            </header>
                             <div className={style.content}>
-                                <span>
+                                <p>
                                     <FontAwesomeIcon icon={faTrash} />
                                     <span>
                                         Remove the product from your cart
                                     </span>
-                                </span>
-                                <span>
+                                </p>
+                                <p>
                                     <FontAwesomeIcon icon={faHeart} />
                                     <span>
                                         Move the product to your favorites
                                     </span>
-                                </span>
+                                </p>
                             </div>
-                        </div>
-                        <div className={style.cartDetails}>
-                            <div className={style.header}>
+                        </article>
+                        <article className={style.details}>
+                            <header className={style.header}>
                                 <h2>Details</h2>
                                 <FontAwesomeIcon icon={faTrash} />
-                            </div>
+                            </header>
                             <div className={style.content}>
-                                <div className={style.cartPrices}>
-                                    <div>
-                                        <span>Products</span>
-                                        <span>{cart.length} / 10</span>
-                                    </div>
-                                    <div>
-                                        <span>Normal Total</span>
-                                        <span>
-                                            {priceStringFormatter(normalTotal)}
-                                        </span>
-                                    </div>
-                                    <div>
-                                        <span>Offer Total</span>
-                                        <span>
-                                            {priceStringFormatter(offerTotal)}
-                                        </span>
-                                    </div>
-                                    <div>
-                                        <span>Cart Offer</span>
-                                        <span>-{cart.length}%</span>
-                                    </div>
+                                <table>
+                                    <tbody>
+                                        <tr>
+                                            <th>Products</th>
+                                            <td>{cart.length} / 10</td>
+                                        </tr>
+                                        <tr>
+                                            <th>Normal</th>
+                                            <td>
+                                                {priceStringFormatter(
+                                                    normalTotal
+                                                )}
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th>Offer</th>
+                                            <td>
+                                                {priceStringFormatter(
+                                                    offerTotal
+                                                )}
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th>Cart Discount</th>
+                                            <td>{cart.length} %</td>
+                                        </tr>
+                                        <tr>
+                                            <th>Total</th>
+                                            <td>
+                                                {priceStringFormatter(
+                                                    cartOfferTotal
+                                                )}
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th>Savings</th>
+                                            <td>
+                                                {priceStringFormatter(
+                                                    normalTotal - cartOfferTotal
+                                                )}
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                <div>
+                                    <span>
+                                        {priceStringFormatter(cartOfferTotal)}
+                                    </span>
+                                    <Link
+                                        href='/cart/purchase'
+                                        prefetch={false}
+                                        onMouseOver={e =>
+                                            e.currentTarget.firstElementChild?.classList.add(
+                                                'fa-bounce'
+                                            )
+                                        }
+                                        onMouseOut={e =>
+                                            e.currentTarget.firstElementChild?.classList.remove(
+                                                'fa-bounce'
+                                            )
+                                        }
+                                    >
+                                        Buy this Cart
+                                        <FontAwesomeIcon
+                                            icon={faGift}
+                                            style={{
+                                                animationIterationCount: 1,
+                                                animationDelay: '150ms',
+                                                animationDuration: '900ms'
+                                            }}
+                                        />
+                                    </Link>
                                 </div>
-                                <div className={style.cartTotal}>
-                                    <div>
-                                        <span>Total</span>
-                                        <span>
-                                            {priceStringFormatter(
-                                                cartOfferTotal
-                                            )}
-                                        </span>
-                                    </div>
-                                    <div>
-                                        <span>Savings</span>
-                                        <span>
-                                            {priceStringFormatter(
-                                                normalTotal - cartOfferTotal
-                                            )}
-                                        </span>
-                                    </div>
-                                </div>
-                                <Link href='/cart/purchase' prefetch={false}>
-                                    Buy this Cart
-                                    <FontAwesomeIcon icon={faGift} />
-                                </Link>
                             </div>
-                        </div>
+                        </article>
                     </div>
-                </div>
-                <div className={style.wrapperRight}>
-                    <div className={style.header}>
+                </section>
+                <section className={style.wrapperRight}>
+                    <header className={style.header}>
                         <h2>GoTierGod&apos;s Cart</h2>
                         <FontAwesomeIcon icon={faHeart} />
-                    </div>
+                    </header>
                     {cart.length > 0 ? (
                         <div className={style.grid}>
                             {cart.map(product => (
@@ -341,7 +328,7 @@ export default function UserCart({ cart }: UserCartProps) {
                             </p>
                         </div>
                     )}
-                </div>
+                </section>
             </div>
         </main>
     )
