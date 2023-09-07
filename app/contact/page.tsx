@@ -8,10 +8,15 @@ import {
 } from '@fortawesome/free-brands-svg-icons'
 import { faExternalLink, faMailBulk } from '@fortawesome/free-solid-svg-icons'
 import EmailCopy from './_components/EmailCopy'
+import Link from 'next/link'
 
 export default async function Page() {
     return (
         <main>
+            <div className={style.breadcrumbs}>
+                <Link href='/'>Home</Link>
+                <span>Contact</span>
+            </div>
             <div className={style.wrapper}>
                 <section className={style.wrapperLeft}>
                     <header className={style.header}>

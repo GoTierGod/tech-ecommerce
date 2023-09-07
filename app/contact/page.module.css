@@ -1,3 +1,36 @@
+.breadcrumbs {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 2px;
+
+    background: var(--main);
+    color: var(--white);
+
+    border: 2px solid var(--main);
+    border-radius: 4px;
+
+    overflow: hidden;
+}
+
+.breadcrumbs :where(a, span) {
+    padding: 0.25rem 0.5rem;
+
+    background: var(--white);
+    color: var(--main);
+}
+
+.breadcrumbs a:last-of-type {
+    padding-right: 1.5rem;
+
+    clip-path: polygon(0% 0%, 75% 0%, 100% 50%, 75% 100%, 0% 100%);
+}
+
+.breadcrumbs span {
+    background: var(--main);
+    color: var(--white);
+}
+
 .wrapper {
     display: flex;
     flex-direction: column;
