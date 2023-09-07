@@ -70,7 +70,7 @@
     border-radius: 4px;
 }
 
-.content > span {
+.content p {
     display: flex;
     gap: 1rem;
 
@@ -82,12 +82,14 @@
     flex-wrap: wrap;
     justify-content: center;
     align-items: center;
+    gap: 1rem;
 }
 
 .selectAndRemove .content > span {
     display: flex;
     justify-content: center;
     align-items: center;
+    gap: 1rem;
 
     width: fit-content;
 
@@ -174,9 +176,6 @@
 
     height: 100%;
     width: 100%;
-
-    opacity: 1;
-    transition: height 300ms, width 300ms, opacity 300ms, top 300ms, left 300ms;
 }
 
 .checkWrapper {
@@ -206,38 +205,10 @@
 
     border: none;
     border-radius: 4px;
-
-    cursor: pointer;
 }
 
 .checkWrapper > button svg {
     height: 1.25rem;
-
-    transition: color 300ms;
-}
-
-.loadingAction {
-    position: absolute;
-
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-    width: 0;
-    height: 0;
-
-    background: var(--white);
-
-    border-radius: 4px;
-
-    overflow: hidden;
-    transition: width 300ms, height 300ms;
-}
-
-.loadingAction > h2 {
-    position: absolute;
-
-    color: transparent;
 
     transition: color 300ms;
 }
@@ -255,8 +226,6 @@
 
     border: none;
     border-radius: 4px;
-
-    cursor: pointer;
 }
 
 .favItemOptions svg {

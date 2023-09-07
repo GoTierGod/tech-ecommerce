@@ -47,16 +47,6 @@ function FavItem({ product, openedOptions, setOpenedOptions }: FavItemProps) {
         setOpenedOptions(product.details.id)
     }, [setOptMenu, setOpenedOptions, product.details.id])
 
-    const deleteAnimation = useCallback(() => {
-        if (favItemRef.current) {
-            const card: HTMLDivElement = favItemRef.current
-            card.style.height = '0'
-            card.style.width = '0'
-            card.style.opacity = '0'
-            setTimeout(() => (card.style.display = 'none'), 350)
-        }
-    }, [favItemRef])
-
     const favItemAction = useCallback(
         async (action: 'delete' | 'move') => {
             toggleMenu()
@@ -81,14 +71,12 @@ function FavItem({ product, openedOptions, setOpenedOptions }: FavItemProps) {
                     )
                 }
 
-                if (res.ok)
-                    setTimeout(() => {
-                        deleteAnimation()
-                    }, 600)
-                router.refresh()
+                if (res.ok) router.refresh()
+
+                setWaitingRes(false)
             }
         },
-        [toggleMenu, waitingRes, product.details.id, deleteAnimation, router]
+        [toggleMenu, waitingRes, product.details.id, router]
     )
 
     useEffect(() => {
@@ -97,37 +85,7 @@ function FavItem({ product, openedOptions, setOpenedOptions }: FavItemProps) {
     }, [openedOptions])
 
     return (
-        <div className={style.favItem} ref={favItemRef}>
-            <div
-                className={style.loadingAction}
-                style={
-                    waitingRes
-                        ? {
-                              width: '100%',
-                              height: '100%'
-                          }
-                        : {
-                              width: '0',
-                              height: '0'
-                          }
-                }
-            >
-                {
-                    <h2
-                        style={
-                            waitingRes
-                                ? {
-                                      color: 'var(--gray)'
-                                  }
-                                : {
-                                      color: 'transparent'
-                                  }
-                        }
-                    >
-                        {waitingRes ? 'Waiting...' : 'Successfull'}
-                    </h2>
-                }
-            </div>
+        <article className={style.favItem} ref={favItemRef}>
             <HorizontalCard product={product} />
             <button
                 className={style.favItemOptions}
@@ -218,7 +176,7 @@ function FavItem({ product, openedOptions, setOpenedOptions }: FavItemProps) {
                     }}
                 />
             </button>
-        </div>
+        </article>
     )
 }
 
@@ -271,31 +229,31 @@ export default function UserFavorites({ favorites }: UserFavoritesProps) {
     return (
         <main>
             <div className={style.wrapper}>
-                <div className={style.wrapperLeft}>
+                <section className={style.wrapperLeft}>
                     <div className={style.stickyWrapper}>
-                        <div className={style.options}>
-                            <div className={style.header}>
+                        <article className={style.options}>
+                            <header className={style.header}>
                                 <h2>Options</h2>
                                 <FontAwesomeIcon icon={faPen} />
-                            </div>
+                            </header>
                             <div className={style.content}>
-                                <span>
+                                <p>
                                     <FontAwesomeIcon icon={faTrash} />
                                     <span>
                                         Remove the product from your favorites
                                     </span>
-                                </span>
-                                <span>
+                                </p>
+                                <p>
                                     <FontAwesomeIcon icon={faCartShopping} />
                                     <span>Move the product to your cart</span>
-                                </span>
+                                </p>
                             </div>
-                        </div>
-                        <div className={style.selectAndRemove}>
-                            <div className={style.header}>
+                        </article>
+                        <article className={style.selectAndRemove}>
+                            <header className={style.header}>
                                 <h2>Select and Remove</h2>
                                 <FontAwesomeIcon icon={faTrash} />
-                            </div>
+                            </header>
                             <div className={style.content}>
                                 {selecting ? (
                                     <button
@@ -328,14 +286,14 @@ export default function UserFavorites({ favorites }: UserFavoritesProps) {
                                     </span>
                                 )}
                             </div>
-                        </div>
+                        </article>
                     </div>
-                </div>
-                <div className={style.wrapperRight}>
-                    <div className={style.header}>
+                </section>
+                <section className={style.wrapperRight}>
+                    <header className={style.header}>
                         <h2>GoTierGod&apos;s Favorites</h2>
                         <FontAwesomeIcon icon={faHeart} />
-                    </div>
+                    </header>
                     {favorites.length > 0 ? (
                         <div className={style.grid}>
                             {favorites.map(product => (
@@ -379,7 +337,7 @@ export default function UserFavorites({ favorites }: UserFavoritesProps) {
                             </p>
                         </div>
                     )}
-                </div>
+                </section>
             </div>
         </main>
     )
