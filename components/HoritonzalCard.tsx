@@ -29,7 +29,7 @@ export default function HorizontalCard({ product }: HorizontalCardProps) {
                 />
             </div>
             <div className={style.details}>
-                <h4 className={style.name}>{product.details.name}</h4>
+                <h3 className={style.name}>{product.details.name}</h3>
                 <div className={style.badges}>
                     {product.best_seller ? (
                         <span className={style.bestSeller}>Best Seller</span>

@@ -90,6 +90,7 @@ function CartItem({ product, openedOptions, setOpenedOptions }: CartItemProps) {
                 className={style.cartItemOptions}
                 onClick={toggleMenu}
                 disabled={waitingRes}
+                aria-label='Toggle options menu'
             >
                 <FontAwesomeIcon icon={faEllipsisVertical} />
             </button>
@@ -125,6 +126,7 @@ function CartItem({ product, openedOptions, setOpenedOptions }: CartItemProps) {
                               borderWidth: 0
                           }
                 }
+                aria-label='Delete'
             >
                 <FontAwesomeIcon
                     icon={faTrash}
@@ -165,6 +167,7 @@ function CartItem({ product, openedOptions, setOpenedOptions }: CartItemProps) {
                               borderWidth: 0
                           }
                 }
+                aria-label='Move to favorites'
             >
                 <FontAwesomeIcon
                     icon={faHeart}
