@@ -50,7 +50,7 @@ function HistoryItem({
     }, [openedOptions])
 
     return (
-        <div className={style.historyItem}>
+        <article className={style.historyItem}>
             <HorizontalCard product={purchase.product} />
             <button className={style.historyItemOptions} onClick={toggleMenu}>
                 <FontAwesomeIcon icon={faEllipsisVertical} />
@@ -59,6 +59,16 @@ function HistoryItem({
                 className={style.linkOption}
                 href={`/purchase/history/details/${purchase.order_item.id}`}
                 prefetch={false}
+                onMouseOver={e =>
+                    e.currentTarget.firstElementChild?.classList.add(
+                        'fa-bounce'
+                    )
+                }
+                onMouseOut={e =>
+                    e.currentTarget.firstElementChild?.classList.remove(
+                        'fa-bounce'
+                    )
+                }
                 style={
                     optMenu
                         ? {
@@ -73,7 +83,14 @@ function HistoryItem({
                           }
                 }
             >
-                <FontAwesomeIcon icon={faListUl} />
+                <FontAwesomeIcon
+                    icon={faListUl}
+                    style={{
+                        animationIterationCount: 1,
+                        animationDelay: '150ms',
+                        animationDuration: '900ms'
+                    }}
+                />
             </Link>
             <Link
                 className={style.linkOption}
@@ -83,6 +100,16 @@ function HistoryItem({
                         : `/purchase/history/report/${purchase.order_item.id}`
                 }
                 prefetch={false}
+                onMouseOver={e =>
+                    e.currentTarget.firstElementChild?.classList.add(
+                        purchase.order.delivered ? 'fa-bounce' : 'fa-shake'
+                    )
+                }
+                onMouseOut={e =>
+                    e.currentTarget.firstElementChild?.classList.remove(
+                        purchase.order.delivered ? 'fa-bounce' : 'fa-shake'
+                    )
+                }
                 style={
                     optMenu
                         ? {
@@ -99,9 +126,14 @@ function HistoryItem({
             >
                 <FontAwesomeIcon
                     icon={purchase.order.delivered ? faFile : faExclamation}
+                    style={{
+                        animationIterationCount: 1,
+                        animationDelay: '150ms',
+                        animationDuration: '900ms'
+                    }}
                 />
             </Link>
-        </div>
+        </article>
     )
 }
 
@@ -111,41 +143,39 @@ export default function PurchaseHistory({ history }: PurchaseHistoryProps) {
     return (
         <main>
             <div className={style.wrapper}>
-                <div className={style.wrapperLeft}>
+                <section className={style.wrapperLeft}>
                     <div className={style.stickyWrapper}>
-                        <div className={style.header}>
+                        <header className={style.header}>
                             <h2>History actions</h2>
                             <FontAwesomeIcon icon={faEllipsisVertical} />
-                        </div>
+                        </header>
                         <div className={style.content}>
-                            <span>
+                            <p>
                                 <FontAwesomeIcon icon={faListUl} />
                                 <span>
                                     View details about the purchase (e.g.
                                     product, delivery, price, etc...)
                                 </span>
-                            </span>
-                            <span>
+                            </p>
+                            <p>
                                 <FontAwesomeIcon icon={faExclamation} />
                                 <span>
                                     Report a problem with the product, delivery,
                                     etc... or cancel your purchase
                                 </span>
-                            </span>
-                            <span>
+                            </p>
+                            <p>
                                 <FontAwesomeIcon icon={faFile} />
                                 <span>Leave a review for this product</span>
-                            </span>
+                            </p>
                         </div>
                     </div>
-                </div>
-                <div className={style.wrapperRight}>
-                    <div className={style.options}>
-                        <div className={style.header}>
-                            <h2>GoTierGod&apos;s purchase history</h2>
-                            <FontAwesomeIcon icon={faBoxOpen} />
-                        </div>
-                    </div>
+                </section>
+                <section className={style.wrapperRight}>
+                    <header className={style.header}>
+                        <h2>GoTierGod&apos;s purchase history</h2>
+                        <FontAwesomeIcon icon={faBoxOpen} />
+                    </header>
                     {history.length > 0 ? (
                         <div className={style.grid}>
                             {history.map(purchase => (
@@ -166,7 +196,7 @@ export default function PurchaseHistory({ history }: PurchaseHistoryProps) {
                             </p>
                         </div>
                     )}
-                </div>
+                </section>
             </div>
         </main>
     )

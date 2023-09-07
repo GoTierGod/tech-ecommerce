@@ -51,10 +51,6 @@
     overflow: hidden;
 }
 
-:is(.header, .content, .historyItem) svg {
-    height: 1rem;
-}
-
 .content {
     display: flex;
     flex-direction: column;
@@ -67,7 +63,7 @@
     border-radius: 4px;
 }
 
-.content > span {
+.content p {
     display: flex;
     gap: 1rem;
 
@@ -147,6 +143,14 @@
     cursor: pointer;
 }
 
+.historyItemOptions svg {
+    transition: transform 300ms;
+}
+
+.historyItemOptions:hover svg {
+    transform: scale(1.25);
+}
+
 .linkOption {
     position: absolute;
     top: 2px;
@@ -173,6 +177,24 @@
     opacity: 1;
     transform: scale(0);
     transition: transform 300ms, right 300ms, top 300ms, background-color 300ms;
+}
+
+.linkOption svg {
+    filter: drop-shadow(2px 4px 6px var(--gray));
+}
+
+.linkOption:first-of-type {
+    transition-delay: 0ms;
+}
+
+.linkOption:last-of-type {
+    transition-delay: 50ms;
+}
+
+.linkOption:hover {
+    background: var(--main);
+
+    transform: scale(1.05);
 }
 
 .linkOption:first-of-type {

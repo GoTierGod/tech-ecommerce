@@ -54,10 +54,6 @@
     overflow: hidden;
 }
 
-:is(.header, .content, .cartItem) svg {
-    height: 1rem;
-}
-
 .content {
     display: flex;
     flex-direction: column;
