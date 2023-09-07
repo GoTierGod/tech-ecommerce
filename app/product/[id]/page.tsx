@@ -68,12 +68,12 @@ export default async function Page({ params }: { params: { id: string } }) {
     const productHeader = (
         <header className={style.header}>
             <h2>{product.details.name}</h2>
-            <div
+            <span
                 className={style.rating}
-                aria-label={`Rating: ${product.rating || 5.0}`}
+                title={`Rating: ${product.rating || 5.0}`}
             >
                 {getProductStars(product.reviews_counter, product.rating)}
-            </div>
+            </span>
         </header>
     )
 
