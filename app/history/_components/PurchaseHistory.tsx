@@ -52,7 +52,11 @@ function HistoryItem({
     return (
         <article className={style.historyItem}>
             <HorizontalCard product={purchase.product} />
-            <button className={style.historyItemOptions} onClick={toggleMenu}>
+            <button
+                className={style.historyItemOptions}
+                onClick={toggleMenu}
+                aria-label='Toggle options menu'
+            >
                 <FontAwesomeIcon icon={faEllipsisVertical} />
             </button>
             <Link
@@ -82,6 +86,7 @@ function HistoryItem({
                               top: '2px'
                           }
                 }
+                aria-label='Purchase details'
             >
                 <FontAwesomeIcon
                     icon={faListUl}
@@ -122,6 +127,9 @@ function HistoryItem({
                               right: '2px',
                               top: '2px'
                           }
+                }
+                aria-label={
+                    purchase.order.delivered ? 'Review' : 'Report a problem'
                 }
             >
                 <FontAwesomeIcon
