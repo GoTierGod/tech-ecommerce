@@ -64,16 +64,7 @@ export default function Header({ categories, user }: HeaderProps) {
     }, [path])
 
     useEffect(() => {
-        if (user && !Cookies.get('authTokens')) router.refresh()
-
-        if (
-            (!user && Cookies.get('authTokens')) ||
-            (!user && !Cookies.get('authTokens'))
-        ) {
-            ;(async () => {
-                router.push(`/api/auth/refresh?path=${path}`)
-            })()
-        }
+        router.push(`/api/auth/refresh?path=${path}`)
 
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [path])
