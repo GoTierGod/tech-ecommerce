@@ -57,7 +57,7 @@ function HistoryItem({
             </button>
             <Link
                 className={style.linkOption}
-                href={`/purchase/history/details/${purchase.order_item.id}`}
+                href={`/history/details/${purchase.order_item.id}`}
                 prefetch={false}
                 onMouseOver={e =>
                     e.currentTarget.firstElementChild?.classList.add(
@@ -96,8 +96,8 @@ function HistoryItem({
                 className={style.linkOption}
                 href={
                     purchase.order.delivered
-                        ? `/purchase/history/review/${purchase.order_item.id}`
-                        : `/purchase/history/report/${purchase.order_item.id}`
+                        ? `/history/review/${purchase.order_item.id}`
+                        : `/history/report/${purchase.order_item.id}`
                 }
                 prefetch={false}
                 onMouseOver={e =>
