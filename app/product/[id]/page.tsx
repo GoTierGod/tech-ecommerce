@@ -66,7 +66,7 @@ export default async function Page({ params }: { params: { id: string } }) {
     const favorites = await getFavorites()
 
     const productHeader = (
-        <div className={style.header}>
+        <header className={style.header}>
             <h2>{product.details.name}</h2>
             <div
                 className={style.rating}
@@ -74,7 +74,7 @@ export default async function Page({ params }: { params: { id: string } }) {
             >
                 {getProductStars(product.reviews_counter, product.rating)}
             </div>
-        </div>
+        </header>
     )
 
     const productContent = (
@@ -112,21 +112,21 @@ export default async function Page({ params }: { params: { id: string } }) {
                     </Link>
                 )}
             </div>
-            <div className={style.delivery}>
+            <article className={style.delivery}>
                 <h3>Delivery</h3>
                 <span>
                     <FontAwesomeIcon icon={faTruck} /> It arrives for free this{' '}
                     {getProductDeliveryDay()}
                 </span>
-            </div>
-            <div className={style.brand}>
+            </article>
+            <article className={style.brand}>
                 <h3>
                     Offered by <span>{product.details.brand.name}</span>
                 </h3>
                 <p>{product.details.brand.description}</p>
-            </div>
+            </article>
             <div className={style.warrantyAndPoints}>
-                <div>
+                <article>
                     <h3>Warranty</h3>
                     <span>
                         <FontAwesomeIcon icon={faShieldAlt} />{' '}
@@ -139,8 +139,8 @@ export default async function Page({ params }: { params: { id: string } }) {
                     >
                         <span>About Warranty</span>
                     </Link>
-                </div>
-                <div>
+                </article>
+                <article>
                     <h3>T-Points</h3>
                     <span>
                         <FontAwesomeIcon icon={faStar} />{' '}
@@ -153,9 +153,9 @@ export default async function Page({ params }: { params: { id: string } }) {
                     >
                         <span>About Points</span>
                     </Link>
-                </div>
+                </article>
             </div>
-            <div className={style.payment}>
+            <article className={style.payment}>
                 <h3>Payment Methods</h3>
                 <div>
                     <div>
@@ -176,19 +176,19 @@ export default async function Page({ params }: { params: { id: string } }) {
                         ))}
                     </div>
                 </div>
-            </div>
+            </article>
         </div>
     )
 
     return (
         <main>
             <div className={style.wrapper}>
-                <div className={style.product}>
+                <section className={style.product}>
                     <div className={style.wrapperLeft}>
                         {productHeader}
                         <ProductImages images={product.images} />
-                        <div className={style.brandProducts}>
-                            <div>
+                        <article className={style.brandProducts}>
+                            <header>
                                 <h3>More of {product.details.brand.name}</h3>
                                 <Link
                                     className={style.link}
@@ -198,7 +198,7 @@ export default async function Page({ params }: { params: { id: string } }) {
                                     {product.details.brand.name}
                                     <FontAwesomeIcon icon={faRightLong} />
                                 </Link>
-                            </div>
+                            </header>
                             <div>
                                 {brandProducts.map(product => (
                                     <VerticalCard
@@ -207,8 +207,8 @@ export default async function Page({ params }: { params: { id: string } }) {
                                     />
                                 ))}
                             </div>
-                        </div>
-                        <div className={style.category}>
+                        </article>
+                        <article className={style.category}>
                             <h3>See more in this category</h3>
                             <Link
                                 className={style.link}
@@ -218,14 +218,14 @@ export default async function Page({ params }: { params: { id: string } }) {
                                 {product.details.category.title}
                                 <FontAwesomeIcon icon={faRightLong} />
                             </Link>
-                        </div>
+                        </article>
                         {productContent}
-                        <div className={style.description}>
+                        <article className={style.description}>
                             <h3>Description</h3>
                             <p>
                                 {respectLineBreaks(product.details.description)}
                             </p>
-                        </div>
+                        </article>
                     </div>
                     <div className={style.wrapperRight}>
                         <div className={style.stickyWrapper}>
@@ -233,7 +233,7 @@ export default async function Page({ params }: { params: { id: string } }) {
                             {productContent}
                         </div>
                     </div>
-                </div>
+                </section>
                 <ProductsSection
                     title='Related Products'
                     products={relatedProducts.filter(
