@@ -51,10 +51,6 @@
     overflow: hidden;
 }
 
-:is(.header, .content) > svg {
-    height: 1rem;
-}
-
 .content {
     display: flex;
     flex-direction: column;
@@ -97,9 +93,6 @@
     background: var(--white);
     color: var(--main);
 
-    font-size: 1rem;
-    font-weight: 425;
-
     border: 2px solid var(--main);
     border-radius: 4px;
 
@@ -108,7 +101,7 @@
     transition: transform 300ms, box-shadow 300ms;
 }
 
-.grid .content a > div {
+.grid .content a > span {
     display: flex;
     justify-content: center;
     align-items: center;

@@ -38,10 +38,10 @@ export default async function Page() {
                                     href='https://github.com/GoTierGod'
                                     target='_blank'
                                 >
-                                    <div>
+                                    <span>
                                         <FontAwesomeIcon icon={faGithub} />
                                         <span>/ GoTierGod</span>
-                                    </div>
+                                    </span>
                                     <FontAwesomeIcon icon={faExternalLink} />
                                 </a>
                                 <p>
@@ -67,10 +67,10 @@ export default async function Page() {
                                     href='https://www.linkedin.com/in/gotiergod/'
                                     target='_blank'
                                 >
-                                    <div>
+                                    <span>
                                         <FontAwesomeIcon icon={faLinkedinIn} />
                                         <span>/ GoTierGod</span>
-                                    </div>
+                                    </span>
                                     <FontAwesomeIcon icon={faExternalLink} />
                                 </a>
                                 <p>
@@ -95,10 +95,10 @@ export default async function Page() {
                                     href='https://twitter.com/GoTierGod'
                                     target='_blank'
                                 >
-                                    <div>
+                                    <span>
                                         <FontAwesomeIcon icon={faTwitter} />
                                         <span>/ GoTierGod</span>
-                                    </div>
+                                    </span>
                                     <FontAwesomeIcon icon={faExternalLink} />
                                 </a>
                                 <p>

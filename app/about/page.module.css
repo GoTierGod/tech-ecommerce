@@ -51,10 +51,6 @@
     overflow: hidden;
 }
 
-:is(.header, .content) > svg {
-    height: 1rem;
-}
-
 .content {
     display: flex;
     flex-direction: column;
@@ -97,14 +93,13 @@
     background: var(--white);
     color: var(--main);
 
-    font-size: 1rem;
-    font-weight: 425;
-
     border: 2px solid var(--main);
     border-radius: 4px;
+
+    transition: transform 300ms, box-shadow 300ms;
 }
 
-.grid .content a > div {
+.grid .content a > span {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -113,25 +108,13 @@
 
 .grid .content a > svg {
     height: 0.5rem;
+    width: 0.5rem;
 }
 
-.list {
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
+.grid .content a:hover {
+    box-shadow: 1px 2px 3px var(--light-pink);
 
-    list-style: none;
-}
-
-.list li {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 0.5rem;
-}
-
-.list li > span:first-of-type {
-    font-weight: 425;
+    transform: scale(1.05);
 }
 
 @media screen and (min-width: 768px) {
