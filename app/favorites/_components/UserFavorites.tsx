@@ -91,6 +91,7 @@ function FavItem({ product, openedOptions, setOpenedOptions }: FavItemProps) {
                 className={style.favItemOptions}
                 onClick={toggleMenu}
                 disabled={waitingRes}
+                aria-label='Toggle options menu'
             >
                 <FontAwesomeIcon icon={faEllipsisVertical} />
             </button>
@@ -126,6 +127,7 @@ function FavItem({ product, openedOptions, setOpenedOptions }: FavItemProps) {
                               borderWidth: 0
                           }
                 }
+                aria-label='Delete'
             >
                 <FontAwesomeIcon
                     icon={faTrash}
@@ -166,6 +168,7 @@ function FavItem({ product, openedOptions, setOpenedOptions }: FavItemProps) {
                               borderWidth: 0
                           }
                 }
+                aria-label='Move to cart'
             >
                 <FontAwesomeIcon
                     icon={faCartShopping}
