@@ -1,6 +1,7 @@
+import { redirect } from 'next/navigation'
+
 import { getPurchase } from '@/utils/data/getPurchase'
 import { getUser } from '@/utils/data/getUser'
-import { redirect } from 'next/navigation'
 import PurchaseReview from '../_components/PurchaseReview'
 
 export default async function Page({ params }: { params: { id: string } }) {

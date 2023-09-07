@@ -92,12 +92,12 @@ export default function PurchaseReview({ product }: PurchaseReviewProps) {
         >
             {!err ? (
                 <div className={style.wrapper}>
-                    <div className={style.wrapperLeft}>
+                    <section className={style.wrapperLeft}>
                         <div className={style.stickyWrapper}>
-                            <div className={style.header}>
+                            <header className={style.header}>
                                 <h2>{product.details.name}</h2>
                                 <FontAwesomeIcon icon={faMicrochip} />
-                            </div>
+                            </header>
                             <div className={style.content}>
                                 <div className={style.image}>
                                     <Image
@@ -117,12 +117,12 @@ export default function PurchaseReview({ product }: PurchaseReviewProps) {
                                 </Link>
                             </div>
                         </div>
-                    </div>
-                    <div className={style.wrapperRight}>
-                        <div className={style.header}>
+                    </section>
+                    <section className={style.wrapperRight}>
+                        <header className={style.header}>
                             <h2>Review</h2>
                             <FontAwesomeIcon icon={faFilePen} />
-                        </div>
+                        </header>
                         <form
                             className={style.review}
                             onSubmit={Formik.handleSubmit}
@@ -177,7 +177,7 @@ export default function PurchaseReview({ product }: PurchaseReviewProps) {
                                 </div>
                             )}
                         </form>
-                    </div>
+                    </section>
                 </div>
             ) : (
                 <ErrorDisplay
