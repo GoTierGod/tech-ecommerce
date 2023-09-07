@@ -13,10 +13,10 @@ export default async function Page() {
     return (
         <main>
             <div className={style.wrapper}>
-                <div className={style.wrapperLeft}>
-                    <div className={style.header}>
+                <section className={style.wrapperLeft}>
+                    <header className={style.header}>
                         <h2>Contact Me</h2>
-                    </div>
+                    </header>
                     <div className={style.content}>
                         <p>
                             In the future you will be able to find more
@@ -25,14 +25,14 @@ export default async function Page() {
                             project.
                         </p>
                     </div>
-                </div>
-                <div className={style.wrapperRight}>
+                </section>
+                <section className={style.wrapperRight}>
                     <div className={style.grid}>
-                        <div>
-                            <div className={style.header}>
+                        <article>
+                            <header className={style.header}>
                                 <h2>GitHub</h2>
                                 <FontAwesomeIcon icon={faGithub} />
-                            </div>
+                            </header>
                             <div className={style.content}>
                                 <a
                                     href='https://github.com/GoTierGod'
@@ -56,12 +56,12 @@ export default async function Page() {
                                     your presence on my GitHub profile!
                                 </p>
                             </div>
-                        </div>
-                        <div>
-                            <div className={style.header}>
+                        </article>
+                        <article>
+                            <header className={style.header}>
                                 <h2>LinkedIn</h2>
                                 <FontAwesomeIcon icon={faLinkedinIn} />
-                            </div>
+                            </header>
                             <div className={style.content}>
                                 <a
                                     href='https://www.linkedin.com/in/gotiergod/'
@@ -84,12 +84,12 @@ export default async function Page() {
                                     new opportunities together.
                                 </p>
                             </div>
-                        </div>
-                        <div>
-                            <div className={style.header}>
+                        </article>
+                        <article>
+                            <header className={style.header}>
                                 <h2>Twitter</h2>
                                 <FontAwesomeIcon icon={faTwitter} />
-                            </div>
+                            </header>
                             <div className={style.content}>
                                 <a
                                     href='https://twitter.com/GoTierGod'
@@ -109,12 +109,12 @@ export default async function Page() {
                                     or any interesting topic!
                                 </p>
                             </div>
-                        </div>
-                        <div>
-                            <div className={style.header}>
+                        </article>
+                        <article>
+                            <header className={style.header}>
                                 <h2>Email</h2>
                                 <FontAwesomeIcon icon={faMailBulk} />
-                            </div>
+                            </header>
                             <div className={style.content}>
                                 <EmailCopy />
                                 <p>
@@ -125,9 +125,9 @@ export default async function Page() {
                                     channel.
                                 </p>
                             </div>
-                        </div>
+                        </article>
                     </div>
-                </div>
+                </section>
             </div>
         </main>
     )

@@ -13,7 +13,7 @@ export default function EmailCopy() {
                 navigator.clipboard.writeText('ivan.gunlove_10_@hotmail.com')
             }
         >
-            <div>ivan.gunlove_10_@hotmail.com</div>
+            ivan.gunlove_10_@hotmail.com
             <FontAwesomeIcon icon={faCopy} />
         </button>
     )
