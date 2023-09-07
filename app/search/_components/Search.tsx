@@ -5,10 +5,7 @@ import style from './search.module.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {
     faArrowDownWideShort,
-    faCaretDown,
     faCaretRight,
-    faCaretUp,
-    faGripHorizontal,
     faListCheck,
     faSearch
 } from '@fortawesome/free-solid-svg-icons'
@@ -280,20 +277,20 @@ export default function Search({
     return (
         <main>
             <div className={style.wrapper}>
-                <div className={style.wrapperLeft}>
+                <section className={style.wrapperLeft}>
                     <div className={style.stickyWrapper}>
-                        <div className={style.searched}>
-                            <div className={style.header}>
+                        <article className={style.searched}>
+                            <header className={style.header}>
                                 <h2>Searched</h2>
                                 <FontAwesomeIcon icon={faSearch} />
-                            </div>
+                            </header>
                             <div className={style.content}>
                                 <span>{searchRes.results} Results for</span>
                                 <p>{titleCaseFormatter(searchStr)}</p>
                             </div>
-                        </div>
-                        <div className={style.filter}>
-                            <div className={style.header}>
+                        </article>
+                        <article className={style.filter}>
+                            <header className={style.header}>
                                 <h2>Filter</h2>
                                 <FontAwesomeIcon icon={faListCheck} />
                                 <button
@@ -319,7 +316,7 @@ export default function Search({
                                     <FontAwesomeIcon icon={faListCheck} />
                                     Filter
                                 </button>
-                            </div>
+                            </header>
                             <div className={style.smallScreenForm}>
                                 <span
                                     className={style.filterMenuMsg}
@@ -346,11 +343,11 @@ export default function Search({
                             <div className={style.wideScreenForm}>
                                 {filterForm('wide')}
                             </div>
-                        </div>
+                        </article>
                     </div>
-                </div>
-                <div className={style.wrapperRight}>
-                    <div className={style.header}>
+                </section>
+                <section className={style.wrapperRight}>
+                    <header className={style.header}>
                         <h2>Results</h2>
                         <div className={style.sort}>
                             <button
@@ -423,7 +420,7 @@ export default function Search({
                                 </button>
                             </div>
                         </div>
-                    </div>
+                    </header>
                     <div className={style.grid}>
                         {searchRes.products.map(product => (
                             <HorizontalCard
@@ -432,8 +429,8 @@ export default function Search({
                             />
                         ))}
                     </div>
-                </div>
-                <div className={style.pagination}>
+                </section>
+                <footer className={style.pagination}>
                     <h2>
                         {`${
                             searchRes.results <= 10
@@ -453,7 +450,7 @@ export default function Search({
                         <div />
                         <button onClick={() => changePage('next')}>Next</button>
                     </div>
-                </div>
+                </footer>
             </div>
         </main>
     )
