@@ -16,7 +16,6 @@ import {
     faSignIn
 } from '@fortawesome/free-solid-svg-icons'
 import { FormEvent, useCallback, useEffect, useState } from 'react'
-import Cookies from 'js-cookie'
 
 import { Category } from '@/types/tables'
 import { titleCaseFormatter } from '@/utils/formatting/titleCaseFormatter'
@@ -178,14 +177,16 @@ export default function Header({ categories, user }: HeaderProps) {
                         </Link>
                     )}
                 </div>
-                <Link
-                    className={style.wideScreenLink}
-                    href='/logout'
-                    prefetch={false}
-                    aria-label='Log Out'
-                >
-                    <FontAwesomeIcon icon={faSignOut} />
-                </Link>
+                {user && (
+                    <Link
+                        className={style.wideScreenLink}
+                        href='/logout'
+                        prefetch={false}
+                        aria-label='Log Out'
+                    >
+                        <FontAwesomeIcon icon={faSignOut} />
+                    </Link>
+                )}
             </div>
             <div
                 className={style.dropdownMenu}
