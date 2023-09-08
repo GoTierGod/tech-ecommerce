@@ -135,7 +135,7 @@
 }
 
 .wideScreenUserLinks {
-    display: flex;
+    display: none;
     gap: 0.5rem;
 }
 
@@ -285,6 +285,10 @@
 
     .smallScreenUserLinks {
         display: none;
+    }
+
+    .wideScreenUserLinks {
+        display: flex;
     }
 }
 
