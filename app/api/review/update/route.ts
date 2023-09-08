@@ -36,14 +36,17 @@ export async function PATCH(req: NextRequest) {
             }
 
             if (Object.keys(reviewData).length >= 1) {
-                const res = await fetch(`${API_URL}/api/reviews/update/${id}`, {
-                    method: 'PATCH',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        authorization: `Bearer ${authTokens.access}`
-                    },
-                    body: JSON.stringify(reviewData)
-                })
+                const res = await fetch(
+                    `${API_URL}/api/reviews/product/${id}/update/`,
+                    {
+                        method: 'PATCH',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            authorization: `Bearer ${authTokens.access}`
+                        },
+                        body: JSON.stringify(reviewData)
+                    }
+                )
 
                 if (res.ok) {
                     const apiResponse: APIResponse = await res.json()

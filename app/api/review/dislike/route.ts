@@ -25,7 +25,7 @@ export async function PATCH(req: NextRequest) {
             const { searchParams } = new URL(req.url)
             const id = searchParams.get('id')
 
-            const res = await fetch(`${API_URL}/api/review/${id}/dislike/`, {
+            const res = await fetch(`${API_URL}/api/reviews/${id}/dislike/`, {
                 method: 'PATCH',
                 headers: {
                     'Content-Type': 'application/json',

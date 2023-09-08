@@ -2,14 +2,16 @@ import { cookies } from 'next/dist/client/components/headers'
 import { NextRequest, NextResponse } from 'next/server'
 
 import { API_URL } from '@/constants/back-end'
-import { APIResponse } from '@/types/response'
 import { AuthTokens } from '@/types/tokens'
+import { APIResponse } from '@/types/response'
 
-export async function DELETE(req: NextRequest) {
+export async function POST(req: NextRequest) {
     try {
         const authCookies = cookies().get('authTokens')
 
         if (authCookies) {
+            const body = await req.json()
+
             let authTokens: AuthTokens | null = null
             try {
                 authTokens = JSON.parse(authCookies.value) as AuthTokens
@@ -17,26 +19,27 @@ export async function DELETE(req: NextRequest) {
                 cookies().delete('authTokens')
 
                 return NextResponse.json(
-                    { message: 'Invalid authentication credentials' },
+                    { message: 'Invalid authentication credientals' },
                     { status: 401 }
                 )
             }
 
-            const { searchParams } = new URL(req.url)
-            const id = searchParams.get('id')
+            const userDeleteData: { password: string } = {
+                password: body.password
+            }
 
-            const res = await fetch(
-                `${API_URL}/api/reviews/product/${id}/delete/`,
-                {
-                    method: 'DELETE',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        authorization: `Bearer ${authTokens.access}`
-                    }
-                }
-            )
+            const res = await fetch(`${API_URL}/api/customer/delete/`, {
+                method: 'DELETE',
+                headers: {
+                    'Content-Type': 'application/json',
+                    Authorization: `Bearer ${authTokens.access}`
+                },
+                body: JSON.stringify(userDeleteData)
+            })
 
             if (res.ok) {
+                cookies().delete('authTokens')
+
                 const apiResponse: APIResponse = await res.json()
                 return NextResponse.json(apiResponse, { status: 200 })
             }
@@ -46,7 +49,7 @@ export async function DELETE(req: NextRequest) {
         }
 
         return NextResponse.json(
-            { message: 'Missing authentication credentials' },
+            { message: 'Missing authentication credientals' },
             { status: 401 }
         )
     } catch (err) {

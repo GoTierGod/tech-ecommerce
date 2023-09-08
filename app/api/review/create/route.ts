@@ -35,14 +35,17 @@ export async function POST(req: NextRequest) {
                 content: body.content
             }
 
-            const res = await fetch(`${API_URL}/api/reviews/create/${id}`, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    authorization: `Bearer ${authTokens.access}`
-                },
-                body: JSON.stringify(reviewData)
-            })
+            const res = await fetch(
+                `${API_URL}/api/reviews/product/${id}/create/`,
+                {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        authorization: `Bearer ${authTokens.access}`
+                    },
+                    body: JSON.stringify(reviewData)
+                }
+            )
 
             if (res.ok) {
                 const apiResponse: APIResponse = await res.json()

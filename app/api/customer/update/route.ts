@@ -10,6 +10,8 @@ export async function PATCH(req: NextRequest) {
         const authCookies = cookies().get('authTokens')
 
         if (authCookies) {
+            const body = await req.json()
+
             let authTokens: AuthTokens | null = null
             try {
                 authTokens = JSON.parse(authCookies.value) as AuthTokens
@@ -17,38 +19,60 @@ export async function PATCH(req: NextRequest) {
                 cookies().delete('authTokens')
 
                 return NextResponse.json(
-                    { message: 'Invalid authentication credentials' },
+                    { message: 'Invalid authentication credientals' },
                     { status: 401 }
                 )
             }
 
-            const body = await req.json()
-            const { id, country, city, address, notes } = body
+            const {
+                username,
+                email,
+                password,
+                phone,
+                country,
+                city,
+                address,
+                firstname,
+                lastname,
+                birthdate,
+                gender
+            } = body
 
-            const updatePurchaseData: {
+            const updatedFields: {
+                username?: string
+                email?: string
+                password?: string
+                phone?: string
                 country?: string
                 city?: string
                 address?: string
-                notes?: string
+                firstname?: string
+                lastname?: string
+                birthdate?: string
+                gender?: string
             } = {
+                ...(username && { username }),
+                ...(email && { email }),
+                ...(password && { password }),
+                ...(phone && { phone }),
                 ...(country && { country }),
                 ...(city && { city }),
                 ...(address && { address }),
-                ...(notes && { notes })
+                ...(firstname && { firstname }),
+                ...(lastname && { lastname }),
+                ...(birthdate && { birthdate }),
+                ...(gender && { gender })
             }
 
-            if (Object.keys(updatePurchaseData).length >= 1) {
-                const res = await fetch(
-                    `${API_URL}/api/purchase/${id}/update/`,
-                    {
-                        method: 'PATCH',
-                        headers: {
-                            'Content-Type': 'application/json',
-                            authorization: `Bearer ${authTokens.access}`
-                        },
-                        body: JSON.stringify(updatePurchaseData)
-                    }
-                )
+            if (Object.keys(updatedFields).length >= 1) {
+                const res = await fetch(`${API_URL}/api/customer/update/`, {
+                    method: 'PATCH',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        Authorization: `Bearer ${authTokens.access}`
+                    },
+                    body: JSON.stringify(updatedFields)
+                })
 
                 if (res.ok) {
                     const apiResponse: APIResponse = await res.json()
@@ -61,12 +85,12 @@ export async function PATCH(req: NextRequest) {
 
             return NextResponse.json(
                 { message: 'There is no data to be updated' },
-                { status: 400 }
+                { status: 401 }
             )
         }
 
         return NextResponse.json(
-            { message: 'Missing authentication credentials' },
+            { message: 'Missing authentication credientals' },
             { status: 401 }
         )
     } catch (err) {

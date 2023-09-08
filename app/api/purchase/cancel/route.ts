@@ -25,7 +25,7 @@ export async function DELETE(req: NextRequest) {
             const { searchParams } = new URL(req.url)
             const id = searchParams.get('id')
 
-            const res = await fetch(`${API_URL}/api/purchase/delete/${id}`, {
+            const res = await fetch(`${API_URL}/api/purchase/${id}/delete/`, {
                 method: 'DELETE',
                 headers: {
                     'Content-Type': 'application/json',
