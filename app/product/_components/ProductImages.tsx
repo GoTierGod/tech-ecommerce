@@ -25,6 +25,7 @@ export default function ProductImages({ images }: ProductImagesProps) {
                 width={450}
                 height={450}
                 quality='100'
+                priority
             />
             <div className={style.imgList}>
                 {images.map(image => (
