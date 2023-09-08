@@ -52,13 +52,15 @@ export default function HighlightedSection({ products }: HighlightedProps) {
                                 alt={product.default_img.description}
                                 width={250}
                                 height={250}
-                                quality='50'
+                                quality='25'
                             />
                             <div>
-                                {priceStringFormatter(
-                                    product.details.offer_price
-                                )}
-                                <span>
+                                <span className={style.price}>
+                                    {priceStringFormatter(
+                                        product.details.offer_price
+                                    )}
+                                </span>
+                                <span className={style.discount}>
                                     {getProductDiscount(
                                         product.details.price,
                                         product.details.offer_price

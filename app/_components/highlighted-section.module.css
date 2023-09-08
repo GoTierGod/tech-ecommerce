@@ -143,12 +143,14 @@
     display: flex;
     flex-direction: column;
     gap: 0.5rem;
+}
 
+.price {
     font-size: 1.25rem;
     font-weight: 400;
 }
 
-.product span {
+.discount {
     padding: 0.25rem 0.5rem;
 
     background: var(--main);

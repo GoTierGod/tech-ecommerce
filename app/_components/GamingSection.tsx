@@ -39,21 +39,36 @@ export default function GamingSection({ products }: GamingProps) {
                         prefetch={false}
                     >
                         <Image
+                            className={style.mainImg}
                             src={product.default_img.url}
                             alt={product.default_img.description}
                             width={250}
                             height={250}
                             quality='50'
                         />
-                        <p>
-                            {priceStringFormatter(product.details.offer_price)}
-                            <span>
-                                {getProductDiscount(
-                                    product.details.price,
-                                    product.details.offer_price
-                                )}
-                            </span>
-                        </p>
+                        <div className={style.content}>
+                            <Image
+                                className={style.secImg}
+                                src={product.default_img.url}
+                                alt={product.default_img.description}
+                                width={250}
+                                height={250}
+                                quality='25'
+                            />
+                            <div>
+                                <span className={style.price}>
+                                    {priceStringFormatter(
+                                        product.details.offer_price
+                                    )}
+                                </span>
+                                <span className={style.discount}>
+                                    {getProductDiscount(
+                                        product.details.price,
+                                        product.details.offer_price
+                                    )}
+                                </span>
+                            </div>
+                        </div>
                     </Link>
                 ))}
             </div>
