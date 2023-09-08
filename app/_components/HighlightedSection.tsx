@@ -38,21 +38,34 @@ export default function HighlightedSection({ products }: HighlightedProps) {
                         prefetch={false}
                     >
                         <Image
+                            className={style.mainImg}
                             src={product.default_img.url}
                             alt={product.default_img.description}
                             width={250}
                             height={250}
                             quality='50'
                         />
-                        <p>
-                            {priceStringFormatter(product.details.offer_price)}
-                            <span>
-                                {getProductDiscount(
-                                    product.details.price,
+                        <div className={style.content}>
+                            <Image
+                                className={style.secImg}
+                                src={product.default_img.url}
+                                alt={product.default_img.description}
+                                width={250}
+                                height={250}
+                                quality='50'
+                            />
+                            <div>
+                                {priceStringFormatter(
                                     product.details.offer_price
                                 )}
-                            </span>
-                        </p>
+                                <span>
+                                    {getProductDiscount(
+                                        product.details.price,
+                                        product.details.offer_price
+                                    )}
+                                </span>
+                            </div>
+                        </div>
                     </Link>
                 </article>
             ))}

@@ -88,9 +88,10 @@
     transition: border-color 300ms, filter 300ms, background-color 300ms;
 
     filter: drop-shadow(1px 2px 3px transparent);
+    overflow: hidden;
 }
 
-.product img {
+.mainImg {
     padding: 1rem;
     height: auto;
     width: 100%;
@@ -107,7 +108,7 @@
     transition: transform 300ms, border-color 300ms;
 }
 
-.product p {
+.content {
     position: absolute;
     bottom: 0;
 
@@ -115,7 +116,7 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    gap: 0.5rem;
+    gap: 1rem;
 
     padding: 0 0.5rem;
     height: 0;
@@ -133,6 +134,20 @@
     transition: height 300ms, padding 300ms;
 }
 
+.secImg {
+    height: 50%;
+    width: auto;
+}
+
+.content div {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+
+    font-size: 1.25rem;
+    font-weight: 400;
+}
+
 .product span {
     padding: 0.25rem 0.5rem;
 
@@ -146,22 +161,18 @@
 }
 
 .product:hover {
-    background: var(--main);
-
     border-color: var(--main);
 
     filter: drop-shadow(1px 2px 3px var(--main));
 }
 
-.product:hover img {
-    border: 2px solid var(--main);
-    transform: scale(0.75) translateY(-74px);
+.product:hover .mainImg {
+    transform: translateY(100%) scale(0.25);
 }
 
-.product:hover p {
-    border-top: 2px solid var(--white);
-    padding: 0.5rem;
-    height: 58px;
+.product:hover .content {
+    padding: 1rem;
+    height: 100%;
 }
 
 @media screen and (min-width: 375px) {
@@ -171,19 +182,6 @@
 
     .title h4 {
         font-size: 1.5rem;
-    }
-
-    .product p {
-        padding: 0 1rem;
-    }
-
-    .product:hover img {
-        transform: scale(0.75) translateY(-92px);
-    }
-
-    .product:hover p {
-        padding: 1rem;
-        height: 76px;
     }
 }
 
