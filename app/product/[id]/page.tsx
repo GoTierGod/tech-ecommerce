@@ -34,6 +34,7 @@ import ProductFavsCart from '../_components/ProductFavsCart'
 import { getCart } from '@/utils/data/getCart'
 import { getFavorites } from '@/utils/data/getFavorites'
 import Breadcrumbs from '@/components/Breadcrumbs'
+import ProductDescription from '../_components/ProductDescription'
 
 const paymentLogos = [
     { src: visaLogo, alt: 'Visa' },
@@ -226,12 +227,9 @@ export default async function Page({ params }: { params: { id: string } }) {
                             </Link>
                         </article>
                         {productContent}
-                        <article className={style.description}>
-                            <h3>Description</h3>
-                            <p>
-                                {respectLineBreaks(product.details.description)}
-                            </p>
-                        </article>
+                        <ProductDescription
+                            description={product.details.description}
+                        />
                     </div>
                     <div className={style.wrapperRight}>
                         <div className={style.stickyWrapper}>
