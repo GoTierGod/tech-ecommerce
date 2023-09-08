@@ -11,7 +11,7 @@ export default async function Page() {
 
     const cart = await getCart()
     if (!cart) redirect('/')
-    if (cart.length <= 1) redirect(`/`)
+    if (cart.length <= 1) redirect(`/cart`)
 
     const coupons = await getCoupons()
 

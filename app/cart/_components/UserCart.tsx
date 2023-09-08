@@ -275,35 +275,47 @@ export default function UserCart({ cart }: UserCartProps) {
                                         </tr>
                                     </tbody>
                                 </table>
-                                <div>
-                                    <span>
-                                        {priceStringFormatter(cartOfferTotal)}
-                                    </span>
-                                    <Link
-                                        href='/cart/purchase'
-                                        prefetch={false}
-                                        onMouseOver={e =>
-                                            e.currentTarget.firstElementChild?.classList.add(
-                                                'fa-bounce'
-                                            )
-                                        }
-                                        onMouseOut={e =>
-                                            e.currentTarget.firstElementChild?.classList.remove(
-                                                'fa-bounce'
-                                            )
-                                        }
-                                    >
-                                        Buy this Cart
-                                        <FontAwesomeIcon
-                                            icon={faGift}
-                                            style={{
-                                                animationIterationCount: 1,
-                                                animationDelay: '150ms',
-                                                animationDuration: '900ms'
-                                            }}
-                                        />
-                                    </Link>
-                                </div>
+                                {cart.length > 1 ? (
+                                    <div>
+                                        <span>
+                                            {priceStringFormatter(
+                                                cartOfferTotal
+                                            )}
+                                        </span>
+                                        <Link
+                                            href='/cart/purchase'
+                                            prefetch={false}
+                                            onMouseOver={e =>
+                                                e.currentTarget.firstElementChild?.classList.add(
+                                                    'fa-bounce'
+                                                )
+                                            }
+                                            onMouseOut={e =>
+                                                e.currentTarget.firstElementChild?.classList.remove(
+                                                    'fa-bounce'
+                                                )
+                                            }
+                                        >
+                                            Buy this Cart
+                                            <FontAwesomeIcon
+                                                icon={faGift}
+                                                style={{
+                                                    animationIterationCount: 1,
+                                                    animationDelay: '150ms',
+                                                    animationDuration: '900ms'
+                                                }}
+                                            />
+                                        </Link>
+                                    </div>
+                                ) : (
+                                    <div>
+                                        <p>
+                                            You must have at least 2 products to
+                                            buy your shopping cart, otherwise
+                                            buy individually
+                                        </p>
+                                    </div>
+                                )}
                             </div>
                         </article>
                     </div>

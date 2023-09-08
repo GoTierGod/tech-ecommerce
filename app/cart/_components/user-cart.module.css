@@ -151,6 +151,10 @@
     border-radius: 4px;
 }
 
+.details .content div p {
+    text-align: center;
+}
+
 .details a {
     display: flex;
     justify-content: space-between;
