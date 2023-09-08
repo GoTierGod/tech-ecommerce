@@ -137,7 +137,7 @@
     background: var(--white);
     color: var(--gray);
 
-    border: 2px solid transparent;
+    border: none;
     border-radius: 4px;
 
     cursor: pointer;

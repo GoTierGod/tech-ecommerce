@@ -16,6 +16,7 @@ import { useCallback, useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation'
 import HorizontalCard from '@/components/HoritonzalCard'
 import { faLightbulb } from '@fortawesome/free-regular-svg-icons'
+import Breadcrumbs from '@/components/Breadcrumbs'
 
 interface SearchProps {
     searchStr: string
@@ -282,6 +283,9 @@ export default function Search({
 
     return (
         <main>
+            <Breadcrumbs
+                routeList={[{ path: `/search/${searchStr}`, name: 'Search' }]}
+            />
             <div className={style.wrapper}>
                 <section className={style.wrapperLeft}>
                     <div className={style.stickyWrapper}>

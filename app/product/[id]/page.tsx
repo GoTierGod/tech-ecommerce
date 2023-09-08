@@ -33,6 +33,7 @@ import { getProducts } from '@/utils/data/getProducts'
 import ProductFavsCart from '../_components/ProductFavsCart'
 import { getCart } from '@/utils/data/getCart'
 import { getFavorites } from '@/utils/data/getFavorites'
+import Breadcrumbs from '@/components/Breadcrumbs'
 
 const paymentLogos = [
     { src: visaLogo, alt: 'Visa' },
@@ -182,6 +183,11 @@ export default async function Page({ params }: { params: { id: string } }) {
 
     return (
         <main>
+            <Breadcrumbs
+                routeList={[
+                    { path: `/product/${product.details.id}`, name: 'Product' }
+                ]}
+            />
             <div className={style.wrapper}>
                 <section className={style.product}>
                     <div className={style.wrapperLeft}>

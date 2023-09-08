@@ -21,6 +21,7 @@ import Link from 'next/link'
 
 import { ComposedPurchaseInfo } from '@/types/purchase'
 import HorizontalCard from '@/components/HoritonzalCard'
+import Breadcrumbs from '@/components/Breadcrumbs'
 
 interface PurchaseHistoryProps {
     history: ComposedPurchaseInfo[]
@@ -150,6 +151,7 @@ export default function PurchaseHistory({ history }: PurchaseHistoryProps) {
 
     return (
         <main>
+            <Breadcrumbs routeList={[{ path: '/history', name: 'History' }]} />
             <div className={style.wrapper}>
                 <section className={style.wrapperLeft}>
                     <div className={style.stickyWrapper}>

@@ -12,6 +12,7 @@ import { priceStringFormatter } from '@/utils/formatting/priceStringFormatter'
 import { titleCaseFormatter } from '@/utils/formatting/titleCaseFormatter'
 import { getPurchase } from '@/utils/data/getPurchase'
 import { getUser } from '@/utils/data/getUser'
+import Breadcrumbs from '@/components/Breadcrumbs'
 
 export default async function Page({ params }: { params: { id: string } }) {
     const { id } = params
@@ -70,6 +71,12 @@ export default async function Page({ params }: { params: { id: string } }) {
 
     return (
         <main>
+            <Breadcrumbs
+                routeList={[
+                    { path: '/history', name: 'History' },
+                    { path: '/history/details', name: 'Details' }
+                ]}
+            />
             <div className={style.wrapper}>
                 <section className={style.wrapperLeft}>
                     <div className={style.stickyWrapper}>

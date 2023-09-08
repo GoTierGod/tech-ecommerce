@@ -5,10 +5,12 @@ import {
     faScrewdriverWrench
 } from '@fortawesome/free-solid-svg-icons'
 import Link from 'next/link'
+import Breadcrumbs from './Breadcrumbs'
 
 export default function NotImplemented() {
     return (
         <main>
+            <Breadcrumbs routeList={[{ path: '', name: '. . .' }]} />
             <div className={style.wrapper}>
                 <div className={style.header}>
                     <h2>This is not implemented yet</h2>

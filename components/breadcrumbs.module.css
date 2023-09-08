@@ -22,3 +22,9 @@
     background: var(--main);
     color: var(--white);
 }
+
+@media screen and (min-width: 768px) {
+    .breadcrumbs {
+        display: none;
+    }
+}

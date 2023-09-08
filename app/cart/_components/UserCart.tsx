@@ -24,6 +24,7 @@ import Link from 'next/link'
 
 import HorizontalCard from '../../../components/HoritonzalCard'
 import { priceStringFormatter } from '@/utils/formatting/priceStringFormatter'
+import Breadcrumbs from '@/components/Breadcrumbs'
 
 interface UserCartProps {
     cart: ComposedProductInfo[]
@@ -200,6 +201,7 @@ export default function UserCart({ cart }: UserCartProps) {
 
     return (
         <main>
+            <Breadcrumbs routeList={[{ path: '/cart', name: 'Cart' }]} />
             <div className={style.wrapper}>
                 <section className={style.wrapperLeft}>
                     <div className={style.stickyWrapper}>

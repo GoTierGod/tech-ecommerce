@@ -25,6 +25,7 @@ import { useRouter } from 'next/navigation'
 
 import { ComposedProductInfo } from '@/types/product'
 import HorizontalCard from '../../../components/HoritonzalCard'
+import Breadcrumbs from '@/components/Breadcrumbs'
 
 interface UserFavoritesProps {
     favorites: ComposedProductInfo[]
@@ -231,6 +232,9 @@ export default function UserFavorites({ favorites }: UserFavoritesProps) {
 
     return (
         <main>
+            <Breadcrumbs
+                routeList={[{ path: '/favorites', name: 'Favorites' }]}
+            />
             <div className={style.wrapper}>
                 <section className={style.wrapperLeft}>
                     <div className={style.stickyWrapper}>

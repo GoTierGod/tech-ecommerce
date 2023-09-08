@@ -1,9 +1,8 @@
 import Link from 'next/link'
 import style from './breadcrumbs.module.css'
-import { titleCaseFormatter } from '@/utils/formatting/titleCaseFormatter'
 
 interface BreadcrumbsProps {
-    routeList: string[]
+    routeList: { path: string; name: string }[]
 }
 
 export default function Breadcrumbs({ routeList }: BreadcrumbsProps) {
@@ -13,17 +12,8 @@ export default function Breadcrumbs({ routeList }: BreadcrumbsProps) {
                 <Link href='/'>Home</Link>
                 {routeList.map((route, idx) => {
                     if (idx === routeList.length - 1)
-                        return (
-                            <span>
-                                {titleCaseFormatter(route.replace(/\//g, ''))}
-                            </span>
-                        )
-                    else
-                        return (
-                            <Link href={route}>
-                                {titleCaseFormatter(route.replace(/\//g, ''))}
-                            </Link>
-                        )
+                        return <span>{route.name}</span>
+                    else return <Link href={route.path}>{route.name}</Link>
                 })}
             </div>
         </section>

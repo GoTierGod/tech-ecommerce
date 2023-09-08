@@ -1,11 +1,13 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import style from './page.module.css'
 import { faGithub } from '@fortawesome/free-brands-svg-icons'
-import { faDatabase, faExternalLink } from '@fortawesome/free-solid-svg-icons'
+import { faExternalLink } from '@fortawesome/free-solid-svg-icons'
+import Breadcrumbs from '@/components/Breadcrumbs'
 
 export default async function Page() {
     return (
         <main>
+            <Breadcrumbs routeList={[{ path: '/about', name: 'About' }]} />
             <div className={style.wrapper}>
                 <section className={style.wrapperLeft}>
                     <header className={style.header}>
