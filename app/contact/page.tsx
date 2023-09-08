@@ -14,7 +14,7 @@ import Breadcrumbs from '@/components/Breadcrumbs'
 export default async function Page() {
     return (
         <main>
-            <Breadcrumbs routeList={['/contact']} />
+            <Breadcrumbs routeList={[{ path: '/contact', name: 'Contact' }]} />
             <div className={style.wrapper}>
                 <section className={style.wrapperLeft}>
                     <header className={style.header}>
