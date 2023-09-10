@@ -5,6 +5,9 @@ import { API_URL } from '@/constants/back-end'
 import { AuthTokens } from '@/types/tokens'
 
 export async function POST(req: NextRequest) {
+    const ip = req.headers.get('x-forwarded-for')
+    console.log(`ip address: ${ip}`)
+
     try {
         const body = await req.json()
 
