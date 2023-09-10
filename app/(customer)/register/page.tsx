@@ -4,7 +4,7 @@ import { redirect } from 'next/navigation'
 
 export default async function Page() {
     const customer = getCustomer()
-    if (!customer) redirect('/login')
+    if (customer) redirect('/')
 
     return <UserRegister />
 }
