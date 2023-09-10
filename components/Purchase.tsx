@@ -116,7 +116,7 @@ export default function Purchase({ customer, order, coupons }: PurchaseProps) {
                 body: JSON.stringify(values)
             })
 
-            if (res.ok) router.replace('/purchase/successfull')
+            if (res.ok) router.push('purchase/successfull')
             else {
                 const errorResponse: APIResponse = await res.json()
 
@@ -243,7 +243,12 @@ export default function Purchase({ customer, order, coupons }: PurchaseProps) {
                                         >
                                             See Product
                                         </Link>
-                                        <button type='submit'>Confirm</button>
+                                        <button
+                                            type='submit'
+                                            onClick={Formik.submitForm}
+                                        >
+                                            Confirm
+                                        </button>
                                     </div>
                                 </div>
                             </div>
