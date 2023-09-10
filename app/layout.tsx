@@ -7,7 +7,7 @@ import { Category } from '@/types/tables'
 import Header from '@/app/_components/Header'
 import Footer from '@/app/_components/Footer'
 import { getData } from '@/utils/data/getData'
-import { getUser } from '@/utils/data/getUser'
+import { getCustomer } from '@/utils/data/getCustomer'
 
 const josefinSans = Josefin_Sans({ subsets: ['latin'] })
 
@@ -23,12 +23,12 @@ export default async function RootLayout({
 }) {
     const categories: Category[] = await getData(`/api/categories/`)
 
-    const user = await getUser()
+    const customer = getCustomer()
 
     return (
         <html lang='en'>
             <body className={josefinSans.className}>
-                <Header categories={categories} user={user} />
+                <Header categories={categories} customer={customer} />
                 {children}
                 <Footer />
             </body>

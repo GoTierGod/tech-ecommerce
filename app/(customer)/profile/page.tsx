@@ -1,4 +1,4 @@
-import { getUser } from '@/utils/data/getUser'
+import { getCustomer } from '@/utils/data/getCustomer'
 import UserProfile from '@/app/(customer)/profile/_components/UserProfile'
 import { redirect } from 'next/navigation'
 import { titleCaseFormatter } from '@/utils/formatting/titleCaseFormatter'
@@ -9,10 +9,10 @@ export const metadata: Metadata = {
 }
 
 export default async function Page() {
-    const user = await getUser()
+    const customer = getCustomer()
+    if (!customer) redirect('/login')
 
-    if (!user) redirect('/api/auth/refresh?path=/profile&auth=1')
-    metadata.title = `${titleCaseFormatter(user.user.username)} | Tech`
+    metadata.title = `${titleCaseFormatter(customer.user.username)} | Tech`
 
-    return <UserProfile customer={user} />
+    return <UserProfile customer={customer} />
 }

@@ -23,10 +23,10 @@ import { CustomerData } from '@/types/users'
 
 interface HeaderProps {
     categories: Category[]
-    user: CustomerData
+    customer: CustomerData
 }
 
-export default function Header({ categories, user }: HeaderProps) {
+export default function Header({ categories, customer }: HeaderProps) {
     const router = useRouter()
     const path = usePathname()
     const [searchStr, setSearchStr] = useState('')
@@ -59,12 +59,6 @@ export default function Header({ categories, user }: HeaderProps) {
 
     useEffect(() => {
         setDropdownMenu(false)
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [path])
-
-    useEffect(() => {
-        router.push(`/api/auth/refresh?path=${path}`)
-
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [path])
 
@@ -141,13 +135,13 @@ export default function Header({ categories, user }: HeaderProps) {
                 <div className={style.wideScreenUserLinks}>
                     <Link
                         className={style.wideScreenLink}
-                        href={user ? '/profile' : '/login'}
+                        href={customer ? '/profile' : '/login'}
                         prefetch={false}
                     >
                         <FontAwesomeIcon icon={faCircleUser} />
-                        {user ? user.user.username : 'Log in'}
+                        {customer ? customer.user.username : 'Log in'}
                     </Link>
-                    {user ? (
+                    {customer ? (
                         <>
                             <Link
                                 className={style.wideScreenLink}
@@ -177,7 +171,7 @@ export default function Header({ categories, user }: HeaderProps) {
                         </Link>
                     )}
                 </div>
-                {user && (
+                {customer && (
                     <Link
                         className={style.wideScreenLink}
                         href='/logout'
@@ -205,13 +199,13 @@ export default function Header({ categories, user }: HeaderProps) {
                 <div className={style.smallScreenUserLinks}>
                     <div>
                         <Link
-                            href={user ? '/profile' : '/login'}
+                            href={customer ? '/profile' : '/login'}
                             prefetch={false}
                         >
                             <FontAwesomeIcon icon={faCircleUser} />
-                            {user ? user.user.username : 'Log in'}
+                            {customer ? customer.user.username : 'Log in'}
                         </Link>
-                        {user ? (
+                        {customer ? (
                             <Link href='/logout' prefetch={false}>
                                 <FontAwesomeIcon icon={faSignOut} />
                                 Log Out
@@ -223,7 +217,7 @@ export default function Header({ categories, user }: HeaderProps) {
                             </Link>
                         )}
                     </div>
-                    {user && (
+                    {customer && (
                         <div>
                             <Link href='/cart' prefetch={false}>
                                 <FontAwesomeIcon icon={faCartShopping} />

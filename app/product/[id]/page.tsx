@@ -20,7 +20,7 @@ import { getProductDeliveryDay } from '@/utils/products/getProductDeliveryDay'
 import { getProductInstallments } from '@/utils/products/getProductInstallments'
 import { notFound } from 'next/navigation'
 import { respectLineBreaks } from '@/utils/formatting/respectLineBreaks'
-import { getUser } from '@/utils/data/getUser'
+import { getCustomer } from '@/utils/data/getCustomer'
 
 import visaLogo from '../../../public/images/payments/visa.svg'
 import mastercardLogo from '../../../public/images/payments/mastercard.svg'
@@ -62,7 +62,7 @@ export default async function Page({ params }: { params: { id: string } }) {
         `?category=${product.details.category.title}&limit=6`
     )
 
-    const user = await getUser()
+    const customer = getCustomer()
 
     const cart = await getCart()
     const favorites = await getFavorites()
@@ -102,7 +102,7 @@ export default async function Page({ params }: { params: { id: string } }) {
                 >
                     <span>Buy Now</span>
                 </Link>
-                {user ? (
+                {customer ? (
                     <ProductFavsCart
                         product={product}
                         cart={cart}

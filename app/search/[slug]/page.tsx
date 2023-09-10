@@ -5,7 +5,7 @@ import { SearchResponse } from '@/types/search'
 import Search from '../_components/Search'
 import { getData } from '@/utils/data/getData'
 import { titleCaseFormatter } from '@/utils/formatting/titleCaseFormatter'
-import { getUser } from '@/utils/data/getUser'
+import { getCustomer } from '@/utils/data/getCustomer'
 
 export const metadata: Metadata = {
     title: 'Search | Tech'
@@ -55,7 +55,7 @@ export default async function Page({
         }`
     )
 
-    const user = await getUser()
+    const customer = getCustomer()
 
     return (
         <Search

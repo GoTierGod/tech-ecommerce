@@ -11,12 +11,12 @@ import {
 
 import ProductReview from './_components/ProductReview'
 import { getReviews } from '@/utils/data/getReviews'
-import { getUser } from '@/utils/data/getUser'
+import { getCustomer } from '@/utils/data/getCustomer'
 
 export default async function Page({ params }: { params: { id: string } }) {
     const { id } = params
 
-    const user = await getUser()
+    const customer = getCustomer()
 
     const reviews = await getReviews(id)
 
@@ -54,7 +54,7 @@ export default async function Page({ params }: { params: { id: string } }) {
                                 <ProductReview
                                     key={review.review.id}
                                     review={review}
-                                    customer={user}
+                                    customer={customer}
                                 />
                             ))}
                         </div>

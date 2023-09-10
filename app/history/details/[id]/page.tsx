@@ -11,14 +11,14 @@ import { Order } from '@/types/tables'
 import { priceStringFormatter } from '@/utils/formatting/priceStringFormatter'
 import { titleCaseFormatter } from '@/utils/formatting/titleCaseFormatter'
 import { getPurchase } from '@/utils/data/getPurchase'
-import { getUser } from '@/utils/data/getUser'
+import { getCustomer } from '@/utils/data/getCustomer'
 import Breadcrumbs from '@/components/Breadcrumbs'
 
 export default async function Page({ params }: { params: { id: string } }) {
     const { id } = params
 
-    const user = await getUser()
-    if (!user) redirect(`/api/auth/refresh?path=/history/details/${id}&auth=1`)
+    const customer = getCustomer()
+    if (!customer) redirect('/login')
 
     const purchase = await getPurchase(id)
     if (!purchase) redirect('')

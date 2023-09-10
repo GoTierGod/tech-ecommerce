@@ -1,11 +1,10 @@
 import UserRegister from '@/app/(customer)/register/_components/UserRegister'
-import { getUser } from '@/utils/data/getUser'
+import { getCustomer } from '@/utils/data/getCustomer'
 import { redirect } from 'next/navigation'
 
 export default async function Page() {
-    const user = await getUser()
-
-    if (user) redirect('/api/auth/refresh?path=/register&auth=0')
+    const customer = getCustomer()
+    if (!customer) redirect('/login')
 
     return <UserRegister />
 }

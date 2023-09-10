@@ -1,12 +1,12 @@
 import { redirect } from 'next/navigation'
 
-import { getUser } from '@/utils/data/getUser'
+import { getCustomer } from '@/utils/data/getCustomer'
 import { getFavorites } from '@/utils/data/getFavorites'
 import UserFavorites from '@/app/favorites/_components/UserFavorites'
 
 export default async function Favorites() {
-    const user = await getUser()
-    if (!user) redirect('/api/auth/refresh?path=/favorites&auth=1')
+    const customer = getCustomer()
+    if (!customer) redirect('/login')
 
     const favorites = await getFavorites()
 

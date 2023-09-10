@@ -1,11 +1,11 @@
 import { redirect } from 'next/navigation'
 
-import { getUser } from '@/utils/data/getUser'
+import { getCustomer } from '@/utils/data/getCustomer'
 import Login from '@/app/(auth)/login/_components/Login'
 
 export default async function Page() {
-    const user = await getUser()
+    const customer = getCustomer()
+    if (customer) redirect('/')
 
-    if (user) redirect('/api/auth/refresh?path=/login&auth=0')
-    else return <Login />
+    return <Login />
 }

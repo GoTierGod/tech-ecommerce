@@ -1,11 +1,11 @@
 import UserCart from '@/app/cart/_components/UserCart'
 import { getCart } from '@/utils/data/getCart'
-import { getUser } from '@/utils/data/getUser'
+import { getCustomer } from '@/utils/data/getCustomer'
 import { redirect } from 'next/navigation'
 
 export default async function Cart() {
-    const user = await getUser()
-    if (!user) redirect('/api/auth/refresh?path=/cart&auth=1')
+    const customer = getCustomer()
+    if (!customer) redirect('/login')
 
     const cart = await getCart()
 

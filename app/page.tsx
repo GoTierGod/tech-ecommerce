@@ -7,7 +7,6 @@ import OffersSection from '@/app/_components/OffersSection'
 import HighlightedSection from '@/app/_components/HighlightedSection'
 import { Metadata } from 'next'
 import GamingSection from '@/app/_components/GamingSection'
-import { getUser } from '@/utils/data/getUser'
 
 export const metadata: Metadata = {
     title: 'Home | Tech'
@@ -38,8 +37,6 @@ export default async function Home() {
     const gaming: ComposedProductInfo[] = await getData(
         `/api/products/?is_gamer=true&limit=6`
     )
-
-    const user = await getUser()
 
     return (
         <main>

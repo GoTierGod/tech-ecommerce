@@ -1,12 +1,11 @@
 import Link from 'next/link'
 import style from './page.module.css'
-import { getUser } from '@/utils/data/getUser'
+import { getCustomer } from '@/utils/data/getCustomer'
 import { redirect } from 'next/navigation'
 
 export default async function Page() {
-    const user = await getUser()
-    if (!user)
-        redirect('/api/auth/refresh?path=/cart/purchase/successfull&auth=1')
+    const customer = getCustomer()
+    if (!customer) redirect('/login')
 
     return (
         <main>

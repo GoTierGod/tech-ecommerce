@@ -1,6 +1,6 @@
 'use client'
 
-import style from './user-login.module.css'
+import style from './login.module.css'
 
 import { useFormik } from 'formik'
 import * as Yup from 'yup'

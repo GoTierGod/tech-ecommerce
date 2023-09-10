@@ -1,5 +1,5 @@
 import UserDelete from '@/app/(customer)/delete/_components/UserDelete'
-import { getUser } from '@/utils/data/getUser'
+import { getCustomer } from '@/utils/data/getCustomer'
 import { Metadata } from 'next'
 import { redirect } from 'next/navigation'
 
@@ -8,9 +8,8 @@ export const metadata: Metadata = {
 }
 
 export default async function Page() {
-    const user = await getUser()
+    const customer = getCustomer()
+    if (!customer) redirect('/login')
 
-    if (!user) redirect('/api/auth/refresh?path=/delete&auth=1')
-
-    return <UserDelete customer={user} />
+    return <UserDelete customer={customer} />
 }
