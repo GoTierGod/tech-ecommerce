@@ -41,7 +41,7 @@ export default function UserRegister() {
         },
         onSubmit: async values => {
             const res = await fetch('/api/customer/create', {
-                method: 'post',
+                method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(values)
             })

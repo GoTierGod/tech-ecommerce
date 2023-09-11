@@ -94,6 +94,7 @@ export async function PATCH(req: NextRequest) {
             { status: 401 }
         )
     } catch (err) {
+        console.log(err)
         return NextResponse.json(
             { message: 'Something went wrong' },
             { status: 400 }
