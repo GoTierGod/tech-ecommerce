@@ -208,7 +208,7 @@ export default function UserUpdate({
     const Formik = useFormik({
         initialValues: requiredFieldsInitialValue[updating],
         onSubmit: async values => {
-            const res = await fetch('/api/user/update', {
+            const res = await fetch('/api/customer/update', {
                 method: 'patch',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(values)

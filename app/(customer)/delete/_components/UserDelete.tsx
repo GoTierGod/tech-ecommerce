@@ -32,7 +32,7 @@ export default function UserDelete({ customer }: UserDeleteProps) {
             consent: ''
         },
         onSubmit: async values => {
-            const res = await fetch('/api/user/delete', {
+            const res = await fetch('/api/customer/delete', {
                 method: 'post',
                 headers: {
                     'Content-Type': 'application/json'

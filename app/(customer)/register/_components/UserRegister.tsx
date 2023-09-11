@@ -40,7 +40,7 @@ export default function UserRegister() {
             birthdate: ''
         },
         onSubmit: async values => {
-            const res = await fetch('/api/user/create', {
+            const res = await fetch('/api/customer/create', {
                 method: 'post',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(values)
