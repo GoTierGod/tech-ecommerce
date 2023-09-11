@@ -87,4 +87,10 @@
 
     border: 2px solid transparent;
     border-radius: 4px;
+
+    transition: transform 300ms;
+}
+
+.footer button:hover {
+    transform: scale(1.05);
 }
