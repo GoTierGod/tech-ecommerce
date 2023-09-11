@@ -70,12 +70,22 @@ export default async function Page({ params }: { params: { id: string } }) {
     const productHeader = (
         <header className={style.header}>
             <h2>{product.details.name}</h2>
-            <span
-                className={style.rating}
-                title={`Rating: ${product.rating || 5.0}`}
-            >
-                {getProductStars(product.reviews_counter, product.rating)}
-            </span>
+            <div className={style.reviews}>
+                <span
+                    className={style.rating}
+                    title={`Rating: ${product.rating || 5.0}`}
+                >
+                    {getProductStars(product.reviews_counter, product.rating)}
+                </span>
+                {product.reviews_counter > 0 && (
+                    <Link
+                        className={style.link}
+                        href={`/product/${id}/reviews`}
+                    >
+                        Reviews
+                    </Link>
+                )}
+            </div>
         </header>
     )
 
