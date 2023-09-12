@@ -27,6 +27,7 @@ const fieldsTouched: string[] = [
 
 export default function Login() {
     const router = useRouter()
+    const [waitingRes, setWaitingRes] = useState(false)
     const [err, setErr] = useState(
         null as null | { message: string; status: number; statusText: string }
     )
@@ -37,24 +38,30 @@ export default function Login() {
             password: ''
         },
         onSubmit: async values => {
-            const res = await fetch(`/api/auth/login`, {
-                method: 'post',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(values)
-            })
+            if (!waitingRes) {
+                setWaitingRes(true)
 
-            if (res.ok) {
-                router.refresh()
-                router.push('/')
-            } else {
-                const errorResponse: APIResponse = await res.json()
-
-                Formik.resetForm()
-                setErr({
-                    message: errorResponse.message,
-                    status: res.status,
-                    statusText: res.statusText
+                const res = await fetch(`/api/auth/login`, {
+                    method: 'post',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(values)
                 })
+
+                if (res.ok) {
+                    router.refresh()
+                    router.push('/')
+                } else {
+                    const errorResponse: APIResponse = await res.json()
+
+                    Formik.resetForm()
+                    setErr({
+                        message: errorResponse.message,
+                        status: res.status,
+                        statusText: res.statusText
+                    })
+                }
+
+                setWaitingRes(false)
             }
         },
         validationSchema: Yup.object({
@@ -183,7 +190,9 @@ export default function Login() {
                                 )}
                             </div>
                             <div className={style.options}>
-                                <button type='submit'>Log In</button>
+                                <button type='submit' disabled={waitingRes}>
+                                    Log In
+                                </button>
                                 <Link href='/'>Back to Home</Link>
                             </div>
                         </form>
