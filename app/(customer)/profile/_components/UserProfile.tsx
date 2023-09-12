@@ -3,7 +3,7 @@
 import style from './user-profile.module.css'
 
 import Link from 'next/link'
-import { useCallback, useState } from 'react'
+import { useCallback, useMemo, useState } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faEdit, faStar } from '@fortawesome/free-solid-svg-icons'
 
@@ -33,31 +33,37 @@ export default function UserProfile({ customer }: UserProfileProps) {
 
     const fieldUpdated = useCallback(() => setUpdating(false), [setUpdating])
 
-    const customerInfoKeys: { [key: string]: string } = {
-        username: 'Username',
-        email: 'Email',
-        password: 'Password',
-        phone: 'Phone',
-        countrycity: 'Country & City',
-        address: 'Address',
-        firstname: 'Name',
-        lastname: 'Last Name',
-        birthdate: 'Birthdate',
-        gender: 'Gender'
-    }
+    const customerInfoKeys: { [key: string]: string } = useMemo(
+        () => ({
+            username: 'Username',
+            email: 'Email',
+            password: 'Password',
+            phone: 'Phone',
+            countrycity: 'Country & City',
+            address: 'Address',
+            firstname: 'Name',
+            lastname: 'Last Name',
+            birthdate: 'Birthdate',
+            gender: 'Gender'
+        }),
+        []
+    )
 
-    const customerInfoValues: { [key: string]: string } = {
-        username: customer.user.username,
-        email: customer.user.email,
-        password: '**************',
-        phone: customer.phone,
-        countrycity: `${customer.country} / ${customer.city}`,
-        address: customer.address,
-        firstname: customer.user.first_name,
-        lastname: customer.user.last_name,
-        birthdate: customer.birthdate,
-        gender: customer.gender
-    }
+    const customerInfoValues: { [key: string]: string } = useMemo(
+        () => ({
+            username: customer.user.username,
+            email: customer.user.email,
+            password: '**************',
+            phone: customer.phone,
+            countrycity: `${customer.country} / ${customer.city}`,
+            address: customer.address,
+            firstname: customer.user.first_name,
+            lastname: customer.user.last_name,
+            birthdate: customer.birthdate,
+            gender: customer.gender
+        }),
+        [customer]
+    )
 
     const ResetError = () => setErr(null)
 

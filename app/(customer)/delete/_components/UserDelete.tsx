@@ -22,6 +22,7 @@ interface UserDeleteProps {
 
 export default function UserDelete({ customer }: UserDeleteProps) {
     const router = useRouter()
+    const [waitingRes, setWaitingRes] = useState(false)
     const [err, setErr] = useState(
         null as null | { message: string; status: number; statusText: string }
     )
@@ -32,25 +33,31 @@ export default function UserDelete({ customer }: UserDeleteProps) {
             consent: ''
         },
         onSubmit: async values => {
-            const res = await fetch('/api/customer/delete', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({ password: values.password })
-            })
+            if (!waitingRes) {
+                setWaitingRes(true)
 
-            if (res.ok) {
-                router.replace('/')
-            } else {
-                const errorResponse: APIResponse = await res.json()
-
-                Formik.resetForm()
-                setErr({
-                    message: errorResponse.message,
-                    status: res.status,
-                    statusText: res.statusText
+                const res = await fetch('/api/customer/delete', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ password: values.password })
                 })
+
+                if (res.ok) {
+                    router.replace('/')
+                } else {
+                    const errorResponse: APIResponse = await res.json()
+
+                    Formik.resetForm()
+                    setErr({
+                        message: errorResponse.message,
+                        status: res.status,
+                        statusText: res.statusText
+                    })
+                }
+
+                setWaitingRes(false)
             }
         },
         validationSchema: Yup.object({
@@ -206,6 +213,7 @@ export default function UserDelete({ customer }: UserDeleteProps) {
                                 <button
                                     className={style.deleteBtn}
                                     type='submit'
+                                    disabled={waitingRes}
                                 >
                                     Delete Account
                                 </button>

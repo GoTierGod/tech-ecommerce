@@ -27,6 +27,7 @@ const fieldsTouched: string[] = [
 
 export default function UserRegister() {
     const router = useRouter()
+    const [waitingRes, setWaitingRes] = useState(false)
     const [err, setErr] = useState(
         null as null | { message: string; status: number; statusText: string }
     )
@@ -40,25 +41,31 @@ export default function UserRegister() {
             birthdate: ''
         },
         onSubmit: async values => {
-            const res = await fetch('/api/customer/create', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(values)
-            })
+            if (!waitingRes) {
+                setWaitingRes(true)
 
-            if (res.ok) {
-                router.replace('/')
-            } else if (res.status === 201) {
-                router.replace('/login')
-            } else {
-                const errorResponse: APIResponse = await res.json()
-
-                Formik.resetForm()
-                setErr({
-                    message: errorResponse.message,
-                    status: res.status,
-                    statusText: res.statusText
+                const res = await fetch('/api/customer/create', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(values)
                 })
+
+                if (res.ok) {
+                    router.replace('/')
+                } else if (res.status === 201) {
+                    router.replace('/login')
+                } else {
+                    const errorResponse: APIResponse = await res.json()
+
+                    Formik.resetForm()
+                    setErr({
+                        message: errorResponse.message,
+                        status: res.status,
+                        statusText: res.statusText
+                    })
+                }
+
+                setWaitingRes(false)
             }
         },
         validationSchema: Yup.object({
@@ -300,7 +307,9 @@ export default function UserRegister() {
                                 )}
                             </div>
                             <div className={style.options}>
-                                <button type='submit'>Sign Up</button>
+                                <button type='submit' disabled={waitingRes}>
+                                    Sign Up
+                                </button>
                                 <Link href='/'>Back to Home</Link>
                             </div>
                         </form>
