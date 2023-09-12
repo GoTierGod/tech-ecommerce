@@ -10,7 +10,7 @@ import {
     faThumbsUp
 } from '@fortawesome/free-solid-svg-icons'
 
-import { useCallback, useState } from 'react'
+import { useCallback, useMemo, useState } from 'react'
 import { ComposedReviewInfo } from '@/types/review'
 import { useRouter } from 'next/navigation'
 import { CustomerData } from '@/types/users'
@@ -78,9 +78,17 @@ export default function ProductReview({
         }
     }, [router, review.review.id, waitingRes])
 
-    const isLiked = interactions.likes.includes(review.review.id)
-    const isDisliked = interactions.dislikes.includes(review.review.id)
-    const isReported = interactions.reports.includes(review.review.id)
+    const isLiked = useMemo(() => {
+        return interactions.likes.includes(review.review.id)
+    }, [interactions.likes, review.review.id])
+
+    const isDisliked = useMemo(() => {
+        return interactions.dislikes.includes(review.review.id)
+    }, [interactions.dislikes, review.review.id])
+
+    const isReported = useMemo(() => {
+        return interactions.reports.includes(review.review.id)
+    }, [interactions.reports, review.review.id])
 
     return (
         <div className={style.card}>
