@@ -8,7 +8,7 @@ import {
     faHeart,
     faHeartPulse
 } from '@fortawesome/free-solid-svg-icons'
-import { useCallback, useMemo } from 'react'
+import { useCallback, useMemo, useState } from 'react'
 
 import { ComposedProductInfo } from '@/types/product'
 import { useRouter } from 'next/navigation'
@@ -25,6 +25,7 @@ export default function ProductFavsCart({
     favorites
 }: ProductFavsCartProps) {
     const router = useRouter()
+    const [waitingRes, setWaitingRes] = useState(false)
 
     const isInCart = useMemo(
         () => cart.find(item => item.details.id === product.details.id),
@@ -37,57 +38,70 @@ export default function ProductFavsCart({
     )
 
     const cartAction = useCallback(async () => {
-        if (isInCart) {
-            const res = await fetch(
-                `/api/cart/delete?id=${product.details.id}`,
-                {
-                    method: 'DELETE'
-                }
-            )
+        if (!waitingRes) {
+            setWaitingRes(true)
 
-            if (res.ok) router.refresh()
-        } else {
-            const res = await fetch(
-                `/api/${isInFavs ? 'favorites/move' : 'cart/add'}?id=${
-                    product.details.id
-                }`,
-                {
-                    method: isInFavs ? 'PATCH' : 'POST'
-                }
-            )
+            if (isInCart) {
+                const res = await fetch(
+                    `/api/cart/delete?id=${product.details.id}`,
+                    {
+                        method: 'DELETE'
+                    }
+                )
 
-            if (res.ok) router.refresh()
+                if (res.ok) router.refresh()
+            } else {
+                const res = await fetch(
+                    `/api/${isInFavs ? 'favorites/move' : 'cart/add'}?id=${
+                        product.details.id
+                    }`,
+                    {
+                        method: isInFavs ? 'PATCH' : 'POST'
+                    }
+                )
+
+                if (res.ok) router.refresh()
+            }
+
+            setWaitingRes(false)
         }
-    }, [product.details.id, router, isInCart, isInFavs])
+    }, [product.details.id, router, waitingRes, isInCart, isInFavs])
 
     const favsAction = useCallback(async () => {
-        if (isInFavs) {
-            const res = await fetch(
-                `/api/favorites/delete?ids=${product.details.id}`,
-                {
-                    method: 'DELETE'
-                }
-            )
+        if (!waitingRes) {
+            setWaitingRes(true)
 
-            if (res.ok) router.refresh()
-        } else {
-            const res = await fetch(
-                `/api/${isInCart ? 'cart/move' : 'favorites/add'}?id=${
-                    product.details.id
-                }`,
-                {
-                    method: isInCart ? 'PATCH' : 'POST'
-                }
-            )
+            if (isInFavs) {
+                const res = await fetch(
+                    `/api/favorites/delete?ids=${product.details.id}`,
+                    {
+                        method: 'DELETE'
+                    }
+                )
 
-            if (res.ok) router.refresh()
+                if (res.ok) router.refresh()
+            } else {
+                const res = await fetch(
+                    `/api/${isInCart ? 'cart/move' : 'favorites/add'}?id=${
+                        product.details.id
+                    }`,
+                    {
+                        method: isInCart ? 'PATCH' : 'POST'
+                    }
+                )
+
+                if (res.ok) router.refresh()
+            }
+
+            setWaitingRes(false)
         }
-    }, [product.details.id, router, isInFavs, isInCart])
+    }, [product.details.id, waitingRes, router, isInFavs, isInCart])
 
     return (
         <div className={style.wrapper}>
             <button
                 onClick={cartAction}
+                disabled={waitingRes}
                 onMouseOver={e =>
                     e.currentTarget.firstElementChild?.classList.add(
                         'fa-bounce'
@@ -115,6 +129,7 @@ export default function ProductFavsCart({
             </button>
             <button
                 onClick={favsAction}
+                disabled={waitingRes}
                 onMouseOver={e =>
                     e.currentTarget.firstElementChild?.classList.add(
                         'fa-bounce'
