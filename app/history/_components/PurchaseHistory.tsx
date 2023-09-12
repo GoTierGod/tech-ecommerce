@@ -199,10 +199,10 @@ export default function PurchaseHistory({ history }: PurchaseHistoryProps) {
                         </div>
                     ) : (
                         <div className={style.empty}>
-                            <h3>Your cart is empty</h3>
+                            <h3>Your history is empty</h3>
                             <p>
-                                At this moment you do not have products added to
-                                your cart, check out our offers!
+                                At this moment you do not have purchased
+                                products, check out our offers!
                             </p>
                         </div>
                     )}
