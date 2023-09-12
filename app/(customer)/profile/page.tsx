@@ -9,7 +9,7 @@ export const metadata: Metadata = {
 }
 
 export default async function Page() {
-    const customer = getCustomer()
+    const customer = await getCustomer()
     if (!customer) redirect('/login')
 
     metadata.title = `${titleCaseFormatter(customer.user.username)} | Tech`

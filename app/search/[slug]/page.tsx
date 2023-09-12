@@ -55,7 +55,7 @@ export default async function Page({
         }`
     )
 
-    const customer = getCustomer()
+    const customer = await getCustomer()
 
     return (
         <Search

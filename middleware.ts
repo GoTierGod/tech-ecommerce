@@ -5,9 +5,7 @@ import { AuthTokens } from './types/tokens'
 import { Customer } from './types/users'
 
 export async function middleware(req: NextRequest) {
-    const headers = new Headers(req.headers)
-
-    // Get the customer data or try to refresh tokens and get the customer data again
+    // Try to refresh tokens if there's no available customer data
     const authCookies = req.cookies.get('authTokens')
     if (!authCookies) req.cookies.delete('authTokens')
     else {
@@ -16,11 +14,7 @@ export async function middleware(req: NextRequest) {
             authTokens = JSON.parse(authCookies.value) as AuthTokens
         } catch (err) {
             req.cookies.delete('authTokens')
-            return NextResponse.next({
-                request: {
-                    headers
-                }
-            })
+            return NextResponse.next()
         }
 
         const customerRes = await fetch(`${API_URL}/api/customer/`, {
@@ -31,10 +25,7 @@ export async function middleware(req: NextRequest) {
             }
         })
 
-        if (customerRes.ok) {
-            const data = (await customerRes.json()) as Customer
-            headers.set('customer', JSON.stringify(data))
-        } else {
+        if (!customerRes.ok) {
             const refreshRes = await fetch(`${API_URL}/api/token/refresh/`, {
                 method: 'POST',
                 headers: {
@@ -47,27 +38,14 @@ export async function middleware(req: NextRequest) {
                 const data = (await refreshRes.json()) as AuthTokens
                 req.cookies.set('authTokens', JSON.stringify(data))
 
-                const customerRes = await fetch(`${API_URL}/api/customer/`, {
-                    method: 'GET',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        Authorization: `Bearer ${authTokens.access}`
-                    }
-                })
-
-                if (customerRes.ok) {
-                    const data = (await customerRes.json()) as Customer
-                    headers.set('customer', JSON.stringify(data))
-                } else req.cookies.delete('authTokens')
+                return NextResponse.next()
             }
+
+            req.cookies.delete('authTokens')
         }
     }
 
-    return NextResponse.next({
-        request: {
-            headers
-        }
-    })
+    return NextResponse.next()
 }
 
 export const config = {

@@ -7,7 +7,7 @@ import { redirect } from 'next/navigation'
 export default async function Page({ params }: { params: { id: string } }) {
     const { id } = params
 
-    const customer = getCustomer()
+    const customer = await getCustomer()
     if (!customer) redirect('/login')
 
     const purchase = await getPurchase(id)

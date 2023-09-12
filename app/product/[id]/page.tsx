@@ -19,7 +19,6 @@ import { getProductStars } from '@/utils/products/getProductStars'
 import { getProductDeliveryDay } from '@/utils/products/getProductDeliveryDay'
 import { getProductInstallments } from '@/utils/products/getProductInstallments'
 import { notFound } from 'next/navigation'
-import { respectLineBreaks } from '@/utils/formatting/respectLineBreaks'
 import { getCustomer } from '@/utils/data/getCustomer'
 
 import visaLogo from '../../../public/images/payments/visa.svg'
@@ -62,7 +61,7 @@ export default async function Page({ params }: { params: { id: string } }) {
         `?category=${product.details.category.title}&limit=6`
     )
 
-    const customer = getCustomer()
+    const customer = await getCustomer()
 
     const cart = await getCart()
     const favorites = await getFavorites()

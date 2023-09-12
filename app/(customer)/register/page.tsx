@@ -3,7 +3,7 @@ import { getCustomer } from '@/utils/data/getCustomer'
 import { redirect } from 'next/navigation'
 
 export default async function Page() {
-    const customer = getCustomer()
+    const customer = await getCustomer()
     if (customer) redirect('/')
 
     return <UserRegister />
