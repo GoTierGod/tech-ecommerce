@@ -2,7 +2,7 @@
 
 import style from './purchase.module.css'
 
-import { ChangeEvent, useCallback, useEffect, useState } from 'react'
+import { ChangeEvent, useCallback, useEffect, useMemo, useState } from 'react'
 import { useFormik } from 'formik'
 import * as Yup from 'yup'
 import { useRouter } from 'next/navigation'
@@ -42,9 +42,11 @@ interface Coupon {
 
 export default function Purchase({ customer, order, coupons }: PurchaseProps) {
     const router = useRouter()
+    const [waitingRes, setWaitingRes] = useState(false)
 
     const [currIdx, setCurrIdx] = useState(0)
     const [currItem, setCurrItem] = useState(order[0])
+
     const [orderItems, setOrderItems] = useState(order.map(p => p.details.id))
     const [cartSpace, setCartSpace] = useState(10 - order.length)
 
@@ -52,7 +54,7 @@ export default function Purchase({ customer, order, coupons }: PurchaseProps) {
         null as null | { message: string; status: number; statusText: string }
     )
 
-    const paymentMethods = ['MasterCard', 'Visa']
+    const paymentMethods = useMemo(() => ['MasterCard', 'Visa'], [])
 
     const normalTotal =
         order.length > 0
@@ -60,6 +62,7 @@ export default function Purchase({ customer, order, coupons }: PurchaseProps) {
                   .map(p => Number(p.details.price))
                   .reduce((p1, p2) => p1 + p2)
             : 0
+
     const offerTotal =
         order.length > 0
             ? order
@@ -95,7 +98,7 @@ export default function Purchase({ customer, order, coupons }: PurchaseProps) {
         [orderItems, setOrderItems, cartSpace]
     )
 
-    const ResetError = () => setErr(null)
+    const ResetError = useCallback(() => setErr(null), [])
 
     const Formik = useFormik({
         initialValues: {
@@ -108,23 +111,27 @@ export default function Purchase({ customer, order, coupons }: PurchaseProps) {
             coupon: ''
         },
         onSubmit: async values => {
-            console.log(JSON.stringify(values))
+            if (!waitingRes) {
+                setWaitingRes(true)
 
-            const res = await fetch('/api/purchase/create/', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(values)
-            })
-
-            if (res.ok) router.push('purchase/successfull')
-            else {
-                const errorResponse: APIResponse = await res.json()
-
-                setErr({
-                    message: errorResponse.message,
-                    status: res.status,
-                    statusText: res.statusText
+                const res = await fetch('/api/purchase/create/', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(values)
                 })
+
+                if (res.ok) router.push('purchase/successfull')
+                else {
+                    const errorResponse: APIResponse = await res.json()
+
+                    setErr({
+                        message: errorResponse.message,
+                        status: res.status,
+                        statusText: res.statusText
+                    })
+                }
+
+                setWaitingRes(false)
             }
         },
         validationSchema: Yup.object({
@@ -246,6 +253,7 @@ export default function Purchase({ customer, order, coupons }: PurchaseProps) {
                                         <button
                                             type='submit'
                                             onClick={Formik.submitForm}
+                                            disabled={waitingRes}
                                         >
                                             Confirm
                                         </button>
