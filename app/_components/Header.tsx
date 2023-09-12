@@ -33,11 +33,15 @@ export default function Header({ categories, customer }: HeaderProps) {
     const [category, setCategory] = useState('')
     const [dropdownMenu, setDropdownMenu] = useState(false)
 
-    const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
-        e.preventDefault()
-        ;/.*[a-z].*/i.test(searchStr) &&
-            router.push(`/search/${searchStr}?page=1`)
-    }
+    const handleSubmit = useCallback(
+        (e: FormEvent<HTMLFormElement>) => {
+            e.preventDefault()
+
+            if (/.*[a-z].*/i.test(searchStr))
+                router.push(`/search/${searchStr}?page=1`)
+        },
+        [router, searchStr]
+    )
 
     const toggleDropdownMenu = useCallback(() => {
         setDropdownMenu(prevDropdownMenu => !prevDropdownMenu)
