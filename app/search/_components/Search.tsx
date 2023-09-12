@@ -432,12 +432,13 @@ export default function Search({
                         </div>
                     </header>
                     <div className={style.grid}>
-                        {searchRes.products.map(product => (
-                            <HorizontalCard
-                                key={product.details.id}
-                                product={product}
-                            />
-                        ))}
+                        {searchRes.products.length > 0 &&
+                            searchRes.products.map(product => (
+                                <HorizontalCard
+                                    key={product.details.id}
+                                    product={product}
+                                />
+                            ))}
                     </div>
                 </section>
                 <footer className={style.pagination}>

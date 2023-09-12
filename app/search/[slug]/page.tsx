@@ -3,9 +3,10 @@ import { Metadata } from 'next'
 
 import { SearchResponse } from '@/types/search'
 import Search from '../_components/Search'
-import { getData } from '@/utils/data/getData'
 import { titleCaseFormatter } from '@/utils/formatting/titleCaseFormatter'
 import { getCustomer } from '@/utils/data/getCustomer'
+import { headers } from 'next/dist/client/components/headers'
+import { API_URL } from '@/constants/back-end'
 
 export const metadata: Metadata = {
     title: 'Search | Tech'
@@ -19,6 +20,7 @@ export default async function Page({
     searchParams?: { [key: string]: string | string[] | undefined }
 }) {
     const { slug: search } = params
+    const forwardedFor = headers().get('X-Forwarded-For') as string
 
     const {
         min_price,
@@ -49,11 +51,34 @@ export default async function Page({
     const unescapedSearchStr = unescape(search)
     metadata.title = `${titleCaseFormatter(unescapedSearchStr)} | Tech`
 
-    const searchRes: SearchResponse = await getData(
-        `/api/search/${
-            unescapedSearchStr.replace(/\s+/, ',') + composeQueryParams()
-        }`
-    )
+    const searchRes: SearchResponse =
+        await (async (): Promise<SearchResponse> => {
+            const res = await fetch(
+                `${API_URL}/api/search/${
+                    unescapedSearchStr.replace(/\s+/, ',') +
+                    composeQueryParams()
+                }`,
+                {
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-Forwarded-For': forwardedFor
+                    }
+                }
+            )
+
+            if (res.ok) {
+                return await res.json()
+            }
+
+            return {
+                results: 0,
+                pages: 1,
+                products: [],
+                categories: [],
+                brands: [],
+                installments: []
+            } as SearchResponse
+        })()
 
     const customer = await getCustomer()
 
