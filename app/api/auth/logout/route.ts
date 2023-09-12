@@ -1,4 +1,4 @@
-import { cookies, headers } from 'next/dist/client/components/headers'
+import { cookies } from 'next/dist/client/components/headers'
 import { NextRequest, NextResponse } from 'next/server'
 
 import { API_URL } from '@/constants/back-end'
@@ -6,8 +6,6 @@ import { AuthTokens } from '@/types/tokens'
 
 export async function POST(req: NextRequest) {
     try {
-        const forwardedFor = headers().get('X-Forwarded-For') as string
-
         const authCookies = cookies().get('authTokens')
         if (authCookies) {
             let authTokens: AuthTokens | null = null
@@ -29,9 +27,7 @@ export async function POST(req: NextRequest) {
             const res = await fetch(`${API_URL}/api/token/blacklist/`, {
                 method: 'POST',
                 headers: {
-                    'Content-Type': 'application/json',
-                    authorization: `Bearer ${authTokens.access}`,
-                    'X-Forwarded-For': forwardedFor
+                    'Content-Type': 'application/json'
                 },
                 body: JSON.stringify(logoutData)
             })

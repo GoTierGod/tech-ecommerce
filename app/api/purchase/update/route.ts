@@ -1,4 +1,4 @@
-import { cookies, headers } from 'next/dist/client/components/headers'
+import { cookies } from 'next/dist/client/components/headers'
 import { NextRequest, NextResponse } from 'next/server'
 
 import { API_URL } from '@/constants/back-end'
@@ -7,9 +7,8 @@ import { APIResponse } from '@/types/response'
 
 export async function PATCH(req: NextRequest) {
     try {
-        const forwardedFor = headers().get('X-Forwarded-For') as string
-
         const authCookies = cookies().get('authTokens')
+
         if (authCookies) {
             let authTokens: AuthTokens | null = null
             try {
@@ -45,8 +44,7 @@ export async function PATCH(req: NextRequest) {
                         method: 'PATCH',
                         headers: {
                             'Content-Type': 'application/json',
-                            authorization: `Bearer ${authTokens.access}`,
-                            'X-Forwarded-For': forwardedFor
+                            authorization: `Bearer ${authTokens.access}`
                         },
                         body: JSON.stringify(updatePurchaseData)
                     }
