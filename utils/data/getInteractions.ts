@@ -1,13 +1,12 @@
-import { cookies, headers } from 'next/dist/client/components/headers'
+import { cookies } from 'next/dist/client/components/headers'
 
 import { API_URL } from '@/constants/back-end'
 import { Interactions } from '@/types/interactions'
 import { AuthTokens } from '@/types/tokens'
 
 export const getInteractions = async (): Promise<Interactions> => {
-    const forwardedFor = headers().get('X-Forwarded-For') as string
-
     const authCookies = cookies().get('authTokens')
+
     if (authCookies) {
         let authTokens: AuthTokens | null = null
         try {
@@ -21,8 +20,7 @@ export const getInteractions = async (): Promise<Interactions> => {
                 method: 'GET',
                 headers: {
                     'Content-Type': 'application/json',
-                    Authorization: `Bearer ${authTokens.access}`,
-                    'X-Forwarded-For': forwardedFor
+                    Authorization: `Bearer ${authTokens.access}`
                 }
             })
 
