@@ -1,10 +1,10 @@
 import { cookies } from 'next/dist/client/components/headers'
 
 import { API_URL } from '@/constants/back-end'
+import { Interactions } from '@/types/interactions'
 import { AuthTokens } from '@/types/tokens'
-import { ComposedProductInfo } from '@/types/product'
 
-export const getCart = async (): Promise<ComposedProductInfo[]> => {
+export const getInteractions = async (): Promise<Interactions> => {
     const authCookies = cookies().get('authTokens')
 
     if (authCookies) {
@@ -12,11 +12,11 @@ export const getCart = async (): Promise<ComposedProductInfo[]> => {
         try {
             authTokens = JSON.parse(authCookies.value)
         } catch (err) {
-            return []
+            return { likes: [], dislikes: [], reports: [] }
         }
 
         if (authTokens) {
-            const res = await fetch(`${API_URL}/api/cart/`, {
+            const res = await fetch(`${API_URL}/api/customer/interactions/`, {
                 method: 'GET',
                 headers: {
                     'Content-Type': 'application/json',
@@ -28,9 +28,9 @@ export const getCart = async (): Promise<ComposedProductInfo[]> => {
                 return await res.json()
             }
 
-            return []
+            return { likes: [], dislikes: [], reports: [] }
         }
     }
 
-    return []
+    return { likes: [], dislikes: [], reports: [] }
 }

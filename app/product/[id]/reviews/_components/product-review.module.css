@@ -94,3 +94,15 @@
 .footer button:hover {
     transform: scale(1.05);
 }
+
+.reported {
+    display: flex;
+    gap: 0.5rem;
+
+    padding: 0.5rem 0.75rem;
+
+    background: var(--main);
+    color: var(--white);
+
+    border-radius: 4px;
+}

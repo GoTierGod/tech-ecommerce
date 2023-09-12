@@ -1,4 +1,3 @@
-import { redirect } from 'next/navigation'
 import { cookies } from 'next/dist/client/components/headers'
 
 import { API_URL } from '@/constants/back-end'
@@ -13,12 +12,12 @@ export const getFavorites = async (): Promise<ComposedProductInfo[]> => {
         try {
             authTokens = JSON.parse(authCookies.value)
         } catch (err) {
-            redirect('/')
+            return []
         }
 
         if (authTokens) {
             const res = await fetch(`${API_URL}/api/favorites/`, {
-                method: 'get',
+                method: 'GET',
                 headers: {
                     'Content-Type': 'application/json',
                     Authorization: `Bearer ${authTokens.access}`
