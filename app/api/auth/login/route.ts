@@ -1,4 +1,4 @@
-import { cookies } from 'next/dist/client/components/headers'
+import { cookies, headers } from 'next/dist/client/components/headers'
 import { NextRequest, NextResponse } from 'next/server'
 
 import { API_URL } from '@/constants/back-end'
@@ -6,6 +6,7 @@ import { AuthTokens } from '@/types/tokens'
 
 export async function POST(req: NextRequest) {
     try {
+        const forwardedFor = headers().get('X-Forwarded-For') as string
         const body = await req.json()
 
         const loginData: { username: string; password: string } = {
@@ -15,7 +16,10 @@ export async function POST(req: NextRequest) {
 
         const res = await fetch(`${API_URL}/api/token/`, {
             method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
+            headers: {
+                'Content-Type': 'application/json',
+                'X-Forwarded-For': forwardedFor
+            },
             body: JSON.stringify(loginData)
         })
 
