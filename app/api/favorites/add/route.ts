@@ -1,4 +1,4 @@
-import { cookies } from 'next/dist/client/components/headers'
+import { cookies, headers } from 'next/dist/client/components/headers'
 import { NextRequest, NextResponse } from 'next/server'
 
 import { API_URL } from '@/constants/back-end'
@@ -7,8 +7,9 @@ import { AuthTokens } from '@/types/tokens'
 
 export async function POST(req: NextRequest) {
     try {
-        const authCookies = cookies().get('authTokens')
+        const forwardedFor = headers().get('X-Forwarded-For') as string
 
+        const authCookies = cookies().get('authTokens')
         if (authCookies) {
             let authTokens: AuthTokens | null = null
             try {
@@ -27,7 +28,11 @@ export async function POST(req: NextRequest) {
 
             const res = await fetch(`${API_URL}/api/favorites/create/${id}`, {
                 method: 'POST',
-                headers: { authorization: `Bearer ${authTokens.access}` }
+                headers: {
+                    'Content-Type': 'application/json',
+                    authorization: `Bearer ${authTokens.access}`,
+                    'X-Forwarded-For': forwardedFor
+                }
             })
 
             if (res.ok) {
