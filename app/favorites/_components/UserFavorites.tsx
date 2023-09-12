@@ -26,8 +26,10 @@ import { useRouter } from 'next/navigation'
 import { ComposedProductInfo } from '@/types/product'
 import HorizontalCard from '../../../components/HoritonzalCard'
 import Breadcrumbs from '@/components/Breadcrumbs'
+import { Customer } from '@/types/users'
 
 interface UserFavoritesProps {
+    customer: Customer
     favorites: ComposedProductInfo[]
 }
 
@@ -184,7 +186,10 @@ function FavItem({ product, openedOptions, setOpenedOptions }: FavItemProps) {
     )
 }
 
-export default function UserFavorites({ favorites }: UserFavoritesProps) {
+export default function UserFavorites({
+    customer,
+    favorites
+}: UserFavoritesProps) {
     const router = useRouter()
     const [openedOptions, setOpenedOptions] = useState(null as null | number)
     const [selecting, setSelecting] = useState(false)
@@ -298,7 +303,7 @@ export default function UserFavorites({ favorites }: UserFavoritesProps) {
                 </section>
                 <section className={style.wrapperRight}>
                     <header className={style.header}>
-                        <h2>GoTierGod&apos;s Favorites</h2>
+                        <h2>{customer.user.username}&apos;s Favorites</h2>
                         <FontAwesomeIcon icon={faHeart} />
                     </header>
                     {favorites.length > 0 ? (

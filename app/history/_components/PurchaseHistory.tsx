@@ -22,8 +22,10 @@ import Link from 'next/link'
 import { ComposedPurchaseInfo } from '@/types/purchase'
 import HorizontalCard from '@/components/HoritonzalCard'
 import Breadcrumbs from '@/components/Breadcrumbs'
+import { Customer } from '@/types/users'
 
 interface PurchaseHistoryProps {
+    customer: Customer
     history: ComposedPurchaseInfo[]
 }
 
@@ -146,7 +148,10 @@ function HistoryItem({
     )
 }
 
-export default function PurchaseHistory({ history }: PurchaseHistoryProps) {
+export default function PurchaseHistory({
+    customer,
+    history
+}: PurchaseHistoryProps) {
     const [openedOptions, setOpenedOptions] = useState(null as null | number)
 
     return (
@@ -183,7 +188,9 @@ export default function PurchaseHistory({ history }: PurchaseHistoryProps) {
                 </section>
                 <section className={style.wrapperRight}>
                     <header className={style.header}>
-                        <h2>GoTierGod&apos;s purchase history</h2>
+                        <h2>
+                            {customer.user.username}&apos;s Purchase History
+                        </h2>
                         <FontAwesomeIcon icon={faBoxOpen} />
                     </header>
                     {history.length > 0 ? (

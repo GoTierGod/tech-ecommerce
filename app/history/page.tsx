@@ -9,5 +9,5 @@ export default async function History() {
 
     const history = await getHistory()
 
-    return <PurchaseHistory history={history} />
+    return <PurchaseHistory customer={customer} history={history} />
 }

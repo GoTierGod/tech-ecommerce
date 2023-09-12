@@ -9,5 +9,5 @@ export default async function Cart() {
 
     const cart = await getCart()
 
-    return <UserCart cart={cart} />
+    return <UserCart customer={customer} cart={cart} />
 }

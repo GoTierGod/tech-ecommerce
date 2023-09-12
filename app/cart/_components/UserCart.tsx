@@ -25,8 +25,10 @@ import Link from 'next/link'
 import HorizontalCard from '../../../components/HoritonzalCard'
 import { priceStringFormatter } from '@/utils/formatting/priceStringFormatter'
 import Breadcrumbs from '@/components/Breadcrumbs'
+import { Customer } from '@/types/users'
 
 interface UserCartProps {
+    customer: Customer
     cart: ComposedProductInfo[]
 }
 
@@ -183,7 +185,7 @@ function CartItem({ product, openedOptions, setOpenedOptions }: CartItemProps) {
     )
 }
 
-export default function UserCart({ cart }: UserCartProps) {
+export default function UserCart({ customer, cart }: UserCartProps) {
     const [openedOptions, setOpenedOptions] = useState(null as null | number)
 
     const normalTotal =
@@ -322,7 +324,7 @@ export default function UserCart({ cart }: UserCartProps) {
                 </section>
                 <section className={style.wrapperRight}>
                     <header className={style.header}>
-                        <h2>GoTierGod&apos;s Cart</h2>
+                        <h2>{customer.user.username}&apos;s Cart</h2>
                         <FontAwesomeIcon icon={faHeart} />
                     </header>
                     {cart.length > 0 ? (

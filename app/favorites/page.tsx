@@ -10,5 +10,5 @@ export default async function Favorites() {
 
     const favorites = await getFavorites()
 
-    return <UserFavorites favorites={favorites} />
+    return <UserFavorites customer={customer} favorites={favorites} />
 }
