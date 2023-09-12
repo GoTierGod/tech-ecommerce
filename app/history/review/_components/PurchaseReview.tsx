@@ -30,7 +30,6 @@ export default function PurchaseReview({ product }: PurchaseReviewProps) {
     const Formik = useFormik({
         initialValues: {
             rating: '',
-            title: '',
             content: ''
         },
         onSubmit: async values => {
@@ -66,12 +65,10 @@ export default function PurchaseReview({ product }: PurchaseReviewProps) {
                     [1, 1.5, 2, 2.5, 3, 3.5, 4, 4.5, 5],
                     'Rating must be from 1 to 5 increasing by 0.5'
                 ),
-            title: Yup.string()
-                .required(`Provide a title for your review`)
-                .max(45),
-            content: Yup.string().required(
-                `Provide comments about the purchased product`
-            )
+            content: Yup.string()
+                .required(`Provide comments about the purchased product`)
+                .min(10)
+                .max(45)
         })
     })
 
@@ -137,40 +134,31 @@ export default function PurchaseReview({ product }: PurchaseReviewProps) {
                                 className={style.review}
                                 onSubmit={Formik.handleSubmit}
                             >
-                                <div className={style.topForm}>
-                                    <div className={style.formField}>
-                                        <label htmlFor='rating'>Rating</label>
-                                        <select
-                                            id='rating'
-                                            {...Formik.getFieldProps('rating')}
-                                        >
-                                            <option value=''>- - -</option>
-                                            <option value='5'>5.0</option>
-                                            <option value='4.5'>4.5</option>
-                                            <option value='4'>4.0</option>
-                                            <option value='3.5'>3.5</option>
-                                            <option value='3'>3.0</option>
-                                            <option value='2.5'>2.5</option>
-                                            <option value='2'>2.0</option>
-                                            <option value='1.5'>1.5</option>
-                                            <option value='1'>1.0</option>
-                                        </select>
-                                    </div>
-                                    <div className={style.formField}>
-                                        <label htmlFor='title'>Title</label>
-                                        <input
-                                            type='text'
-                                            id='title'
-                                            placeholder='Nice!'
-                                            {...Formik.getFieldProps('title')}
-                                        />
-                                    </div>
+                                <div className={style.formField}>
+                                    <label htmlFor='rating'>Rating</label>
+                                    <select
+                                        id='rating'
+                                        {...Formik.getFieldProps('rating')}
+                                    >
+                                        <option value=''>- - -</option>
+                                        <option value='5'>5.0</option>
+                                        <option value='4.5'>4.5</option>
+                                        <option value='4'>4.0</option>
+                                        <option value='3.5'>3.5</option>
+                                        <option value='3'>3.0</option>
+                                        <option value='2.5'>2.5</option>
+                                        <option value='2'>2.0</option>
+                                        <option value='1.5'>1.5</option>
+                                        <option value='1'>1.0</option>
+                                    </select>
                                 </div>
                                 <div className={style.formField}>
                                     <label htmlFor='content'>Content</label>
                                     <textarea
                                         id='content'
                                         placeholder='Very good product...'
+                                        minLength={10}
+                                        maxLength={45}
                                         {...Formik.getFieldProps('content')}
                                     />
                                 </div>
