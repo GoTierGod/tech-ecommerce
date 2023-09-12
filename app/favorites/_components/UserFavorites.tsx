@@ -50,37 +50,43 @@ function FavItem({ product, openedOptions, setOpenedOptions }: FavItemProps) {
         setOpenedOptions(product.details.id)
     }, [setOptMenu, setOpenedOptions, product.details.id])
 
-    const favItemAction = useCallback(
-        async (action: 'delete' | 'move') => {
-            toggleMenu()
+    const deleteAction = useCallback(async () => {
+        toggleMenu()
 
-            if (!waitingRes) {
-                setWaitingRes(true)
+        if (!waitingRes) {
+            setWaitingRes(true)
 
-                let res
-                if (action === 'delete') {
-                    res = await fetch(
-                        `/api/favorites/delete?ids=${product.details.id}`,
-                        {
-                            method: 'DELETE'
-                        }
-                    )
-                } else {
-                    res = await fetch(
-                        `/api/favorites/move?id=${product.details.id}`,
-                        {
-                            method: 'PATCH'
-                        }
-                    )
+            const res = await fetch(
+                `/api/favorites/delete?id=${product.details.id}`,
+                {
+                    method: 'DELETE'
                 }
+            )
 
-                if (res.ok) router.refresh()
+            if (res.ok) router.refresh()
 
-                setWaitingRes(false)
-            }
-        },
-        [toggleMenu, waitingRes, product.details.id, router]
-    )
+            setWaitingRes(false)
+        }
+    }, [router, toggleMenu, waitingRes, product.details.id])
+
+    const moveAction = useCallback(async () => {
+        toggleMenu()
+
+        if (!waitingRes) {
+            setWaitingRes(true)
+
+            const res = await fetch(
+                `/api/favorites/move?id=${product.details.id}`,
+                {
+                    method: 'PATCH'
+                }
+            )
+
+            if (res.ok) router.refresh()
+
+            setWaitingRes(false)
+        }
+    }, [router, toggleMenu, waitingRes, product.details.id])
 
     useEffect(() => {
         if (openedOptions !== product.details.id) setOptMenu(false)
@@ -99,7 +105,7 @@ function FavItem({ product, openedOptions, setOpenedOptions }: FavItemProps) {
                 <FontAwesomeIcon icon={faEllipsisVertical} />
             </button>
             <button
-                onClick={() => favItemAction('delete')}
+                onClick={deleteAction}
                 onMouseOver={e =>
                     e.currentTarget.firstElementChild?.classList.add(
                         'fa-bounce'
@@ -142,7 +148,7 @@ function FavItem({ product, openedOptions, setOpenedOptions }: FavItemProps) {
                 />
             </button>
             <button
-                onClick={() => favItemAction('move')}
+                onClick={moveAction}
                 onMouseOver={e =>
                     e.currentTarget.firstElementChild?.classList.add('fa-shake')
                 }

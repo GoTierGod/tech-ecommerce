@@ -49,37 +49,40 @@ function CartItem({ product, openedOptions, setOpenedOptions }: CartItemProps) {
         setOpenedOptions(product.details.id)
     }, [setOptMenu, setOpenedOptions, product.details.id])
 
-    const cartItemAction = useCallback(
-        async (action: 'delete' | 'move') => {
-            toggleMenu()
+    const deleteAction = useCallback(async () => {
+        toggleMenu()
 
-            if (!waitingRes) {
-                setWaitingRes(true)
+        if (!waitingRes) {
+            setWaitingRes(true)
 
-                let res
-                if (action === 'delete') {
-                    res = await fetch(
-                        `/api/cart/delete?id=${product.details.id}`,
-                        {
-                            method: 'DELETE'
-                        }
-                    )
-                } else {
-                    res = await fetch(
-                        `/api/cart/move?id=${product.details.id}`,
-                        {
-                            method: 'PATCH'
-                        }
-                    )
+            const res = await fetch(
+                `/api/cart/delete?id=${product.details.id}`,
+                {
+                    method: 'DELETE'
                 }
+            )
 
-                if (res.ok) router.refresh()
+            if (res.ok) router.refresh()
 
-                setWaitingRes(false)
-            }
-        },
-        [toggleMenu, waitingRes, product.details.id, router]
-    )
+            setWaitingRes(false)
+        }
+    }, [router, toggleMenu, waitingRes, product.details.id])
+
+    const moveAction = useCallback(async () => {
+        toggleMenu()
+
+        if (!waitingRes) {
+            setWaitingRes(true)
+
+            const res = await fetch(`/api/cart/move?id=${product.details.id}`, {
+                method: 'PATCH'
+            })
+
+            if (res.ok) router.refresh()
+
+            setWaitingRes(false)
+        }
+    }, [router, toggleMenu, waitingRes, product.details.id])
 
     useEffect(() => {
         if (openedOptions !== product.details.id) setOptMenu(false)
@@ -98,7 +101,7 @@ function CartItem({ product, openedOptions, setOpenedOptions }: CartItemProps) {
                 <FontAwesomeIcon icon={faEllipsisVertical} />
             </button>
             <button
-                onClick={() => cartItemAction('delete')}
+                onClick={deleteAction}
                 onMouseOver={e =>
                     e.currentTarget.firstElementChild?.classList.add(
                         'fa-bounce'
@@ -141,7 +144,7 @@ function CartItem({ product, openedOptions, setOpenedOptions }: CartItemProps) {
                 />
             </button>
             <button
-                onClick={() => cartItemAction('move')}
+                onClick={moveAction}
                 onMouseOver={e =>
                     e.currentTarget.firstElementChild?.classList.add('fa-beat')
                 }
@@ -192,12 +195,14 @@ export default function UserCart({ customer, cart }: UserCartProps) {
         cart.length > 0
             ? cart.map(p => Number(p.details.price)).reduce((p1, p2) => p1 + p2)
             : 0
+
     const offerTotal =
         cart.length > 0
             ? cart
                   .map(p => Number(p.details.offer_price))
                   .reduce((p1, p2) => p1 + p2)
             : 0
+
     const cartOfferTotal =
         cart.length > 0 ? offerTotal - (offerTotal * cart.length) / 100 : 0
 
