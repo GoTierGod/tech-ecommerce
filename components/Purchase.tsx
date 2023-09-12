@@ -98,8 +98,6 @@ export default function Purchase({ customer, order, coupons }: PurchaseProps) {
         [orderItems, setOrderItems, cartSpace]
     )
 
-    const ResetError = useCallback(() => setErr(null), [])
-
     const Formik = useFormik({
         initialValues: {
             products: orderItems,
@@ -155,6 +153,8 @@ export default function Purchase({ customer, order, coupons }: PurchaseProps) {
             coupon: Yup.number()
         })
     })
+
+    const resetError = useCallback(() => setErr(null), [])
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
     useEffect(() => setCurrItem(order[currIdx]), [currIdx])
@@ -524,7 +524,7 @@ export default function Purchase({ customer, order, coupons }: PurchaseProps) {
             ) : (
                 <ErrorDisplay
                     {...err}
-                    action={ResetError}
+                    action={resetError}
                     actionText='Try again'
                 />
             )}

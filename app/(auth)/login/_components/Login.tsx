@@ -11,7 +11,7 @@ import {
     faHandPeace,
     faXmarkCircle
 } from '@fortawesome/free-solid-svg-icons'
-import { useState } from 'react'
+import { useCallback, useState } from 'react'
 import Link from 'next/link'
 
 import ErrorDisplay from '../../../../components/ErrorDisplay'
@@ -76,7 +76,7 @@ export default function Login() {
         })
     })
 
-    const ErrorReset = () => setErr(null)
+    const resetError = useCallback(() => setErr(null), [])
 
     return (
         <main
@@ -201,7 +201,7 @@ export default function Login() {
             ) : (
                 <ErrorDisplay
                     {...err}
-                    action={ErrorReset}
+                    action={resetError}
                     actionText='Try again'
                 />
             )}

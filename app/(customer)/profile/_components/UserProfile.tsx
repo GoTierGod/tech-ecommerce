@@ -65,7 +65,7 @@ export default function UserProfile({ customer }: UserProfileProps) {
         [customer]
     )
 
-    const ResetError = () => setErr(null)
+    const resetError = useCallback(() => setErr(null), [])
 
     return (
         <main
@@ -247,7 +247,7 @@ export default function UserProfile({ customer }: UserProfileProps) {
             ) : (
                 <ErrorDisplay
                     {...err}
-                    action={ResetError}
+                    action={resetError}
                     actionText='Try again'
                 />
             )}

@@ -12,7 +12,7 @@ import {
     faXmarkCircle
 } from '@fortawesome/free-solid-svg-icons'
 import { useRouter } from 'next/navigation'
-import { useState } from 'react'
+import { useCallback, useState } from 'react'
 
 import ErrorDisplay from '../../../../components/ErrorDisplay'
 import { APIResponse } from '@/types/response'
@@ -115,7 +115,7 @@ export default function UserRegister() {
         })
     })
 
-    const ErrorReset = () => setErr(null)
+    const resetError = useCallback(() => setErr(null), [])
 
     return (
         <main
@@ -318,7 +318,7 @@ export default function UserRegister() {
             ) : (
                 <ErrorDisplay
                     {...err}
-                    action={ErrorReset}
+                    action={resetError}
                     actionText='Try again'
                 />
             )}

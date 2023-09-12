@@ -8,7 +8,7 @@ import Link from 'next/link'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCheckCircle, faXmarkCircle } from '@fortawesome/free-solid-svg-icons'
 import { useRouter } from 'next/navigation'
-import { useState } from 'react'
+import { useCallback, useState } from 'react'
 
 import { Customer } from '@/types/users'
 import ErrorDisplay from '../../../../components/ErrorDisplay'
@@ -74,7 +74,7 @@ export default function UserDelete({ customer }: UserDeleteProps) {
         })
     })
 
-    const ErrorReset = () => setErr(null)
+    const resetError = useCallback(() => setErr(null), [])
 
     return (
         <main
@@ -225,7 +225,7 @@ export default function UserDelete({ customer }: UserDeleteProps) {
             ) : (
                 <ErrorDisplay
                     {...err}
-                    action={ErrorReset}
+                    action={resetError}
                     actionText='Try again'
                 />
             )}

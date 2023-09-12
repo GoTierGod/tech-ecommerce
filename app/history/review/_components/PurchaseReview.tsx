@@ -9,7 +9,7 @@ import { faFilePen, faMicrochip } from '@fortawesome/free-solid-svg-icons'
 import Image from 'next/image'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
-import { useState } from 'react'
+import { useCallback, useState } from 'react'
 
 import { ComposedProductInfo } from '@/types/product'
 import { APIResponse } from '@/types/response'
@@ -72,7 +72,7 @@ export default function PurchaseReview({ product }: PurchaseReviewProps) {
         })
     })
 
-    const ResetError = () => setErr(null)
+    const resetError = useCallback(() => setErr(null), [])
 
     return (
         <main
@@ -183,7 +183,7 @@ export default function PurchaseReview({ product }: PurchaseReviewProps) {
             ) : (
                 <ErrorDisplay
                     {...err}
-                    action={ResetError}
+                    action={resetError}
                     actionText='Try again'
                 />
             )}
