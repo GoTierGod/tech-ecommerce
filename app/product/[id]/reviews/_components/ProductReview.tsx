@@ -13,7 +13,7 @@ import {
 import { useCallback, useMemo, useState } from 'react'
 import { ComposedReviewInfo } from '@/types/review'
 import { useRouter } from 'next/navigation'
-import { CustomerData } from '@/types/users'
+import { CustomerData } from '@/types/customer'
 import { Interactions } from '@/types/interactions'
 
 interface ProductReviewProps {

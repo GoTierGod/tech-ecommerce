@@ -10,14 +10,14 @@ import { faCheckCircle, faXmarkCircle } from '@fortawesome/free-solid-svg-icons'
 import { useRouter } from 'next/navigation'
 import { useCallback, useState } from 'react'
 
-import { Customer } from '@/types/users'
 import ErrorDisplay from '../../../../components/ErrorDisplay'
 import { APIResponse } from '@/types/response'
+import { ComposedCustomerData } from '@/types/customer'
 
 const fieldsTouched: string[] = ['password', 'username']
 
 interface UserDeleteProps {
-    customer: Customer
+    customer: ComposedCustomerData
 }
 
 export default function UserDelete({ customer }: UserDeleteProps) {
@@ -68,7 +68,7 @@ export default function UserDelete({ customer }: UserDeleteProps) {
             consent: Yup.string()
                 .required('Confirm account deletion')
                 .equals(
-                    [`Delete ${customer.user.username}`],
+                    [`Delete ${customer.username}`],
                     `The entered text does not match`
                 )
         })
@@ -93,7 +93,7 @@ export default function UserDelete({ customer }: UserDeleteProps) {
             {!err ? (
                 <div className={style.wrapper}>
                     <div>
-                        <h1>{customer.user.username}</h1>
+                        <h1>{customer.username}</h1>
                         <div className={style.feedback}>
                             <h2>
                                 Are you sure you want to delete your account?
@@ -157,9 +157,7 @@ export default function UserDelete({ customer }: UserDeleteProps) {
                                     }}
                                 >
                                     Enter &quot;
-                                    <span>
-                                        {`Delete ${customer.user.username}`}
-                                    </span>
+                                    <span>{`Delete ${customer.username}`}</span>
                                     &quot;
                                 </label>
                                 <input

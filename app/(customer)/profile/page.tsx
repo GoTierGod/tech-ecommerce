@@ -12,7 +12,7 @@ export default async function Page() {
     const customer = await getCustomer()
     if (!customer) redirect('/login')
 
-    metadata.title = `${titleCaseFormatter(customer.user.username)} | Tech`
+    metadata.title = `${titleCaseFormatter(customer.username)} | Tech`
 
     return <UserProfile customer={customer} />
 }

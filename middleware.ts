@@ -2,7 +2,6 @@ import { NextRequest, NextResponse } from 'next/server'
 
 import { API_URL } from './constants/back-end'
 import { AuthTokens } from './types/tokens'
-import { Customer } from './types/users'
 import { headers } from 'next/dist/client/components/headers'
 
 export async function middleware(req: NextRequest) {

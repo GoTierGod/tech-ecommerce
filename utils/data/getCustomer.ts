@@ -1,6 +1,6 @@
 import { cookies, headers } from 'next/dist/client/components/headers'
 
-import { CustomerData } from '@/types/users'
+import { CustomerData } from '@/types/customer'
 import { API_URL } from '@/constants/back-end'
 import { AuthTokens } from '@/types/tokens'
 

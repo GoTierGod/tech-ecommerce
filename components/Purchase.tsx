@@ -23,7 +23,7 @@ import {
 } from '@fortawesome/free-solid-svg-icons'
 
 import { ComposedProductInfo } from '@/types/product'
-import { Customer } from '@/types/users'
+import { Customer } from '@/types/customer'
 import { priceStringFormatter } from '@/utils/formatting/priceStringFormatter'
 import { APIResponse } from '@/types/response'
 import ErrorDisplay from './ErrorDisplay'

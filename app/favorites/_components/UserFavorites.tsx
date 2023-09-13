@@ -26,10 +26,10 @@ import { useRouter } from 'next/navigation'
 import { ComposedProductInfo } from '@/types/product'
 import HorizontalCard from '../../../components/HoritonzalCard'
 import Breadcrumbs from '@/components/Breadcrumbs'
-import { Customer } from '@/types/users'
+import { ComposedCustomerData } from '@/types/customer'
 
 interface UserFavoritesProps {
-    customer: Customer
+    customer: ComposedCustomerData
     favorites: ComposedProductInfo[]
 }
 
@@ -309,7 +309,7 @@ export default function UserFavorites({
                 </section>
                 <section className={style.wrapperRight}>
                     <header className={style.header}>
-                        <h2>{customer.user.username}&apos;s Favorites</h2>
+                        <h2>{customer.username}&apos;s Favorites</h2>
                         <FontAwesomeIcon icon={faHeart} />
                     </header>
                     {favorites.length > 0 ? (

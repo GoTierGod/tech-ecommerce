@@ -7,15 +7,15 @@ import { useCallback, useMemo, useState } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faEdit, faStar } from '@fortawesome/free-solid-svg-icons'
 
-import { Customer } from '@/types/users'
 import { titleCaseFormatter } from '@/utils/formatting/titleCaseFormatter'
 import { getCustomerAge } from '@/utils/customers/getCustomerAge'
 import UserUpdate from './UserUpdate'
 import ErrorDisplay from '../../../../components/ErrorDisplay'
 import Breadcrumbs from '@/components/Breadcrumbs'
+import { ComposedCustomerData } from '@/types/customer'
 
 interface UserProfileProps {
-    customer: Customer
+    customer: ComposedCustomerData
 }
 
 export default function UserProfile({ customer }: UserProfileProps) {
@@ -51,14 +51,14 @@ export default function UserProfile({ customer }: UserProfileProps) {
 
     const customerInfoValues: { [key: string]: string } = useMemo(
         () => ({
-            username: customer.user.username,
-            email: customer.user.email,
+            username: customer.username,
+            email: customer.email,
             password: '**************',
             phone: customer.phone,
             countrycity: `${customer.country} / ${customer.city}`,
             address: customer.address,
-            firstname: customer.user.first_name,
-            lastname: customer.user.last_name,
+            firstname: customer.first_name,
+            lastname: customer.last_name,
             birthdate: customer.birthdate,
             gender: customer.gender
         }),
@@ -89,9 +89,7 @@ export default function UserProfile({ customer }: UserProfileProps) {
                     <div className={style.wrapper}>
                         <div className={style.top}>
                             <div className={style.topLeft}>
-                                <h1>
-                                    {titleCaseFormatter(customer.user.username)}
-                                </h1>
+                                <h1>{titleCaseFormatter(customer.username)}</h1>
                                 <div className={style.points}>
                                     <FontAwesomeIcon icon={faStar} />
                                     <span>{customer.points}</span>

@@ -11,14 +11,14 @@ import {
 } from '@fortawesome/free-solid-svg-icons'
 import { useRouter } from 'next/navigation'
 
-import { Customer } from '@/types/users'
 import { APIResponse } from '@/types/response'
+import { ComposedCustomerData } from '@/types/customer'
 
 interface UserUpdateProps {
     updating: string
     fieldUpdated: Function
     setErr: Function
-    customer: Customer
+    customer: ComposedCustomerData
     customerInfoKeys: { [key: string]: string }
     customerInfoValues: { [key: string]: string }
 }
@@ -80,7 +80,7 @@ export default function UserUpdate({
                         'Your username can only contain letters and numbers'
                     )
                     .not(
-                        [customer.user.username],
+                        [customer.username],
                         'Username must be different from your current username'
                     )
             },
@@ -91,7 +91,7 @@ export default function UserUpdate({
                     .required('Enter a new email')
                     .max(255, 'Maximum 255 characters')
                     .not(
-                        [customer.user.email],
+                        [customer.email],
                         'Email must be different from your current email'
                     )
             },
@@ -157,7 +157,7 @@ export default function UserUpdate({
                     .required('Enter your first name')
                     .max(255, 'Maximum 255 characters')
                     .not(
-                        [customer.user.first_name],
+                        [customer.first_name],
                         'Name must be different from your current name'
                     )
             },
@@ -170,7 +170,7 @@ export default function UserUpdate({
                     .required('Enter your last name')
                     .max(255, 'Maximum 255 characters')
                     .not(
-                        [customer.user.last_name],
+                        [customer.last_name],
                         'Last name must be different from your current last name'
                     )
             },

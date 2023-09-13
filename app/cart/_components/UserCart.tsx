@@ -25,10 +25,10 @@ import Link from 'next/link'
 import HorizontalCard from '../../../components/HoritonzalCard'
 import { priceStringFormatter } from '@/utils/formatting/priceStringFormatter'
 import Breadcrumbs from '@/components/Breadcrumbs'
-import { Customer } from '@/types/users'
+import { ComposedCustomerData } from '@/types/customer'
 
 interface UserCartProps {
-    customer: Customer
+    customer: ComposedCustomerData
     cart: ComposedProductInfo[]
 }
 
@@ -329,7 +329,7 @@ export default function UserCart({ customer, cart }: UserCartProps) {
                 </section>
                 <section className={style.wrapperRight}>
                     <header className={style.header}>
-                        <h2>{customer.user.username}&apos;s Cart</h2>
+                        <h2>{customer.username}&apos;s Cart</h2>
                         <FontAwesomeIcon icon={faHeart} />
                     </header>
                     {cart.length > 0 ? (

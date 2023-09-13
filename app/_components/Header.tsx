@@ -19,7 +19,7 @@ import { FormEvent, useCallback, useEffect, useState } from 'react'
 
 import { Category } from '@/types/tables'
 import { titleCaseFormatter } from '@/utils/formatting/titleCaseFormatter'
-import { CustomerData } from '@/types/users'
+import { CustomerData } from '@/types/customer'
 
 interface HeaderProps {
     categories: Category[]
@@ -143,7 +143,7 @@ export default function Header({ categories, customer }: HeaderProps) {
                         prefetch={false}
                     >
                         <FontAwesomeIcon icon={faCircleUser} />
-                        {customer ? customer.user.username : 'Log in'}
+                        {customer ? customer.username : 'Log in'}
                     </Link>
                     {customer ? (
                         <>
@@ -207,7 +207,7 @@ export default function Header({ categories, customer }: HeaderProps) {
                             prefetch={false}
                         >
                             <FontAwesomeIcon icon={faCircleUser} />
-                            {customer ? customer.user.username : 'Log in'}
+                            {customer ? customer.username : 'Log in'}
                         </Link>
                         {customer ? (
                             <Link href='/logout' prefetch={false}>
