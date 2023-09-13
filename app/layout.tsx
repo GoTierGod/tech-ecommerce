@@ -13,7 +13,10 @@ const josefinSans = Josefin_Sans({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
     title: 'Tech',
-    description: 'The best products in technology'
+    description: 'Tech specialized E-Commerce project made by @GoTierGod.',
+    openGraph: {
+        images: ['/ogp.png']
+    }
 }
 
 export default async function RootLayout({
