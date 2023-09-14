@@ -76,7 +76,7 @@
     gap: 1rem;
 }
 
-.grid > div {
+.grid article {
     display: flex;
     flex-direction: column;
     gap: 0.5rem;
