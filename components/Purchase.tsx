@@ -23,13 +23,13 @@ import {
 } from '@fortawesome/free-solid-svg-icons'
 
 import { ComposedProductInfo } from '@/types/product'
-import { Customer } from '@/types/customer'
 import { priceStringFormatter } from '@/utils/formatting/priceStringFormatter'
 import { APIResponse } from '@/types/response'
 import ErrorDisplay from './ErrorDisplay'
+import { ComposedCustomerData } from '@/types/customer'
 
 interface PurchaseProps {
-    customer: Customer
+    customer: ComposedCustomerData
     order: ComposedProductInfo[]
     coupons: Coupon[]
 }
