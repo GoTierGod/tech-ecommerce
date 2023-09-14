@@ -80,7 +80,7 @@ export default async function Page({
             } as SearchResponse
         })()
 
-    const customer = await getCustomer()
+    const customer = getCustomer()
 
     return (
         <Search

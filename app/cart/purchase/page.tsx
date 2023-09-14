@@ -6,7 +6,7 @@ import { getCustomer } from '@/utils/data/getCustomer'
 import Purchase from '@/components/Purchase'
 
 export default async function Page() {
-    const customer = await getCustomer()
+    const customer = getCustomer()
     if (!customer) redirect('/login')
 
     const cart = await getCart()

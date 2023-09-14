@@ -8,7 +8,7 @@ export const metadata: Metadata = {
 }
 
 export default async function Page() {
-    const customer = await getCustomer()
+    const customer = getCustomer()
     if (!customer) redirect('/login')
 
     return <UserDelete customer={customer} />

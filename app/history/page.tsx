@@ -4,7 +4,7 @@ import { redirect } from 'next/navigation'
 import PurchaseHistory from './_components/PurchaseHistory'
 
 export default async function History() {
-    const customer = await getCustomer()
+    const customer = getCustomer()
     if (!customer) redirect('/login')
 
     const history = await getHistory()

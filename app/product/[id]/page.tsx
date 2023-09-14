@@ -61,7 +61,7 @@ export default async function Page({ params }: { params: { id: string } }) {
         `?category=${product.details.category.title}&limit=6`
     )
 
-    const customer = await getCustomer()
+    const customer = getCustomer()
 
     const cart = await getCart()
     const favorites = await getFavorites()

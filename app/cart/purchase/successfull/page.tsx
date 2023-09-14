@@ -4,7 +4,7 @@ import { getCustomer } from '@/utils/data/getCustomer'
 import { redirect } from 'next/navigation'
 
 export default async function Page() {
-    const customer = await getCustomer()
+    const customer = getCustomer()
     if (!customer) redirect('/login')
 
     return (

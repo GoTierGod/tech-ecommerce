@@ -26,7 +26,7 @@ export default async function RootLayout({
 }) {
     const categories: Category[] = await getData(`/api/categories/`)
 
-    const customer = await getCustomer()
+    const customer = getCustomer()
 
     return (
         <html lang='en'>

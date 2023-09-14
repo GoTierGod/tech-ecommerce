@@ -8,7 +8,7 @@ import Purchase from '@/components/Purchase'
 export default async function Page({ params }: { params: { id: string } }) {
     const { id } = params
 
-    const customer = await getCustomer()
+    const customer = getCustomer()
     if (!customer) redirect('/login')
 
     const product = await getProduct(id)
