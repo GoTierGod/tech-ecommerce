@@ -4,7 +4,7 @@ import Link from 'next/link'
 import Image from 'next/image'
 
 import { ComposedProductInfo } from '@/types/product'
-import { priceStringFormatter } from '@/utils/formatting/priceStringFormatter'
+import { priceFormatter } from '@/utils/formatting/priceFormatter'
 import { getProductDiscount } from '@/utils/products/getProductDiscount'
 import { getProductInstallments } from '@/utils/products/getProductInstallments'
 
@@ -46,10 +46,8 @@ export default function HorizontalCard({ product }: HorizontalCardProps) {
                     </span>
                 </div>
                 <div className={style.offer}>
-                    <span>{priceStringFormatter(product.details.price)}</span>
-                    <span>
-                        {priceStringFormatter(product.details.offer_price)}
-                    </span>
+                    <span>{priceFormatter(product.details.price)}</span>
+                    <span>{priceFormatter(product.details.offer_price)}</span>
                     <span>
                         Available in{' '}
                         <span>

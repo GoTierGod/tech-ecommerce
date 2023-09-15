@@ -6,7 +6,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faRightLong } from '@fortawesome/free-solid-svg-icons'
 
 import { ComposedProductInfo } from '@/types/product'
-import { priceStringFormatter } from '@/utils/formatting/priceStringFormatter'
+import { priceFormatter } from '@/utils/formatting/priceFormatter'
 import { getProductDiscount } from '@/utils/products/getProductDiscount'
 
 interface OffersProps {
@@ -43,7 +43,7 @@ export default function OffersSection({ products }: OffersProps) {
                             />
                             <div>
                                 <span className={style.price}>
-                                    {priceStringFormatter(
+                                    {priceFormatter(
                                         product.details.offer_price
                                     )}
                                 </span>

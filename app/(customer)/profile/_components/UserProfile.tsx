@@ -7,7 +7,7 @@ import { useCallback, useMemo, useState } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faEdit, faStar } from '@fortawesome/free-solid-svg-icons'
 
-import { titleCaseFormatter } from '@/utils/formatting/titleCaseFormatter'
+import { capitalizeFormatter } from '@/utils/formatting/capitalizeFormatter'
 import { getCustomerAge } from '@/utils/customers/getCustomerAge'
 import UserUpdate from './UserUpdate'
 import ErrorDisplay from '../../../../components/ErrorDisplay'
@@ -89,7 +89,9 @@ export default function UserProfile({ customer }: UserProfileProps) {
                     <div className={style.wrapper}>
                         <div className={style.top}>
                             <div className={style.topLeft}>
-                                <h1>{titleCaseFormatter(customer.username)}</h1>
+                                <h1>
+                                    {capitalizeFormatter(customer.username)}
+                                </h1>
                                 <div className={style.points}>
                                     <FontAwesomeIcon icon={faStar} />
                                     <span>{customer.points}</span>

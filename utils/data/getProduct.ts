@@ -1,14 +1,25 @@
 import { API_URL } from '@/constants/back-end'
 import { ComposedProductInfo } from '@/types/product'
+import { headers } from 'next/dist/client/components/headers'
 
 export const getProduct = async (
     id: string
 ): Promise<ComposedProductInfo | null> => {
-    const res = await fetch(`${API_URL}/api/products/${id}`, {
-        next: { revalidate: 3600 }
-    })
+    try {
+        const forwardedFor = headers().get('X-Forwarded-For')
 
-    if (!res.ok) return null
+        const res = await fetch(`${API_URL}/api/products/${id}`, {
+            next: { revalidate: 3600 },
+            headers: {
+                'Content-Type': 'application/json',
+                ...(forwardedFor && { 'X-Forwarded-For': forwardedFor })
+            }
+        })
 
-    return res.json()
+        if (!res.ok) return null
+
+        return res.json()
+    } catch (err) {
+        return null
+    }
 }

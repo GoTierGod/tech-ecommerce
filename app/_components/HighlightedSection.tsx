@@ -6,7 +6,7 @@ import Link from 'next/link'
 import { ComposedProductInfo } from '@/types/product'
 import { faRightLong } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { priceStringFormatter } from '@/utils/formatting/priceStringFormatter'
+import { priceFormatter } from '@/utils/formatting/priceFormatter'
 import { getProductDiscount } from '@/utils/products/getProductDiscount'
 
 interface HighlightedProps {
@@ -56,7 +56,7 @@ export default function HighlightedSection({ products }: HighlightedProps) {
                             />
                             <div>
                                 <span className={style.price}>
-                                    {priceStringFormatter(
+                                    {priceFormatter(
                                         product.details.offer_price
                                     )}
                                 </span>

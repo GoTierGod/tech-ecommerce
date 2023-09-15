@@ -23,7 +23,7 @@ import {
 } from '@fortawesome/free-solid-svg-icons'
 
 import { ComposedProductInfo } from '@/types/product'
-import { priceStringFormatter } from '@/utils/formatting/priceStringFormatter'
+import { priceFormatter } from '@/utils/formatting/priceFormatter'
 import { APIResponse } from '@/types/response'
 import ErrorDisplay from './ErrorDisplay'
 import { ComposedCustomerData } from '@/types/customer'
@@ -229,15 +229,13 @@ export default function Purchase({ customer, order, coupons }: PurchaseProps) {
                                         <div className={style.totalPay}>
                                             <span>You will pay</span>
                                             <span>
-                                                {priceStringFormatter(
-                                                    offerTotal
-                                                )}
+                                                {priceFormatter(offerTotal)}
                                             </span>
                                         </div>
                                         <div className={style.totalSaved}>
                                             <span>You will save</span>
                                             <span>
-                                                {priceStringFormatter(
+                                                {priceFormatter(
                                                     normalTotal - offerTotal
                                                 )}
                                             </span>
@@ -363,22 +361,18 @@ export default function Purchase({ customer, order, coupons }: PurchaseProps) {
                                     </div>
                                     <div className={style.paymentPrice}>
                                         <span>
-                                            {priceStringFormatter(offerTotal)}
+                                            {priceFormatter(offerTotal)}
                                         </span>
                                         <span>Using this payment method</span>
                                         <span className={style.discount}>
                                             <span>
-                                                {priceStringFormatter(
-                                                    normalTotal
-                                                )}
+                                                {priceFormatter(normalTotal)}
                                             </span>
                                             <FontAwesomeIcon
                                                 icon={faRightLong}
                                             />
                                             <span>
-                                                {priceStringFormatter(
-                                                    offerTotal
-                                                )}
+                                                {priceFormatter(offerTotal)}
                                             </span>
                                         </span>
                                     </div>
@@ -395,7 +389,7 @@ export default function Purchase({ customer, order, coupons }: PurchaseProps) {
                                     <div className={style.cartCoupon}>
                                         <span>
                                             {order.length}% ({' '}
-                                            {priceStringFormatter(
+                                            {priceFormatter(
                                                 (offerTotal * order.length) /
                                                     100
                                             )}{' '}
@@ -420,7 +414,7 @@ export default function Purchase({ customer, order, coupons }: PurchaseProps) {
                                                     >
                                                         {`${
                                                             c.title
-                                                        } ( ${priceStringFormatter(
+                                                        } ( ${priceFormatter(
                                                             c.amount
                                                         )} )`}
                                                     </option>
@@ -430,7 +424,7 @@ export default function Purchase({ customer, order, coupons }: PurchaseProps) {
                                     <div className={style.couponDiscount}>
                                         <span>
                                             {Formik.values.coupon
-                                                ? priceStringFormatter(
+                                                ? priceFormatter(
                                                       coupons.filter(
                                                           c =>
                                                               c.id ===
@@ -445,15 +439,13 @@ export default function Purchase({ customer, order, coupons }: PurchaseProps) {
                                         <span>Using this coupon</span>
                                         <span className={style.discount}>
                                             <span>
-                                                {priceStringFormatter(
-                                                    offerTotal
-                                                )}
+                                                {priceFormatter(offerTotal)}
                                             </span>
                                             <FontAwesomeIcon
                                                 icon={faRightLong}
                                             />
                                             <span>
-                                                {priceStringFormatter(
+                                                {priceFormatter(
                                                     offerTotal -
                                                         (Formik.values.coupon
                                                             ? (

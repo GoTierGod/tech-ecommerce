@@ -23,7 +23,7 @@ import {
 import Link from 'next/link'
 
 import HorizontalCard from '../../../components/HoritonzalCard'
-import { priceStringFormatter } from '@/utils/formatting/priceStringFormatter'
+import { priceFormatter } from '@/utils/formatting/priceFormatter'
 import Breadcrumbs from '@/components/Breadcrumbs'
 import { ComposedCustomerData } from '@/types/customer'
 
@@ -247,17 +247,13 @@ export default function UserCart({ customer, cart }: UserCartProps) {
                                         <tr>
                                             <th>Normal</th>
                                             <td>
-                                                {priceStringFormatter(
-                                                    normalTotal
-                                                )}
+                                                {priceFormatter(normalTotal)}
                                             </td>
                                         </tr>
                                         <tr>
                                             <th>Offer</th>
                                             <td>
-                                                {priceStringFormatter(
-                                                    offerTotal
-                                                )}
+                                                {priceFormatter(offerTotal)}
                                             </td>
                                         </tr>
                                         <tr>
@@ -267,15 +263,13 @@ export default function UserCart({ customer, cart }: UserCartProps) {
                                         <tr>
                                             <th>Total</th>
                                             <td>
-                                                {priceStringFormatter(
-                                                    cartOfferTotal
-                                                )}
+                                                {priceFormatter(cartOfferTotal)}
                                             </td>
                                         </tr>
                                         <tr>
                                             <th>Savings</th>
                                             <td>
-                                                {priceStringFormatter(
+                                                {priceFormatter(
                                                     normalTotal - cartOfferTotal
                                                 )}
                                             </td>
@@ -285,9 +279,7 @@ export default function UserCart({ customer, cart }: UserCartProps) {
                                 {cart.length > 1 ? (
                                     <div>
                                         <span>
-                                            {priceStringFormatter(
-                                                cartOfferTotal
-                                            )}
+                                            {priceFormatter(cartOfferTotal)}
                                         </span>
                                         <Link
                                             href='/cart/purchase'

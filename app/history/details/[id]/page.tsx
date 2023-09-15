@@ -8,8 +8,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faListUl, faMicrochip } from '@fortawesome/free-solid-svg-icons'
 
 import { Order } from '@/types/tables'
-import { priceStringFormatter } from '@/utils/formatting/priceStringFormatter'
-import { titleCaseFormatter } from '@/utils/formatting/titleCaseFormatter'
+import { priceFormatter } from '@/utils/formatting/priceFormatter'
+import { capitalizeFormatter } from '@/utils/formatting/capitalizeFormatter'
 import { getPurchase } from '@/utils/data/getPurchase'
 import { getCustomer } from '@/utils/data/getCustomer'
 import Breadcrumbs from '@/components/Breadcrumbs'
@@ -120,7 +120,7 @@ export default async function Page({ params }: { params: { id: string } }) {
                         <div className={style.detail}>
                             <h3>Payment Method</h3>
                             <p>
-                                {titleCaseFormatter(
+                                {capitalizeFormatter(
                                     purchase.order.payment_method
                                 )}
                             </p>
@@ -134,7 +134,7 @@ export default async function Page({ params }: { params: { id: string } }) {
                                     : 'product'}{' '}
                                 for{' '}
                                 <span>
-                                    {priceStringFormatter(
+                                    {priceFormatter(
                                         purchase.order_item.total_cost
                                     )}
                                 </span>

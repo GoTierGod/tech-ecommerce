@@ -6,7 +6,7 @@ import Link from 'next/link'
 import { ComposedProductInfo } from '@/types/product'
 import { respectLineBreaks } from '@/utils/formatting/respectLineBreaks'
 import { getProductDiscount } from '@/utils/products/getProductDiscount'
-import { priceStringFormatter } from '@/utils/formatting/priceStringFormatter'
+import { priceFormatter } from '@/utils/formatting/priceFormatter'
 
 interface VerticalCardProps {
     product: ComposedProductInfo
@@ -31,11 +31,9 @@ export default function VerticalCard({ product }: VerticalCardProps) {
             <div className={style.details}>
                 <div className={style.offer}>
                     <p className={style.price}>
+                        <span>{priceFormatter(product.details.price)}</span>
                         <span>
-                            {priceStringFormatter(product.details.price)}
-                        </span>
-                        <span>
-                            {priceStringFormatter(product.details.offer_price)}
+                            {priceFormatter(product.details.offer_price)}
                         </span>
                     </p>
                     <span className={style.discount}>

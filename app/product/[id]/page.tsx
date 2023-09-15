@@ -26,7 +26,7 @@ import mastercardLogo from '../../../public/images/payments/mastercard.svg'
 import americanExpressLogo from '../../../public/images/payments/american-express.svg'
 import dinersClubLogo from '../../../public/images/payments/diners-club-international.svg'
 import { Metadata } from 'next'
-import { priceStringFormatter } from '@/utils/formatting/priceStringFormatter'
+import { priceFormatter } from '@/utils/formatting/priceFormatter'
 import { getProduct } from '@/utils/data/getProduct'
 import { getProducts } from '@/utils/data/getProducts'
 import ProductFavsCart from '../_components/ProductFavsCart'
@@ -91,8 +91,8 @@ export default async function Page({ params }: { params: { id: string } }) {
     const productContent = (
         <div className={style.content}>
             <div className={style.offer}>
-                <span>{priceStringFormatter(product.details.price)}</span>
-                <span>{priceStringFormatter(product.details.offer_price)}</span>
+                <span>{priceFormatter(product.details.price)}</span>
+                <span>{priceFormatter(product.details.offer_price)}</span>
                 <span>
                     Available in{' '}
                     <span>

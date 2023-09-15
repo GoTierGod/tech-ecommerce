@@ -6,7 +6,7 @@ import Image from 'next/image'
 import { ComposedProductInfo } from '@/types/product'
 import { faRightLong } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { priceStringFormatter } from '@/utils/formatting/priceStringFormatter'
+import { priceFormatter } from '@/utils/formatting/priceFormatter'
 import { getProductDiscount } from '@/utils/products/getProductDiscount'
 
 interface GamingProps {
@@ -57,7 +57,7 @@ export default function GamingSection({ products }: GamingProps) {
                             />
                             <div>
                                 <span className={style.price}>
-                                    {priceStringFormatter(
+                                    {priceFormatter(
                                         product.details.offer_price
                                     )}
                                 </span>

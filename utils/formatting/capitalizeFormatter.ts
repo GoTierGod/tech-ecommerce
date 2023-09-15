@@ -1,5 +1,5 @@
 // TEXT IN TITLE CASE
-export const titleCaseFormatter = (str: string): string =>
+export const capitalizeFormatter = (str: string): string =>
     str
         .replace(/\s/g, ' ')
         .split(' ')

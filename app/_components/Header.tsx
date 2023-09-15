@@ -18,7 +18,7 @@ import {
 import { FormEvent, useCallback, useEffect, useState } from 'react'
 
 import { Category } from '@/types/tables'
-import { titleCaseFormatter } from '@/utils/formatting/titleCaseFormatter'
+import { capitalizeFormatter } from '@/utils/formatting/capitalizeFormatter'
 import { CustomerData } from '@/types/customer'
 
 interface HeaderProps {
@@ -106,7 +106,7 @@ export default function Header({ categories, customer }: HeaderProps) {
                     </option>
                     {categories.map(category => (
                         <option key={category.id} value={category.title}>
-                            {titleCaseFormatter(category.title)}
+                            {capitalizeFormatter(category.title)}
                         </option>
                     ))}
                 </select>

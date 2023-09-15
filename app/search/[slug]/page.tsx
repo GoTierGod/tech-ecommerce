@@ -3,7 +3,7 @@ import { Metadata } from 'next'
 
 import { SearchResponse } from '@/types/search'
 import Search from '../_components/Search'
-import { titleCaseFormatter } from '@/utils/formatting/titleCaseFormatter'
+import { capitalizeFormatter } from '@/utils/formatting/capitalizeFormatter'
 import { getCustomer } from '@/utils/data/getCustomer'
 import { headers } from 'next/dist/client/components/headers'
 import { API_URL } from '@/constants/back-end'
@@ -49,7 +49,7 @@ export default async function Page({
     }
 
     const unescapedSearchStr = unescape(search)
-    metadata.title = `${titleCaseFormatter(unescapedSearchStr)} | Tech`
+    metadata.title = `${capitalizeFormatter(unescapedSearchStr)} | Tech`
 
     const searchRes: SearchResponse =
         await (async (): Promise<SearchResponse> => {

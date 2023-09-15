@@ -9,7 +9,7 @@ import {
     faListCheck,
     faSearch
 } from '@fortawesome/free-solid-svg-icons'
-import { titleCaseFormatter } from '@/utils/formatting/titleCaseFormatter'
+import { capitalizeFormatter } from '@/utils/formatting/capitalizeFormatter'
 import { useFormik } from 'formik'
 import * as Yup from 'yup'
 import { useCallback, useEffect, useState } from 'react'
@@ -296,7 +296,7 @@ export default function Search({
                             </header>
                             <div className={style.content}>
                                 <span>{searchRes.results} Results for</span>
-                                <p>{titleCaseFormatter(searchStr)}</p>
+                                <p>{capitalizeFormatter(searchStr)}</p>
                             </div>
                         </article>
                         <article className={style.filter}>
