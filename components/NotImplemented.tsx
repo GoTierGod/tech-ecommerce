@@ -25,8 +25,10 @@ export default function NotImplemented() {
                         If you have any intriguing ideas to enhance the project,
                         please don&apos;t hesitate to reach out to me using one
                         of the contact methods I&apos;ve made available on the{' '}
-                        <Link href='/contact'>contact page</Link>. Thank you for
-                        your interest in trying out my project.
+                        <Link href='/contact' prefetch={false}>
+                            contact page
+                        </Link>
+                        . Thank you for your interest in trying out my project.
                     </p>
                 </div>
             </div>

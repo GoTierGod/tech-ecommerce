@@ -98,10 +98,18 @@ export default function UserProfile({ customer }: UserProfileProps) {
                                 </div>
                             </div>
                             <div className={style.topRight}>
-                                <Link className={style.logout} href='/logout'>
+                                <Link
+                                    className={style.logout}
+                                    href='/logout'
+                                    prefetch={false}
+                                >
                                     Log Out
                                 </Link>
-                                <Link className={style.delete} href='/delete'>
+                                <Link
+                                    className={style.delete}
+                                    href='/delete'
+                                    prefetch={false}
+                                >
                                     Delete Account
                                 </Link>
                             </div>
@@ -234,11 +242,19 @@ export default function UserProfile({ customer }: UserProfileProps) {
                             />
                         )}
                         <div className={style.bottom}>
-                            <Link className={style.logout} href='/logout'>
+                            <Link
+                                className={style.logout}
+                                href='/logout'
+                                prefetch={false}
+                            >
                                 Log Out
                             </Link>
                             <span>--- Be Careful ---</span>
-                            <Link className={style.delete} href='/delete'>
+                            <Link
+                                className={style.delete}
+                                href='/delete'
+                                prefetch={false}
+                            >
                                 Delete Account
                             </Link>
                         </div>

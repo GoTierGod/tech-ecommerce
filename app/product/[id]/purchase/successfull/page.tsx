@@ -38,8 +38,12 @@ export default async function Page({ params }: { params: { id: string } }) {
                         buying decisions.
                     </p>
                     <div className={style.options}>
-                        <Link href='/history'>Purchase History</Link>
-                        <Link href='/'>Back to Home</Link>
+                        <Link href='/history' prefetch={false}>
+                            Purchase History
+                        </Link>
+                        <Link href='/' prefetch={false}>
+                            Back to Home
+                        </Link>
                     </div>
                 </div>
             </div>

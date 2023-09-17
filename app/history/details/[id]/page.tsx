@@ -97,9 +97,12 @@ export default async function Page({ params }: { params: { id: string } }) {
                                 />
                             </div>
                             <div className={style.options}>
-                                <Link href={`/history`}>Back to History</Link>
+                                <Link href='/history' prefetch={false}>
+                                    Back to History
+                                </Link>
                                 <Link
                                     href={`/product/${purchase.product.details.id}`}
+                                    prefetch={false}
                                 >
                                     See Product
                                 </Link>

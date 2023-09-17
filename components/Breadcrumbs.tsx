@@ -9,7 +9,9 @@ export default function Breadcrumbs({ routeList }: BreadcrumbsProps) {
     return (
         <section className={style.breadcrumbs}>
             <div className={style.breadcrumbs}>
-                <Link href='/'>Home</Link>
+                <Link href='/' prefetch={false}>
+                    Home
+                </Link>
                 {routeList.map((route, idx) => {
                     if (idx === routeList.length - 1)
                         return <span>{route.name}</span>

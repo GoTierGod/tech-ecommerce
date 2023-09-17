@@ -310,7 +310,9 @@ export default function UserRegister() {
                                 <button type='submit' disabled={waitingRes}>
                                     Sign Up
                                 </button>
-                                <Link href='/'>Back to Home</Link>
+                                <Link href='/' prefetch={false}>
+                                    Back to Home
+                                </Link>
                             </div>
                         </form>
                     </div>

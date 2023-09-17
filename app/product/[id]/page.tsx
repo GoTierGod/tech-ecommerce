@@ -80,6 +80,7 @@ export default async function Page({ params }: { params: { id: string } }) {
                     <Link
                         className={style.link}
                         href={`/product/${id}/reviews`}
+                        prefetch={false}
                     >
                         Reviews
                     </Link>
@@ -108,6 +109,7 @@ export default async function Page({ params }: { params: { id: string } }) {
                 <Link
                     className={style.link}
                     href={`/product/${product.details.id}/purchase`}
+                    prefetch={false}
                 >
                     <span>Buy Now</span>
                 </Link>

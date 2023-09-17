@@ -193,7 +193,9 @@ export default function Login() {
                                 <button type='submit' disabled={waitingRes}>
                                     Log In
                                 </button>
-                                <Link href='/'>Back to Home</Link>
+                                <Link href='/' prefetch={false}>
+                                    Back to Home
+                                </Link>
                             </div>
                         </form>
                     </div>

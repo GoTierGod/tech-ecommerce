@@ -215,7 +215,9 @@ export default function UserDelete({ customer }: UserDeleteProps) {
                                 >
                                     Delete Account
                                 </button>
-                                <Link href='/profile'>Cancel</Link>
+                                <Link href='/profile' prefetch={false}>
+                                    Cancel
+                                </Link>
                             </div>
                         </form>
                     </div>
