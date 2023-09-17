@@ -5,7 +5,7 @@ import Link from 'next/link'
 
 import { ComposedProductInfo } from '@/types/product'
 import { respectLineBreaks } from '@/utils/formatting/respectLineBreaks'
-import { getProductDiscount } from '@/utils/products/getProductDiscount'
+import { getProductDiscount } from '@/utils/product/getProductDiscount'
 import { priceFormatter } from '@/utils/formatting/priceFormatter'
 
 interface VerticalCardProps {

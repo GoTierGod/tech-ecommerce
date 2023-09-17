@@ -5,8 +5,8 @@ import Image from 'next/image'
 
 import { ComposedProductInfo } from '@/types/product'
 import { priceFormatter } from '@/utils/formatting/priceFormatter'
-import { getProductDiscount } from '@/utils/products/getProductDiscount'
-import { getProductInstallments } from '@/utils/products/getProductInstallments'
+import { getProductDiscount } from '@/utils/product/getProductDiscount'
+import { getProductInstallments } from '@/utils/product/getProductInstallments'
 
 interface HorizontalCardProps {
     product: ComposedProductInfo

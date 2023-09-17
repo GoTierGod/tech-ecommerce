@@ -7,7 +7,7 @@ import { ComposedProductInfo } from '@/types/product'
 import { faRightLong } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { priceFormatter } from '@/utils/formatting/priceFormatter'
-import { getProductDiscount } from '@/utils/products/getProductDiscount'
+import { getProductDiscount } from '@/utils/product/getProductDiscount'
 
 interface HighlightedProps {
     products: ComposedProductInfo[]

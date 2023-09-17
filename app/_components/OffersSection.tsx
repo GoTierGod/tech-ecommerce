@@ -7,7 +7,7 @@ import { faRightLong } from '@fortawesome/free-solid-svg-icons'
 
 import { ComposedProductInfo } from '@/types/product'
 import { priceFormatter } from '@/utils/formatting/priceFormatter'
-import { getProductDiscount } from '@/utils/products/getProductDiscount'
+import { getProductDiscount } from '@/utils/product/getProductDiscount'
 
 interface OffersProps {
     products: ComposedProductInfo[]

@@ -8,7 +8,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faEdit, faStar } from '@fortawesome/free-solid-svg-icons'
 
 import { capitalizeFormatter } from '@/utils/formatting/capitalizeFormatter'
-import { getCustomerAge } from '@/utils/customers/getCustomerAge'
+import { getCustomerAge } from '@/utils/customer/getCustomerAge'
 import UserUpdate from './UserUpdate'
 import ErrorDisplay from '../../../../components/ErrorDisplay'
 import Breadcrumbs from '@/components/Breadcrumbs'
