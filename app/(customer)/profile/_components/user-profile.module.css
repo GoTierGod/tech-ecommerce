@@ -1,37 +1,37 @@
 .wrapper {
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    align-items: center;
     gap: 1rem;
 
     width: 100%;
     max-width: 1200px;
 }
 
-.wrapper svg {
-    height: 1rem;
-}
-
-.top {
+.wrapperLeft,
+.stickyWrapper,
+.wrapperRight {
     display: flex;
     flex-direction: column;
+    gap: 0.5rem;
+}
+
+.wrapperLeft {
+    gap: 1rem;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0.5rem;
 
     width: 100%;
 }
 
-.topLeft,
-.topRight {
+.header {
     display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-}
-
-.topLeft :where(h1, div) {
-    display: flex;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
-    gap: 0.5rem;
+    gap: 1rem;
 
     padding: 1rem;
 
@@ -41,22 +41,99 @@
     border-radius: 4px;
 }
 
-.top h1 {
+.header h2 {
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    line-clamp: 1;
+    -webkit-box-orient: vertical;
+
+    height: 1.1rem;
+
     font-size: 1.125rem;
     font-weight: 400;
+
+    overflow: hidden;
 }
 
-.top span {
-    font-size: 1rem;
-    font-weight: 375;
-}
-
-.details {
-    display: grid;
-    grid-template-columns: 1fr;
+.points {
+    display: flex;
     gap: 0.5rem;
+}
+
+.content {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+
+    padding: 1.5rem;
+
+    background: var(--white);
+
+    border-radius: 4px;
+}
+
+.content p {
+    display: flex;
+    gap: 1rem;
 
     width: 100%;
+}
+
+.wrapperLeft article {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.wrapperLeft > article:first-of-type .content {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+}
+
+.wrapperLeft > article:first-of-type .content a {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+
+    padding: 0.75rem 1rem;
+
+    background: var(--gray);
+    color: var(--white);
+
+    text-align: center;
+
+    border-radius: 4px;
+}
+
+.deleteAccount .content {
+    justify-content: center;
+    align-items: center;
+}
+
+.deleteAccount .content p {
+    width: fit-content;
+    text-align: center;
+}
+
+.deleteAccount .content a {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+
+    padding: 0.75rem 1rem;
+
+    background: var(--gray);
+    color: var(--white);
+
+    text-align: center;
+
+    border-radius: 4px;
+}
+
+.wrapperLeft .deleteAccount {
+    display: none;
 }
 
 .cell {
@@ -85,6 +162,8 @@
     justify-content: flex-start;
     align-items: flex-start;
     gap: 0.5rem;
+
+    width: 75%;
 }
 
 .cell h2 {
@@ -173,35 +252,21 @@
     color: var(--white);
 }
 
-.topRight :where(.logout, .delete) {
+.wrapperLLeftRight :where(.logout, .delete) {
     display: none;
 }
 
 @media screen and (min-width: 768px) {
-    .wrapper {
-        padding: 5vh 1rem;
-        padding: 5dvh 1rem;
+    .wrapperLeft > article:first-of-type .content {
+        grid-template-columns: repeat(4, 1fr);
     }
 
-    .top {
-        flex-direction: row;
-        justify-content: space-between;
-        gap: 1rem;
+    .stickyWrapper {
+        position: sticky;
+        top: 84px;
     }
 
-    .topLeft {
-        flex-direction: row;
-    }
-
-    .topRight {
-        flex-direction: row;
-    }
-
-    .topRight :where(.logout, .delete) {
-        display: flex;
-    }
-
-    .details {
+    .grid {
         grid-template-columns: repeat(2, 1fr);
     }
 
@@ -209,12 +274,35 @@
         display: none;
     }
 
-    .topLeft :where(h1, div),
-    .topRight :where(.edit, .logout, .delete) {
-        padding: 0.5rem 0.75rem;
-    }
-
     .editForm form {
         grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media screen and (min-width: 1024px) {
+    .wrapper {
+        display: grid;
+        grid-template-columns: 5fr 2fr;
+        grid-template-areas: 'w-right w-left';
+    }
+
+    .wrapperLeft {
+        grid-area: w-left;
+    }
+
+    .wrapperLeft > article:first-of-type .content {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .wrapperRight {
+        grid-area: w-right;
+    }
+
+    .wrapperLeft .deleteAccount {
+        display: flex;
+    }
+
+    .wrapper > .deleteAccount {
+        display: none;
     }
 }
