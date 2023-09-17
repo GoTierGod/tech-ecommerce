@@ -28,14 +28,6 @@ export interface Product {
     category: Category
 }
 
-export interface ProductSpecification {
-    id: number
-    key: string
-    value: string
-
-    product: string
-}
-
 export interface ProductImage {
     id: number
     url: string
@@ -47,32 +39,31 @@ export interface ProductImage {
 
 export interface Review {
     id: number
-    rating: string
-    title: string
+    rating: number
     content: string
     date: string
-    likes: number
-    dislikes: number
     is_useful: boolean
+    hidden: boolean
 
-    customer: any
+    customer: string
     product: string
 }
 
 export interface Order {
     id: number
     paid: number
-    payment_method: string
+    purchase_date: string
     delivery_term: string
     dispatched: boolean
     on_the_way: boolean
     delivered: boolean
-    purchase_date: string
+    payment_method: string
     country: string
     city: string
     address: string
     notes: string
 
+    customer: string
     delivery_man: string | null
 }
 
@@ -81,9 +72,8 @@ export interface OrderItem {
     total_cost: number
     quantity: number
 
-    order: string
-    customer: string
     product: string
+    order: string
 }
 
 export interface CardItem {

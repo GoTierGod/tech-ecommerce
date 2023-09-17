@@ -1,7 +1,7 @@
 import { unescape } from 'querystring'
 import { Metadata } from 'next'
 
-import { SearchResponse } from '@/types/search'
+import { SearchResponseData } from '@/types/search'
 import Search from '../_components/Search'
 import { capitalizeFormatter } from '@/utils/formatting/capitalizeFormatter'
 import { getCustomer } from '@/utils/data/getCustomer'
@@ -51,8 +51,8 @@ export default async function Page({
     const unescapedSearchStr = unescape(search)
     metadata.title = `${capitalizeFormatter(unescapedSearchStr)} | Tech`
 
-    const searchRes: SearchResponse =
-        await (async (): Promise<SearchResponse> => {
+    const searchRes: SearchResponseData =
+        await (async (): Promise<SearchResponseData> => {
             const res = await fetch(
                 `${API_URL}/api/search/${
                     unescapedSearchStr.replace(/\s+/, ',') +
@@ -77,7 +77,7 @@ export default async function Page({
                 categories: [],
                 brands: [],
                 installments: []
-            } as SearchResponse
+            } as SearchResponseData
         })()
 
     const customer = getCustomer()

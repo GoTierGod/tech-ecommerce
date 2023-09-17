@@ -1,10 +1,10 @@
 import { cookies, headers } from 'next/dist/client/components/headers'
 
 import { API_URL } from '@/constants/back-end'
-import { Interactions } from '@/types/interactions'
+import { CustomerInteractions } from '@/types/customer'
 import { AuthTokens } from '@/types/tokens'
 
-export const getInteractions = async (): Promise<Interactions> => {
+export const getInteractions = async (): Promise<CustomerInteractions> => {
     try {
         const forwardedFor = headers().get('X-Forwarded-For') as string
 

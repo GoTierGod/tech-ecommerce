@@ -19,18 +19,18 @@ import {
 } from 'react'
 import Link from 'next/link'
 
-import { ComposedPurchaseInfo } from '@/types/purchase'
+import { ComposedPurchaseData } from '@/types/purchase'
 import HorizontalCard from '@/components/HoritonzalCard'
 import Breadcrumbs from '@/components/Breadcrumbs'
 import { ComposedCustomerData } from '@/types/customer'
 
 interface PurchaseHistoryProps {
     customer: ComposedCustomerData
-    history: ComposedPurchaseInfo[]
+    history: ComposedPurchaseData[]
 }
 
 interface HistoryItemProps {
-    purchase: ComposedPurchaseInfo
+    purchase: ComposedPurchaseData
     openedOptions: null | number
     setOpenedOptions: Dispatch<SetStateAction<number | null>>
 }

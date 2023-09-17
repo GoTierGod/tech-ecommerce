@@ -11,15 +11,15 @@ import {
 } from '@fortawesome/free-solid-svg-icons'
 
 import { useCallback, useMemo, useState } from 'react'
-import { ComposedReviewInfo } from '@/types/review'
+import { ComposedReviewData } from '@/types/review'
 import { useRouter } from 'next/navigation'
 import { CustomerData } from '@/types/customer'
-import { Interactions } from '@/types/interactions'
+import { CustomerInteractions } from '@/types/customer'
 
 interface ProductReviewProps {
-    review: ComposedReviewInfo
+    review: ComposedReviewData
     customer: CustomerData
-    interactions: Interactions
+    interactions: CustomerInteractions
 }
 
 export default function ProductReview({
@@ -94,7 +94,7 @@ export default function ProductReview({
         <div className={style.card}>
             <div className={style.header}>
                 <div>
-                    <h3>@{review.review.customer.user.username}</h3>
+                    <h3>@{review.review.customer}</h3>
                 </div>
                 <div>
                     <h3>{review.review.rating}</h3>

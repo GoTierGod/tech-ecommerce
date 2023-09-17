@@ -1,13 +1,7 @@
 import { ComposedProductInfo } from './product'
 import { Order, OrderItem } from './tables'
 
-export interface Purchase {
-    order: Order
-    order_item: OrderItem
-    is_reviewed: boolean
-}
-
-export interface ComposedPurchaseInfo {
+export interface ComposedPurchaseData {
     order: Order
     order_item: OrderItem
     product: ComposedProductInfo

@@ -13,4 +13,10 @@ export interface ComposedCustomerData {
     points: number
 }
 
+export interface CustomerInteractions {
+    likes: Array<number>
+    dislikes: Array<number>
+    reports: Array<number>
+}
+
 export type CustomerData = ComposedCustomerData | null

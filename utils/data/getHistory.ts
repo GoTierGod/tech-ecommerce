@@ -2,10 +2,10 @@ import { cookies, headers } from 'next/dist/client/components/headers'
 import { redirect } from 'next/navigation'
 
 import { API_URL } from '@/constants/back-end'
-import { ComposedPurchaseInfo } from '@/types/purchase'
+import { ComposedPurchaseData } from '@/types/purchase'
 import { AuthTokens } from '@/types/tokens'
 
-export const getHistory = async (): Promise<ComposedPurchaseInfo[]> => {
+export const getHistory = async (): Promise<ComposedPurchaseData[]> => {
     try {
         const forwardedFor = headers().get('X-Forwarded-For') as string
 

@@ -1,6 +1,6 @@
 'use client'
 
-import { SearchResponse } from '@/types/search'
+import { SearchResponseData } from '@/types/search'
 import style from './search.module.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {
@@ -21,7 +21,7 @@ import Breadcrumbs from '@/components/Breadcrumbs'
 interface SearchProps {
     searchStr: string
     searchParams: { [key: string]: string | string[] | undefined } | undefined
-    searchRes: SearchResponse
+    searchRes: SearchResponseData
 }
 
 export default function Search({

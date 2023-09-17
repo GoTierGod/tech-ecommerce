@@ -1,9 +1,9 @@
 import { headers } from 'next/dist/client/components/headers'
 
 import { API_URL } from '@/constants/back-end'
-import { ComposedReviewInfo } from '@/types/review'
+import { ComposedReviewData } from '@/types/review'
 
-export const getReviews = async (id: string): Promise<ComposedReviewInfo[]> => {
+export const getReviews = async (id: string): Promise<ComposedReviewData[]> => {
     try {
         const forwardedFor = headers().get('X-Forwarded-For')
 
