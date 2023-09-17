@@ -94,6 +94,7 @@ export default async function Page({ params }: { params: { id: string } }) {
                                     width={250}
                                     height={250}
                                     quality='50'
+                                    priority
                                 />
                             </div>
                             <div className={style.options}>

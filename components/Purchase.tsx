@@ -206,6 +206,7 @@ export default function Purchase({ customer, order, coupons }: PurchaseProps) {
                                         width={250}
                                         height={250}
                                         quality='50'
+                                        priority
                                     />
                                     {order.length > 1 && (
                                         <button
