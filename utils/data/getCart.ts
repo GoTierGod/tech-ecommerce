@@ -3,6 +3,7 @@ import { cookies, headers } from 'next/dist/client/components/headers'
 import { API_URL } from '@/constants/back-end'
 import { AuthTokens } from '@/types/tokens'
 import { ComposedProductInfo } from '@/types/product'
+import { APIResponse } from '@/types/response'
 
 export const getCart = async (): Promise<ComposedProductInfo[]> => {
     try {
@@ -28,6 +29,18 @@ export const getCart = async (): Promise<ComposedProductInfo[]> => {
 
                 if (res.ok) {
                     return await res.json()
+                }
+
+                if (res.status === 429) {
+                    const errorResponse: APIResponse = await res.json()
+
+                    throw new Error(
+                        JSON.stringify({
+                            status: res.status,
+                            message:
+                                errorResponse?.message || errorResponse?.detail
+                        })
+                    )
                 }
 
                 return []

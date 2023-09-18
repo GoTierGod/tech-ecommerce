@@ -55,7 +55,10 @@ export default function Login() {
 
                     Formik.resetForm()
                     setErr({
-                        message: errorResponse.message,
+                        message:
+                            errorResponse?.message ||
+                            errorResponse?.detail ||
+                            'Something went wrong',
                         status: res.status,
                         statusText: res.statusText
                     })

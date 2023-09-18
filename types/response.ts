@@ -1,3 +1,4 @@
 export interface APIResponse {
-    message: string
+    message?: string
+    detail?: string
 }

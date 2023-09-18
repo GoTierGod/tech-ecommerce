@@ -3,6 +3,7 @@ import { cookies, headers } from 'next/dist/client/components/headers'
 import { API_URL } from '@/constants/back-end'
 import { CustomerInteractions } from '@/types/customer'
 import { AuthTokens } from '@/types/tokens'
+import { APIResponse } from '@/types/response'
 
 export const getInteractions = async (): Promise<CustomerInteractions> => {
     try {
@@ -32,6 +33,18 @@ export const getInteractions = async (): Promise<CustomerInteractions> => {
 
                 if (res.ok) {
                     return await res.json()
+                }
+
+                if (res.status === 429) {
+                    const errorResponse: APIResponse = await res.json()
+
+                    throw new Error(
+                        JSON.stringify({
+                            status: res.status,
+                            message:
+                                errorResponse?.message || errorResponse?.detail
+                        })
+                    )
                 }
             }
         }

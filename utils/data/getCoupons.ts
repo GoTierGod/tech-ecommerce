@@ -4,6 +4,7 @@ import { redirect } from 'next/navigation'
 import { API_URL } from '@/constants/back-end'
 import { Coupon } from '@/types/tables'
 import { AuthTokens } from '@/types/tokens'
+import { APIResponse } from '@/types/response'
 
 export const getCoupons = async (): Promise<Coupon[]> => {
     try {
@@ -29,6 +30,18 @@ export const getCoupons = async (): Promise<Coupon[]> => {
 
                 if (res.ok) {
                     return await res.json()
+                }
+
+                if (res.status === 429) {
+                    const errorResponse: APIResponse = await res.json()
+
+                    throw new Error(
+                        JSON.stringify({
+                            status: res.status,
+                            message:
+                                errorResponse?.message || errorResponse?.detail
+                        })
+                    )
                 }
 
                 return []

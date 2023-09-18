@@ -1,0 +1,32 @@
+.error {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+
+    padding: 2rem;
+    padding-top: 99px;
+
+    background: var(--gray);
+    color: var(--white);
+
+    text-align: center;
+
+    min-height: 100vh;
+    min-height: 100dvh;
+    min-width: 100%;
+}
+
+.error :where(h1, h2) {
+    font-weight: 400;
+}
+
+.error span {
+    width: 6rem;
+    height: 2px;
+
+    background: var(--white);
+
+    border-radius: 4px;
+}

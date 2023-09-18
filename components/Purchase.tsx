@@ -123,7 +123,10 @@ export default function Purchase({ customer, order, coupons }: PurchaseProps) {
                     const errorResponse: APIResponse = await res.json()
 
                     setErr({
-                        message: errorResponse.message,
+                        message:
+                            errorResponse?.message ||
+                            errorResponse?.detail ||
+                            'Something went wrong',
                         status: res.status,
                         statusText: res.statusText
                     })

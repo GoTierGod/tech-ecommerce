@@ -4,6 +4,7 @@ import { redirect } from 'next/navigation'
 import { API_URL } from '@/constants/back-end'
 import { ComposedPurchaseData } from '@/types/purchase'
 import { AuthTokens } from '@/types/tokens'
+import { APIResponse } from '@/types/response'
 
 export const getHistory = async (): Promise<ComposedPurchaseData[]> => {
     try {
@@ -30,6 +31,18 @@ export const getHistory = async (): Promise<ComposedPurchaseData[]> => {
 
                 if (res.ok) {
                     return await res.json()
+                }
+
+                if (res.status === 429) {
+                    const errorResponse: APIResponse = await res.json()
+
+                    throw new Error(
+                        JSON.stringify({
+                            status: res.status,
+                            message:
+                                errorResponse?.message || errorResponse?.detail
+                        })
+                    )
                 }
 
                 return []
