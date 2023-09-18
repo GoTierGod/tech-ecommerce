@@ -3,6 +3,7 @@ import { NextRequest, NextResponse } from 'next/server'
 
 import { API_URL } from '@/constants/back-end'
 import { AuthTokens } from '@/types/tokens'
+import { APIResponse } from '@/types/response'
 
 export async function POST(req: NextRequest) {
     try {
@@ -34,9 +35,14 @@ export async function POST(req: NextRequest) {
             )
         }
 
-        const errorResponse: { detail: string } = await res.json()
+        const errorResponse: APIResponse = await res.json()
         return NextResponse.json(
-            { message: errorResponse.detail },
+            {
+                message:
+                    errorResponse?.message ||
+                    errorResponse?.detail ||
+                    'Something went wrong'
+            },
             { status: res.status }
         )
     } catch (err) {

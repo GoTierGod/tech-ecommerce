@@ -3,6 +3,7 @@ import { NextRequest, NextResponse } from 'next/server'
 
 import { API_URL } from '@/constants/back-end'
 import { AuthTokens } from '@/types/tokens'
+import { APIResponse } from '@/types/response'
 
 export async function POST(req: NextRequest) {
     try {
@@ -43,6 +44,17 @@ export async function POST(req: NextRequest) {
                     { status: 200 }
                 )
             }
+
+            const errorResponse: APIResponse = await res.json()
+            return NextResponse.json(
+                {
+                    message:
+                        errorResponse?.message ||
+                        errorResponse?.detail ||
+                        'Something went wrong'
+                },
+                { status: res.status }
+            )
         }
 
         cookies().delete('authTokens')
