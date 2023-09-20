@@ -70,6 +70,10 @@
     border-radius: 4px;
 }
 
+.content p {
+    max-width: 450px;
+}
+
 .grid {
     display: flex;
     flex-direction: column;

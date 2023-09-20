@@ -14,26 +14,20 @@ export default async function Page() {
                 <div className={style.content}>
                     <h2>Delivery Phases</h2>
                     <p>
-                        <span>Dispatched:</span> In this phase, your ecommerce
-                        order transitions from processing to physical
-                        fulfillment. Products are carefully gathered, packed,
-                        and labeled for shipping. Customers receive
-                        notifications with tracking details as their items leave
-                        the warehouse.
+                        <span>Dispatched:</span> In this phase, your order
+                        transitions from processing to physical fulfillment.
+                        Products are carefully gathered, packed, and labeled for
+                        shipping.
                     </p>
                     <p>
                         <span>On the way:</span> During this phase, packed
-                        orders are in transit to their destination. Customers
-                        can track their orders in real-time, ensuring
-                        transparency and managing expectations. Potential delays
-                        might be communicated, maintaining trust.
+                        orders are in transit to their destination.
                     </p>
                     <p>
                         <span>Delivered</span> This phase is the culmination.
-                        Customers receive their products, marking a successful
-                        transaction. This phase often triggers feedback requests
-                        and further engagement opportunities, influencing future
-                        buying decisions.
+                        You will receive the purchased products, marking a
+                        successful transaction. Once this phase is completed you
+                        can leave a review about any of your products.
                     </p>
                     <div className={style.options}>
                         <Link href='/history' prefetch={false}>

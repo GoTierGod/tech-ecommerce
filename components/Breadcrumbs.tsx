@@ -14,8 +14,13 @@ export default function Breadcrumbs({ routeList }: BreadcrumbsProps) {
                 </Link>
                 {routeList.map((route, idx) => {
                     if (idx === routeList.length - 1)
-                        return <span>{route.name}</span>
-                    else return <Link href={route.path}>{route.name}</Link>
+                        return <span key={route.name + idx}>{route.name}</span>
+                    else
+                        return (
+                            <Link key={route.name + idx} href={route.path}>
+                                {route.name}
+                            </Link>
+                        )
                 })}
             </div>
         </section>

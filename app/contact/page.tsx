@@ -16,19 +16,6 @@ export default async function Page() {
         <main>
             <Breadcrumbs routeList={[{ path: '/contact', name: 'Contact' }]} />
             <div className={style.wrapper}>
-                <section className={style.wrapperLeft}>
-                    <header className={style.header}>
-                        <h2>Contact Me</h2>
-                    </header>
-                    <div className={style.content}>
-                        <p>
-                            In the future you will be able to find more
-                            information about me, my skills, knowledge and more
-                            on my portfolio website, thanks for trying my
-                            project.
-                        </p>
-                    </div>
-                </section>
                 <section className={style.wrapperRight}>
                     <div className={style.grid}>
                         <article>
@@ -49,14 +36,14 @@ export default async function Page() {
                                 </a>
                                 <p>
                                     Feel free to follow me on GitHub, where you
-                                    can explore a collection of my projects,
-                                    read helpful tutorials, and stay up to date
-                                    on my future projects. Get an inside look at
-                                    the development process of my projects as I
-                                    leverage various cutting-edge frameworks,
-                                    libraries, and technologies to bring my
-                                    ideas to life. I would really appreciate
-                                    your presence on my GitHub profile!
+                                    can explore a collection of my projects and
+                                    stay up to date on my future publications.
+                                    Get an inside look at the development
+                                    process of my projects as I leverage various
+                                    cutting-edge frameworks, libraries, and
+                                    technologies to bring my ideas to life. I
+                                    would really appreciate your presence on my
+                                    GitHub!
                                 </p>
                             </div>
                         </article>
@@ -109,7 +96,7 @@ export default async function Page() {
                                     relaxing interactions, follow me on Twitter
                                     and feel free to talk to me about anything
                                     related to programming, animals, video games
-                                    or any interesting topic!
+                                    or any fun topic!
                                 </p>
                             </div>
                         </article>
@@ -123,9 +110,8 @@ export default async function Page() {
                                 <p>
                                     Finally, I would like to provide you with my
                                     email address as an alternate means of
-                                    contact, should it be more convenient for
-                                    you to communicate with me through this
-                                    channel.
+                                    contact, you may find it more convenient to
+                                    contact me through this channel.
                                 </p>
                             </div>
                         </article>
