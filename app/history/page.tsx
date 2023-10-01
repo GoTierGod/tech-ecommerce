@@ -5,7 +5,7 @@ import PurchaseHistory from './_components/PurchaseHistory'
 
 export default async function History() {
     const customer = getCustomer()
-    if (!customer) redirect('/login')
+    if (!customer) redirect('api/auth/refresh/?auth=1&path=/history')
 
     const history = await getHistory()
 

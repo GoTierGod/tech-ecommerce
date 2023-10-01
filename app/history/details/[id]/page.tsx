@@ -18,7 +18,8 @@ export default async function Page({ params }: { params: { id: string } }) {
     const { id } = params
 
     const customer = getCustomer()
-    if (!customer) redirect('/login')
+    if (!customer)
+        redirect(`api/auth/refresh/?auth=1&path=/history/details/${id}`)
 
     const purchase = await getPurchase(id)
     if (!purchase) redirect('')

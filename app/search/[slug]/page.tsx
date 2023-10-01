@@ -5,8 +5,9 @@ import { SearchResponseData } from '@/types/search'
 import Search from '../_components/Search'
 import { capitalizeFormatter } from '@/utils/formatting/capitalizeFormatter'
 import { getCustomer } from '@/utils/data/getCustomer'
-import { headers } from 'next/dist/client/components/headers'
+import { cookies, headers } from 'next/dist/client/components/headers'
 import { API_URL } from '@/constants/back-end'
+import { redirect } from 'next/navigation'
 
 export const metadata: Metadata = {
     title: 'Search | Tech'
@@ -80,7 +81,10 @@ export default async function Page({
             } as SearchResponseData
         })()
 
+    const authCookies = cookies().get('authTokens')
     const customer = getCustomer()
+    if (!customer && authCookies)
+        redirect(`api/auth/refresh/?auth=0&path=/search/${search}`)
 
     return (
         <Search

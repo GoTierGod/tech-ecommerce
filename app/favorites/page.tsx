@@ -6,7 +6,7 @@ import UserFavorites from '@/app/favorites/_components/UserFavorites'
 
 export default async function Favorites() {
     const customer = getCustomer()
-    if (!customer) redirect('/login')
+    if (!customer) redirect('api/auth/refresh/?auth=1&path=/favorites')
 
     const favorites = await getFavorites()
 

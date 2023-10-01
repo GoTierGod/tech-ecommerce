@@ -5,7 +5,7 @@ import { getCustomer } from '@/utils/data/getCustomer'
 
 export default async function Page() {
     const customer = getCustomer()
-    if (!customer) redirect('/')
+    if (!customer) redirect('api/auth/refresh/?auth=1&path=/logout')
 
     return <Logout />
 }

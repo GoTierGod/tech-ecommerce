@@ -8,7 +8,8 @@ import Header from '@/app/_components/Header'
 import Footer from '@/app/_components/Footer'
 import { getCustomer } from '@/utils/data/getCustomer'
 import { API_URL } from '@/constants/back-end'
-import { notFound } from 'next/navigation'
+import { notFound, redirect } from 'next/navigation'
+import { cookies } from 'next/dist/client/components/headers'
 
 const josefinSans = Josefin_Sans({ subsets: ['latin'] })
 
@@ -33,7 +34,9 @@ export default async function RootLayout({
         return []
     })()
 
+    const authCookies = cookies().get('authTokens')
     const customer = getCustomer()
+    if (!customer && authCookies) redirect('api/auth/refresh/?auth=0&path=/')
 
     return (
         <html lang='en'>

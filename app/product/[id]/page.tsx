@@ -18,7 +18,7 @@ import ProductImages from '@/app/product/_components/ProductImages'
 import { getProductStars } from '@/utils/product/getProductStars'
 import { getProductDeliveryDay } from '@/utils/product/getProductDeliveryDay'
 import { getProductInstallments } from '@/utils/product/getProductInstallments'
-import { notFound } from 'next/navigation'
+import { notFound, redirect } from 'next/navigation'
 import { getCustomer } from '@/utils/data/getCustomer'
 
 import visaLogo from '@/public/images/payments/visa.svg'
@@ -34,6 +34,7 @@ import { getCart } from '@/utils/data/getCart'
 import { getFavorites } from '@/utils/data/getFavorites'
 import Breadcrumbs from '@/components/Breadcrumbs'
 import ProductDescription from '../_components/ProductDescription'
+import { cookies } from 'next/dist/client/components/headers'
 
 const paymentLogos = [
     { src: visaLogo, alt: 'Visa' },
@@ -62,6 +63,7 @@ export default async function Page({ params }: { params: { id: string } }) {
     )
 
     const customer = getCustomer()
+    if (!customer) redirect(`api/auth/refresh/?auth=0&path=/product/${id}`)
 
     const cart = await getCart()
     const favorites = await getFavorites()
