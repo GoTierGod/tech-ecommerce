@@ -17,7 +17,7 @@ export const metadata: Metadata = {
     title: 'Tech',
     description: 'Tech specialized E-Commerce project made by @GoTierGod.',
     openGraph: {
-        images: ['/min.svg']
+        images: ['/min.svg', '/min.webp']
     }
 }
 
