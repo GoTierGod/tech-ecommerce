@@ -2,6 +2,11 @@
 
 This front-end application built with Next.js 13 and was seamlessly integrated with the Django REST Framework API. This synergy creates an easy-to-use graphical interface (GUI) that enhances the user experience and allows the user to fully explore all of the website's features.
 
+## Repositories
+
+-   [Front-End Repository (Current)](https://github.com/GoTierGod/tech-ecommerce)
+-   [Back-End Repository](https://github.com/GoTierGod/tech-ecommerce-api)
+
 ## Key Features
 
 ### Authentication and Authorization
