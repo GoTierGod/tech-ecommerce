@@ -51,6 +51,7 @@ export default function UserRegister() {
                 })
 
                 if (res.ok) {
+                    router.refresh()
                     router.replace('/')
                 } else if (res.status === 201) {
                     router.replace('/login')
