@@ -26,6 +26,7 @@ export async function GET(req: NextRequest) {
         const path = searchParams.get('oath')
 
         if (!auth || !path) {
+            cookies().delete('authTokens')
             redirect('/')
         }
 
@@ -57,8 +58,8 @@ export async function GET(req: NextRequest) {
             // If authentication is optional
             else redirect(path)
         }
+    } else {
+        cookies().delete('authTokens')
+        redirect('/')
     }
-
-    cookies().delete('authTokens')
-    redirect('/')
 }

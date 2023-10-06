@@ -10,6 +10,7 @@ import { getCustomer } from '@/utils/data/getCustomer'
 import { API_URL } from '@/constants/back-end'
 import { notFound, redirect } from 'next/navigation'
 import { cookies } from 'next/dist/client/components/headers'
+import { getData } from '@/utils/data/getData'
 
 const josefinSans = Josefin_Sans({ subsets: ['latin'] })
 
@@ -26,13 +27,7 @@ export default async function RootLayout({
 }: {
     children: React.ReactNode
 }) {
-    const categories: Category[] = await (async (): Promise<Category[]> => {
-        const res = await fetch(`${API_URL}/api/categories/`, {})
-
-        if (res.ok) return await res.json()
-
-        return []
-    })()
+    const categories: Category[] = await getData(`/api/categories/`)
 
     const authCookies = cookies().get('authTokens')
     const customer = getCustomer()

@@ -62,8 +62,10 @@ export default async function Page({ params }: { params: { id: string } }) {
         `?category=${product.details.category.title}&limit=6`
     )
 
+    const authCookies = cookies().get('authTokens')
     const customer = getCustomer()
-    if (!customer) redirect(`api/auth/refresh/?auth=0&path=/product/${id}`)
+    if (!customer && authCookies)
+        redirect(`api/auth/refresh/?auth=0&path=/product/${id}`)
 
     const cart = await getCart()
     const favorites = await getFavorites()

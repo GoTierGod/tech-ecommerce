@@ -1,5 +1,4 @@
 import { API_URL } from '@/constants/back-end'
-import { APIResponse } from '@/types/response'
 import { headers } from 'next/dist/client/components/headers'
 
 export const getData = async (route: string) => {
