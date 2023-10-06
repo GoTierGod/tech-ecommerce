@@ -63,13 +63,18 @@ export default function UserProfile({ customer }: UserProfileProps) {
             username: customer.username,
             email: customer.email,
             password: '**************',
-            phone: customer.phone,
-            countrycity: `${customer.country} / ${customer.city}`,
-            address: customer.address,
-            firstname: customer.first_name,
-            lastname: customer.last_name,
+            phone: customer.phone || '. . .',
+            countrycity:
+                customer.country || customer.city
+                    ? `${customer.country || '. . .'} / ${
+                          customer.city || '. . .'
+                      }`
+                    : '. . .',
+            address: customer.address || '. . .',
+            firstname: customer.first_name || '. . .',
+            lastname: customer.last_name || '. . .',
             birthdate: customer.birthdate,
-            gender: customer.gender
+            gender: customer.gender || '. . .'
         }),
         [customer]
     )
