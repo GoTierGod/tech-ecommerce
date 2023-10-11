@@ -1,7 +1,7 @@
 import { cookies, headers } from 'next/dist/client/components/headers'
 import { redirect } from 'next/navigation'
 
-import { API_URL } from '@/constants/back-end'
+import { API_URL } from '@/constants/api'
 import { ComposedPurchaseData } from '@/types/purchase'
 import { AuthTokens } from '@/types/tokens'
 import { APIResponse } from '@/types/response'

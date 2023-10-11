@@ -6,7 +6,7 @@ import Search from '../_components/Search'
 import { capitalizeFormatter } from '@/utils/formatting/capitalizeFormatter'
 import { getCustomer } from '@/utils/data/getCustomer'
 import { cookies, headers } from 'next/dist/client/components/headers'
-import { API_URL } from '@/constants/back-end'
+import { API_URL } from '@/constants/api'
 import { redirect } from 'next/navigation'
 
 export const metadata: Metadata = {

@@ -1,4 +1,4 @@
-import { API_URL } from '@/constants/back-end'
+import { API_URL } from '@/constants/api'
 import { cookies, headers } from 'next/dist/client/components/headers'
 import { NextRequest, NextResponse } from 'next/server'
 

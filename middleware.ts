@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
 
-import { API_URL } from './constants/back-end'
+import { API_URL } from './constants/api'
 import { AuthTokens } from './types/tokens'
 import { ComposedCustomerData } from './types/customer'
 

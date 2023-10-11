@@ -1,4 +1,4 @@
-import { API_URL } from '@/constants/back-end'
+import { API_URL } from '@/constants/api'
 import { AuthTokens } from '@/types/tokens'
 import { cookies, headers } from 'next/dist/client/components/headers'
 import { redirect } from 'next/navigation'
