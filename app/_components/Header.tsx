@@ -37,8 +37,8 @@ export default function Header({ categories, customer }: HeaderProps) {
         (e: FormEvent<HTMLFormElement>) => {
             e.preventDefault()
 
-            if (/.*[a-z].*/i.test(searchStr))
-                router.push(`/search/${searchStr}?page=1`)
+            if (/.*[a-zñ].*/i.test(searchStr))
+                router.push(`/search/${searchStr.trim()}?page=1`)
         },
         [router, searchStr]
     )
